@@ -21,11 +21,11 @@ foreach ($storageDirs as $sDir) {
 
 // Auto-generate or update .env on production server
 $envFile = __DIR__ . '/../.env';
-if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=true') === false || strpos(@file_get_contents($envFile), 'srv2190.hstgr.io') === false) {
+if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'DoctorWallah2026Secured') === false) {
     $prodEnv = "APP_NAME=\"DoctorWallah\"\n"
         . "APP_ENV=production\n"
         . "APP_KEY=\"base64:ajmsflCfT24fHNskELz7tcw5FTJZVzXl2RvU+yb+gZQ=\"\n"
-        . "APP_DEBUG=true\n"
+        . "APP_DEBUG=false\n"
         . "APP_URL=\"https://doctorwallah.com\"\n\n"
         . "APP_LOCALE=bn\n"
         . "APP_FALLBACK_LOCALE=en\n"
@@ -38,20 +38,20 @@ if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=tr
         . "LOG_DEPRECATIONS_CHANNEL=null\n"
         . "LOG_LEVEL=error\n\n"
         . "DB_CONNECTION=mysql\n"
-        . "DB_HOST=\"srv2190.hstgr.io\"\n"
+        . "DB_HOST=\"127.0.0.1\"\n"
         . "DB_PORT=\"3306\"\n"
         . "DB_DATABASE=\"u825551938_doctorw\"\n"
         . "DB_USERNAME=\"u825551938_doctorw\"\n"
-        . "DB_PASSWORD=\"DoctorWallah_2026_SecuredDb!\"\n\n"
-        . "SESSION_DRIVER=database\n"
+        . "DB_PASSWORD=\"DoctorWallah2026Secured\"\n\n"
+        . "SESSION_DRIVER=file\n"
         . "SESSION_LIFETIME=120\n"
         . "SESSION_ENCRYPT=false\n"
         . "SESSION_PATH=/\n"
         . "SESSION_DOMAIN=null\n\n"
         . "BROADCAST_CONNECTION=log\n"
         . "FILESYSTEM_DISK=public\n"
-        . "QUEUE_CONNECTION=database\n"
-        . "CACHE_STORE=database\n"
+        . "QUEUE_CONNECTION=sync\n"
+        . "CACHE_STORE=file\n"
         . "MEMCACHED_HOST=127.0.0.1\n\n"
         . "REDIS_CLIENT=phpredis\n"
         . "REDIS_HOST=127.0.0.1\n"
@@ -67,8 +67,12 @@ if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=tr
         . "MAIL_FROM_NAME=\"\${APP_NAME}\"\n\n"
         . "VITE_APP_NAME=\"\${APP_NAME}\"\n";
     @file_put_contents($envFile, $prodEnv);
-    @unlink(__DIR__ . '/../bootstrap/cache/config.php');
 }
+
+// Always clear bootstrap cache to ensure fresh config is loaded
+@unlink(__DIR__ . '/../bootstrap/cache/config.php');
+@unlink(__DIR__ . '/../bootstrap/cache/routes-v7.php');
+@unlink(__DIR__ . '/../bootstrap/cache/services.php');
 
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
