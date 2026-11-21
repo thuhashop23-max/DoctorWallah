@@ -21,11 +21,11 @@ foreach ($storageDirs as $sDir) {
 
 // Auto-generate or update .env on production server
 $envFile = __DIR__ . '/../.env';
-if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'srv2190.hstgr.io') === false) {
+if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=true') === false || strpos(@file_get_contents($envFile), 'srv2190.hstgr.io') === false) {
     $prodEnv = "APP_NAME=\"DoctorWallah\"\n"
         . "APP_ENV=production\n"
         . "APP_KEY=\"base64:ajmsflCfT24fHNskELz7tcw5FTJZVzXl2RvU+yb+gZQ=\"\n"
-        . "APP_DEBUG=false\n"
+        . "APP_DEBUG=true\n"
         . "APP_URL=\"https://doctorwallah.com\"\n\n"
         . "APP_LOCALE=bn\n"
         . "APP_FALLBACK_LOCALE=en\n"
