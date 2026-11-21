@@ -21,11 +21,11 @@ foreach ($storageDirs as $sDir) {
 
 // Auto-generate or update .env on production server
 $envFile = __DIR__ . '/../.env';
-if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=true') === false) {
+if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'srv2190.hstgr.io') === false) {
     $prodEnv = "APP_NAME=\"DoctorWallah\"\n"
         . "APP_ENV=production\n"
         . "APP_KEY=\"base64:ajmsflCfT24fHNskELz7tcw5FTJZVzXl2RvU+yb+gZQ=\"\n"
-        . "APP_DEBUG=true\n"
+        . "APP_DEBUG=false\n"
         . "APP_URL=\"https://doctorwallah.com\"\n\n"
         . "APP_LOCALE=bn\n"
         . "APP_FALLBACK_LOCALE=en\n"
@@ -38,7 +38,7 @@ if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'APP_DEBUG=tr
         . "LOG_DEPRECATIONS_CHANNEL=null\n"
         . "LOG_LEVEL=error\n\n"
         . "DB_CONNECTION=mysql\n"
-        . "DB_HOST=\"127.0.0.1\"\n"
+        . "DB_HOST=\"srv2190.hstgr.io\"\n"
         . "DB_PORT=\"3306\"\n"
         . "DB_DATABASE=\"u825551938_doctorw\"\n"
         . "DB_USERNAME=\"u825551938_doctorw\"\n"
