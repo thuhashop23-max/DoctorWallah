@@ -37,8 +37,8 @@ const DEFAULT_HEADER_SETTINGS: HeaderSettings = {
     show_auth_buttons: true,
     logo_url: null,
     logo_height: 44,
-    brand_title: 'NovoNex',
-    brand_title_en: 'NovoNex',
+    brand_title: 'DoctorWallah',
+    brand_title_en: 'DoctorWallah',
     brand_subtitle: '',
     brand_subtitle_en: '',
     announcement_enabled: false,
@@ -331,7 +331,7 @@ export const AdminHeaderBuilderPage: React.FC = () => {
     };
 
     // Localized values for Live Preview based on previewLang toggle
-    const previewBrandTitle = getLocalizedText(headerSettings.brand_title, headerSettings.brand_title_en, previewLang) || 'NovoNex';
+    const previewBrandTitle = getLocalizedText(headerSettings.brand_title, headerSettings.brand_title_en, previewLang) || 'DoctorWallah';
     const previewBrandSubtitle = getLocalizedText(headerSettings.brand_subtitle, headerSettings.brand_subtitle_en, previewLang) || '';
     const previewAnnouncementText = getLocalizedText(headerSettings.announcement_text, headerSettings.announcement_text_en, previewLang);
     const previewCtaText = getLocalizedText(headerSettings.cta_button_text, headerSettings.cta_button_text_en, previewLang) || 'Free Classes';
@@ -740,7 +740,7 @@ export const AdminHeaderBuilderPage: React.FC = () => {
                                                 value={headerSettings.brand_title || ''}
                                                 onChange={(e) => handleUpdate('brand_title', e.target.value)}
                                                 className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
-                                                placeholder="e.g. NovoNex"
+                                                placeholder="e.g. DoctorWallah"
                                             />
                                         </div>
                                         <div>
@@ -752,7 +752,7 @@ export const AdminHeaderBuilderPage: React.FC = () => {
                                                 value={headerSettings.brand_title_en || ''}
                                                 onChange={(e) => handleUpdate('brand_title_en', e.target.value)}
                                                 className="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-medium"
-                                                placeholder="e.g. NovoNex"
+                                                placeholder="e.g. DoctorWallah"
                                             />
                                         </div>
                                     </div>
@@ -1203,7 +1203,7 @@ export const AdminHeaderBuilderPage: React.FC = () => {
                                                 </label>
                                                 <div className="flex flex-wrap items-center gap-2 mb-3">
                                                     {[
-                                                        { label: 'NovoNex Crimson Red', color: '#8a0000' },
+                                                        { label: 'DoctorWallah Crimson Red', color: '#8a0000' },
                                                         { label: 'Deep Maroon', color: '#680000' },
                                                         { label: 'Royal Blue', color: '#1e40af' },
                                                         { label: 'Sky Blue', color: '#0284c7' },

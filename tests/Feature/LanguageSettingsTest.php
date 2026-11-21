@@ -53,7 +53,7 @@ class LanguageSettingsTest extends TestCase
 
         // Update to 'bn'
         $response = $this->putJson('/api/admin/website-settings', [
-            'site_name' => 'Novonex Academy',
+            'site_name' => 'DoctorWallah',
             'site_tagline' => 'Learning Platform',
             'primary_color' => '#0284c7',
             'secondary_color' => '#0ea5e9',
@@ -69,7 +69,7 @@ class LanguageSettingsTest extends TestCase
 
         // Update back to 'en'
         $responseEn = $this->putJson('/api/admin/website-settings', [
-            'site_name' => 'Novonex Academy',
+            'site_name' => 'DoctorWallah',
             'site_tagline' => 'Learning Platform',
             'primary_color' => '#0284c7',
             'secondary_color' => '#0ea5e9',
@@ -89,7 +89,7 @@ class LanguageSettingsTest extends TestCase
         Sanctum::actingAs($this->admin);
 
         $response = $this->putJson('/api/admin/website-settings', [
-            'site_name' => 'Novonex Academy',
+            'site_name' => 'DoctorWallah',
             'site_tagline' => 'Learning Platform',
             'primary_color' => '#0284c7',
             'secondary_color' => '#0ea5e9',
@@ -120,7 +120,7 @@ class LanguageSettingsTest extends TestCase
         Sanctum::actingAs($this->admin);
 
         $response = $this->putJson('/api/admin/website-settings', [
-            'site_name' => 'Novonex Academy',
+            'site_name' => 'DoctorWallah',
             'site_tagline' => 'Learning Platform',
             'primary_color' => '#0284c7',
             'secondary_color' => '#0ea5e9',
@@ -172,10 +172,10 @@ class LanguageSettingsTest extends TestCase
 
         $footerPayload = [
             'footer_settings' => [
-                'brand_title' => 'Novonex Plus',
+                'brand_title' => 'DoctorWallah Plus',
                 'description' => 'Custom footer description text',
                 'phone' => '+8801999999999',
-                'email' => 'hello@novonex.edu.bd',
+                'email' => 'hello@DoctorWallah.edu.bd',
                 'column_2_title' => 'Important Links',
                 'column_2_links' => [
                     ['id' => '1', 'label' => 'All Courses', 'url' => '/courses'],
@@ -185,11 +185,11 @@ class LanguageSettingsTest extends TestCase
 
         $response = $this->putJson('/api/admin/website-settings/footer', $footerPayload);
         $response->assertStatus(200)
-            ->assertJsonPath('footer_settings.brand_title', 'Novonex Plus');
+            ->assertJsonPath('footer_settings.brand_title', 'DoctorWallah Plus');
 
         $publicRes = $this->getJson('/api/settings');
         $publicRes->assertStatus(200)
-            ->assertJsonPath('footer_settings.email', 'hello@novonex.edu.bd');
+            ->assertJsonPath('footer_settings.email', 'hello@DoctorWallah.edu.bd');
     }
 
     public function test_non_admin_cannot_update_header_or_footer_settings(): void

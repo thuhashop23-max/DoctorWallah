@@ -30,7 +30,7 @@ class AutoSmsPushController extends Controller
         } catch (\Throwable $e) {
             $setting = (object) [
                 'enabled' => true,
-                'general_template' => "Dear {student_name}, thank you for purchasing \"{course_title}\" at NovoNex! Log in to start learning: {login_url}",
+                'general_template' => "Dear {student_name}, thank you for purchasing \"{course_title}\" at DoctorWallah! Log in to start learning: {login_url}",
             ];
         }
 
@@ -166,7 +166,7 @@ class AutoSmsPushController extends Controller
 
         $rendered = str_replace(
             ['{student_name}', '{course_title}', '{bundle_title}', '{order_id}', '{amount}', '{site_name}', '{login_url}'],
-            ['Test Student', $courseTitle, $bundleTitle, 'ORD-9988', 'Tk 1,500.00', 'NovoNex', url('/login')],
+            ['Test Student', $courseTitle, $bundleTitle, 'ORD-9988', 'Tk 1,500.00', 'DoctorWallah', url('/login')],
             $validated['template']
         );
 

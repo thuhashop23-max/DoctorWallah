@@ -622,7 +622,7 @@ export const AdminCourseEditPage: React.FC = () => {
                                         type="text"
                                         value={couponCode}
                                         onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                                        placeholder="e.g. NOVONEX500"
+                                        placeholder="e.g. DoctorWallah500"
                                         className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-mono font-bold uppercase focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
                                     />
                                     <p className="text-[11px] text-slate-400 mt-1">

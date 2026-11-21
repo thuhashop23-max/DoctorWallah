@@ -87,7 +87,7 @@ class SmsSettingsController extends Controller
 
         $result = $smsService->sendSms(
             $validated['phone'],
-            'Novonex LMS: This is a test message from SMS gateway.',
+            'DoctorWallah LMS: This is a test message from SMS gateway.',
             'test',
             null,
             true

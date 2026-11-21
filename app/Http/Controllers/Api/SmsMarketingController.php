@@ -103,7 +103,7 @@ class SmsMarketingController extends Controller
         }
 
         $setting = WebsiteSetting::first();
-        $siteName = $setting ? $setting->site_name : 'Novonex Academy';
+        $siteName = $setting ? $setting->site_name : 'DoctorWallah';
 
         $campaignTitle = $titleInput;
         if (empty($campaignTitle)) {

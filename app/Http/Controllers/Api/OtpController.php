@@ -146,7 +146,7 @@ class OtpController extends Controller
             'payload' => $existingPayload,
         ]);
 
-        $smsMessage = "Your new NovoNex OTP is: {$otpCode}. Valid for {$smsSettings->otp_expiration_minutes} minutes.";
+        $smsMessage = "Your new DoctorWallah OTP is: {$otpCode}. Valid for {$smsSettings->otp_expiration_minutes} minutes.";
         $smsService->sendSms($normalizedPhone, $smsMessage);
 
         return response()->json([

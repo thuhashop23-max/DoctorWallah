@@ -156,7 +156,7 @@ export const AdminNexPilotAiConfigPage: React.FC = () => {
                             </span>
                         </h2>
                         <p className="text-xs text-slate-500 dark:text-slate-400">
-                            Configure global OpenAI API models powering both AI Exam Question Generation and NexPilot Tutors across NovoNex.
+                            Configure global OpenAI API models powering both AI Exam Question Generation and NexPilot Tutors across DoctorWallah.
                         </p>
                     </div>
                 </div>

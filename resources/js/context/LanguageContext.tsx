@@ -21,7 +21,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     useEffect(() => {
         document.documentElement.lang = 'en';
         try {
-            localStorage.removeItem('novonex_language');
+            localStorage.removeItem('DoctorWallah_language');
         } catch (_) {}
     }, []);
 

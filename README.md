@@ -1,6 +1,6 @@
-# Novonex Academy — Premium Full-Stack Learning Management System (LMS)
+# DoctorWallah — Premium Full-Stack Learning Management System (LMS)
 
-Novonex Academy is a production-grade, full-stack EdTech platform engineered for the Bangladeshi education market. Inspired by top educational platforms such as [phyhunt.com](https://www.phyhunt.com/) and powered by Tutor LMS Pro style curriculum workflows, it provides an end-to-end ecosystem for students, teachers, and administrators.
+DoctorWallah is a production-grade, full-stack EdTech platform engineered for the Bangladeshi education market. Inspired by top educational platforms such as [phyhunt.com](https://www.phyhunt.com/) and powered by Tutor LMS Pro style curriculum workflows, it provides an end-to-end ecosystem for students, teachers, and administrators.
 
 ---
 
@@ -91,7 +91,7 @@ Configure your MySQL credentials in `.env`:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=novonex_lms
+DB_DATABASE=DoctorWallah_lms
 DB_USERNAME=root
 DB_PASSWORD=
 ```

@@ -216,7 +216,7 @@ class ShurjopayService
             'currency' => 'BDT',
             'customer_name' => $user->name ?: 'Student',
             'customer_address' => $user->address ?: 'Dhaka, Bangladesh',
-            'customer_email' => $user->email ?: ($user->phone . '@novonex.com'),
+            'customer_email' => $user->email ?: ($user->phone . '@DoctorWallah.com'),
             'customer_phone' => $user->phone ?: '01700000000',
             'customer_city' => 'Dhaka',
             'customer_post_code' => '1200',

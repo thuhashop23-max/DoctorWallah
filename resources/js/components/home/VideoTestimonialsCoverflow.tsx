@@ -51,14 +51,14 @@ const DEFAULT_ITEMS: VideoTestimonialItem[] = [
     {
         id: '1',
         name: 'Samiul',
-        role: 'NovoNex Student Review',
+        role: 'DoctorWallah Student Review',
         videoUrl: 'https://youtu.be/Cbw_yhBGM_4',
         thumbnailUrl: '',
     },
     {
         id: '2',
         name: 'Khurshed',
-        role: 'NovoNex Student Review',
+        role: 'DoctorWallah Student Review',
         videoUrl: 'https://youtu.be/Zt7yfNIbInQ',
         thumbnailUrl: '',
     },

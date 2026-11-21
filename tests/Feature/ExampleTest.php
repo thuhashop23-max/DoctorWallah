@@ -15,7 +15,7 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
-        $response->assertSee('novonex_theme');
+        $response->assertSee('DoctorWallah_theme');
         $response->assertSee('dark:bg-slate-950');
     }
 }

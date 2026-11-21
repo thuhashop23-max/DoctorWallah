@@ -57,14 +57,14 @@ class Media extends Model
         if ($filePath) {
             $path = ltrim(str_replace('public/', '', $filePath), '/');
             $assetUrl = asset('storage/' . $path);
-            if ((request()->isSecure() || str_contains(request()->getHost(), 'doctorwallah.com') || str_contains(request()->getHost(), 'nexcourses.com') || request()->server('HTTP_X_FORWARDED_PROTO') === 'https') && str_starts_with($assetUrl, 'http://')) {
+            if ((request()->isSecure() || str_contains(request()->getHost(), 'doctorwallah.com') || str_contains(request()->getHost(), 'doctorwallah.com') || request()->server('HTTP_X_FORWARDED_PROTO') === 'https') && str_starts_with($assetUrl, 'http://')) {
                 return 'https://' . substr($assetUrl, 7);
             }
             return $assetUrl;
         }
 
         if ($value) {
-            if ((request()->isSecure() || str_contains(request()->getHost(), 'doctorwallah.com') || str_contains(request()->getHost(), 'nexcourses.com') || request()->server('HTTP_X_FORWARDED_PROTO') === 'https') && str_starts_with($value, 'http://')) {
+            if ((request()->isSecure() || str_contains(request()->getHost(), 'doctorwallah.com') || str_contains(request()->getHost(), 'doctorwallah.com') || request()->server('HTTP_X_FORWARDED_PROTO') === 'https') && str_starts_with($value, 'http://')) {
                 return 'https://' . substr($value, 7);
             }
             return $value;

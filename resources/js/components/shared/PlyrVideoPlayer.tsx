@@ -24,7 +24,7 @@ export const extractYouTubeId = (url?: string | null): string | null => {
     return match ? match[1] : null;
 };
 
-const QUALITY_STORAGE_KEY = 'novonex_video_quality';
+const QUALITY_STORAGE_KEY = 'DoctorWallah_video_quality';
 
 const QUALITY_OPTIONS = [
     { label: '1080p', detail: 'Full HD', value: '1080p', ytLevel: 'hd1080' },

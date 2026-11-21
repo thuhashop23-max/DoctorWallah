@@ -11,7 +11,7 @@ interface ThemeContextType {
     toggleTheme: () => void;
 }
 
-const STORAGE_KEY = 'novonex_theme';
+const STORAGE_KEY = 'DoctorWallah_theme';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 

@@ -119,7 +119,7 @@ interface WidgetDef {
     type: BlockType;
     name: string;
     description: string;
-    category: 'Basic' | 'Pro & Marketing' | 'NovoNex LMS';
+    category: 'Basic' | 'Pro & Marketing' | 'DoctorWallah LMS';
     icon: React.ComponentType<{ className?: string }>;
     iconBg: string;
     iconColor: string;
@@ -272,12 +272,12 @@ const WIDGET_CATALOG: WidgetDef[] = [
         iconBg: 'bg-emerald-500/20',
         iconColor: 'text-emerald-400',
     },
-    // --- NOVONEX LMS ---
+    // --- DoctorWallah LMS ---
     {
         type: 'course_tabs',
         name: 'Course Tabs & Grid',
         description: 'Category filter tabs & live course cards',
-        category: 'NovoNex LMS',
+        category: 'DoctorWallah LMS',
         icon: BookOpen,
         iconBg: 'bg-sky-500/20',
         iconColor: 'text-sky-400',
@@ -286,7 +286,7 @@ const WIDGET_CATALOG: WidgetDef[] = [
         type: 'bundle_showcase',
         name: 'Course Bundles',
         description: 'Combo package showcase grid',
-        category: 'NovoNex LMS',
+        category: 'DoctorWallah LMS',
         icon: Boxes,
         iconBg: 'bg-indigo-500/20',
         iconColor: 'text-indigo-400',
@@ -295,7 +295,7 @@ const WIDGET_CATALOG: WidgetDef[] = [
         type: 'teachers_showcase',
         name: 'Faculty Mentors',
         description: 'Teacher profiles & university tags',
-        category: 'NovoNex LMS',
+        category: 'DoctorWallah LMS',
         icon: GraduationCap,
         iconBg: 'bg-orange-500/20',
         iconColor: 'text-orange-400',
@@ -304,7 +304,7 @@ const WIDGET_CATALOG: WidgetDef[] = [
         type: 'html_widget',
         name: 'Custom HTML/CSS',
         description: 'Embed arbitrary code & styles',
-        category: 'NovoNex LMS',
+        category: 'DoctorWallah LMS',
         icon: Code,
         iconBg: 'bg-amber-500/20',
         iconColor: 'text-amber-400',
@@ -470,7 +470,7 @@ export const AdminPageBuilderPage: React.FC = () => {
             });
             if (page.slug === 'home') {
                 try {
-                    sessionStorage.removeItem('novonex_home_custom_page');
+                    sessionStorage.removeItem('DoctorWallah_home_custom_page');
                 } catch {}
             }
             showToast('Saved successfully!');
@@ -575,7 +575,7 @@ export const AdminPageBuilderPage: React.FC = () => {
                     title: 'Why Choose Us',
                     settings: {
                         sectionTag: 'Our Highlights',
-                        sectionTitle: 'Why Choose NovoNex?',
+                        sectionTitle: 'Why Choose DoctorWallah?',
                         sectionSub: 'We don\'t just deliver videos; we build conceptual mastery.',
                         items: [
                             { id: '1', icon: 'Award', title: 'Expert Faculty', desc: 'Lectures prepared under direct supervision of top university professors.' },
@@ -620,7 +620,7 @@ export const AdminPageBuilderPage: React.FC = () => {
                     title: 'Video Embed',
                     settings: {
                         title: 'Introduction to Our Platform',
-                        subtitle: 'See how NovoNex helps students excel',
+                        subtitle: 'See how DoctorWallah helps students excel',
                         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
                     }
                 };
@@ -811,14 +811,14 @@ export const AdminPageBuilderPage: React.FC = () => {
                             {
                                 id: '1',
                                 name: 'Samiul',
-                                role: 'NovoNex Student Review',
+                                role: 'DoctorWallah Student Review',
                                 videoUrl: 'https://youtu.be/Cbw_yhBGM_4',
                                 thumbnailUrl: '',
                             },
                             {
                                 id: '2',
                                 name: 'Khurshed',
-                                role: 'NovoNex Student Review',
+                                role: 'DoctorWallah Student Review',
                                 videoUrl: 'https://youtu.be/Zt7yfNIbInQ',
                                 thumbnailUrl: '',
                             },
@@ -837,7 +837,7 @@ export const AdminPageBuilderPage: React.FC = () => {
                         sectionTitle: 'Common Questions & Answers',
                         sectionSub: 'Everything you need to know about enrollments, classes, and exams.',
                         items: [
-                            { id: '1', q: 'How do I enroll in a course on NovoNex?', a: 'Click the "Enroll Now" or "Get Course" button on any course card. Complete the checkout process to get immediate access.' },
+                            { id: '1', q: 'How do I enroll in a course on DoctorWallah?', a: 'Click the "Enroll Now" or "Get Course" button on any course card. Complete the checkout process to get immediate access.' },
                             { id: '2', q: 'Can I access recorded classes and lecture sheets after live sessions?', a: 'Yes, every live session is saved to your student archive in Full HD and remains accessible throughout your course validity.' },
                             { id: '3', q: 'How does the NexPilot AI Doubt Solver assist my learning?', a: 'NexPilot is an intelligent 24/7 tutor linked with your curriculum. Ask any study question to get instant step-by-step guidance.' },
                         ]
@@ -1217,7 +1217,7 @@ export const AdminPageBuilderPage: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    (['Basic', 'Pro & Marketing', 'NovoNex LMS'] as const).map(category => {
+                                    (['Basic', 'Pro & Marketing', 'DoctorWallah LMS'] as const).map(category => {
                                         const categoryWidgets = WIDGET_CATALOG.filter(w => w.category === category);
                                         return (
                                             <div key={category} className="space-y-2 pt-1">
@@ -2309,7 +2309,7 @@ export const AdminPageBuilderPage: React.FC = () => {
                                                                                     name: 'Student Name',
                                                                                     role: 'Batch / College',
                                                                                     rating: 5,
-                                                                                    quote: 'Learning with NovoNex has been truly transformative and wonderful!'
+                                                                                    quote: 'Learning with DoctorWallah has been truly transformative and wonderful!'
                                                                                 };
                                                                                 handleUpdateSelectedSettings('items', [...items, newItem]);
                                                                             }}

@@ -178,7 +178,7 @@ export const TeacherProfilePage: React.FC = () => {
                             <div>
                                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 text-xs font-bold border border-sky-200/80 dark:border-sky-800/80 mb-2.5">
                                     <Sparkles className="w-3.5 h-3.5 text-sky-500" />
-                                    <span>NovoNex Faculty Member</span>
+                                    <span>DoctorWallah Faculty Member</span>
                                 </div>
 
                                 <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -200,7 +200,7 @@ export const TeacherProfilePage: React.FC = () => {
 
                             {/* Bio */}
                             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
-                                {teacher.bio || 'Experienced and dedicated instructor at NovoNex. Helping students master complex topics with clarity and confidence.'}
+                                {teacher.bio || 'Experienced and dedicated instructor at DoctorWallah. Helping students master complex topics with clarity and confidence.'}
                             </p>
 
                             {/* Quick Stats Bar */}

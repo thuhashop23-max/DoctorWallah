@@ -18,7 +18,7 @@ return new class extends Migration
                 'status' => 'published',
                 'layout_type' => 'builder',
                 'is_system' => true,
-                'meta_title' => 'Novonex Academy | Best Online Learning Platform in Bangladesh',
+                'meta_title' => 'DoctorWallah | Best Online Learning Platform in Bangladesh',
                 'meta_description' => 'Leading online education platform in Bangladesh. Premier preparation for HSC and university admissions.',
                 'blocks' => Page::defaultHomeBlocks(),
             ]
@@ -32,8 +32,8 @@ return new class extends Migration
                 'status' => 'published',
                 'layout_type' => 'builder',
                 'is_system' => false,
-                'meta_title' => 'Privacy Policy - Novonex Academy',
-                'meta_description' => 'Novonex Academy privacy policy and data protection terms.',
+                'meta_title' => 'Privacy Policy - DoctorWallah',
+                'meta_description' => 'DoctorWallah privacy policy and data protection terms.',
                 'blocks' => [
                     [
                         'id' => 'block_hero_privacy',
@@ -42,7 +42,7 @@ return new class extends Migration
                         'settings' => [
                             'badge' => 'Legal & Terms',
                             'title' => 'Privacy Policy',
-                            'subtitle' => 'Novonex Academy is dedicated to safeguarding your personal data and privacy.',
+                            'subtitle' => 'DoctorWallah is dedicated to safeguarding your personal data and privacy.',
                             'buttonText' => '',
                             'buttonLink' => '',
                             'bgColor' => 'slate',
@@ -68,8 +68,8 @@ return new class extends Migration
                 'status' => 'published',
                 'layout_type' => 'builder',
                 'is_system' => false,
-                'meta_title' => 'Terms and Conditions - Novonex Academy',
-                'meta_description' => 'Terms and conditions of using Novonex Academy.',
+                'meta_title' => 'Terms and Conditions - DoctorWallah',
+                'meta_description' => 'Terms and conditions of using DoctorWallah.',
                 'blocks' => [
                     [
                         'id' => 'block_hero_terms',
@@ -78,7 +78,7 @@ return new class extends Migration
                         'settings' => [
                             'badge' => 'Rules & Guidelines',
                             'title' => 'Terms & Conditions',
-                            'subtitle' => 'Rules and guidelines for using the Novonex Academy platform.',
+                            'subtitle' => 'Rules and guidelines for using the DoctorWallah platform.',
                             'buttonText' => '',
                             'buttonLink' => '',
                             'bgColor' => 'sky',

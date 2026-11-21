@@ -119,7 +119,7 @@ export const TeacherCoursesPage: React.FC = () => {
                         </h4>
                         <p className="text-xs text-slate-400 max-w-md mx-auto">
                             {activeTab === 'enrolled'
-                                ? 'You can explore courses on NovoNex and enroll to learn new topics from other mentors.'
+                                ? 'You can explore courses on DoctorWallah and enroll to learn new topics from other mentors.'
                                 : 'Assigned courses will appear here once linked by the platform administrator.'}
                         </p>
                         {activeTab === 'enrolled' && (

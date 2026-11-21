@@ -197,15 +197,15 @@ return new class extends Migration
         if (! Schema::hasTable('website_settings')) {
             Schema::create('website_settings', function (Blueprint $table) {
                 $table->id();
-                $table->string('site_name')->default('Novonex Academy');
+                $table->string('site_name')->default('DoctorWallah');
                 $table->string('site_tagline')->nullable()->default('Bangladesh’s Premier EdTech Platform');
                 $table->string('logo_url')->nullable();
                 $table->string('favicon_url')->nullable();
-                $table->string('contact_email')->nullable()->default('support@novonex.edu.bd');
+                $table->string('contact_email')->nullable()->default('support@DoctorWallah.edu.bd');
                 $table->string('contact_phone')->nullable()->default('+880 1700 000000');
                 $table->string('primary_color')->default('#0ea5e9');
                 $table->string('secondary_color')->default('#0f172a');
-                $table->text('copyright_text')->nullable()->default('© 2026 Novonex Academy. All rights reserved.');
+                $table->text('copyright_text')->nullable()->default('© 2026 DoctorWallah. All rights reserved.');
                 $table->timestamps();
             });
         }

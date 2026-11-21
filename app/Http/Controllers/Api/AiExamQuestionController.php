@@ -197,7 +197,7 @@ class AiExamQuestionController extends Controller
             ? "ABSOLUTE STRICT RULE: The user selected ONLY '{$types[0]}'. You MUST ONLY generate questions of type '{$types[0]}'. DO NOT generate any other question type! Every single question in the 'questions' array MUST have \"question_type\": \"{$types[0]}\"."
             : "ABSOLUTE STRICT RULE: You MUST ONLY generate questions of the requested types: [{$typesListStr}]. DO NOT generate any other types!";
 
-        $systemMessage = "You are an expert exam question creator for \"NovoNex\", an advanced educational platform.
+        $systemMessage = "You are an expert exam question creator for \"DoctorWallah\", an advanced educational platform.
 Your task is to generate exactly {$count} high-quality, academically rigorous examination questions based strictly on the instructions and provided reference material.
 
 {$languageInstruction}

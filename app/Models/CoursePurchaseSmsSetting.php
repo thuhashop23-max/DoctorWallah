@@ -21,7 +21,7 @@ class CoursePurchaseSmsSetting extends Model
             ['id' => 1],
             [
                 'enabled' => true,
-                'general_template' => "Dear {student_name}, thank you for purchasing \"{course_title}\" at NovoNex! Log in to start learning: {login_url}",
+                'general_template' => "Dear {student_name}, thank you for purchasing \"{course_title}\" at DoctorWallah! Log in to start learning: {login_url}",
             ]
         );
     }

@@ -145,7 +145,7 @@ export const AdminSmsPage: React.FC = () => {
                             type="text"
                             value={senderId}
                             onChange={(e) => setSenderId(e.target.value)}
-                            placeholder="e.g., NovoNex (if approved)"
+                            placeholder="e.g., DoctorWallah (if approved)"
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white"
                         />
                     </div>

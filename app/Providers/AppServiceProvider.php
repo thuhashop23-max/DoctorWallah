@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production') || 
             request()->server('HTTP_X_FORWARDED_PROTO') === 'https' ||
             str_contains(request()->getHost(), 'doctorwallah.com') ||
-            str_contains(request()->getHost(), 'nexcourses.com')) {
+            str_contains(request()->getHost(), 'doctorwallah.com')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
 
@@ -42,22 +42,23 @@ class AppServiceProvider extends ServiceProvider
 
             if (\Illuminate\Support\Facades\Schema::hasTable('website_settings')) {
                 $setting = \App\Models\WebsiteSetting::first();
-                if ($setting && ($setting->site_name !== 'NovoNex' || $setting->primary_color !== '#CC1200' || $setting->secondary_color !== '#25a2ee' || str_contains(json_encode($setting->header_settings), 'Monologue'))) {
+                if ($setting && ($setting->site_name !== 'DoctorWallah' || str_contains(json_encode($setting->header_settings), 'NovoNex') || str_contains(json_encode($setting->header_settings), 'Monologue'))) {
+                    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
                     $header = $setting->header_settings ?? [];
-                    $header['brand_title'] = 'NovoNex';
+                    $header['brand_title'] = 'DoctorWallah';
                     $header['brand_subtitle'] = '';
                     $footer = $setting->footer_settings ?? [];
-                    $footer['brand_title'] = 'NovoNex';
+                    $footer['brand_title'] = 'DoctorWallah';
                     $footer['brand_subtitle'] = '';
                     $footer['description'] = 'Bangladesh’s premier online learning platform. Prepare for exams with the best mentors.';
-                    $footer['email'] = 'support@nexcourses.com';
-                    $footer['copyright_text'] = '© 2026 NovoNex. All rights reserved.';
+                    $footer['email'] = 'support@doctorwallah.com';
+                    $footer['copyright_text'] = '© 2026 DoctorWallah. All rights reserved.';
 
                     $setting->update([
-                        'site_name' => 'NovoNex',
+                        'site_name' => 'DoctorWallah',
                         'site_tagline' => 'Premier Online Learning & EdTech Platform',
-                        'contact_email' => 'support@nexcourses.com',
-                        'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                        'contact_email' => 'support@doctorwallah.com',
+                        'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
                         'primary_color' => '#CC1200',
                         'secondary_color' => '#25a2ee',
                         'header_settings' => $header,
@@ -71,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
                     ['phone' => '+8801700000001'],
                     [
                         'name' => 'Admin',
-                        'email' => 'admin@novonex.com',
+                        'email' => 'admin@doctorwallah.com',
                         'password' => \Illuminate\Support\Facades\Hash::make('password123'),
                         'role' => \App\Models\User::ROLE_ADMIN,
                         'status' => \App\Models\User::STATUS_ACTIVE,

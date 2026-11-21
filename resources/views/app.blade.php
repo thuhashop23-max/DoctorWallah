@@ -6,7 +6,7 @@
     @php
         $siteSettings = \App\Models\WebsiteSetting::current();
         $siteFavicon = $siteSettings->favicon_url ?? null;
-        $siteTitle = $siteSettings->site_name ?? 'NovoNex';
+        $siteTitle = $siteSettings->site_name ?? 'DoctorWallah';
         $siteTagline = $siteSettings->site_tagline ?? 'Premier Online Learning & EdTech Platform';
         $headerSettings = $siteSettings->header_settings ?? [];
         $siteLogo = $headerSettings['logo_url'] ?? $siteSettings->logo_url ?? null;
@@ -29,7 +29,7 @@
         window.__INITIAL_SETTINGS__ = {!! json_encode($siteSettings) !!};
         (function() {
             try {
-                var theme = localStorage.getItem('novonex_theme');
+                var theme = localStorage.getItem('DoctorWallah_theme');
                 var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (theme === 'dark' || (!theme && prefersDark)) {
                     document.documentElement.classList.add('dark');

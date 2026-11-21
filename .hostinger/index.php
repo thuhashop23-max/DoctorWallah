@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
 
 $envPath = __DIR__ . '/app/.env';
-$prodEnv = "APP_NAME=\"Novonex Academy\"\n"
+$prodEnv = "APP_NAME=\"DoctorWallah\"\n"
     . "APP_ENV=production\n"
     . "APP_KEY=\"base64:8LjiCD2092BjzTs8yKmtgJZYHBSxl9zzGD/zHToHmsI=\"\n"
     . "APP_DEBUG=false\n"
-    . "APP_URL=\"https://novonexdelta.com\"\n\n"
+    . "APP_URL=\"https://doctorwallah.com\"\n\n"
     . "APP_LOCALE=bn\n"
     . "APP_FALLBACK_LOCALE=en\n"
     . "APP_FAKER_LOCALE=en_US\n\n"
@@ -25,7 +25,7 @@ $prodEnv = "APP_NAME=\"Novonex Academy\"\n"
     . "DB_PORT=\"3306\"\n"
     . "DB_DATABASE=\"u991362382_delta\"\n"
     . "DB_USERNAME=\"u991362382_delta\"\n"
-    . "DB_PASSWORD=\"NovonexDelta_2026_SecuredDb\"\n\n"
+    . "DB_PASSWORD=\"DoctorWallahDelta_2026_SecuredDb\"\n\n"
     . "SESSION_DRIVER=database\n"
     . "SESSION_LIFETIME=120\n"
     . "SESSION_ENCRYPT=false\n"
@@ -46,11 +46,11 @@ $prodEnv = "APP_NAME=\"Novonex Academy\"\n"
     . "MAIL_PORT=2525\n"
     . "MAIL_USERNAME=null\n"
     . "MAIL_PASSWORD=null\n"
-    . "MAIL_FROM_ADDRESS=\"info@novonexdelta.com\"\n"
+    . "MAIL_FROM_ADDRESS=\"info@doctorwallah.com\"\n"
     . "MAIL_FROM_NAME=\"\${APP_NAME}\"\n\n"
     . "VITE_APP_NAME=\"\${APP_NAME}\"\n";
 
-if (!file_exists($envPath) || strpos(@file_get_contents($envPath), 'NovonexDelta_2026_SecuredDb') === false) {
+if (!file_exists($envPath) || strpos(@file_get_contents($envPath), 'DoctorWallahDelta_2026_SecuredDb') === false) {
     @file_put_contents($envPath, $prodEnv);
 }
 

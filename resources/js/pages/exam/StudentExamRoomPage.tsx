@@ -315,7 +315,7 @@ export const StudentExamRoomPage: React.FC = () => {
                     <div className="hidden print:block mb-6 border-b-2 border-slate-900 pb-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <h1 className="text-2xl font-black tracking-tight text-slate-900">NOVONEX</h1>
+                                <h1 className="text-2xl font-black tracking-tight text-slate-900">DoctorWallah</h1>
                                 <p className="text-xs uppercase tracking-widest text-slate-600 font-bold">Online Examination Result & Evaluation Sheet</p>
                             </div>
                             <div className="text-right text-xs text-slate-700">

@@ -53,7 +53,7 @@ class WebsiteSetting extends Model
             'show_auth_buttons' => true,
             'logo_url' => null,
             'logo_height' => 44,
-            'brand_title' => 'NovoNex',
+            'brand_title' => 'DoctorWallah',
             'brand_subtitle' => '',
             'announcement_enabled' => false,
             'announcement_text' => '🎉 Admissions open for new batch! Enroll now with special discount.',
@@ -146,7 +146,7 @@ class WebsiteSetting extends Model
     {
         return [
             'bg_color' => '#0f172a',
-            'brand_title' => 'NovoNex',
+            'brand_title' => 'DoctorWallah',
             'brand_subtitle' => '',
             'description' => 'Bangladesh’s leading online learning platform. Prepare for exams with the best mentors.',
             'badge_text' => '100% Trusted & Quality Online Education',
@@ -168,13 +168,13 @@ class WebsiteSetting extends Model
             'column_4_title' => 'Contact Us',
             'phone' => '+880 1700 000000',
             'phone_hours' => '10 AM - 10 PM (Sat - Thu)',
-            'email' => 'support@novonex.com',
+            'email' => 'support@doctorwallah.com',
             'address' => 'Dhaka, Bangladesh',
             'social_links' => [
                 ['id' => '1', 'platform' => 'facebook', 'url' => 'https://facebook.com'],
                 ['id' => '2', 'platform' => 'youtube', 'url' => 'https://youtube.com'],
             ],
-            'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+            'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
             'bottom_credit' => 'Crafted with ❤️ for passionate learners',
         ];
     }
@@ -272,16 +272,16 @@ class WebsiteSetting extends Model
         $setting = static::first();
         if (! $setting) {
             $setting = static::create([
-                'site_name' => 'NovoNex',
+                'site_name' => 'DoctorWallah',
                 'site_tagline' => 'Premier Online Learning & EdTech Platform',
                 'default_language' => 'en',
                 'logo_url' => null,
                 'favicon_url' => null,
-                'contact_email' => 'support@novonex.com',
+                'contact_email' => 'support@doctorwallah.com',
                 'contact_phone' => '+880 1700 000000',
                 'primary_color' => '#CC1200',
                 'secondary_color' => '#25a2ee',
-                'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
                 'header_settings' => static::defaultHeaderSettings(),
                 'footer_settings' => static::defaultFooterSettings(),
                 'manual_payment_settings' => static::defaultManualPaymentSettings(),
@@ -291,23 +291,23 @@ class WebsiteSetting extends Model
             ]);
         }
 
-        // Ensure legacy brand names are updated to NovoNex
+        // Ensure legacy brand names are updated to DoctorWallah
         if ($setting->site_name === 'Monologue Edu' || (isset($setting->header_settings['brand_title']) && $setting->header_settings['brand_title'] === 'Monologue')) {
             $header = $setting->header_settings ?? [];
-            $header['brand_title'] = 'NovoNex';
+            $header['brand_title'] = 'DoctorWallah';
             $header['brand_subtitle'] = '';
             
             $footer = $setting->footer_settings ?? [];
-            $footer['brand_title'] = 'NovoNex';
+            $footer['brand_title'] = 'DoctorWallah';
             $footer['brand_subtitle'] = '';
-            $footer['email'] = 'support@novonex.com';
-            $footer['copyright_text'] = '© 2026 NovoNex. All rights reserved.';
+            $footer['email'] = 'support@doctorwallah.com';
+            $footer['copyright_text'] = '© 2026 DoctorWallah. All rights reserved.';
 
             $setting->update([
-                'site_name' => 'NovoNex',
+                'site_name' => 'DoctorWallah',
                 'site_tagline' => 'Premier Online Learning & EdTech Platform',
-                'contact_email' => 'support@novonex.com',
-                'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                'contact_email' => 'support@doctorwallah.com',
+                'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
                 'header_settings' => $header,
                 'footer_settings' => $footer,
             ]);

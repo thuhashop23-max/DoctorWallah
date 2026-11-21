@@ -25,12 +25,12 @@ import {
 
 const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
     bg_color: '#0f172a',
-    brand_title: 'NovoNex',
-    brand_title_en: 'NovoNex',
+    brand_title: 'DoctorWallah',
+    brand_title_en: 'DoctorWallah',
     brand_subtitle: '',
     brand_subtitle_en: '',
-    description: 'NovoNex is a premier online education platform dedicated to conceptual clarity, interactive learning, and exam excellence.',
-    description_en: 'NovoNex is a premier online education platform dedicated to conceptual clarity, interactive learning, and exam excellence.',
+    description: 'DoctorWallah is a premier online education platform dedicated to conceptual clarity, interactive learning, and exam excellence.',
+    description_en: 'DoctorWallah is a premier online education platform dedicated to conceptual clarity, interactive learning, and exam excellence.',
     badge_text: '100% Verified Learning Platform',
     badge_text_en: '100% Verified Learning Platform',
     show_badge: true,
@@ -55,15 +55,15 @@ const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
     phone: '+880 1700 000000',
     phone_hours: '10:00 AM - 10:00 PM (Sat - Thu)',
     phone_hours_en: '10:00 AM - 10:00 PM (Sat - Thu)',
-    email: 'support@nexcourses.com',
+    email: 'support@doctorwallah.com',
     address: 'Dhaka, Bangladesh',
     address_en: 'Dhaka, Bangladesh',
     social_links: [
         { id: '1', platform: 'facebook', url: 'https://facebook.com' },
         { id: '2', platform: 'youtube', url: 'https://youtube.com' },
     ],
-    copyright_text: '© 2026 NovoNex. All rights reserved.',
-    copyright_text_en: '© 2026 NovoNex. All rights reserved.',
+    copyright_text: '© 2026 DoctorWallah. All rights reserved.',
+    copyright_text_en: '© 2026 DoctorWallah. All rights reserved.',
     bottom_credit: 'Crafted with ❤️ for passionate learners',
     bottom_credit_en: 'Crafted with ❤️ for passionate learners',
 };
@@ -83,7 +83,7 @@ export const AdminFooterBuilderPage: React.FC = () => {
             setFooterSettings({
                 ...DEFAULT_FOOTER_SETTINGS,
                 ...settings.footer_settings,
-                brand_title: settings.footer_settings.brand_title || settings.site_name || 'NovoNex',
+                brand_title: settings.footer_settings.brand_title || settings.site_name || 'DoctorWallah',
                 copyright_text: settings.footer_settings.copyright_text || settings.copyright_text || DEFAULT_FOOTER_SETTINGS.copyright_text,
             });
         }
@@ -201,7 +201,7 @@ export const AdminFooterBuilderPage: React.FC = () => {
 
     // Live preview localized helpers
     const logoUrl = footerSettings.logo_url || settings?.logo_url || settings?.header_settings?.logo_url;
-    const previewBrandTitle = getLocalizedText(footerSettings.brand_title, footerSettings.brand_title_en, previewLang) || 'NovoNex';
+    const previewBrandTitle = getLocalizedText(footerSettings.brand_title, footerSettings.brand_title_en, previewLang) || 'DoctorWallah';
     const previewBrandSubtitle = getLocalizedText(footerSettings.brand_subtitle, footerSettings.brand_subtitle_en, previewLang) || '';
     const previewDescription = getLocalizedText(footerSettings.description, footerSettings.description_en, previewLang);
     const previewBadgeText = getLocalizedText(footerSettings.badge_text, footerSettings.badge_text_en, previewLang);
@@ -467,7 +467,7 @@ export const AdminFooterBuilderPage: React.FC = () => {
                                         value={footerSettings.brand_title || ''}
                                         onChange={(e) => handleUpdate('brand_title', e.target.value)}
                                         className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold"
-                                        placeholder="e.g. NovoNex"
+                                        placeholder="e.g. DoctorWallah"
                                     />
                                 </div>
                                 <div>
@@ -709,7 +709,7 @@ export const AdminFooterBuilderPage: React.FC = () => {
                                         value={footerSettings.email || ''}
                                         onChange={(e) => handleUpdate('email', e.target.value)}
                                         className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
-                                        placeholder="support@nexcourses.com"
+                                        placeholder="support@doctorwallah.com"
                                     />
                                 </div>
                                 <div>
@@ -808,7 +808,7 @@ export const AdminFooterBuilderPage: React.FC = () => {
                                             type="text"
                                             value={footerSettings.copyright_text || ''}
                                             onChange={(e) => handleUpdate('copyright_text', e.target.value)}
-                                            placeholder="© 2026 NovoNex. All rights reserved."
+                                            placeholder="© 2026 DoctorWallah. All rights reserved."
                                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-sky-500"
                                         />
                                     </div>

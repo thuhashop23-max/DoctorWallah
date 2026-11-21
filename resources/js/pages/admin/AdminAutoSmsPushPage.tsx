@@ -41,7 +41,7 @@ const AVAILABLE_TAGS = [
     { tag: '{bundle_title}', label: 'Bundle Title', desc: 'Title of the enrolled course bundle' },
     { tag: '{order_id}', label: 'Order ID', desc: 'Unique order identifier' },
     { tag: '{amount}', label: 'Amount Paid', desc: 'Final amount paid in BDT' },
-    { tag: '{site_name}', label: 'Site Name', desc: 'NovoNex' },
+    { tag: '{site_name}', label: 'Site Name', desc: 'DoctorWallah' },
     { tag: '{login_url}', label: 'Login URL', desc: 'Direct portal login link' },
 ];
 
@@ -606,8 +606,8 @@ export const AdminAutoSmsPushPage: React.FC = () => {
             .replace(/{bundle_title}/g, 'HSC Science Complete Bundle')
             .replace(/{order_id}/g, 'ORD-10293')
             .replace(/{amount}/g, 'Tk 2,500.00')
-            .replace(/{site_name}/g, 'NovoNex')
-            .replace(/{login_url}/g, 'https://nexcourses.com/login');
+            .replace(/{site_name}/g, 'DoctorWallah')
+            .replace(/{login_url}/g, 'https://doctorwallah.com/login');
     };
 
     if (loading) {
@@ -882,8 +882,8 @@ export const AdminAutoSmsPushPage: React.FC = () => {
                             onChange={(e) => setTemplateText(e.target.value)}
                             placeholder={
                                 targetType === 'bundle'
-                                    ? 'Dear {student_name}, congratulations on enrolling in {bundle_title}! Access your courses at {login_url} - NovoNex'
-                                    : 'Dear {student_name}, welcome to {course_title}! Join our batch group: https://t.me/... - NovoNex'
+                                    ? 'Dear {student_name}, congratulations on enrolling in {bundle_title}! Access your courses at {login_url} - DoctorWallah'
+                                    : 'Dear {student_name}, welcome to {course_title}! Join our batch group: https://t.me/... - DoctorWallah'
                             }
                             className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:ring-2 focus:ring-sky-500"
                             required

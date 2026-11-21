@@ -41,7 +41,7 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
                     {logoUrl ? (
                         <img
                             src={logoUrl}
-                            alt="NovoNex"
+                            alt="DoctorWallah"
                             className="w-full h-full object-contain"
                             onError={(e) => {
                                 (e.target as HTMLElement).style.display = 'none';

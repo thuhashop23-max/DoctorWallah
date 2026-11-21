@@ -3,7 +3,7 @@
  * Stores referral code in localStorage and cookies for cross-session attribution.
  */
 
-const REFERRAL_KEY = 'novonex_aff_ref';
+const REFERRAL_KEY = 'DoctorWallah_aff_ref';
 const DEFAULT_EXPIRY_DAYS = 30;
 
 interface StoredReferral {
@@ -51,7 +51,7 @@ export function setStoredReferralCode(code: string, expiryDays: number = DEFAULT
 
         // Also set a document cookie for redundancy
         const maxAge = (expiryDays || DEFAULT_EXPIRY_DAYS) * 24 * 60 * 60;
-        document.cookie = `novonex_ref=${encodeURIComponent(code)}; max-age=${maxAge}; path=/; SameSite=Lax`;
+        document.cookie = `DoctorWallah_ref=${encodeURIComponent(code)}; max-age=${maxAge}; path=/; SameSite=Lax`;
     } catch (e) {
         console.error('Error storing referral code', e);
     }
@@ -77,7 +77,7 @@ export function getStoredReferralCode(): string | null {
         }
 
         // Fallback: check cookie
-        const match = document.cookie.match(/(?:^|; )novonex_ref=([^;]*)/);
+        const match = document.cookie.match(/(?:^|; )DoctorWallah_ref=([^;]*)/);
         if (match && match[1]) {
             return decodeURIComponent(match[1]);
         }
@@ -95,7 +95,7 @@ export function clearStoredReferralCode(): void {
     if (typeof window === 'undefined') return;
     try {
         localStorage.removeItem(REFERRAL_KEY);
-        document.cookie = 'novonex_ref=; max-age=0; path=/; SameSite=Lax';
+        document.cookie = 'DoctorWallah_ref=; max-age=0; path=/; SameSite=Lax';
     } catch (e) {
         console.error('Error clearing referral code', e);
     }

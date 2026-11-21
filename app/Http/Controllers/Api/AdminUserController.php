@@ -220,7 +220,7 @@ class AdminUserController extends Controller
                 ['user_id' => $user->id],
                 [
                     'designation' => $request->input('designation') ?: 'Instructor',
-                    'institution' => $request->input('institution') ?: 'NovoNex Faculty',
+                    'institution' => $request->input('institution') ?: 'DoctorWallah Faculty',
                     'photo_url' => $request->input('photo_url'),
                     'bio' => $request->input('bio'),
                     'is_featured' => true,
@@ -426,7 +426,7 @@ class AdminUserController extends Controller
                 ['user_id' => $user->id],
                 [
                     'designation' => $request->input('designation') ?: ($user->teacherProfile?->designation ?: 'Instructor'),
-                    'institution' => $request->input('institution') ?: ($user->teacherProfile?->institution ?: 'NovoNex Faculty'),
+                    'institution' => $request->input('institution') ?: ($user->teacherProfile?->institution ?: 'DoctorWallah Faculty'),
                     'photo_url' => $photoUrl,
                     'bio' => $request->input('bio') ?: $user->teacherProfile?->bio,
                     'is_featured' => true,

@@ -224,7 +224,7 @@ class AuthController extends Controller
                 ]
             );
 
-            $smsMessage = "Your NovoNex OTP code is: {$otpCode}. Valid for {$smsSettings->otp_expiration_minutes} minutes.";
+            $smsMessage = "Your DoctorWallah OTP code is: {$otpCode}. Valid for {$smsSettings->otp_expiration_minutes} minutes.";
             $smsService->sendSms($normalizedPhone, $smsMessage);
 
             return response()->json([
@@ -272,7 +272,7 @@ class AuthController extends Controller
                 ['user_id' => $user->id],
                 [
                     'designation' => 'Instructor',
-                    'institution' => 'NovoNex Faculty',
+                    'institution' => 'DoctorWallah Faculty',
                     'is_featured' => true,
                 ]
             );
@@ -356,7 +356,7 @@ class AuthController extends Controller
             ],
         ]);
 
-        $smsMessage = "Your NovoNex password reset OTP is: {$otpCode}. Valid for 10 minutes.";
+        $smsMessage = "Your DoctorWallah password reset OTP is: {$otpCode}. Valid for 10 minutes.";
         $smsService->sendSms($normalizedPhone, $smsMessage);
 
         return response()->json([

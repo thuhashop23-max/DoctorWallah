@@ -45,9 +45,9 @@ return new class extends Migration
             $pages = DB::table('pages')->get();
             foreach ($pages as $p) {
                 $updated = false;
-                $newMeta = str_replace('Novonex Academy', 'Monologue Edu', $p->meta_title ?? '');
+                $newMeta = str_replace('DoctorWallah', 'Monologue Edu', $p->meta_title ?? '');
                 $rawBlocks = $p->blocks ?? '';
-                $newBlocks = str_replace(['Novonex Academy', 'Novonex'], ['Monologue Edu', 'Monologue Edu'], $rawBlocks);
+                $newBlocks = str_replace(['DoctorWallah', 'DoctorWallah'], ['Monologue Edu', 'Monologue Edu'], $rawBlocks);
 
                 if ($newMeta !== $p->meta_title || $newBlocks !== $rawBlocks) {
                     DB::table('pages')->where('id', $p->id)->update([

@@ -56,7 +56,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
         if (settings) {
             setLogoUrl(settings.logo_url || (settings as any).header_settings?.logo_url || '');
             setFaviconUrl(settings.favicon_url || '');
-            setSiteName(settings.site_name || 'NovoNex');
+            setSiteName(settings.site_name || 'DoctorWallah');
             setSiteTagline(settings.site_tagline || 'Premier Online Learning & EdTech Platform');
             setPrimaryColor(settings.primary_color || '#CC1200');
             setSecondaryColor(settings.secondary_color || '#25a2ee');
@@ -130,7 +130,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
             const payload = {
                 logo_url: logoUrl.trim() || null,
                 favicon_url: faviconUrl.trim() || null,
-                site_name: siteName.trim() || 'NovoNex',
+                site_name: siteName.trim() || 'DoctorWallah',
                 site_tagline: siteTagline.trim() || '',
                 primary_color: primaryColor,
                 secondary_color: secondaryColor,
@@ -166,7 +166,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
         if (confirm('Are you sure you want to reset logo, favicon and site settings to defaults?')) {
             setLogoUrl('');
             setFaviconUrl('');
-            setSiteName('NovoNex');
+            setSiteName('DoctorWallah');
             setSiteTagline("Premier Online Learning Platform");
             setPrimaryColor('#CC1200');
             setSecondaryColor('#25a2ee');
@@ -290,7 +290,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                                     )}
                                 </div>
                                 <span className="text-xs font-semibold truncate">
-                                    {siteName || 'NovoNex'} {siteTagline ? `| ${siteTagline}` : ''}
+                                    {siteName || 'DoctorWallah'} {siteTagline ? `| ${siteTagline}` : ''}
                                 </span>
                                 <button type="button" className="text-slate-400 hover:text-white ml-auto">
                                     <X className="w-3 h-3" />
@@ -300,7 +300,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                             {/* Inactive Tab Example */}
                             <div className="px-3 py-2 text-slate-400 hover:text-slate-200 text-xs flex items-center gap-2 rounded-t-xl transition hidden sm:flex">
                                 <span className="w-3 h-3 rounded-full bg-slate-700 inline-block"></span>
-                                <span className="truncate max-w-[100px]">Dashboard - NovoNex</span>
+                                <span className="truncate max-w-[100px]">Dashboard - DoctorWallah</span>
                             </div>
 
                             {/* New Tab Button */}
@@ -335,7 +335,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                         <div className="flex-1 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-700/80 flex items-center gap-2 text-slate-300 font-mono text-[11px]">
                             <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
                             <span className="text-emerald-400 font-medium">https://</span>
-                            <span className="text-slate-100 font-bold">nexcourses.com</span>
+                            <span className="text-slate-100 font-bold">doctorwallah.com</span>
                             <span className="text-slate-500">/</span>
                             <span className="ml-auto flex items-center gap-1.5 text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                                 <ShieldCheck className="w-3 h-3" />
@@ -351,7 +351,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                             <span>Live Preview Active: This is how your favicon and title appear in the browser tab</span>
                         </div>
                         <h4 className="text-base sm:text-lg font-bold text-slate-200">
-                            {siteName || 'NovoNex'}
+                            {siteName || 'DoctorWallah'}
                         </h4>
                         <p className="text-xs text-slate-400 max-w-md mx-auto">
                             {siteTagline || "Empowering Education Across Bangladesh"}
@@ -429,7 +429,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                             ) : (
                                 <div className="flex items-center gap-2 pt-3 text-slate-700">
                                     <BookOpen className="w-6 h-6 text-indigo-600" />
-                                    <span className="font-black text-base">{siteName || 'NovoNex'}</span>
+                                    <span className="font-black text-base">{siteName || 'DoctorWallah'}</span>
                                 </div>
                             )}
                         </div>
@@ -449,7 +449,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                             ) : (
                                 <div className="flex items-center gap-2 pt-3 text-white">
                                     <BookOpen className="w-6 h-6 text-sky-400" />
-                                    <span className="font-black text-white text-base">{siteName || 'NovoNex'}</span>
+                                    <span className="font-black text-white text-base">{siteName || 'DoctorWallah'}</span>
                                 </div>
                             )}
                         </div>
@@ -773,7 +773,7 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
                             required
                             value={siteName}
                             onChange={(e) => setSiteName(e.target.value)}
-                            placeholder="e.g. NovoNex"
+                            placeholder="e.g. DoctorWallah"
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-sky-500 focus:bg-white"
                         />
                         <p className="text-[11px] text-slate-400 mt-1">Appears as the primary title in browser tabs</p>

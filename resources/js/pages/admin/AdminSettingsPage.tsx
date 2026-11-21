@@ -119,7 +119,7 @@ export const AdminSettingsPage: React.FC = () => {
                                         type="email"
                                         value={contactEmail}
                                         onChange={(e) => setContactEmail(e.target.value)}
-                                        placeholder="support@nexcourses.com"
+                                        placeholder="support@doctorwallah.com"
                                         className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-sky-500"
                                     />
                                 </div>

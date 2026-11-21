@@ -82,7 +82,7 @@ class Page extends Model
                 'title' => 'Why Choose Us Section',
                 'settings' => [
                     'sectionTag' => 'Our Features',
-                    'sectionTitle' => 'Why NovoNex Is the First Choice for Students',
+                    'sectionTitle' => 'Why DoctorWallah Is the First Choice for Students',
                     'sectionSub' => 'Beyond rote memorization, we teach deep concepts and practical problem-solving tricks to guide students to the top.',
                     'items' => [
                         [
@@ -180,14 +180,14 @@ class Page extends Model
                         [
                             'id' => 'v1',
                             'name' => 'Samiul',
-                            'role' => 'NovoNex Student Review',
+                            'role' => 'DoctorWallah Student Review',
                             'videoUrl' => 'https://youtu.be/Cbw_yhBGM_4',
                             'thumbnailUrl' => '',
                         ],
                         [
                             'id' => 'v2',
                             'name' => 'Khurshed',
-                            'role' => 'NovoNex Student Review',
+                            'role' => 'DoctorWallah Student Review',
                             'videoUrl' => 'https://youtu.be/Zt7yfNIbInQ',
                             'thumbnailUrl' => '',
                         ],
@@ -257,7 +257,7 @@ class Page extends Model
                     'items' => [
                         [
                             'id' => 'faq_1',
-                            'q' => 'How do I purchase or enroll in a NovoNex course?',
+                            'q' => 'How do I purchase or enroll in a DoctorWallah course?',
                             'a' => 'Click the "Enroll Now" or "Buy Course" button on any course card. Complete the payment via bKash, Nagad, or Rocket and submit your TrxID for fast activation.'
                         ],
                         [
@@ -418,7 +418,7 @@ class Page extends Model
                     'status' => 'published',
                     'layout_type' => 'category',
                     'is_system' => false,
-                    'meta_title' => $category->name . ' - NovoNex',
+                    'meta_title' => $category->name . ' - DoctorWallah',
                     'meta_description' => $category->description ?? ($category->name . ' courses and materials.'),
                     'blocks' => static::defaultCategoryBlocks($category),
                 ]
@@ -435,7 +435,7 @@ class Page extends Model
                 'status' => 'published',
                 'layout_type' => 'builder',
                 'is_system' => true,
-                'meta_title' => 'All Courses - NovoNex',
+                'meta_title' => 'All Courses - DoctorWallah',
                 'meta_description' => 'Browse all subject-based preparation courses.',
                 'blocks' => static::defaultCoursesBlocks(),
             ]

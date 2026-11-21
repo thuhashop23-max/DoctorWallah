@@ -3,7 +3,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-$secret = 'NovonexDeploy_2026_DeltaSecretKey';
+$secret = 'DoctorWallahDeploy_2026_DeltaSecretKey';
 $providedSecret = $_GET['secret'] ?? $_SERVER['HTTP_X_DEPLOY_SECRET'] ?? '';
 
 if (!hash_equals($secret, (string)$providedSecret)) {

@@ -203,7 +203,7 @@ class AdminCourseController extends Controller
                             ['user_id' => $instUser->id],
                             [
                                 'designation' => 'Instructor',
-                                'institution' => 'NovoNex Faculty',
+                                'institution' => 'DoctorWallah Faculty',
                                 'is_featured' => true,
                             ]
                         );
@@ -379,7 +379,7 @@ class AdminCourseController extends Controller
                             ['user_id' => $instUser->id],
                             [
                                 'designation' => 'Instructor',
-                                'institution' => 'NovoNex Faculty',
+                                'institution' => 'DoctorWallah Faculty',
                                 'is_featured' => true,
                             ]
                         );

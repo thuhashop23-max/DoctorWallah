@@ -89,7 +89,7 @@ class GreenWebSmsService
                 $response = Http::timeout(15)
                     ->withoutVerifying()
                     ->withHeaders([
-                        'User-Agent' => 'NovoNex-LMS/1.0',
+                        'User-Agent' => 'DoctorWallah-LMS/1.0',
                         'Accept' => '*/*',
                     ])
                     ->asForm()

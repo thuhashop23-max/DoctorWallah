@@ -469,7 +469,7 @@ export const CourseDetailsPage: React.FC = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-base">NovoNex Expert Faculty</h4>
+                                            <h4 className="font-bold text-slate-900 text-base">DoctorWallah Expert Faculty</h4>
                                             <p className="text-xs text-slate-500 font-medium mt-0.5">Experienced Academic & Admission Mentors</p>
                                         </div>
                                     </div>

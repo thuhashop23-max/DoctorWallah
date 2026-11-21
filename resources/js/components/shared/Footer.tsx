@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
 
     const bgColor = footer?.bg_color || '#0f172a';
     const brandTitle = getLocalizedText(footer?.brand_title, footer?.brand_title_en, language)
-        || (settings?.site_name ? settings.site_name.split(' ')[0] : 'NovoNex');
+        || (settings?.site_name ? settings.site_name.split(' ')[0] : 'DoctorWallah');
     const brandSubtitle = getLocalizedText(footer?.brand_subtitle, footer?.brand_subtitle_en, language)
         || (settings?.site_name && settings.site_name.split(' ').length > 1 ? settings.site_name.split(' ').slice(1).join(' ') : '');
 
@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
     const col4Title = getLocalizedText(footer?.column_4_title, footer?.column_4_title_en, language) || t.footer.contactUs;
     const phone = footer?.phone || settings?.contact_phone || '+880 1700 000000';
     const phoneHours = getLocalizedText(footer?.phone_hours, footer?.phone_hours_en, language) || t.footer.hotlineTime;
-    const email = footer?.email || settings?.contact_email || 'support@novonex.com';
+    const email = footer?.email || settings?.contact_email || 'support@doctorwallah.com';
     const address = getLocalizedText(footer?.address, footer?.address_en, language) || 'Dhaka, Bangladesh';
     const socialLinks = footer?.social_links || [];
 

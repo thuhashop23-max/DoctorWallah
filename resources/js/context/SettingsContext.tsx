@@ -17,7 +17,7 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             return (window as any).__INITIAL_SETTINGS__;
         }
         try {
-            const cached = localStorage.getItem('novonex_settings_cache');
+            const cached = localStorage.getItem('DoctorWallah_settings_cache');
             if (cached) return JSON.parse(cached);
         } catch (_) {}
         return null;
@@ -29,7 +29,7 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             const { data } = await apiClient.get('/settings');
             setSettings(data);
             try {
-                localStorage.setItem('novonex_settings_cache', JSON.stringify(data));
+                localStorage.setItem('DoctorWallah_settings_cache', JSON.stringify(data));
             } catch (_) {}
         } catch (err) {
             console.error('Failed to load website settings', err);
@@ -42,7 +42,7 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setSettings(prev => {
             const next = prev ? { ...prev, ...newSettings } : (newSettings as WebsiteSetting);
             try {
-                localStorage.setItem('novonex_settings_cache', JSON.stringify(next));
+                localStorage.setItem('DoctorWallah_settings_cache', JSON.stringify(next));
             } catch (_) {}
             return next;
         });

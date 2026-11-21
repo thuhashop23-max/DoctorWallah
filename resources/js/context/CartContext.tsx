@@ -79,9 +79,9 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CART_STORAGE_KEY = 'novonex_cart_items';
-const COUPON_STORAGE_KEY = 'novonex_cart_coupon';
-const POINTS_STORAGE_KEY = 'novonex_cart_points';
+const CART_STORAGE_KEY = 'DoctorWallah_cart_items';
+const COUPON_STORAGE_KEY = 'DoctorWallah_cart_coupon';
+const POINTS_STORAGE_KEY = 'DoctorWallah_cart_points';
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [items, setItems] = useState<CartItem[]>(() => {

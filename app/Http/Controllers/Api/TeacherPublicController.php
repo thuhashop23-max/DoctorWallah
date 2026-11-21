@@ -39,7 +39,7 @@ class TeacherPublicController extends Controller
                     'id' => $teacher->id,
                     'name' => $teacher->name,
                     'designation' => $profile?->designation ?? 'Instructor',
-                    'institution' => $profile?->institution ?? 'NovoNex Faculty',
+                    'institution' => $profile?->institution ?? 'DoctorWallah Faculty',
                     'photo_url' => $profile?->photo_url,
                     'bio' => $profile?->bio,
                     'expertise' => $profile?->expertise,
@@ -69,7 +69,7 @@ class TeacherPublicController extends Controller
         if (! $teacher->teacherProfile) {
             TeacherProfile::firstOrCreate(['user_id' => $teacher->id], [
                 'designation' => 'Instructor',
-                'institution' => 'NovoNex Faculty',
+                'institution' => 'DoctorWallah Faculty',
                 'is_featured' => true,
             ]);
             $teacher->load('teacherProfile');
@@ -124,7 +124,7 @@ class TeacherPublicController extends Controller
                 'id' => $teacher->id,
                 'name' => $teacher->name,
                 'designation' => $profile?->designation ?? 'Instructor',
-                'institution' => $profile?->institution ?? 'NovoNex Faculty',
+                'institution' => $profile?->institution ?? 'DoctorWallah Faculty',
                 'photo_url' => $profile?->photo_url,
                 'bio' => $profile?->bio,
                 'expertise' => $profile?->expertise,

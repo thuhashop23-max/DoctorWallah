@@ -62,7 +62,7 @@ class PublicPageController extends Controller
                         'status' => 'published',
                         'layout_type' => 'category',
                         'is_system' => false,
-                        'meta_title' => $cat->name . ' - Novonex Academy',
+                        'meta_title' => $cat->name . ' - DoctorWallah',
                         'meta_description' => $cat->description ?? ($cat->name . ' all courses.'),
                         'blocks' => Page::defaultCategoryBlocks($cat),
                     ]

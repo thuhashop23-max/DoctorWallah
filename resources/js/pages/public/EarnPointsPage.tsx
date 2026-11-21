@@ -314,7 +314,7 @@ export const EarnPointsPage: React.FC = () => {
                     <div className="relative z-10 max-w-3xl space-y-4">
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 font-extrabold text-xs shadow-2xs">
                             <Sparkles className="w-3.5 h-3.5" />
-                            <span>NovoNex Student Rewards</span>
+                            <span>DoctorWallah Student Rewards</span>
                         </div>
 
                         <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight">

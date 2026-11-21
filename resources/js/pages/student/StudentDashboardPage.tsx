@@ -122,7 +122,7 @@ export const StudentDashboardPage: React.FC = () => {
         recentActivities.push(
             {
                 id: 'act-welcome',
-                text: 'Welcome to NovoNex Student Portal',
+                text: 'Welcome to DoctorWallah Student Portal',
                 time: 'Recently',
             },
             {
@@ -403,7 +403,7 @@ export const StudentDashboardPage: React.FC = () => {
                                             />
                                         ) : (
                                             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-[#25a2ee] to-slate-900 text-white font-bold text-[10px] p-1 text-center">
-                                                <span>NovoNex</span>
+                                                <span>DoctorWallah</span>
                                             </div>
                                         )}
                                     </div>

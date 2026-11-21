@@ -548,7 +548,7 @@ export const AdminSmsMarketingPage: React.FC = () => {
                                 },
                                 {
                                     title: 'Discount Offer Announcement',
-                                    text: 'Dear {name}, enjoy a 50% discount on all courses at NovoNex! Enroll today at nexcourses.com.'
+                                    text: 'Dear {name}, enjoy a 50% discount on all courses at DoctorWallah! Enroll today at doctorwallah.com.'
                                 },
                                 {
                                     title: 'Urgent Notice',

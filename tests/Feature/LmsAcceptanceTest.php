@@ -350,7 +350,7 @@ class LmsAcceptanceTest extends TestCase
         // Update GreenWeb SMS settings
         $response = $this->putJson('/api/admin/sms-settings', [
             'api_token' => 'SECRET_GREENWEB_API_TOKEN_9999',
-            'sender_id' => 'Novonex',
+            'sender_id' => 'DoctorWallah',
             'sms_enabled' => true,
             'otp_enabled' => true,
             'otp_expiration_minutes' => 5,

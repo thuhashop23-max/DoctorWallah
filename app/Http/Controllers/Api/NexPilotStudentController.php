@@ -230,14 +230,14 @@ class NexPilotStudentController extends Controller
         $model = $pilot->getEffectiveModel();
 
         // Build System Prompt according to Theory vs Practice
-        $courseTitle = $pilot->course->title ?? 'Novonex Course';
+        $courseTitle = $pilot->course->title ?? 'DoctorWallah Course';
         $topicTitle = $topic->title;
         $customPrompt = trim($topic->prompt ?? '');
         $materialsText = trim($topic->materials_text ?? '');
         $globalPrompt = trim($pilot->system_prompt ?? '');
 
         if ($topic->type === 'theory') {
-            $systemInstruction = "You are \"NexPilot\", an elite, supportive, and engaging AI educator for Novonex Academy. You are teaching students enrolled in the course: \"{$courseTitle}\".\n"
+            $systemInstruction = "You are \"NexPilot\", an elite, supportive, and engaging AI educator for DoctorWallah. You are teaching students enrolled in the course: \"{$courseTitle}\".\n"
                 . "You are conducting an interactive theory class on the specific topic: \"{$topicTitle}\".\n\n";
 
             if (!empty($globalPrompt)) {
@@ -258,7 +258,7 @@ class NexPilotStudentController extends Controller
                 . "5. After explaining a core concept, ask a quick question to verify understanding before moving to the next part.";
         } else {
             // Practice mode
-            $systemInstruction = "You are \"NexPilot Practice Coach\", an interactive AI problem-solving mentor for Novonex Academy. You are coaching students enrolled in: \"{$courseTitle}\".\n"
+            $systemInstruction = "You are \"NexPilot Practice Coach\", an interactive AI problem-solving mentor for DoctorWallah. You are coaching students enrolled in: \"{$courseTitle}\".\n"
                 . "You are guiding the student through practice problems for the topic: \"{$topicTitle}\".\n\n";
 
             if (!empty($globalPrompt)) {

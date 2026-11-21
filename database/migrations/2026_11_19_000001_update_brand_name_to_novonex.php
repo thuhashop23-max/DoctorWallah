@@ -19,26 +19,26 @@ return new class extends Migration
                 $footer = !empty($settings->footer_settings) ? json_decode($settings->footer_settings, true) : [];
 
                 if (is_array($header)) {
-                    $header['brand_title'] = 'NovoNex';
-                    $header['brand_title_en'] = 'NovoNex';
+                    $header['brand_title'] = 'DoctorWallah';
+                    $header['brand_title_en'] = 'DoctorWallah';
                     $header['brand_subtitle'] = '';
                     $header['brand_subtitle_en'] = '';
                 }
                 if (is_array($footer)) {
-                    $footer['brand_title'] = 'NovoNex';
-                    $footer['brand_title_en'] = 'NovoNex';
+                    $footer['brand_title'] = 'DoctorWallah';
+                    $footer['brand_title_en'] = 'DoctorWallah';
                     $footer['brand_subtitle'] = '';
                     $footer['brand_subtitle_en'] = '';
-                    $footer['email'] = 'support@nexcourses.com';
-                    $footer['copyright_text'] = '© 2026 NovoNex. All rights reserved.';
-                    $footer['copyright_text_en'] = '© 2026 NovoNex. All rights reserved.';
+                    $footer['email'] = 'support@doctorwallah.com';
+                    $footer['copyright_text'] = '© 2026 DoctorWallah. All rights reserved.';
+                    $footer['copyright_text_en'] = '© 2026 DoctorWallah. All rights reserved.';
                 }
 
                 DB::table('website_settings')->where('id', $settings->id)->update([
-                    'site_name' => 'NovoNex',
+                    'site_name' => 'DoctorWallah',
                     'site_tagline' => 'Premier Online Learning & EdTech Platform',
-                    'contact_email' => 'support@nexcourses.com',
-                    'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                    'contact_email' => 'support@doctorwallah.com',
+                    'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
                     'primary_color' => '#CC1200',
                     'secondary_color' => '#25a2ee',
                     'header_settings' => json_encode($header),
@@ -53,8 +53,8 @@ return new class extends Migration
                 $rawMeta = $p->meta_title ?? '';
                 $rawBlocks = $p->blocks ?? '';
 
-                $newMeta = str_ireplace(['Monologue Edu', 'Monologue'], 'NovoNex', $rawMeta);
-                $newBlocks = str_ireplace(['Monologue Edu', 'Monologue'], 'NovoNex', $rawBlocks);
+                $newMeta = str_ireplace(['Monologue Edu', 'Monologue'], 'DoctorWallah', $rawMeta);
+                $newBlocks = str_ireplace(['Monologue Edu', 'Monologue'], 'DoctorWallah', $rawBlocks);
 
                 if ($newMeta !== $rawMeta || $newBlocks !== $rawBlocks) {
                     DB::table('pages')->where('id', $p->id)->update([
@@ -68,7 +68,7 @@ return new class extends Migration
         if (Schema::hasTable('course_purchase_sms_settings')) {
             $sms = DB::table('course_purchase_sms_settings')->first();
             if ($sms && !empty($sms->general_template)) {
-                $newTpl = str_ireplace(['Monologue Edu', 'Monologue'], 'NovoNex', $sms->general_template);
+                $newTpl = str_ireplace(['Monologue Edu', 'Monologue'], 'DoctorWallah', $sms->general_template);
                 if ($newTpl !== $sms->general_template) {
                     DB::table('course_purchase_sms_settings')->where('id', $sms->id)->update([
                         'general_template' => $newTpl,

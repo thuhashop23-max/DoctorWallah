@@ -758,7 +758,7 @@ const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ b
     const s = block.settings || {};
 
     const badge = getLocalizedText(s.badge, s.badge_en, language);
-    const title = getLocalizedText(s.title, s.title_en, language) || 'Join NovoNex Today';
+    const title = getLocalizedText(s.title, s.title_en, language) || 'Join DoctorWallah Today';
     const subtitle = getLocalizedText(s.subtitle, s.subtitle_en, language);
     const buttonText = getLocalizedText(s.buttonText, s.buttonText_en, language) || 'Browse Courses';
 
@@ -1277,7 +1277,7 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
                                     {t.designation || 'Instructor & Mentor'}
                                 </p>
                                 <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 line-clamp-1">
-                                    {t.institution || 'NovoNex'}
+                                    {t.institution || 'DoctorWallah'}
                                 </p>
                             </div>
                             <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-100 dark:border-slate-800">
@@ -1366,7 +1366,7 @@ const TestimonialsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
     const s = block.settings || {};
     const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Student Reviews';
     const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Success Stories from Our Students';
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Hear authentic experiences and achievements from NovoNex learners.';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Hear authentic experiences and achievements from DoctorWallah learners.';
 
     const defaultItems = [
         {
@@ -1458,7 +1458,7 @@ const FaqAccordionBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
     const defaultFaqs = [
         {
             id: '1',
-            q: 'How do I enroll in a course on NovoNex?',
+            q: 'How do I enroll in a course on DoctorWallah?',
             a: 'Click the "Enroll Now" button on any course card, select your payment method (bKash, Nagad, Rocket, or Card), complete the payment, and your enrollment will be instantly activated.'
         },
         {

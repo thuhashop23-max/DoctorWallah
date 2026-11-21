@@ -69,7 +69,7 @@ export const HomePage: React.FC = () => {
     const { addToCart, isInCart } = useCart();
     const [customPage, setCustomPage] = useState<CustomPage | null>(() => {
         try {
-            const cached = sessionStorage.getItem('novonex_home_custom_page');
+            const cached = sessionStorage.getItem('DoctorWallah_home_custom_page');
             if (cached) {
                 const parsed = JSON.parse(cached);
                 if (parsed && Array.isArray(parsed.blocks) && parsed.blocks.length > 0) {
@@ -87,7 +87,7 @@ export const HomePage: React.FC = () => {
     const [teacherFilter, setTeacherFilter] = useState<'all' | 'ssc' | 'hsc' | 'admission' | 'arts'>('all');
     const [loading, setLoading] = useState<boolean>(() => {
         try {
-            const cached = sessionStorage.getItem('novonex_home_custom_page');
+            const cached = sessionStorage.getItem('DoctorWallah_home_custom_page');
             if (cached) {
                 const parsed = JSON.parse(cached);
                 if (parsed && Array.isArray(parsed.blocks) && parsed.blocks.length > 0) {
@@ -138,7 +138,7 @@ export const HomePage: React.FC = () => {
                     const fetchedPage = pageRes.value.data.page;
                     setCustomPage(fetchedPage);
                     try {
-                        sessionStorage.setItem('novonex_home_custom_page', JSON.stringify(fetchedPage));
+                        sessionStorage.setItem('DoctorWallah_home_custom_page', JSON.stringify(fetchedPage));
                     } catch {}
                 }
                 if (teachersRes.status === 'fulfilled') {
@@ -179,7 +179,7 @@ export const HomePage: React.FC = () => {
         return {
             ...t,
             designation: t.designation || 'Instructor & Mentor',
-            institution: t.institution || 'NovoNex',
+            institution: t.institution || 'DoctorWallah',
             experience: t.bio ? (t.bio.length > 50 ? t.bio.substring(0, 50) + '...' : t.bio) : 'Faculty Member',
             tags,
             category: cat
@@ -238,7 +238,7 @@ export const HomePage: React.FC = () => {
 
     const faqs = [
         {
-            q: 'How do I purchase or enroll in a course on NovoNex?',
+            q: 'How do I purchase or enroll in a course on DoctorWallah?',
             a: 'Click the "Add to Cart" button on any course card and proceed to checkout from your cart. Complete payment via bKash, Nagad, Rocket, Cards or online payment gateway, and submit your transaction details to activate course access immediately.',
         },
         {
@@ -262,7 +262,7 @@ export const HomePage: React.FC = () => {
     if (loading) {
         return (
             <PagePreloader
-                title="Loading NovoNex..."
+                title="Loading DoctorWallah..."
                 subtitle="Setting up courses, mentors, and learning materials"
             />
         );
@@ -284,14 +284,14 @@ export const HomePage: React.FC = () => {
                         {
                             id: 'v1',
                             name: 'Samiul',
-                            role: 'NovoNex Student Review',
+                            role: 'DoctorWallah Student Review',
                             videoUrl: 'https://youtu.be/Cbw_yhBGM_4',
                             thumbnailUrl: '',
                         },
                         {
                             id: 'v2',
                             name: 'Khurshed',
-                            role: 'NovoNex Student Review',
+                            role: 'DoctorWallah Student Review',
                             videoUrl: 'https://youtu.be/Zt7yfNIbInQ',
                             thumbnailUrl: '',
                         },
@@ -1168,12 +1168,12 @@ export const HomePage: React.FC = () => {
             {/* 6.5. STUDENT REVIEWS / TESTIMONIALS DUAL-DIRECTION SCROLL MARQUEE */}
             <StudentReviewsMarquee settings={testimonialsBlock?.settings} />
 
-            {/* 7. WHY CHOOSE NOVONEX (Platform Pillars) */}
+            {/* 7. WHY CHOOSE DoctorWallah (Platform Pillars) */}
             <section className="bg-slate-900 text-white py-16 sm:py-20 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
                         <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950 px-3 py-1 rounded-full border border-sky-800">
-                            Why Choose NovoNex?
+                            Why Choose DoctorWallah?
                         </span>
                         <h2 className="text-2xl sm:text-4xl font-black tracking-tight">
                             Strategic Guidance & Ultimate Preparation

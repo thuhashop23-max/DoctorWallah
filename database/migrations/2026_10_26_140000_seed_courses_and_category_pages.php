@@ -19,7 +19,7 @@ return new class extends Migration
                 'status' => 'published',
                 'layout_type' => 'builder',
                 'is_system' => true,
-                'meta_title' => 'All Courses - Novonex Academy',
+                'meta_title' => 'All Courses - DoctorWallah',
                 'meta_description' => 'Choose the right course to achieve your goals. Comprehensive preparation with experienced mentors.',
                 'blocks' => Page::defaultCoursesBlocks(),
             ]

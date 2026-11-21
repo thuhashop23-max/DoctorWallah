@@ -64,7 +64,7 @@ class AdminCategoryController extends Controller
                     'status' => 'published',
                     'layout_type' => 'category',
                     'is_system' => false,
-                    'meta_title' => $category->name . ' - Novonex Academy',
+                    'meta_title' => $category->name . ' - DoctorWallah',
                     'meta_description' => $category->description ?? ($category->name . ' all courses.'),
                     'blocks' => Page::defaultCategoryBlocks($category),
                 ]
@@ -116,7 +116,7 @@ class AdminCategoryController extends Controller
             $catPage->update([
                 'title' => $category->name,
                 'slug' => 'category-' . $slug,
-                'meta_title' => $category->name . ' - Novonex Academy',
+                'meta_title' => $category->name . ' - DoctorWallah',
             ]);
         }
 

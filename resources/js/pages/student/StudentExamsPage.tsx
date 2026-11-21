@@ -931,7 +931,7 @@ export const StudentExamsPage: React.FC = () => {
                         <div className="hidden print:block border-b-2 border-slate-900 pb-4 mb-6">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <h1 className="text-2xl font-black text-slate-900 tracking-tight">NOVONEX</h1>
+                                    <h1 className="text-2xl font-black text-slate-900 tracking-tight">DoctorWallah</h1>
                                     <p className="text-xs text-slate-600 uppercase font-semibold tracking-wider">
                                         Online Examination Result & Evaluation Sheet
                                     </p>
@@ -1323,7 +1323,7 @@ export const StudentExamsPage: React.FC = () => {
                         {/* Modal Footer */}
                         <div className="pt-3 border-t border-gray-100 flex items-center justify-between shrink-0 mt-2 print:hidden">
                             <span className="text-xs text-gray-400">
-                                NovoNex Examination System
+                                DoctorWallah Examination System
                             </span>
                             <div className="flex items-center gap-2">
                                 <button
@@ -1344,7 +1344,7 @@ export const StudentExamsPage: React.FC = () => {
 
                         {/* Print Only Footer */}
                         <div className="hidden print:block pt-3 mt-4 border-t border-gray-300 text-center text-[10px] text-gray-500">
-                            NovoNex Examination System • {selectedSubmission.exam?.title || reviewExam?.title}
+                            DoctorWallah Examination System • {selectedSubmission.exam?.title || reviewExam?.title}
                         </div>
                     </div>
                 </div>
