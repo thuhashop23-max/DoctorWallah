@@ -1,0 +1,337 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class WebsiteSetting extends Model
+{
+    protected $fillable = [
+        'site_name',
+        'site_tagline',
+        'default_language',
+        'logo_url',
+        'favicon_url',
+        'contact_email',
+        'contact_phone',
+        'primary_color',
+        'secondary_color',
+        'copyright_text',
+        'header_settings',
+        'footer_settings',
+        'manual_payment_settings',
+        'shurjopay_settings',
+        'vdocipher_settings',
+        'openai_settings',
+    ];
+
+    protected $casts = [
+        'header_settings' => 'array',
+        'footer_settings' => 'array',
+        'manual_payment_settings' => 'array',
+        'shurjopay_settings' => 'array',
+        'vdocipher_settings' => 'array',
+        'openai_settings' => 'array',
+    ];
+
+    public function getLogoUrlAttribute($value): ?string
+    {
+        if (!empty($value)) {
+            return $value;
+        }
+
+        return $this->header_settings['logo_url'] ?? null;
+    }
+
+    public static function defaultHeaderSettings(): array
+    {
+        return [
+            'sticky' => true,
+            'show_theme_toggle' => true,
+            'show_auth_buttons' => true,
+            'logo_url' => null,
+            'logo_height' => 44,
+            'brand_title' => 'NovoNex',
+            'brand_subtitle' => '',
+            'announcement_enabled' => false,
+            'announcement_text' => '🎉 Admissions open for new batch! Enroll now with special discount.',
+            'announcement_link' => '/courses',
+            'announcement_bg' => '#0284c7',
+            'cta_button_enabled' => false,
+            'cta_button_text' => 'Free Class',
+            'cta_button_link' => '/courses?type=free',
+            'banner_enabled' => false,
+            'banner_mode' => 'image',
+            'banner_image_url' => null,
+            'banner_link' => '/courses',
+            'banner_link_open_new_tab' => false,
+            'banner_bg_color' => '#8a0000',
+            'banner_text_color' => '#ffffff',
+            'banner_title' => 'First class of new batch is completely free!',
+            'banner_subtitle' => 'Join now to register',
+            'banner_btn_text' => 'Click Here',
+            'banner_btn_link' => '/courses',
+            'banner_btn_bg' => '#16a34a',
+            'banner_btn_text_color' => '#ffffff',
+            'banner_secondary_text' => 'Call 16910',
+            'banner_secondary_link' => 'tel:16910',
+            'banner_closeable' => true,
+            'banner_show_on' => 'all',
+            'menu_items' => [
+                [
+                    'id' => '1',
+                    'label' => 'Home',
+                    'label_en' => 'Home',
+                    'url' => '/',
+                    'is_external' => false,
+                    'highlight' => false,
+                ],
+                [
+                    'id' => '2',
+                    'label' => 'Courses',
+                    'label_en' => 'Courses',
+                    'url' => '/courses',
+                    'is_external' => false,
+                    'highlight' => false,
+                    'children' => [
+                        ['id' => '2-1', 'label' => 'All Courses', 'label_en' => 'All Courses', 'url' => '/courses'],
+                        ['id' => '2-2', 'label' => 'HSC Academic Cycle', 'label_en' => 'HSC Academic Cycle', 'url' => '/courses'],
+                        ['id' => '2-3', 'label' => 'Varsity Admission', 'label_en' => 'Varsity Admission', 'url' => '/courses'],
+                        ['id' => '2-4', 'label' => 'Free Trial Classes', 'label_en' => 'Free Trial Classes', 'url' => '/courses?type=free'],
+                    ],
+                ],
+                [
+                    'id' => '3',
+                    'label' => 'Books & Bundles',
+                    'label_en' => 'Books & Bundles',
+                    'url' => '/courses',
+                    'is_external' => false,
+                    'highlight' => false,
+                    'children' => [
+                        ['id' => '3-1', 'label' => 'Combo Course Bundles', 'label_en' => 'Combo Course Bundles', 'url' => '/courses'],
+                        ['id' => '3-2', 'label' => 'Lecture Sheets & Notes', 'label_en' => 'Lecture Sheets & Notes', 'url' => '/courses'],
+                    ],
+                ],
+                [
+                    'id' => '4',
+                    'label' => 'Free Resources',
+                    'label_en' => 'Free Resources',
+                    'url' => '/courses?type=free',
+                    'is_external' => false,
+                    'highlight' => false,
+                ],
+                [
+                    'id' => '5',
+                    'label' => 'Contact Us',
+                    'label_en' => 'Contact Us',
+                    'url' => '/p/contact',
+                    'is_external' => false,
+                    'highlight' => false,
+                ],
+                [
+                    'id' => '6',
+                    'label' => 'E-Book & Exams',
+                    'label_en' => 'E-Book & Exams',
+                    'url' => '/student/exams',
+                    'is_external' => false,
+                    'highlight' => true,
+                ],
+            ],
+        ];
+    }
+
+    public static function defaultFooterSettings(): array
+    {
+        return [
+            'bg_color' => '#0f172a',
+            'brand_title' => 'NovoNex',
+            'brand_subtitle' => '',
+            'description' => 'Bangladesh’s leading online learning platform. Prepare for exams with the best mentors.',
+            'badge_text' => '100% Trusted & Quality Online Education',
+            'show_badge' => true,
+            'column_2_title' => 'Quick Links',
+            'column_2_links' => [
+                ['id' => '1', 'label' => 'Home', 'url' => '/'],
+                ['id' => '2', 'label' => 'All Courses', 'url' => '/courses'],
+                ['id' => '3', 'label' => 'Physics Courses', 'url' => '/courses?category=hsc-physics'],
+                ['id' => '4', 'label' => 'Admission Preparation', 'url' => '/courses?category=admission'],
+            ],
+            'column_3_title' => 'Course Categories',
+            'column_3_links' => [
+                ['id' => '1', 'label' => 'HSC Physics', 'url' => '/courses?category=hsc-physics'],
+                ['id' => '2', 'label' => 'HSC Chemistry', 'url' => '/courses?category=chemistry'],
+                ['id' => '3', 'label' => 'Higher Mathematics', 'url' => '/courses?category=math'],
+                ['id' => '4', 'label' => 'Admission Preparation', 'url' => '/courses?category=admission'],
+            ],
+            'column_4_title' => 'Contact Us',
+            'phone' => '+880 1700 000000',
+            'phone_hours' => '10 AM - 10 PM (Sat - Thu)',
+            'email' => 'support@novonex.com',
+            'address' => 'Dhaka, Bangladesh',
+            'social_links' => [
+                ['id' => '1', 'platform' => 'facebook', 'url' => 'https://facebook.com'],
+                ['id' => '2', 'platform' => 'youtube', 'url' => 'https://youtube.com'],
+            ],
+            'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+            'bottom_credit' => 'Crafted with ❤️ for passionate learners',
+        ];
+    }
+
+    public static function defaultManualPaymentSettings(): array
+    {
+        return [
+            'bkash' => [
+                'enabled' => true,
+                'name' => 'bKash',
+                'account_number' => '01700000000',
+                'type' => 'send_money', // 'send_money' | 'payment' | 'cash_out'
+                'instructions' => 'Open your bKash app or dial *247# to Send Money to the recipient number. Enter the TrxID below after payment.',
+                'instructions_en' => 'Open your bKash app or dial *247# to Send Money to the recipient number. Enter the TrxID below after payment.',
+            ],
+            'nagad' => [
+                'enabled' => true,
+                'name' => 'Nagad',
+                'account_number' => '01700000000',
+                'type' => 'send_money', // 'send_money' | 'payment' | 'cash_out'
+                'instructions' => 'Open your Nagad app or dial *167# to Send Money to the recipient number. Enter the TrxID below after payment.',
+                'instructions_en' => 'Open your Nagad app or dial *167# to Send Money to the recipient number. Enter the TrxID below after payment.',
+            ],
+            'rocket' => [
+                'enabled' => true,
+                'name' => 'Rocket',
+                'account_number' => '01700000000',
+                'type' => 'send_money', // 'send_money' | 'payment' | 'cash_out'
+                'instructions' => 'Open your Rocket app or dial *322# to Send Money to the recipient number. Enter the TrxID below after payment.',
+                'instructions_en' => 'Open your Rocket app or dial *322# to Send Money to the recipient number. Enter the TrxID below after payment.',
+            ],
+        ];
+    }
+
+    public static function defaultShurjopaySettings(): array
+    {
+        return [
+            'enabled' => true,
+            'environment' => 'live', // 'sandbox' or 'live'
+            'live_api_url' => 'https://engine.shurjopayment.com',
+            'live_username' => 'Monologue Edu',
+            'live_password' => 'FMN4G@wK*!5p',
+            'live_prefix' => 'MLE',
+            'sandbox_api_url' => 'https://sandbox.shurjopayment.com',
+            'sandbox_username' => 'sp_sandbox',
+            'sandbox_password' => 'pyyk97hu&6u6',
+            'sandbox_prefix' => 'sp',
+            'display_name' => 'Pay with shurjoPay',
+            'description' => 'bKash, Nagad, Rocket, Cards',
+        ];
+    }
+
+    public static function defaultOpenaiSettings(): array
+    {
+        return [
+            'api_key' => '',
+            'default_model' => 'gpt-4o-mini',
+            'cost_per_1k_input' => 0.00015,
+            'cost_per_1k_output' => 0.00060,
+        ];
+    }
+
+    public static function defaultVdocipherSettings(): array
+    {
+        return [
+            'enabled' => true,
+            'api_secret_key' => '',
+            'folder_id' => '',
+            'watermark_enabled' => true,
+        ];
+    }
+
+    public static function current(): self
+    {
+        if (Schema::hasTable('website_settings') && !Schema::hasColumn('website_settings', 'shurjopay_settings')) {
+            try {
+                Schema::table('website_settings', function (Blueprint $table) {
+                    $table->json('shurjopay_settings')->nullable()->after('manual_payment_settings');
+                });
+            } catch (\Throwable $e) {
+                // Table/column might already exist
+            }
+        }
+
+        if (Schema::hasTable('website_settings') && !Schema::hasColumn('website_settings', 'vdocipher_settings')) {
+            try {
+                Schema::table('website_settings', function (Blueprint $table) {
+                    $table->json('vdocipher_settings')->nullable()->after('shurjopay_settings');
+                });
+            } catch (\Throwable $e) {
+                // Table/column might already exist
+            }
+        }
+
+        $setting = static::first();
+        if (! $setting) {
+            $setting = static::create([
+                'site_name' => 'NovoNex',
+                'site_tagline' => 'Premier Online Learning & EdTech Platform',
+                'default_language' => 'en',
+                'logo_url' => null,
+                'favicon_url' => null,
+                'contact_email' => 'support@novonex.com',
+                'contact_phone' => '+880 1700 000000',
+                'primary_color' => '#CC1200',
+                'secondary_color' => '#25a2ee',
+                'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                'header_settings' => static::defaultHeaderSettings(),
+                'footer_settings' => static::defaultFooterSettings(),
+                'manual_payment_settings' => static::defaultManualPaymentSettings(),
+                'shurjopay_settings' => static::defaultShurjopaySettings(),
+                'vdocipher_settings' => static::defaultVdocipherSettings(),
+                'openai_settings' => static::defaultOpenaiSettings(),
+            ]);
+        }
+
+        // Ensure legacy brand names are updated to NovoNex
+        if ($setting->site_name === 'Monologue Edu' || (isset($setting->header_settings['brand_title']) && $setting->header_settings['brand_title'] === 'Monologue')) {
+            $header = $setting->header_settings ?? [];
+            $header['brand_title'] = 'NovoNex';
+            $header['brand_subtitle'] = '';
+            
+            $footer = $setting->footer_settings ?? [];
+            $footer['brand_title'] = 'NovoNex';
+            $footer['brand_subtitle'] = '';
+            $footer['email'] = 'support@novonex.com';
+            $footer['copyright_text'] = '© 2026 NovoNex. All rights reserved.';
+
+            $setting->update([
+                'site_name' => 'NovoNex',
+                'site_tagline' => 'Premier Online Learning & EdTech Platform',
+                'contact_email' => 'support@novonex.com',
+                'copyright_text' => '© 2026 NovoNex. All rights reserved.',
+                'header_settings' => $header,
+                'footer_settings' => $footer,
+            ]);
+        }
+
+        if (empty($setting->header_settings)) {
+            $setting->header_settings = static::defaultHeaderSettings();
+        }
+        if (empty($setting->footer_settings)) {
+            $setting->footer_settings = static::defaultFooterSettings();
+        }
+        if (empty($setting->manual_payment_settings)) {
+            $setting->manual_payment_settings = static::defaultManualPaymentSettings();
+        }
+        if (empty($setting->openai_settings)) {
+            $setting->openai_settings = static::defaultOpenaiSettings();
+        }
+        if (empty($setting->shurjopay_settings)) {
+            $setting->shurjopay_settings = static::defaultShurjopaySettings();
+        }
+        if (empty($setting->vdocipher_settings)) {
+            $setting->vdocipher_settings = static::defaultVdocipherSettings();
+        }
+
+        return $setting;
+    }
+}

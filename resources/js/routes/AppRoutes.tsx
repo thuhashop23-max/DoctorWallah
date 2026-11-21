@@ -1,0 +1,247 @@
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { PublicLayout } from '../layouts/PublicLayout';
+import { DashboardLayout } from '../layouts/DashboardLayout';
+import { StudentDashboardLayout } from '../layouts/StudentDashboardLayout';
+
+// Public pages
+import { HomePage } from '../pages/public/HomePage';
+import { CoursesPage } from '../pages/public/CoursesPage';
+import { CourseDetailsPage } from '../pages/public/CourseDetailsPage';
+import { LoginPage } from '../pages/public/LoginPage';
+import { RegisterPage } from '../pages/public/RegisterPage';
+import { ForgotPasswordPage } from '../pages/public/ForgotPasswordPage';
+import { CartPage } from '../pages/public/CartPage';
+import { CheckoutPage } from '../pages/public/CheckoutPage';
+import { OrderStatusPage } from '../pages/public/OrderStatusPage';
+import { TeacherProfilePage } from '../pages/public/TeacherProfilePage';
+import { EarnPointsPage } from '../pages/public/EarnPointsPage';
+
+// Admin pages
+import { AdminDashboardPage } from '../pages/admin/AdminDashboardPage';
+import { AdminPointsPage } from '../pages/admin/AdminPointsPage';
+import { AdminPointUsagesPage } from '../pages/admin/AdminPointUsagesPage';
+import { AdminCoursesPage } from '../pages/admin/AdminCoursesPage';
+import { AdminCourseEditPage } from '../pages/admin/AdminCourseEditPage';
+import { AdminCourseBuilderPage } from '../pages/admin/AdminCourseBuilderPage';
+import { AdminManualEnrollmentPage } from '../pages/admin/AdminManualEnrollmentPage';
+import { AdminCourseStudentsPage } from '../pages/admin/AdminCourseStudentsPage';
+import { AdminAccessKeysPage } from '../pages/admin/AdminAccessKeysPage';
+import { AdminUsersPage } from '../pages/admin/AdminUsersPage';
+import { AdminUserCreatePage } from '../pages/admin/AdminUserCreatePage';
+import { AdminRolesPage } from '../pages/admin/roles/AdminRolesPage';
+import { AdminOrdersPage } from '../pages/admin/AdminOrdersPage';
+import { AdminAnalyticsPage } from '../pages/admin/AdminAnalyticsPage';
+import { AdminSmsPage } from '../pages/admin/AdminSmsPage';
+import { AdminSmsGatewayConditionPage } from '../pages/admin/AdminSmsGatewayConditionPage';
+import { AdminAutoSmsPushPage } from '../pages/admin/AdminAutoSmsPushPage';
+import { AdminSmsMarketingPage } from '../pages/admin/AdminSmsMarketingPage';
+import { AdminBundlesPage } from '../pages/admin/AdminBundlesPage';
+import { AdminBundleFormPage } from '../pages/admin/AdminBundleFormPage';
+import { AdminBundleBuilderPage } from '../pages/admin/AdminBundleBuilderPage';
+import { AdminSettingsPage } from '../pages/admin/AdminSettingsPage';
+import { AdminVdoCipherSettingsPage } from '../pages/admin/AdminVdoCipherSettingsPage';
+import { AdminMediaPage } from '../pages/admin/AdminMediaPage';
+import { AdminCourseCategoriesPage } from '../pages/admin/AdminCourseCategoriesPage';
+import { AdminPagesPage } from '../pages/admin/AdminPagesPage';
+import { AdminPageBuilderPage } from '../pages/admin/AdminPageBuilderPage';
+import { AdminHeaderBuilderPage } from '../pages/admin/AdminHeaderBuilderPage';
+import { AdminFooterBuilderPage } from '../pages/admin/AdminFooterBuilderPage';
+import { AdminAppearanceGeneralPage } from '../pages/admin/AdminAppearanceGeneralPage';
+import { AdminManualPaymentPage } from '../pages/admin/AdminManualPaymentPage';
+import { AdminShurjopayPage } from '../pages/admin/AdminShurjopayPage';
+import { AdminNexPilotsPage } from '../pages/admin/AdminNexPilotsPage';
+import { AdminNexPilotEditPage } from '../pages/admin/AdminNexPilotEditPage';
+import { AdminNexPilotBuilderPage } from '../pages/admin/AdminNexPilotBuilderPage';
+import { AdminNexPilotAiConfigPage } from '../pages/admin/AdminNexPilotAiConfigPage';
+import { AdminCouponsPage } from '../pages/admin/AdminCouponsPage';
+import { AdminDynamicOffersPage } from '../pages/admin/AdminDynamicOffersPage';
+import { AdminTrashPage } from '../pages/admin/AdminTrashPage';
+import { NotifyStudentPage } from '../pages/shared/NotifyStudentPage';
+import { ComplainBoxPage } from '../pages/shared/ComplainBoxPage';
+import { ClassReviewsPage } from '../pages/admin/ClassReviewsPage';
+import { CustomPageView } from '../pages/public/CustomPageView';
+
+// Teacher pages
+import { TeacherDashboardPage } from '../pages/teacher/TeacherDashboardPage';
+import { TeacherCoursesPage } from '../pages/teacher/TeacherCoursesPage';
+import { TeacherQuestionsPage } from '../pages/teacher/TeacherQuestionsPage';
+
+// Student pages
+import { StudentDashboardPage } from '../pages/student/StudentDashboardPage';
+import { StudentCoursesPage } from '../pages/student/StudentCoursesPage';
+import { StudentOrdersPage } from '../pages/student/StudentOrdersPage';
+import { StudentNexPilotPage } from '../pages/student/StudentNexPilotPage';
+import { StudentAffiliatePage } from '../pages/student/StudentAffiliatePage';
+import { StudentExamsPage } from '../pages/student/StudentExamsPage';
+import { StudentLeaderboardPage } from '../pages/student/StudentLeaderboardPage';
+import { StudentRoutinePage } from '../pages/student/StudentRoutinePage';
+import { StudentLiveClassesPage } from '../pages/student/StudentLiveClassesPage';
+import { StudentLiveClassRoomPage } from '../pages/student/StudentLiveClassRoomPage';
+import { StudentSettingsPage } from '../pages/student/StudentSettingsPage';
+
+// Affiliate Admin pages
+import { AdminAffiliateGeneralSettingsPage } from '../pages/admin/affiliate/AdminAffiliateGeneralSettingsPage';
+import { AdminAffiliateCourseSettingsPage } from '../pages/admin/affiliate/AdminAffiliateCourseSettingsPage';
+import { AdminAffiliateMembersPage } from '../pages/admin/affiliate/AdminAffiliateMembersPage';
+
+// Learning page
+import { LessonPlayerPage } from '../pages/learning/LessonPlayerPage';
+
+// Exam pages
+import { ExamListPage } from '../pages/exam/ExamListPage';
+import { ExamFormPage } from '../pages/exam/ExamFormPage';
+import { ExamBuilderPage } from '../pages/exam/ExamBuilderPage';
+import { ExamSubmissionsPage } from '../pages/exam/ExamSubmissionsPage';
+import { StudentExamRoomPage } from '../pages/exam/StudentExamRoomPage';
+
+export const AppRoutes: React.FC = () => {
+    return (
+        <Routes>
+            {/* Public Pages */}
+            <Route element={<PublicLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/courses" element={<CoursesPage />} />
+                <Route path="/courses/:slug" element={<CourseDetailsPage />} />
+                <Route path="/earn-points" element={<EarnPointsPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/checkout/:slug" element={<CheckoutPage />} />
+                <Route path="/order-status/:orderNumber" element={<OrderStatusPage />} />
+                <Route path="/teachers/:id" element={<TeacherProfilePage />} />
+                <Route path="/instructors/:id" element={<TeacherProfilePage />} />
+                <Route path="/p/:slug" element={<CustomPageView />} />
+                <Route path="/privacy-policy" element={<CustomPageView slugOverride="privacy-policy" />} />
+                <Route path="/terms" element={<CustomPageView slugOverride="terms" />} />
+            </Route>
+
+            {/* Visual Page Builder (Full-Screen) */}
+            <Route path="/admin/pages/:id/builder" element={<AdminPageBuilderPage />} />
+
+            {/* Admin Dashboard */}
+            <Route path="/admin" element={<DashboardLayout />}>
+                <Route index element={<AdminDashboardPage />} />
+                <Route path="courses" element={<AdminCoursesPage />} />
+                <Route path="courses/create" element={<AdminCourseEditPage />} />
+                <Route path="courses/categories" element={<AdminCourseCategoriesPage />} />
+                <Route path="courses/manual-enrollment" element={<AdminManualEnrollmentPage />} />
+                <Route path="courses/students" element={<AdminCourseStudentsPage />} />
+                <Route path="courses/access-keys" element={<AdminAccessKeysPage />} />
+                <Route path="access-keys" element={<AdminAccessKeysPage />} />
+                <Route path="courses/:id/edit" element={<AdminCourseEditPage />} />
+                <Route path="courses/:id/builder" element={<AdminCourseBuilderPage />} />
+                {/* Course Bundles & Bundle Builder */}
+                <Route path="bundles" element={<AdminBundlesPage />} />
+                <Route path="bundles/create" element={<AdminBundleFormPage />} />
+                <Route path="bundles/:id/edit" element={<AdminBundleFormPage />} />
+                <Route path="bundles/:id/builder" element={<AdminBundleBuilderPage />} />
+                <Route path="nexpilot" element={<AdminNexPilotsPage />} />
+                <Route path="nexpilot/new" element={<AdminNexPilotEditPage />} />
+                <Route path="nexpilot/ai-configuration" element={<AdminNexPilotAiConfigPage />} />
+                <Route path="nexpilot/:id/edit" element={<AdminNexPilotEditPage />} />
+                <Route path="nexpilot/:id/builder" element={<AdminNexPilotBuilderPage />} />
+                {/* AI Configuration */}
+                <Route path="ai" element={<Navigate to="/admin/ai/configuration" replace />} />
+                <Route path="ai/configuration" element={<AdminNexPilotAiConfigPage />} />
+                {/* Exam Management */}
+                <Route path="exams" element={<ExamListPage />} />
+                <Route path="exams/create" element={<ExamFormPage />} />
+                <Route path="exams/:id/edit" element={<ExamFormPage />} />
+                <Route path="exams/:id/builder" element={<ExamBuilderPage />} />
+                <Route path="exams/:id/submissions" element={<ExamSubmissionsPage />} />
+                <Route path="pages" element={<AdminPagesPage />} />
+                <Route path="appearance" element={<Navigate to="/admin/appearance/general" replace />} />
+                <Route path="appearance/general" element={<AdminAppearanceGeneralPage />} />
+                <Route path="appearance/header" element={<AdminHeaderBuilderPage />} />
+                <Route path="appearance/footer" element={<AdminFooterBuilderPage />} />
+                {/* User & Role Management */}
+                <Route path="users" element={<AdminUsersPage />} />
+                <Route path="users/create" element={<AdminUserCreatePage />} />
+                <Route path="users/roles" element={<AdminRolesPage />} />
+                <Route path="orders" element={<AdminOrdersPage />} />
+                {/* Marketing & Coupons & Dynamic Offers */}
+                <Route path="marketing" element={<Navigate to="/admin/marketing/offers" replace />} />
+                <Route path="marketing/offers" element={<AdminDynamicOffersPage />} />
+                <Route path="marketing/coupons" element={<AdminCouponsPage />} />
+                <Route path="marketing/coupons/create" element={<AdminCouponsPage autoOpenCreate={true} />} />
+                {/* Announcements & Notifications */}
+                <Route path="announcements" element={<Navigate to="/admin/announcements/notify" replace />} />
+                <Route path="announcements/notify" element={<NotifyStudentPage role="admin" />} />
+                <Route path="payments" element={<Navigate to="/admin/payments/manual" replace />} />
+                <Route path="payments/manual" element={<AdminManualPaymentPage />} />
+                <Route path="payments/shurjopay" element={<AdminShurjopayPage />} />
+                {/* Affiliate Management */}
+                <Route path="affiliate" element={<Navigate to="/admin/affiliate/settings" replace />} />
+                <Route path="affiliate/settings" element={<AdminAffiliateGeneralSettingsPage />} />
+                <Route path="affiliate/courses" element={<AdminAffiliateCourseSettingsPage />} />
+                <Route path="affiliate/members" element={<AdminAffiliateMembersPage />} />
+                <Route path="analytics" element={<AdminAnalyticsPage />} />
+                <Route path="sms" element={<AdminSmsPage />} />
+                <Route path="sms/gateway-condition" element={<AdminSmsGatewayConditionPage />} />
+                <Route path="sms/auto-push" element={<AdminAutoSmsPushPage />} />
+                <Route path="sms-marketing" element={<AdminSmsMarketingPage />} />
+                <Route path="settings" element={<AdminSettingsPage />} />
+                <Route path="settings/general" element={<AdminSettingsPage />} />
+                <Route path="settings/vdocipher" element={<AdminVdoCipherSettingsPage />} />
+                <Route path="media" element={<AdminMediaPage />} />
+                <Route path="trash" element={<AdminTrashPage />} />
+                <Route path="points" element={<Navigate to="/admin/points/rules" replace />} />
+                <Route path="points/rules" element={<AdminPointsPage />} />
+                <Route path="points/usages" element={<AdminPointUsagesPage />} />
+                <Route path="complain-box" element={<ComplainBoxPage role="admin" />} />
+                <Route path="class-reviews" element={<ClassReviewsPage />} />
+            </Route>
+
+            {/* Teacher Dashboard */}
+            <Route path="/teacher" element={<DashboardLayout />}>
+                <Route index element={<TeacherDashboardPage />} />
+                <Route path="courses" element={<TeacherCoursesPage />} />
+                <Route path="courses/:id/builder" element={<AdminCourseBuilderPage />} />
+                <Route path="questions" element={<TeacherQuestionsPage />} />
+                <Route path="complain-box" element={<ComplainBoxPage role="teacher" />} />
+                <Route path="class-reviews" element={<ClassReviewsPage />} />
+                {/* Exam Management */}
+                <Route path="exams" element={<ExamListPage />} />
+                <Route path="exams/create" element={<ExamFormPage />} />
+                <Route path="exams/:id/edit" element={<ExamFormPage />} />
+                <Route path="exams/:id/builder" element={<ExamBuilderPage />} />
+                <Route path="exams/:id/submissions" element={<ExamSubmissionsPage />} />
+                {/* Announcements & Notifications */}
+                <Route path="announcements" element={<Navigate to="/teacher/announcements/notify" replace />} />
+                <Route path="announcements/notify" element={<NotifyStudentPage role="teacher" />} />
+            </Route>
+
+            {/* Student Dashboard */}
+            <Route path="/student" element={<StudentDashboardLayout />}>
+                <Route index element={<StudentDashboardPage />} />
+                <Route path="my-courses" element={<StudentCoursesPage />} />
+                <Route path="routine" element={<StudentRoutinePage />} />
+                <Route path="live-classes" element={<StudentLiveClassesPage />} />
+                <Route path="live-classes/:id" element={<StudentLiveClassRoomPage />} />
+                <Route path="courses/:courseId/nexpilot" element={<StudentNexPilotPage />} />
+                <Route path="exams" element={<StudentExamsPage />} />
+                <Route path="leaderboard" element={<StudentLeaderboardPage />} />
+                <Route path="orders" element={<StudentOrdersPage />} />
+                <Route path="affiliate" element={<StudentAffiliatePage />} />
+                <Route path="profile" element={<StudentSettingsPage defaultView="profile" />} />
+                <Route path="settings" element={<Navigate to="/student/settings/devices" replace />} />
+                <Route path="settings/devices" element={<StudentSettingsPage defaultView="devices" />} />
+                <Route path="settings/profile" element={<StudentSettingsPage defaultView="profile" />} />
+                <Route path="settings/password" element={<StudentSettingsPage defaultView="password" />} />
+            </Route>
+
+            {/* Student Exam Room */}
+            <Route path="/exams/:examId/take" element={<StudentExamRoomPage />} />
+
+            {/* Learning Room / Video Player */}
+            <Route path="/learning/:courseId" element={<LessonPlayerPage />} />
+            <Route path="/learning/:courseId/lessons/:lessonId" element={<LessonPlayerPage />} />
+
+            {/* Fallback to Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+    );
+};

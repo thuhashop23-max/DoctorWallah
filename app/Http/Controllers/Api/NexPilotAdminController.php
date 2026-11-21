@@ -1,0 +1,553 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Enrollment;
+use App\Models\NexPilot;
+use App\Models\NexPilotTopic;
+use App\Models\WebsiteSetting;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
+class NexPilotAdminController extends Controller
+{
+    /**
+     * List all NexPilots
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $query = NexPilot::with(['course:id,title,slug,price,thumbnail'])
+            ->withCount([
+                'topics as total_topics_count',
+                'theoryTopics as theory_topics_count',
+                'practiceTopics as practice_topics_count',
+                'studentUsages as students_count'
+            ]);
+
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhereHas('course', function ($cq) use ($search) {
+                      $cq->where('title', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        $pilots = $query->latest()->paginate($request->integer('per_page', 15));
+
+        return response()->json($pilots);
+    }
+
+    /**
+     * Get courses eligible for a new pilot
+     */
+    public function getEligibleCourses(): JsonResponse
+    {
+        // Get all courses that don't already have a pilot (or allow pilot update)
+        $courses = Course::select('id', 'title', 'price', 'sale_price', 'status')
+            ->with('nexpilot:id,course_id')
+            ->orderBy('title')
+            ->get()
+            ->map(function ($c) {
+                return [
+                    'id' => $c->id,
+                    'title' => $c->title,
+                    'price' => (float) $c->effective_price,
+                    'status' => $c->status,
+                    'has_pilot' => (bool) $c->nexpilot,
+                    'pilot_id' => $c->nexpilot?->id,
+                ];
+            });
+
+        return response()->json($courses);
+    }
+
+    /**
+     * Store new NexPilot
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'course_id' => ['required', 'integer', 'exists:courses,id', 'unique:nexpilots,course_id'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'short_description' => ['nullable', 'string', 'max:500'],
+            'long_description' => ['nullable', 'string'],
+            'max_usd_limit' => ['required', 'numeric', 'min:0.01', 'max:100.00'],
+            'openai_model' => ['nullable', 'string', 'max:100'],
+            'openai_api_key' => ['nullable', 'string', 'max:500'],
+            'system_prompt' => ['nullable', 'string'],
+            'is_active' => ['boolean'],
+        ]);
+
+        $course = Course::findOrFail($validated['course_id']);
+        if (empty($validated['title'])) {
+            $validated['title'] = $course->title . ' NexPilot';
+        }
+        if (empty($validated['openai_model'])) {
+            $validated['openai_model'] = 'gpt-4o-mini';
+        }
+
+        try {
+            $pilot = NexPilot::create($validated);
+
+            return response()->json([
+                'message' => 'NexPilot created successfully.',
+                'pilot' => $pilot->load('course:id,title,price'),
+            ], 201);
+        } catch (\Throwable $e) {
+            Log::error('NexPilot store error: ' . $e->getMessage(), [
+                'payload' => $validated,
+                'exception' => $e,
+            ]);
+
+            return response()->json([
+                'message' => 'Failed to create pilot: ' . $e->getMessage(),
+            ], 422);
+        }
+    }
+
+    /**
+     * Show single NexPilot
+     */
+    public function show($id): JsonResponse
+    {
+        $pilot = NexPilot::with(['course:id,title,price,thumbnail'])
+            ->withCount(['theoryTopics', 'practiceTopics'])
+            ->findOrFail($id);
+
+        return response()->json($pilot);
+    }
+
+    /**
+     * Update NexPilot
+     */
+    public function update(Request $request, $id): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+
+        $validated = $request->validate([
+            'course_id' => [
+                'required',
+                'integer',
+                'exists:courses,id',
+                Rule::unique('nexpilots', 'course_id')->ignore($pilot->id),
+            ],
+            'title' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'short_description' => ['nullable', 'string', 'max:500'],
+            'long_description' => ['nullable', 'string'],
+            'max_usd_limit' => ['required', 'numeric', 'min:0.01', 'max:100.00'],
+            'openai_model' => ['nullable', 'string', 'max:100'],
+            'openai_api_key' => ['nullable', 'string', 'max:500'],
+            'system_prompt' => ['nullable', 'string'],
+            'is_active' => ['boolean'],
+        ]);
+
+        // CRITICAL: Preserve current model or fallback to default; never set to null
+        if (empty($validated['openai_model'])) {
+            $validated['openai_model'] = $pilot->openai_model ?: 'gpt-4o-mini';
+        }
+
+        if (!array_key_exists('openai_api_key', $validated)) {
+            $validated['openai_api_key'] = $pilot->openai_api_key;
+        }
+
+        try {
+            $pilot->update($validated);
+
+            return response()->json([
+                'message' => 'NexPilot updated successfully.',
+                'pilot' => $pilot->fresh(['course:id,title,price']),
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('NexPilot update error: ' . $e->getMessage(), [
+                'pilot_id' => $id,
+                'payload' => $validated,
+                'exception' => $e,
+            ]);
+
+            return response()->json([
+                'message' => 'Failed to update pilot: ' . $e->getMessage(),
+            ], 422);
+        }
+    }
+
+    /**
+     * Delete NexPilot
+     */
+    public function destroy($id): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+        $pilot->delete();
+
+        return response()->json([
+            'message' => 'NexPilot deleted successfully.',
+        ]);
+    }
+
+    /**
+     * Get Builder Data (Theory & Practice Topics + Attachments)
+     */
+    public function getBuilderData($id): JsonResponse
+    {
+        $pilot = NexPilot::with([
+            'course:id,title,slug,price,thumbnail',
+            'topics' => function ($q) {
+                $q->orderBy('order_index')->orderBy('id');
+            }
+        ])->findOrFail($id);
+
+        $theoryTopics = $pilot->topics->where('type', 'theory')->values();
+        $practiceTopics = $pilot->topics->where('type', 'practice')->values();
+
+        return response()->json([
+            'pilot' => [
+                'id' => $pilot->id,
+                'course_id' => $pilot->course_id,
+                'course_title' => $pilot->course->title ?? '',
+                'title' => $pilot->title,
+                'price' => $pilot->price,
+                'max_usd_limit' => $pilot->max_usd_limit,
+                'openai_model' => $pilot->openai_model,
+                'has_custom_key' => !empty($pilot->openai_api_key),
+                'system_prompt' => $pilot->system_prompt,
+                'is_active' => $pilot->is_active,
+            ],
+            'theory_topics' => $theoryTopics,
+            'practice_topics' => $practiceTopics,
+        ]);
+    }
+
+    /**
+     * Store new Topic (Theory or Practice)
+     */
+    public function storeTopic(Request $request, $id): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+
+        $validated = $request->validate([
+            'type' => ['required', 'in:theory,practice'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'prompt' => ['required', 'string'],
+            'materials_text' => ['nullable', 'string'],
+            'attachments' => ['nullable', 'array'],
+            'attachments.*.name' => ['required', 'string'],
+            'attachments.*.url' => ['required', 'string'],
+            'attachments.*.size' => ['nullable'],
+            'attachments.*.type' => ['nullable', 'string'],
+            'order_index' => ['nullable', 'integer'],
+            'is_active' => ['boolean'],
+        ]);
+
+        if (!isset($validated['order_index'])) {
+            $maxOrder = $pilot->topics()->where('type', $validated['type'])->max('order_index') ?? 0;
+            $validated['order_index'] = $maxOrder + 1;
+        }
+
+        $topic = $pilot->topics()->create($validated);
+
+        return response()->json([
+            'message' => ($validated['type'] === 'theory' ? 'Theory' : 'Practice') . ' topic created successfully.',
+            'topic' => $topic,
+        ], 201);
+    }
+
+    /**
+     * Update Topic
+     */
+    public function updateTopic(Request $request, $topicId): JsonResponse
+    {
+        $topic = NexPilotTopic::findOrFail($topicId);
+
+        $validated = $request->validate([
+            'type' => ['required', 'in:theory,practice'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'prompt' => ['required', 'string'],
+            'materials_text' => ['nullable', 'string'],
+            'attachments' => ['nullable', 'array'],
+            'attachments.*.name' => ['required', 'string'],
+            'attachments.*.url' => ['required', 'string'],
+            'attachments.*.size' => ['nullable'],
+            'attachments.*.type' => ['nullable', 'string'],
+            'order_index' => ['nullable', 'integer'],
+            'is_active' => ['boolean'],
+        ]);
+
+        $topic->update($validated);
+
+        return response()->json([
+            'message' => 'Topic updated successfully.',
+            'topic' => $topic,
+        ]);
+    }
+
+    /**
+     * Delete Topic
+     */
+    public function destroyTopic($topicId): JsonResponse
+    {
+        $topic = NexPilotTopic::findOrFail($topicId);
+        $topic->delete();
+
+        return response()->json([
+            'message' => 'Topic deleted successfully.',
+        ]);
+    }
+
+    /**
+     * Reorder topics
+     */
+    public function reorderTopics(Request $request, $id): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+        $validated = $request->validate([
+            'topics' => ['required', 'array'],
+            'topics.*.id' => ['required', 'exists:nexpilot_topics,id'],
+            'topics.*.order_index' => ['required', 'integer'],
+        ]);
+
+        foreach ($validated['topics'] as $item) {
+            NexPilotTopic::where('id', $item['id'])
+                ->where('nexpilot_id', $pilot->id)
+                ->update(['order_index' => $item['order_index']]);
+        }
+
+        return response()->json([
+            'message' => 'Topic order saved successfully.',
+        ]);
+    }
+
+    /**
+     * Upload material (slides, pdf, notes, books)
+     */
+    public function uploadAttachment(Request $request): JsonResponse
+    {
+        $request->validate([
+            'file' => ['required', 'file', 'max:30720'], // Max 30MB
+        ]);
+
+        $file = $request->file('file');
+        $fileName = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+
+        $path = $file->storeAs('nexpilot/materials', $fileName, 'public');
+        $url = Storage::disk('public')->url($path);
+
+        return response()->json([
+            'name' => $file->getClientOriginalName(),
+            'url' => $url,
+            'size' => $file->getSize(),
+            'type' => $file->getClientMimeType(),
+        ]);
+    }
+
+    /**
+     * Get Global OpenAI Settings
+     */
+    public function getSettings(): JsonResponse
+    {
+        $setting = WebsiteSetting::current();
+        $openai = $setting->openai_settings ?? [];
+
+        $apiKey = $openai['api_key'] ?? env('OPENAI_API_KEY', '');
+        $hasKey = !empty($apiKey);
+        $maskedKey = '';
+        if ($hasKey) {
+            $maskedKey = strlen($apiKey) > 10 
+                ? substr($apiKey, 0, 7) . '...' . substr($apiKey, -4) 
+                : '••••••••••••';
+        }
+
+        return response()->json([
+            'has_api_key' => $hasKey,
+            'masked_key' => $maskedKey,
+            'api_key' => $apiKey,
+            'default_model' => $openai['default_model'] ?? 'gpt-4o-mini',
+            'is_enabled' => (bool) ($openai['is_enabled'] ?? true),
+            'temperature' => (float) ($openai['temperature'] ?? 0.7),
+            'global_system_prompt' => $openai['global_system_prompt'] ?? '',
+            'cost_per_1k_input' => (float) ($openai['cost_per_1k_input'] ?? 0.00015),
+            'cost_per_1k_output' => (float) ($openai['cost_per_1k_output'] ?? 0.00060),
+        ]);
+    }
+
+    /**
+     * Update Global OpenAI Settings
+     */
+    public function updateSettings(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'api_key' => ['nullable', 'string', 'max:500'],
+            'default_model' => ['required', 'string', 'max:100'],
+            'is_enabled' => ['nullable', 'boolean'],
+            'temperature' => ['nullable', 'numeric', 'min:0', 'max:2'],
+            'global_system_prompt' => ['nullable', 'string', 'max:5000'],
+            'cost_per_1k_input' => ['nullable', 'numeric', 'min:0'],
+            'cost_per_1k_output' => ['nullable', 'numeric', 'min:0'],
+        ]);
+
+        $setting = WebsiteSetting::current();
+        $current = $setting->openai_settings ?? [];
+
+        $apiKey = (isset($validated['api_key']) && trim($validated['api_key']) !== '') 
+            ? trim($validated['api_key']) 
+            : ($current['api_key'] ?? '');
+
+        $newSettings = [
+            'api_key' => $apiKey,
+            'default_model' => $validated['default_model'],
+            'is_enabled' => (bool) ($validated['is_enabled'] ?? true),
+            'temperature' => (float) ($validated['temperature'] ?? 0.7),
+            'global_system_prompt' => $validated['global_system_prompt'] ?? ($current['global_system_prompt'] ?? ''),
+            'cost_per_1k_input' => (float) ($validated['cost_per_1k_input'] ?? 0.00015),
+            'cost_per_1k_output' => (float) ($validated['cost_per_1k_output'] ?? 0.00060),
+        ];
+
+        $setting->update([
+            'openai_settings' => $newSettings,
+        ]);
+
+        return response()->json([
+            'message' => 'AI Model configuration saved successfully.',
+            'settings' => $setting->fresh()->openai_settings,
+        ]);
+    }
+
+    /**
+     * Test OpenAI Connection
+     */
+    public function testConnection(Request $request): JsonResponse
+    {
+        $apiKey = trim($request->input('api_key', ''));
+        if (empty($apiKey)) {
+            $setting = WebsiteSetting::current();
+            $apiKey = $setting->openai_settings['api_key'] ?? env('OPENAI_API_KEY', '');
+        }
+
+        if (empty($apiKey)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No OpenAI API Key found. Please provide an API key.',
+            ], 422);
+        }
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$apiKey}",
+            ])->timeout(12)->get('https://api.openai.com/v1/models');
+
+            if ($response->successful()) {
+                $models = collect($response->json('data', []))->pluck('id')->filter(function ($id) {
+                    return str_contains($id, 'gpt');
+                })->take(10)->values();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'OpenAI API connection successful! Model access active.',
+                    'models' => $models,
+                ]);
+            }
+
+            $errorMsg = $response->json('error.message') ?? 'OpenAI API connection failed (Status ' . $response->status() . ')';
+            return response()->json([
+                'success' => false,
+                'message' => $errorMsg,
+            ], 422);
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Server connection error: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get students enrolled in a pilot's course with NexPilot access status
+     */
+    public function getEnrolledStudents($id): JsonResponse
+    {
+        $pilot = NexPilot::with('course')->findOrFail($id);
+
+        $enrollments = Enrollment::with('user:id,name,phone,email')
+            ->where('course_id', $pilot->course_id)
+            ->where('status', Enrollment::STATUS_ACTIVE)
+            ->latest('enrolled_at')
+            ->get()
+            ->map(function ($e) {
+                return [
+                    'enrollment_id' => $e->id,
+                    'user_id' => $e->user_id,
+                    'name' => $e->user?->name ?? 'Unknown',
+                    'phone' => $e->user?->phone,
+                    'email' => $e->user?->email,
+                    'has_nexpilot' => (bool) $e->has_nexpilot,
+                    'enrolled_at' => $e->enrolled_at ? $e->enrolled_at->format('d M Y, h:i A') : 'N/A',
+                ];
+            });
+
+        return response()->json([
+            'pilot' => [
+                'id' => $pilot->id,
+                'title' => $pilot->title,
+                'course_title' => $pilot->course?->title,
+                'price' => (float) $pilot->price,
+            ],
+            'students' => $enrollments,
+        ]);
+    }
+
+    /**
+     * Toggle NexPilot access for an enrolled student
+     */
+    public function toggleStudentAccess(Request $request, $id, $enrollmentId): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+        $enrollment = Enrollment::where('id', $enrollmentId)->where('course_id', $pilot->course_id)->firstOrFail();
+
+        $newStatus = !$enrollment->has_nexpilot;
+        $enrollment->update([
+            'has_nexpilot' => $newStatus,
+            'nexpilot_id' => $newStatus ? $pilot->id : null,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'has_nexpilot' => $newStatus,
+            'message' => $newStatus 
+                ? 'NexPilot access granted to student successfully.' 
+                : 'Student NexPilot access revoked.',
+        ]);
+    }
+
+    /**
+     * Grant NexPilot to all enrolled students of this course
+     */
+    public function grantToAllStudents($id): JsonResponse
+    {
+        $pilot = NexPilot::findOrFail($id);
+
+        $count = Enrollment::where('course_id', $pilot->course_id)
+            ->where('status', Enrollment::STATUS_ACTIVE)
+            ->update([
+                'has_nexpilot' => true,
+                'nexpilot_id' => $pilot->id,
+            ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "NexPilot access successfully granted to {$count} students of this course!",
+        ]);
+    }
+}
+

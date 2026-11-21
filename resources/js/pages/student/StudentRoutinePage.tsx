@@ -1,0 +1,728 @@
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { apiClient } from '../../api/client';
+import {
+    Calendar as CalendarIcon,
+    Clock,
+    Radio,
+    BookOpen,
+    CheckCircle2,
+    Bell,
+    Sparkles,
+    ChevronLeft,
+    ChevronRight,
+    PlayCircle,
+    Award,
+    Loader2,
+    Package,
+    Truck,
+    Video,
+    FileText,
+    ExternalLink,
+    Filter
+} from 'lucide-react';
+
+interface EnrolledCourse {
+    id: number;
+    title: string;
+    slug: string;
+    thumbnail?: string | null;
+}
+
+interface RoutineEvent {
+    id: number;
+    type: 'live_class' | 'live_exam' | 'class_upload' | 'material' | 'book_parcel' | 'general';
+    type_label: string;
+    title: string;
+    description?: string | null;
+    start_time: string | null;
+    end_time: string | null;
+    date: string | null;
+    time_time: string;
+    time_period: string;
+    time_display: string;
+    subject: string;
+    subject_theme: 'amber' | 'blue' | 'rose' | 'emerald' | 'violet' | 'teal' | 'green' | 'indigo' | 'orange';
+    course_id?: number | null;
+    course_title: string;
+    instructor_name: string;
+    is_live: boolean;
+    is_upcoming: boolean;
+    is_completed: boolean;
+    action_url: string;
+    action_text?: string | null;
+    status: string;
+    duration_minutes?: number;
+    total_marks?: number;
+    meta?: {
+        courier_name?: string;
+        tracking_code?: string;
+    } | null;
+}
+
+const ENGLISH_MONTHS = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const ENGLISH_DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const ENGLISH_DAYS_FULL = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+export const formatRoutineNumber = (num: number | string): string => {
+    return String(num);
+};
+
+export const StudentRoutinePage: React.FC = () => {
+    const [events, setEvents] = useState<RoutineEvent[]>([]);
+    const [enrolledCourses, setEnrolledCourses] = useState<EnrolledCourse[]>([]);
+    const [selectedCourseId, setSelectedCourseId] = useState<string | number>('all');
+    const [selectedType, setSelectedType] = useState<string>('all');
+    const [datesWithEvents, setDatesWithEvents] = useState<string[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const [selectedDateStr, setSelectedDateStr] = useState<string>(() => {
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = String(today.getMonth() + 1).padStart(2, '0');
+        const d = String(today.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    });
+
+    const [currentMonthDate, setCurrentMonthDate] = useState<Date>(new Date());
+    const [reminderSetMap, setReminderSetMap] = useState<{ [key: string]: boolean }>({});
+    const dateStripRef = useRef<HTMLDivElement>(null);
+
+    const todayStr = useMemo(() => {
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = String(today.getMonth() + 1).padStart(2, '0');
+        const d = String(today.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }, []);
+
+    useEffect(() => {
+        fetchRoutine();
+    }, [selectedCourseId, selectedType]);
+
+    const fetchRoutine = async () => {
+        try {
+            setLoading(true);
+            const params: any = {};
+            if (selectedCourseId !== 'all') {
+                params.course_id = selectedCourseId;
+            }
+            if (selectedType !== 'all') {
+                params.type = selectedType;
+            }
+
+            const res = await apiClient.get('/student/routine', { params });
+            setEvents(res.data.events || []);
+            setDatesWithEvents(res.data.dates_with_events || []);
+            setEnrolledCourses(res.data.enrolled_courses || []);
+        } catch (err) {
+            console.error('Failed to load routine events', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Generate days for the horizontal strip (entire current month)
+    const monthDays = useMemo(() => {
+        const year = currentMonthDate.getFullYear();
+        const month = currentMonthDate.getMonth();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        const days = [];
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateObj = new Date(year, month, day);
+            const y = dateObj.getFullYear();
+            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(day).padStart(2, '0');
+            const dateStr = `${y}-${m}-${d}`;
+            const dayOfWeek = dateObj.getDay();
+
+            days.push({
+                dateStr,
+                dayNumber: day,
+                dayName: ENGLISH_DAYS_SHORT[dayOfWeek],
+                isToday: dateStr === todayStr,
+                hasEvents: datesWithEvents.includes(dateStr),
+            });
+        }
+        return days;
+    }, [currentMonthDate, datesWithEvents, todayStr]);
+
+    // Jump to Today
+    const handleJumpToToday = () => {
+        const now = new Date();
+        setCurrentMonthDate(now);
+        setSelectedDateStr(todayStr);
+
+        setTimeout(() => {
+            const el = document.getElementById(`date-chip-${todayStr}`);
+            el?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }, 100);
+    };
+
+    // Previous / Next Month
+    const handlePrevMonth = () => {
+        setCurrentMonthDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+    };
+
+    const handleNextMonth = () => {
+        setCurrentMonthDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+    };
+
+    // Filter events for selected date
+    const selectedDateEvents = useMemo(() => {
+        return events.filter(e => e.date === selectedDateStr);
+    }, [events, selectedDateStr]);
+
+    // Selected date display label
+    const selectedDateHeaderLabel = useMemo(() => {
+        if (!selectedDateStr) return '';
+        const parts = selectedDateStr.split('-');
+        if (parts.length !== 3) return selectedDateStr;
+
+        const dateObj = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        const isToday = selectedDateStr === todayStr;
+        const dayOfWeek = ENGLISH_DAYS_FULL[dateObj.getDay()];
+        const dayNumber = dateObj.getDate();
+        const monthName = ENGLISH_MONTHS[dateObj.getMonth()];
+
+        const count = selectedDateEvents.length;
+        const countText = count > 0 ? `${count} ${count === 1 ? 'event' : 'events'}` : 'No events';
+
+        if (isToday) {
+            return `Today • ${dayOfWeek}, ${monthName} ${dayNumber} (${countText})`;
+        }
+        return `${dayOfWeek}, ${monthName} ${dayNumber} • (${countText})`;
+    }, [selectedDateStr, todayStr, selectedDateEvents.length]);
+
+    // Handle Reminder Click
+    const handleToggleReminder = (eventKey: string, title: string) => {
+        setReminderSetMap(prev => {
+            const isCurrentlySet = Boolean(prev[eventKey]);
+            const nextState = !isCurrentlySet;
+            if (nextState) {
+                alert(`🔔 Reminder set for "${title}"! You will receive a notification when it begins.`);
+            }
+            return { ...prev, [eventKey]: nextState };
+        });
+    };
+
+    const currentMonthLabel = `${ENGLISH_MONTHS[currentMonthDate.getMonth()]} ${currentMonthDate.getFullYear()}`;
+
+    // Theme border & badge styling
+    const getThemeStyles = (theme: string, type: string) => {
+        if (type === 'book_parcel') {
+            return {
+                border: 'border-orange-500',
+                pillBg: 'bg-orange-50 text-orange-800 border-orange-200/80',
+            };
+        }
+        if (type === 'class_upload') {
+            return {
+                border: 'border-sky-500',
+                pillBg: 'bg-sky-50 text-sky-800 border-sky-200/80',
+            };
+        }
+        if (type === 'material') {
+            return {
+                border: 'border-teal-500',
+                pillBg: 'bg-teal-50 text-teal-800 border-teal-200/80',
+            };
+        }
+
+        switch (theme) {
+            case 'amber':
+                return {
+                    border: 'border-amber-500',
+                    pillBg: 'bg-amber-50 text-amber-800 border-amber-200/60',
+                };
+            case 'blue':
+                return {
+                    border: 'border-sky-500',
+                    pillBg: 'bg-sky-50 text-sky-800 border-sky-200/60',
+                };
+            case 'rose':
+                return {
+                    border: 'border-rose-500',
+                    pillBg: 'bg-rose-50 text-rose-800 border-rose-200/60',
+                };
+            case 'violet':
+                return {
+                    border: 'border-purple-500',
+                    pillBg: 'bg-purple-50 text-purple-800 border-purple-200/60',
+                };
+            case 'teal':
+                return {
+                    border: 'border-teal-500',
+                    pillBg: 'bg-teal-50 text-teal-800 border-teal-200/60',
+                };
+            case 'orange':
+                return {
+                    border: 'border-orange-500',
+                    pillBg: 'bg-orange-50 text-orange-800 border-orange-200/60',
+                };
+            case 'emerald':
+            default:
+                return {
+                    border: 'border-emerald-600',
+                    pillBg: 'bg-emerald-50 text-[#0B4B34] border-emerald-200/60',
+                };
+        }
+    };
+
+    return (
+        <div className="space-y-5 pb-12">
+            {/* Top Header Card */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
+                        <CalendarIcon className="w-7 h-7 text-[#0B4B34]" />
+                        <span>Class & Exam Routine</span>
+                    </h1>
+                    <div className="flex items-center gap-2 mt-1">
+                        <button
+                            type="button"
+                            onClick={handlePrevMonth}
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                            title="Previous Month"
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <span className="text-sm font-bold text-slate-600">
+                            {currentMonthLabel}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={handleNextMonth}
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                            title="Next Month"
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Right: 'Today' Pill Button */}
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                    <button
+                        type="button"
+                        onClick={handleJumpToToday}
+                        className="px-5 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 text-[#0B4B34] font-black text-xs transition-all shadow-2xs border border-emerald-200/80 cursor-pointer active:scale-95"
+                    >
+                        Today
+                    </button>
+                </div>
+            </div>
+
+            {/* Course Filter Tabs */}
+            {enrolledCourses.length > 0 && (
+                <div className="bg-white rounded-2xl p-3 border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 text-xs font-extrabold text-slate-700 shrink-0">
+                        <BookOpen className="w-4 h-4 text-[#0B4B34]" />
+                        <span>Course Filter:</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-1">
+                        <button
+                            type="button"
+                            onClick={() => setSelectedCourseId('all')}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer ${selectedCourseId === 'all'
+                                ? 'bg-[#0B4B34] text-white shadow-xs'
+                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                }`}
+                        >
+                            All My Courses
+                        </button>
+
+                        {enrolledCourses.map((c) => (
+                            <button
+                                key={c.id}
+                                type="button"
+                                onClick={() => setSelectedCourseId(c.id)}
+                                className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 truncate max-w-[220px] transition-all cursor-pointer ${selectedCourseId === c.id
+                                    ? 'bg-[#0B4B34] text-white shadow-xs'
+                                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    }`}
+                                title={c.title}
+                            >
+                                {c.title}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Type Filter Pills Strip */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('all')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap ${selectedType === 'all'
+                        ? 'bg-slate-900 text-white shadow-xs'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
+                        }`}
+                >
+                    All Schedules
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('live_class')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'live_class'
+                        ? 'bg-rose-600 text-white shadow-xs'
+                        : 'bg-white text-rose-700 hover:bg-rose-50 border border-slate-200/80'
+                        }`}
+                >
+                    <Radio className="w-3.5 h-3.5" />
+                    <span>Live Classes</span>
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('live_exam')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'live_exam'
+                        ? 'bg-amber-600 text-white shadow-xs'
+                        : 'bg-white text-amber-700 hover:bg-amber-50 border border-slate-200/80'
+                        }`}
+                >
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>Live Exams</span>
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('class_upload')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'class_upload'
+                        ? 'bg-sky-600 text-white shadow-xs'
+                        : 'bg-white text-sky-700 hover:bg-sky-50 border border-slate-200/80'
+                        }`}
+                >
+                    <Video className="w-3.5 h-3.5" />
+                    <span>Class Uploads</span>
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('material')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'material'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'bg-white text-teal-700 hover:bg-teal-50 border border-slate-200/80'
+                        }`}
+                >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>Study Materials</span>
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setSelectedType('book_parcel')}
+                    className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'book_parcel'
+                        ? 'bg-orange-600 text-white shadow-xs'
+                        : 'bg-white text-orange-700 hover:bg-orange-50 border border-slate-200/80'
+                        }`}
+                >
+                    <Package className="w-3.5 h-3.5" />
+                    <span>Book / Parcel Delivery</span>
+                </button>
+            </div>
+
+            {/* Horizontal Calendar Date Strip */}
+            <div className="relative">
+                <div
+                    ref={dateStripRef}
+                    className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-2 px-1 scroll-smooth no-scrollbar"
+                >
+                    {monthDays.map((day) => {
+                        const isSelected = selectedDateStr === day.dateStr;
+
+                        return (
+                            <button
+                                key={day.dateStr}
+                                id={`date-chip-${day.dateStr}`}
+                                type="button"
+                                onClick={() => setSelectedDateStr(day.dateStr)}
+                                className={`shrink-0 w-12 sm:w-14 py-2.5 rounded-2xl flex flex-col items-center justify-center transition-all cursor-pointer ${isSelected
+                                    ? 'bg-[#0B4B34] text-white shadow-md shadow-emerald-950/25 ring-2 ring-[#0B4B34]/30 scale-105'
+                                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+                                    }`}
+                            >
+                                <span className={`text-[11px] font-bold ${isSelected ? 'text-emerald-100' : 'text-slate-400'
+                                    }`}>
+                                    {day.isToday ? 'Today' : day.dayName}
+                                </span>
+                                <span className="text-base font-black tracking-tight mt-0.5">
+                                    {day.dayNumber}
+                                </span>
+
+                                {/* Event indicator dot below */}
+                                <span
+                                    className={`w-1.5 h-1.5 rounded-full mt-1.5 transition-all ${isSelected
+                                        ? 'bg-white'
+                                        : day.hasEvents
+                                            ? 'bg-[#0B4B34]'
+                                            : 'opacity-0'
+                                        }`}
+                                />
+                            </button>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* Daily Header Subtitle */}
+            <div className="pt-2">
+                <h3 className="text-sm font-bold text-slate-800">
+                    {selectedDateHeaderLabel}
+                </h3>
+            </div>
+
+            {/* Event Cards Section */}
+            {loading ? (
+                <div className="bg-white rounded-3xl p-16 border border-slate-200/80 text-center shadow-xs">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#0B4B34] mx-auto mb-3" />
+                    <p className="text-xs text-slate-500">Loading routine schedule...</p>
+                </div>
+            ) : selectedDateEvents.length === 0 ? (
+                <div className="bg-white rounded-3xl p-12 sm:p-16 border border-slate-200/80 shadow-xs text-center space-y-3">
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#0B4B34] flex items-center justify-center mx-auto">
+                        <CalendarIcon className="w-7 h-7" />
+                    </div>
+                    <h4 className="text-base font-bold text-slate-800">
+                        No scheduled events on this day
+                    </h4>
+                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                        There are no classes, exams, or deliveries scheduled for this day. Review previous class notes or practice exams to stay ahead.
+                    </p>
+                    <div className="pt-2 flex items-center justify-center gap-3">
+                        <Link
+                            to="/student/exams"
+                            className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-[#0B4B34] font-bold text-xs rounded-xl transition-colors"
+                        >
+                            Take Practice Exam
+                        </Link>
+                        <Link
+                            to="/student/my-courses"
+                            className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors"
+                        >
+                            Browse Course Content
+                        </Link>
+                    </div>
+                </div>
+            ) : (
+                <div className="space-y-3.5">
+                    {selectedDateEvents.map((evt) => {
+                        const eventKey = `${evt.type}-${evt.id}`;
+                        const isReminderSet = Boolean(reminderSetMap[eventKey]);
+                        const theme = getThemeStyles(evt.subject_theme, evt.type);
+
+                        const isLiveClass = evt.type === 'live_class';
+                        const isLiveExam = evt.type === 'live_exam';
+                        const isClassUpload = evt.type === 'class_upload';
+                        const isMaterial = evt.type === 'material';
+                        const isBookParcel = evt.type === 'book_parcel';
+
+                        return (
+                            <div
+                                key={eventKey}
+                                className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                            >
+                                {/* Left Column: Time */}
+                                <div className="sm:w-24 shrink-0 flex sm:flex-col items-baseline sm:items-start justify-between sm:justify-center border-b sm:border-b-0 border-slate-100 pb-2 sm:pb-0">
+                                    <div className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-none">
+                                        {evt.time_time || '—'}
+                                    </div>
+                                    <div className="text-[11px] font-bold text-slate-400 mt-1">
+                                        {evt.time_period || ''}
+                                    </div>
+                                </div>
+
+                                {/* Middle Column: Vertical Accent Line & Content */}
+                                <div className={`flex-1 border-l-2 ${theme.border} pl-3.5 sm:pl-4 space-y-1.5 min-w-0`}>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        {/* Course Tag */}
+                                        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px] truncate max-w-[180px]">
+                                            {evt.course_title}
+                                        </span>
+
+                                        {/* Subject Tag */}
+                                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${theme.pillBg}`}>
+                                            {evt.subject}
+                                        </span>
+
+                                        {/* Type Pill */}
+                                        {isLiveClass && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+                                                <Radio className="w-3 h-3 text-rose-500 animate-pulse" />
+                                                <span>Live Class</span>
+                                            </span>
+                                        )}
+                                        {isLiveExam && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                                <Clock className="w-3 h-3 text-amber-600" />
+                                                <span>Live Exam</span>
+                                            </span>
+                                        )}
+                                        {isClassUpload && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200 flex items-center gap-1">
+                                                <Video className="w-3 h-3 text-sky-600" />
+                                                <span>Class Upload</span>
+                                            </span>
+                                        )}
+                                        {isMaterial && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200 flex items-center gap-1">
+                                                <FileText className="w-3 h-3 text-teal-600" />
+                                                <span>Study Material</span>
+                                            </span>
+                                        )}
+                                        {isBookParcel && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-50 text-orange-700 border border-orange-200 flex items-center gap-1">
+                                                <Package className="w-3 h-3 text-orange-600" />
+                                                <span>Book / Parcel</span>
+                                            </span>
+                                        )}
+
+                                        {/* Live Indicator */}
+                                        {evt.is_live && (
+                                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-500 text-white flex items-center gap-1 animate-pulse shadow-xs">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                                <span>Live Now</span>
+                                            </span>
+                                        )}
+
+                                        {/* Shipped / Delivered status for parcel */}
+                                        {isBookParcel && evt.status === 'shipped' && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-800 flex items-center gap-1">
+                                                <Truck className="w-3 h-3" />
+                                                <span>Shipped via Courier</span>
+                                            </span>
+                                        )}
+                                        {isBookParcel && evt.status === 'delivered' && (
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                                                <CheckCircle2 className="w-3 h-3" />
+                                                <span>Delivered</span>
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Title */}
+                                    <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                                        {evt.title}
+                                    </h4>
+
+                                    {/* Description */}
+                                    {evt.description && (
+                                        <p className="text-xs text-slate-500 line-clamp-2">
+                                            {evt.description}
+                                        </p>
+                                    )}
+
+                                    {/* Courier Tracking info for parcel */}
+                                    {isBookParcel && evt.meta?.courier_name && (
+                                        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-orange-800 font-semibold bg-orange-50/80 p-2 rounded-xl border border-orange-200/60">
+                                            <Truck className="w-4 h-4 text-orange-600 shrink-0" />
+                                            <span>Courier: {evt.meta.courier_name}</span>
+                                            {evt.meta.tracking_code && (
+                                                <span className="bg-white px-2 py-0.5 rounded-md border border-orange-200 text-orange-950 font-mono text-[11px]">
+                                                    Tracking Code: {evt.meta.tracking_code}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Instructor & details Subtitle */}
+                                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-0.5">
+                                        {evt.instructor_name && (
+                                            <span className="font-medium text-slate-600">
+                                                {evt.instructor_name}
+                                            </span>
+                                        )}
+                                        {isLiveExam && evt.duration_minutes && (
+                                            <span className="text-slate-400">
+                                                • Duration: {formatRoutineNumber(evt.duration_minutes)} mins
+                                            </span>
+                                        )}
+                                        {isLiveExam && evt.total_marks && (
+                                            <span className="text-slate-400">
+                                                • Total Marks: {formatRoutineNumber(evt.total_marks)}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Right Column: Action Button */}
+                                <div className="shrink-0 flex items-center sm:self-center">
+                                    {evt.is_live ? (
+                                        <Link
+                                            to={evt.action_url}
+                                            className="px-5 py-2.5 rounded-full bg-[#0B4B34] hover:bg-emerald-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-950/20 animate-pulse transition-all"
+                                        >
+                                            <PlayCircle className="w-3.5 h-3.5" />
+                                            <span>
+                                                {isLiveExam ? 'Take Exam' : 'Join Class'}
+                                            </span>
+                                        </Link>
+                                    ) : isClassUpload ? (
+                                        <a
+                                            href={evt.action_url}
+                                            className="px-4 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs flex items-center gap-1.5 border border-sky-200 transition-colors"
+                                        >
+                                            <PlayCircle className="w-3.5 h-3.5 text-sky-600" />
+                                            <span>{evt.action_text || 'Watch Class'}</span>
+                                        </a>
+                                    ) : isMaterial ? (
+                                        <a
+                                            href={evt.action_url}
+                                            className="px-4 py-2 rounded-full bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold text-xs flex items-center gap-1.5 border border-teal-200 transition-colors"
+                                        >
+                                            <FileText className="w-3.5 h-3.5 text-teal-600" />
+                                            <span>{evt.action_text || 'Download Notes'}</span>
+                                        </a>
+                                    ) : isBookParcel ? (
+                                        evt.action_url && evt.action_url !== '#' ? (
+                                            <a
+                                                href={evt.action_url}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="px-4 py-2 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-800 font-bold text-xs flex items-center gap-1.5 border border-orange-200 transition-colors"
+                                            >
+                                                <ExternalLink className="w-3.5 h-3.5 text-orange-600" />
+                                                <span>{evt.action_text || 'Track Parcel'}</span>
+                                            </a>
+                                        ) : (
+                                            <button
+                                                type="button"
+                                                onClick={() => alert(`📦 Parcel Information:\nCourse: ${evt.course_title}\nDetails: ${evt.title}\nCourier: ${evt.meta?.courier_name || 'Will be shipped soon'}\nTracking Number: ${evt.meta?.tracking_code || 'Processing'}`)}
+                                                className="px-4 py-2 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-800 font-bold text-xs flex items-center gap-1.5 border border-orange-200 cursor-pointer transition-colors"
+                                            >
+                                                <Package className="w-3.5 h-3.5 text-orange-600" />
+                                                <span>{evt.action_text || 'Parcel Details'}</span>
+                                            </button>
+                                        )
+                                    ) : evt.is_completed ? (
+                                        <Link
+                                            to={evt.action_url}
+                                            className="px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
+                                        >
+                                            {isLiveExam ? 'View Results' : 'View Recording'}
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            onClick={() => handleToggleReminder(eventKey, evt.title)}
+                                            className={`px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isReminderSet
+                                                ? 'bg-emerald-100 text-[#0B4B34] border border-emerald-300'
+                                                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                                                }`}
+                                        >
+                                            <Bell className={`w-3.5 h-3.5 ${isReminderSet ? 'fill-current text-[#0B4B34]' : 'text-slate-400'}`} />
+                                            <span>{isReminderSet ? 'Reminder Set' : 'Set Reminder'}</span>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+};
