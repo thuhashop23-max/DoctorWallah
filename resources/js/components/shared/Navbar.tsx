@@ -87,7 +87,7 @@ export const Navbar: React.FC = () => {
 
     const isPointsActive = (settings as any)?.point_settings?.is_active !== false;
 
-    // Default Course Categories for the Courses dropdown
+    // Course Categories for the Courses dropdown
     const courseCategories = [
         { id: 'c-all', label: 'All Courses', label_bn: 'সকল কোর্স', url: '/courses' },
         { id: 'c-academic', label: 'Academic Courses', label_bn: 'একাডেমিক কোর্স', url: '/courses?type=academic' },
@@ -217,27 +217,27 @@ export const Navbar: React.FC = () => {
             {headerSettings?.announcement_enabled && announcementText && (
                 <div
                     style={{ backgroundColor: headerSettings.announcement_bg || '#0284c7' }}
-                    className="w-full text-white text-xs font-semibold py-1.5 px-4 text-center shadow-xs transition-colors"
+                    className="w-full text-white text-xs font-semibold py-1.5 px-3 sm:px-4 text-center shadow-xs transition-colors"
                 >
-                    <div className="max-w-7xl mx-auto flex items-center justify-center gap-2">
-                        <span>{announcementText}</span>
+                    <div className="max-w-7xl mx-auto flex items-center justify-center gap-1.5 sm:gap-2">
+                        <span className="truncate">{announcementText}</span>
                         {headerSettings.announcement_link && (
                             headerSettings.announcement_link.startsWith('http') ? (
                                 <a
                                     href={headerSettings.announcement_link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="underline font-bold text-[11px] opacity-90 hover:opacity-100 inline-flex items-center gap-0.5 ml-1"
+                                    className="underline font-bold text-[11px] opacity-90 hover:opacity-100 inline-flex items-center gap-0.5 ml-1 shrink-0"
                                 >
-                                    <span>View Details</span>
+                                    <span>View</span>
                                     <ChevronRight className="w-3 h-3" />
                                 </a>
                             ) : (
                                 <Link
                                     to={headerSettings.announcement_link}
-                                    className="underline font-bold text-[11px] opacity-90 hover:opacity-100 inline-flex items-center gap-0.5 ml-1"
+                                    className="underline font-bold text-[11px] opacity-90 hover:opacity-100 inline-flex items-center gap-0.5 ml-1 shrink-0"
                                 >
-                                    <span>View Details</span>
+                                    <span>View</span>
                                     <ChevronRight className="w-3 h-3" />
                                 </Link>
                             )
@@ -246,34 +246,34 @@ export const Navbar: React.FC = () => {
                 </div>
             )}
 
-            {/* Floating Capsule Header (Adapts smoothly to Light and Dark Mode) */}
-            <header className="w-full pt-2.5 sm:pt-4 px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-                <div className="w-full bg-white/90 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-3 sm:gap-6 transition-all duration-200">
+            {/* Floating Capsule Header */}
+            <header className="w-full pt-2 sm:pt-3.5 px-2.5 sm:px-4 lg:px-8 max-w-6xl mx-auto">
+                <div className="w-full bg-white/95 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-full px-3 sm:px-5 py-2 sm:py-2.5 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-1.5 sm:gap-4 transition-all duration-200">
                     
                     {/* Brand Logo (Left) */}
-                    <div className="flex items-center shrink-0">
-                        <Link to="/" className="flex items-center gap-2.5 group">
+                    <div className="flex items-center shrink-0 min-w-0">
+                        <Link to="/" className="flex items-center gap-1.5 sm:gap-2.5 group">
                             {logoUrl && !logoError ? (
                                 <img
                                     src={logoUrl}
                                     alt={settings?.site_name || 'DoctorWallah'}
                                     onError={() => setLogoError(true)}
                                     style={{ height: `${logoHeight}px` }}
-                                    className="w-auto max-w-[130px] sm:max-w-[170px] object-contain group-hover:opacity-95 transition-opacity"
+                                    className="w-auto max-w-[110px] sm:max-w-[160px] object-contain group-hover:opacity-95 transition-opacity"
                                 />
                             ) : loading ? (
-                                <div style={{ height: `${logoHeight}px`, width: '120px' }} className="shrink-0" />
+                                <div style={{ height: `${logoHeight}px`, width: '100px' }} className="shrink-0" />
                             ) : (
-                                <div className="flex items-center gap-2 sm:gap-2.5">
-                                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
-                                        <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                                <div className="flex items-center gap-1.5 sm:gap-2.5">
+                                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
+                                        <GraduationCap className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
                                     </div>
                                     <div className="flex items-baseline gap-1">
-                                        <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase font-sans">
+                                        <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase font-sans">
                                             Doctor<span className="text-sky-500">Wallah</span>
                                         </span>
                                         {brandSubtitle && (
-                                            <span className="text-[10px] font-bold text-sky-500 uppercase tracking-widest hidden sm:inline">
+                                            <span className="text-[10px] font-bold text-sky-500 uppercase tracking-widest hidden lg:inline">
                                                 {brandSubtitle}
                                             </span>
                                         )}
@@ -284,11 +284,11 @@ export const Navbar: React.FC = () => {
                     </div>
 
                     {/* Desktop Navigation Links (Center - Clean & Minimal) */}
-                    <nav className="hidden md:flex items-center gap-1 lg:gap-3">
+                    <nav className="hidden md:flex items-center gap-1 lg:gap-3 shrink-0">
                         {/* 1. Home Link */}
                         <Link
                             to="/"
-                            className={`relative flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold transition-colors ${
+                            className={`relative flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold transition-colors ${
                                 isHome
                                     ? 'text-slate-950 dark:text-white font-bold'
                                     : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
@@ -297,7 +297,7 @@ export const Navbar: React.FC = () => {
                             <Home className="w-4 h-4 shrink-0" />
                             <span>{language === 'bn' ? 'হোম' : 'Home'}</span>
                             {isHome && (
-                                <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
+                                <span className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
                             )}
                         </Link>
 
@@ -310,7 +310,7 @@ export const Navbar: React.FC = () => {
                             <Link
                                 to="/courses"
                                 onClick={() => setCoursesDropdownOpen(false)}
-                                className={`relative flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+                                className={`relative flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
                                     isCourses || coursesDropdownOpen
                                         ? 'text-slate-950 dark:text-white font-bold'
                                         : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
@@ -320,7 +320,7 @@ export const Navbar: React.FC = () => {
                                 <span>{language === 'bn' ? 'কোর্সসমূহ' : 'Courses'}</span>
                                 <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${coursesDropdownOpen ? 'rotate-180 text-slate-900 dark:text-white' : ''}`} />
                                 {isCourses && (
-                                    <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
+                                    <span className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
                                 )}
                             </Link>
 
@@ -340,7 +340,7 @@ export const Navbar: React.FC = () => {
                             )}
                         </div>
 
-                        {/* 3. More Dropdown (If extra pages exist, neatly compact) */}
+                        {/* 3. More Dropdown (If other pages exist) */}
                         {otherMenuItems.length > 0 && (
                             <div
                                 className="relative"
@@ -350,7 +350,7 @@ export const Navbar: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
-                                    className={`relative flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+                                    className={`relative flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
                                         moreDropdownOpen
                                             ? 'text-slate-950 dark:text-white font-bold'
                                             : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
@@ -392,13 +392,13 @@ export const Navbar: React.FC = () => {
                         )}
                     </nav>
 
-                    {/* Right Side Actions Group (Contained securely within the capsule) */}
-                    <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-                        {/* Search Button */}
+                    {/* Right Side Actions Group */}
+                    <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                        {/* Search Button (Hidden on small mobile, search input is in mobile drawer) */}
                         <button
                             type="button"
                             onClick={() => setSearchModalOpen(true)}
-                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                            className="hidden sm:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white items-center justify-center transition-all cursor-pointer shrink-0"
                             title="Search Courses"
                             aria-label="Search"
                         >
@@ -409,23 +409,23 @@ export const Navbar: React.FC = () => {
                         <button
                             type="button"
                             onClick={toggleCart}
-                            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                            className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer shrink-0"
                             title="Shopping Cart"
                             aria-label="Shopping Cart"
                         >
-                            <ShoppingCart className="w-4 h-4" />
+                            <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             {cartCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-sky-500 text-white text-[10px] font-black min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center shadow-md animate-in zoom-in duration-150">
+                                <span className="absolute -top-1 -right-1 bg-sky-500 text-white text-[9px] sm:text-[10px] font-black min-w-[15px] h-[15px] sm:min-w-[18px] sm:h-[18px] px-1 rounded-full flex items-center justify-center shadow-xs">
                                     {cartCount > 9 ? '9+' : cartCount}
                                 </span>
                             )}
                         </button>
 
-                        {/* Reward Points Pill (Preserved) */}
+                        {/* Reward Points Pill (Visible on large screens, in drawer on mobile) */}
                         {isPointsActive && (
                             <Link
                                 to="/earn-points"
-                                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 text-amber-600 dark:bg-amber-500/15 dark:border-amber-500/30 dark:text-amber-400 font-bold text-xs transition-all shadow-2xs group"
+                                className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 text-amber-600 dark:bg-amber-500/15 dark:border-amber-500/30 dark:text-amber-400 font-bold text-xs transition-all shadow-2xs group shrink-0"
                                 title="My Reward Points"
                             >
                                 <Gem className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
@@ -433,32 +433,32 @@ export const Navbar: React.FC = () => {
                             </Link>
                         )}
 
-                        {/* Theme Switcher Button (Light Mode: Moon, Dark Mode: Sun) */}
+                        {/* Theme Switcher Button */}
                         {headerSettings?.show_theme_toggle !== false && (
                             <button
                                 type="button"
                                 onClick={toggleTheme}
                                 title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
                                 aria-label="Theme toggle"
-                                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer select-none"
+                                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer select-none shrink-0"
                             >
                                 {isDark ? (
-                                    <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+                                    <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 transition-transform duration-300" />
                                 ) : (
-                                    <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 rotate-0 hover:-rotate-12" />
+                                    <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700 transition-transform duration-300" />
                                 )}
                             </button>
                         )}
 
                         {/* Auth Area */}
                         {user ? (
-                            <div className="flex items-center gap-1.5 sm:gap-2">
-                                {/* Notification Bell */}
-                                <div className="relative">
+                            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                                {/* Notification Bell (Hidden on small mobile, in drawer) */}
+                                <div className="relative hidden sm:block">
                                     <button
                                         type="button"
                                         onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
-                                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer relative"
+                                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer relative shrink-0"
                                         title="Notifications"
                                     >
                                         <Bell className="w-4 h-4" />
@@ -520,12 +520,13 @@ export const Navbar: React.FC = () => {
                                 {/* User Dashboard Pill */}
                                 <Link
                                     to={getDashboardPath()}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 dark:border-white/15 text-slate-800 dark:text-white transition-all group"
+                                    className="flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 dark:border-white/15 text-slate-800 dark:text-white transition-all shrink-0"
+                                    title="My Dashboard"
                                 >
-                                    <div className="w-5 h-5 rounded-full bg-sky-500 text-white font-bold text-[11px] flex items-center justify-center">
+                                    <div className="w-5 h-5 rounded-full bg-sky-500 text-white font-bold text-[10px] flex items-center justify-center shrink-0">
                                         {user.name.charAt(0).toUpperCase()}
                                     </div>
-                                    <span className="font-bold text-xs hidden sm:inline max-w-[90px] truncate">
+                                    <span className="font-bold text-xs hidden sm:inline max-w-[80px] truncate">
                                         {user.name.split(' ')[0]}
                                     </span>
                                 </Link>
@@ -533,22 +534,19 @@ export const Navbar: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={logout}
-                                    className="p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-full transition-colors cursor-pointer"
+                                    className="hidden sm:flex p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-full transition-colors cursor-pointer shrink-0"
                                     title="Logout"
                                 >
                                     <LogOut className="w-4 h-4" />
                                 </button>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2">
-                                {/* High-Contrast Rounded Pill Login Button (Light Mode: Black, Dark Mode: White) */}
-                                <Link
-                                    to="/login"
-                                    className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-4 sm:px-6 py-1.5 sm:py-2 rounded-full transition-all shadow-md text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
-                                >
-                                    {language === 'bn' ? 'লগইন' : 'Login'}
-                                </Link>
-                            </div>
+                            <Link
+                                to="/login"
+                                className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-3 sm:px-5 py-1 sm:py-1.5 rounded-full transition-all shadow-xs text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
+                            >
+                                {language === 'bn' ? 'লগইন' : 'Login'}
+                            </Link>
                         )}
 
                         {/* Mobile Hamburger Toggle Button */}
@@ -560,17 +558,39 @@ export const Navbar: React.FC = () => {
                                     setOpenMobileSubmenuIds({});
                                 }
                             }}
-                            className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white flex items-center justify-center transition-colors cursor-pointer"
+                            className="md:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
                             aria-label="Toggle Menu"
                         >
-                            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+                            {mobileMenuOpen ? <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                         </button>
                     </div>
                 </div>
 
+                {/* Mobile Backdrop */}
+                {mobileMenuOpen && (
+                    <div 
+                        className="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-150"
+                        onClick={() => setMobileMenuOpen(false)}
+                    />
+                )}
+
                 {/* Mobile Floating Drawer (Fully responsive & theme-adaptive) */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden mt-2 bg-white/95 dark:bg-[#0c0d12]/98 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 rounded-3xl p-4 shadow-2xl text-slate-800 dark:text-white space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="md:hidden relative z-50 mt-2 bg-white/98 dark:bg-[#0c0d12]/98 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-3xl p-4 shadow-2xl text-slate-800 dark:text-white space-y-3 max-h-[calc(82vh)] overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+                        {/* Drawer Header */}
+                        <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-white/10">
+                            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                Menu
+                            </span>
+                            <button
+                                type="button"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+
                         {/* Mobile Search Bar */}
                         <form
                             onSubmit={(e) => {
@@ -580,31 +600,31 @@ export const Navbar: React.FC = () => {
                                 setMobileMenuOpen(false);
                                 setSearchQuery('');
                             }}
-                            className="relative mb-2"
+                            className="relative"
                         >
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search courses or topics..."
-                                className="w-full pl-10 pr-20 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-sky-500"
+                                className="w-full pl-9 pr-20 py-2 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-sky-500"
                             />
-                            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                             <button
                                 type="submit"
-                                className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold text-xs rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
+                                className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold text-xs rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
                             >
                                 Search
                             </button>
                         </form>
 
                         {/* Navigation Links */}
-                        <div className="space-y-1">
+                        <div className="space-y-1 pt-1">
                             {/* 1. Home */}
                             <Link
                                 to="/"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-colors ${
+                                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm transition-colors ${
                                     isHome
                                         ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold'
                                         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10'
@@ -614,12 +634,12 @@ export const Navbar: React.FC = () => {
                                 <span>{language === 'bn' ? 'হোম' : 'Home'}</span>
                             </Link>
 
-                            {/* 2. Courses (Expandable) */}
+                            {/* 2. Courses (Expandable Accordion) */}
                             <div className="space-y-1">
                                 <button
                                     type="button"
                                     onClick={() => toggleMobileSubmenu('courses')}
-                                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer text-left ${
+                                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer text-left ${
                                         isCourses ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                 >
@@ -660,7 +680,7 @@ export const Navbar: React.FC = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
+                                        className="flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
                                     >
                                         <span className="flex items-center gap-2.5">
                                             <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
@@ -673,7 +693,7 @@ export const Navbar: React.FC = () => {
                                         key={item.id}
                                         to={item.url}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
+                                        className="flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
                                     >
                                         <span className="flex items-center gap-2.5">
                                             <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
@@ -691,7 +711,7 @@ export const Navbar: React.FC = () => {
                                 setMobileMenuOpen(false);
                                 toggleCart();
                             }}
-                            className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                            className="w-full flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
                         >
                             <span className="flex items-center gap-2.5">
                                 <ShoppingCart className="w-4 h-4 text-sky-500 shrink-0" />
@@ -704,53 +724,69 @@ export const Navbar: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Mobile Points & Auth */}
-                        <div className="pt-3 border-t border-slate-200 dark:border-white/10 space-y-2">
-                            {isPointsActive && (
-                                <Link
-                                    to="/earn-points"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center justify-between px-3 py-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs font-bold text-amber-600 dark:text-amber-400"
-                                >
-                                    <span className="flex items-center gap-2">
-                                        <Gem className="w-4 h-4 text-amber-500" />
-                                        <span>My Reward Points</span>
-                                    </span>
-                                    <span className="px-2 py-0.5 bg-amber-500 text-white rounded-md text-[11px] font-extrabold flex items-center gap-1">
-                                        <Gem className="w-3 h-3 text-white" />
-                                        <span>{user ? (user.points ?? 0) : 0}</span>
-                                    </span>
-                                </Link>
-                            )}
+                        {/* Mobile Points Badge */}
+                        {isPointsActive && (
+                            <Link
+                                to="/earn-points"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="flex items-center justify-between px-3 py-2 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs font-bold text-amber-600 dark:text-amber-400"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <Gem className="w-4 h-4 text-amber-500" />
+                                    <span>My Reward Points</span>
+                                </span>
+                                <span className="px-2 py-0.5 bg-amber-500 text-white rounded-md text-[11px] font-extrabold flex items-center gap-1">
+                                    <Gem className="w-3 h-3 text-white" />
+                                    <span>{user ? (user.points ?? 0) : 0}</span>
+                                </span>
+                            </Link>
+                        )}
 
+                        {/* Mobile Auth Area */}
+                        <div className="pt-2 border-t border-slate-200 dark:border-white/10">
                             {user ? (
-                                <div className="flex items-center gap-2 w-full pt-1">
-                                    <Link
-                                        to={getDashboardPath()}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="flex-1 py-2.5 text-center font-bold text-white bg-sky-600 hover:bg-sky-500 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors"
-                                    >
-                                        <Shield className="w-4 h-4" />
-                                        <span>{user.role === 'admin' ? 'Admin Panel' : `Dashboard (${user.name.split(' ')[0]})`}</span>
-                                    </Link>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setMobileMenuOpen(false);
-                                            logout();
-                                        }}
-                                        className="p-2.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/20 border border-slate-200 dark:border-white/10 rounded-xl transition-colors cursor-pointer"
-                                        title="Logout"
-                                    >
-                                        <LogOut className="w-4 h-4" />
-                                    </button>
+                                <div className="space-y-2 pt-1">
+                                    <div className="px-3 py-2 bg-slate-50 dark:bg-white/5 rounded-xl flex items-center gap-2.5">
+                                        <div className="w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center shrink-0">
+                                            {user.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                                                {user.name}
+                                            </p>
+                                            <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                                                {user.email}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 w-full">
+                                        <Link
+                                            to={getDashboardPath()}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className="flex-1 py-2 text-center font-bold text-white bg-sky-600 hover:bg-sky-500 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors"
+                                        >
+                                            <Shield className="w-4 h-4" />
+                                            <span>Dashboard</span>
+                                        </Link>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setMobileMenuOpen(false);
+                                                logout();
+                                            }}
+                                            className="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/20 border border-slate-200 dark:border-white/10 rounded-xl transition-colors cursor-pointer"
+                                            title="Logout"
+                                        >
+                                            <LogOut className="w-4 h-4" />
+                                        </button>
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-2 gap-2 w-full pt-1">
                                     <Link
                                         to="/login"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="py-2.5 text-center font-bold text-white dark:text-slate-950 bg-slate-950 dark:bg-white hover:opacity-90 rounded-xl text-xs transition-all shadow-md"
+                                        className="py-2.5 text-center font-bold text-white dark:text-slate-950 bg-slate-950 dark:bg-white hover:opacity-90 rounded-xl text-xs transition-all shadow-xs"
                                     >
                                         {language === 'bn' ? 'লগইন' : 'Login'}
                                     </Link>
@@ -865,10 +901,10 @@ export const Navbar: React.FC = () => {
                         )
                     ) : (
                         /* Mode 2: Custom Text & Background Color Banner */
-                        <div className="py-2.5 sm:py-3 px-4 sm:px-6 lg:px-8">
-                            <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs sm:text-sm">
-                                <div className="flex items-center gap-2.5 min-w-0 pr-6 sm:pr-0">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+                        <div className="py-2.5 sm:py-3 px-3 sm:px-6 lg:px-8">
+                            <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 text-xs sm:text-sm">
+                                <div className="flex items-center gap-2 min-w-0 pr-4 sm:pr-0">
+                                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
                                     <span className="font-extrabold truncate text-white">
                                         {headerSettings?.banner_title || 'First class is completely free in the new batch!'}
                                     </span>
@@ -879,7 +915,7 @@ export const Navbar: React.FC = () => {
                                     )}
                                 </div>
 
-                                <div className="flex items-center gap-2 shrink-0">
+                                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                                     {headerSettings?.banner_btn_text && (
                                         headerSettings.banner_btn_link?.startsWith('http') ? (
                                             <a
@@ -890,7 +926,7 @@ export const Navbar: React.FC = () => {
                                                     backgroundColor: headerSettings.banner_btn_bg || '#16a34a',
                                                     color: headerSettings.banner_btn_text_color || '#ffffff',
                                                 }}
-                                                className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs font-black shadow-xs hover:brightness-110 transition-all flex items-center gap-1"
+                                                className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs font-black shadow-xs hover:brightness-110 transition-all flex items-center gap-1"
                                             >
                                                 <span>{headerSettings.banner_btn_text}</span>
                                                 <ChevronRight className="w-3.5 h-3.5" />
@@ -902,7 +938,7 @@ export const Navbar: React.FC = () => {
                                                     backgroundColor: headerSettings.banner_btn_bg || '#16a34a',
                                                     color: headerSettings.banner_btn_text_color || '#ffffff',
                                                 }}
-                                                className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs font-black shadow-xs hover:brightness-110 transition-all flex items-center gap-1"
+                                                className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs font-black shadow-xs hover:brightness-110 transition-all flex items-center gap-1"
                                             >
                                                 <span>{headerSettings.banner_btn_text}</span>
                                                 <ChevronRight className="w-3.5 h-3.5" />
