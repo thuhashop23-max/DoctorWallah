@@ -1,0 +1,30 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Trigger Hostinger Auto-Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Hostinger Webhook
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X POST https://webhooks.hostinger.com/deploy/5fe50e2f5681deeea7e8b5234ba53993 \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: push" \
+            -d '{"ref":"refs/heads/main"}')
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "Hostinger response status: $http_code"
+          if [ "$http_code" -ne 200 ]; then
+            echo "Deployment webhook returned non-200 status: $http_code"
+            echo "$body"
+            exit 1
+          fi
+          echo "Deployment triggered successfully!"

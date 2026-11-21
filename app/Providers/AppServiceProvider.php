@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('production') || 
             request()->server('HTTP_X_FORWARDED_PROTO') === 'https' ||
+            str_contains(request()->getHost(), 'doctorwallah.com') ||
             str_contains(request()->getHost(), 'nexcourses.com')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
