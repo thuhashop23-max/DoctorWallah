@@ -5,6 +5,20 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Ensure storage and cache directories exist on production
+$storageDirs = [
+    __DIR__ . '/../storage/framework/views',
+    __DIR__ . '/../storage/framework/sessions',
+    __DIR__ . '/../storage/framework/cache/data',
+    __DIR__ . '/../storage/logs',
+    __DIR__ . '/../bootstrap/cache',
+];
+foreach ($storageDirs as $sDir) {
+    if (!is_dir($sDir)) {
+        @mkdir($sDir, 0775, true);
+    }
+}
+
 // Auto-generate or update .env on production server
 $envFile = __DIR__ . '/../.env';
 if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'u825551938_doctorw') === false || strpos(@file_get_contents($envFile), 'APP_NAME="DoctorWallah"') === false) {
@@ -65,7 +79,12 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 require __DIR__.'/../vendor/autoload.php';
 
 // Bootstrap Laravel and handle the request...
-/** @var Application $app */
-$app = require_once __DIR__.'/../bootstrap/app.php';
-
-$app->handleRequest(Request::capture());
+try {
+    /** @var Application $app */
+    $app = require_once __DIR__.'/../bootstrap/app.php';
+    $app->handleRequest(Request::capture());
+} catch (\Throwable $e) {
+    http_response_code(500);
+    header('Content-Type: text/plain');
+    echo "ERROR: " . $e->getMessage() . "\n" . $e->getFile() . ":" . $e->getLine() . "\n" . $e->getTraceAsString();
+}
