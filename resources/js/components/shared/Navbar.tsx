@@ -10,14 +10,11 @@ import {
     Home,
     GraduationCap,
     BookOpen,
-    FileText,
     Users,
     ClipboardList,
     Search,
     Menu,
     X,
-    User as UserIcon,
-    LayoutDashboard,
     LogOut,
     ChevronDown,
     Sparkles,
@@ -31,75 +28,11 @@ import {
     ExternalLink,
     ChevronRight,
     ShoppingCart,
-    Calendar,
     Sun,
     Moon
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { HeaderMenuItem } from '../../types';
-
-const DEFAULT_NAV_ITEMS: HeaderMenuItem[] = [
-    {
-        id: '1',
-        label: 'AI ML',
-        label_en: 'AI ML',
-        url: '/courses',
-        is_external: false,
-        highlight: true,
-    },
-    {
-        id: '2',
-        label: 'Course Details',
-        label_en: 'Course Details',
-        url: '/courses',
-        is_external: false,
-        highlight: false,
-        children: [
-            { id: '2-1', label: 'All Courses', label_en: 'All Courses', url: '/courses' },
-            { id: '2-2', label: 'Academic Courses', label_en: 'Academic Courses', url: '/courses?type=academic' },
-            { id: '2-3', label: 'Admission & Varsity', label_en: 'Admission & Varsity', url: '/courses?type=admission' },
-            { id: '2-4', label: 'Recorded Batches', label_en: 'Recorded Batches', url: '/courses' },
-        ],
-    },
-    {
-        id: 'earn-points',
-        label: 'Earn Points',
-        label_en: 'Earn Points',
-        url: '/earn-points',
-        is_external: false,
-        highlight: true,
-    },
-    {
-        id: '3',
-        label: 'Success Story',
-        label_en: 'Success Story',
-        url: '/courses',
-        is_external: false,
-        highlight: false,
-    },
-    {
-        id: '4',
-        label: 'Bootcamps / Events',
-        label_en: 'Bootcamps / Events',
-        url: '/courses?type=live',
-        is_external: false,
-        highlight: false,
-    },
-    {
-        id: '5',
-        label: 'More',
-        label_en: 'More',
-        url: '/courses',
-        is_external: false,
-        highlight: false,
-        children: [
-            { id: '5-1', label: 'Live Exams & Quizzes', label_en: 'Live Exams & Quizzes', url: '/student/exams' },
-            { id: '5-2', label: 'Free Trial Classes', label_en: 'Free Trial Classes', url: '/courses?type=free' },
-            { id: '5-3', label: 'Class Routine', label_en: 'Class Routine', url: '/student/routine' },
-            { id: '5-4', label: 'Contact Us', label_en: 'Contact Us', url: '/p/contact' },
-        ],
-    },
-];
 
 export const Navbar: React.FC = () => {
     const { user, logout } = useAuth();
@@ -112,7 +45,8 @@ export const Navbar: React.FC = () => {
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openMobileSubmenuIds, setOpenMobileSubmenuIds] = useState<Record<string, boolean>>({});
-    const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+    const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
+    const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
     const [searchModalOpen, setSearchModalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [logoError, setLogoError] = useState(false);
@@ -151,37 +85,29 @@ export const Navbar: React.FC = () => {
         language
     );
 
-    const rawMenuItems: HeaderMenuItem[] = (headerSettings?.menu_items && headerSettings.menu_items.length > 0)
-        ? headerSettings.menu_items
-        : DEFAULT_NAV_ITEMS;
-
     const isPointsActive = (settings as any)?.point_settings?.is_active !== false;
 
-    const menuItems = React.useMemo(() => {
-        if (!isPointsActive) {
-            return rawMenuItems.filter(item => item.url !== '/earn-points');
-        }
+    // Default Course Categories for the Courses dropdown
+    const courseCategories = [
+        { id: 'c-all', label: 'All Courses', label_bn: 'সকল কোর্স', url: '/courses' },
+        { id: 'c-academic', label: 'Academic Courses', label_bn: 'একাডেমিক কোর্স', url: '/courses?type=academic' },
+        { id: 'c-admission', label: 'Admission & Varsity', label_bn: 'ভর্তি প্রস্তুতি', url: '/courses?type=admission' },
+        { id: 'c-recorded', label: 'Recorded Batches', label_bn: 'রেকর্ডেড ব্যাচ', url: '/courses' },
+        { id: 'c-free', label: 'Free Trial Classes', label_bn: 'ফ্রি ট্রায়াল ক্লাস', url: '/courses?type=free' },
+    ];
 
-        const hasEarn = rawMenuItems.some(item => item.url === '/earn-points');
-        if (!hasEarn) {
-            const earnItem: HeaderMenuItem = {
-                id: 'earn-points',
-                label: 'Earn Points',
-                label_en: 'Earn Points',
-                url: '/earn-points',
-                is_external: false,
-                highlight: true,
-            };
-            const courseIdx = rawMenuItems.findIndex(item => item.url === '/courses' || item.label?.toLowerCase().includes('course'));
-            if (courseIdx >= 0) {
-                const copy = [...rawMenuItems];
-                copy.splice(courseIdx + 1, 0, earnItem);
-                return copy;
-            }
-            return [...rawMenuItems, earnItem];
-        }
-        return rawMenuItems;
-    }, [rawMenuItems, isPointsActive]);
+    // Secondary items from DB if user wants to access other pages
+    const rawMenuItems: HeaderMenuItem[] = (headerSettings?.menu_items && headerSettings.menu_items.length > 0)
+        ? headerSettings.menu_items
+        : [];
+
+    const otherMenuItems = React.useMemo(() => {
+        return rawMenuItems.filter(item => {
+            const url = (item.url || '').toLowerCase();
+            const label = (item.label || '').toLowerCase();
+            return url !== '/' && url !== '/courses' && !label.includes('course') && !label.includes('হোম') && !label.includes('home');
+        });
+    }, [rawMenuItems]);
 
     useEffect(() => {
         setLogoError(false);
@@ -190,7 +116,8 @@ export const Navbar: React.FC = () => {
     // Close dropdowns on route change
     useEffect(() => {
         setMobileMenuOpen(false);
-        setOpenDropdownId(null);
+        setCoursesDropdownOpen(false);
+        setMoreDropdownOpen(false);
         setSearchModalOpen(false);
         setNotifDropdownOpen(false);
         setOpenMobileSubmenuIds({});
@@ -250,6 +177,7 @@ export const Navbar: React.FC = () => {
     };
 
     const isHome = location.pathname === '/';
+    const isCourses = location.pathname.startsWith('/courses');
 
     // 10MS Style Header Banner Dismissal State
     const bannerKey = `${headerSettings?.banner_image_url || ''}_${headerSettings?.banner_title || ''}_${headerSettings?.banner_bg_color || ''}`;
@@ -282,51 +210,6 @@ export const Navbar: React.FC = () => {
         !bannerDismissed &&
         (headerSettings?.banner_show_on === 'home' ? isHome : true)
     );
-
-    // Dynamic icon resolution matching the menu label or URL
-    const getNavIcon = (item: HeaderMenuItem) => {
-        const label = (item.label || item.label_en || '').toLowerCase();
-        const url = (item.url || '').toLowerCase();
-
-        if (url === '/' || label === 'home' || label.includes('হোম') || label.includes('নীড়')) {
-            return <Home className="w-4 h-4 shrink-0" />;
-        }
-        if (url.includes('course') || label.includes('course') || label.includes('কোর্স')) {
-            return <GraduationCap className="w-4 h-4 shrink-0" />;
-        }
-        if (url.includes('exam') || label.includes('exam') || label.includes('পরীক্ষা') || label.includes('quiz')) {
-            return <ClipboardList className="w-4 h-4 shrink-0" />;
-        }
-        if (url.includes('store') || url.includes('book') || label.includes('store') || label.includes('বই') || label.includes('দোকান')) {
-            return <BookOpen className="w-4 h-4 shrink-0" />;
-        }
-        if (url.includes('point') || label.includes('point') || label.includes('পয়েন্ট')) {
-            return <Gem className="w-4 h-4 shrink-0" />;
-        }
-        if (label.includes('about') || label.includes('আমাদের') || label.includes('story') || label.includes('দল')) {
-            return <Users className="w-4 h-4 shrink-0" />;
-        }
-        if (label.includes('bootcamp') || label.includes('event')) {
-            return <Calendar className="w-4 h-4 shrink-0" />;
-        }
-        if (label.includes('ai') || label.includes('ml') || item.highlight) {
-            return <Sparkles className="w-4 h-4 shrink-0" />;
-        }
-        if (item.children && item.children.length > 0) {
-            return <Boxes className="w-4 h-4 shrink-0" />;
-        }
-        return <BookMarked className="w-4 h-4 shrink-0" />;
-    };
-
-    const isRouteActive = (item: HeaderMenuItem) => {
-        if (item.url === '/') {
-            return location.pathname === '/';
-        }
-        if (item.url && item.url !== '#') {
-            return location.pathname === item.url || location.pathname.startsWith(`${item.url}/`);
-        }
-        return false;
-    };
 
     return (
         <div className={`${headerSettings?.sticky !== false ? 'sticky top-0' : 'relative'} z-50 w-full`}>
@@ -363,9 +246,10 @@ export const Navbar: React.FC = () => {
                 </div>
             )}
 
-            {/* Floating Dark Capsule Header (Inspired by ACS / Rakib's Classroom) */}
-            <header className="w-full pt-2 sm:pt-3.5 px-2.5 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <div className="w-full bg-[#0c0d12]/95 dark:bg-[#090a0f]/95 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-full px-3.5 sm:px-6 py-2 sm:py-2.5 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-2 sm:gap-4 transition-all">
+            {/* Floating Capsule Header (Adapts smoothly to Light and Dark Mode) */}
+            <header className="w-full pt-2.5 sm:pt-4 px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+                <div className="w-full bg-white/90 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-3 sm:gap-6 transition-all duration-200">
+                    
                     {/* Brand Logo (Left) */}
                     <div className="flex items-center shrink-0">
                         <Link to="/" className="flex items-center gap-2.5 group">
@@ -375,162 +259,146 @@ export const Navbar: React.FC = () => {
                                     alt={settings?.site_name || 'DoctorWallah'}
                                     onError={() => setLogoError(true)}
                                     style={{ height: `${logoHeight}px` }}
-                                    className="w-auto max-w-[130px] sm:max-w-[180px] object-contain group-hover:opacity-95 transition-opacity"
+                                    className="w-auto max-w-[130px] sm:max-w-[170px] object-contain group-hover:opacity-95 transition-opacity"
                                 />
                             ) : loading ? (
                                 <div style={{ height: `${logoHeight}px`, width: '120px' }} className="shrink-0" />
                             ) : (
                                 <div className="flex items-center gap-2 sm:gap-2.5">
-                                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 text-white flex items-center justify-center font-black shadow-md group-hover:scale-105 transition-transform">
+                                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
                                         <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                     </div>
-                                    <div className="flex flex-col">
-                                        <div className="flex items-baseline gap-1">
-                                            <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-white uppercase font-sans">
-                                                {brandTitle || 'DoctorWallah'}
+                                    <div className="flex items-baseline gap-1">
+                                        <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase font-sans">
+                                            Doctor<span className="text-sky-500">Wallah</span>
+                                        </span>
+                                        {brandSubtitle && (
+                                            <span className="text-[10px] font-bold text-sky-500 uppercase tracking-widest hidden sm:inline">
+                                                {brandSubtitle}
                                             </span>
-                                            {brandSubtitle && (
-                                                <span className="text-[10px] font-bold text-sky-400 uppercase tracking-widest hidden sm:inline">
-                                                    {brandSubtitle}
-                                                </span>
-                                            )}
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             )}
                         </Link>
                     </div>
 
-                    {/* Desktop Navigation Links (Center) */}
-                    <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-                        {menuItems.map((item) => {
-                            const hasChildren = Boolean(item.children && item.children.length > 0);
-                            const isActive = isRouteActive(item);
-                            const isOpen = openDropdownId === item.id;
-                            const itemLabel = getLocalizedText(item.label, item.label_en, language) || item.label;
+                    {/* Desktop Navigation Links (Center - Clean & Minimal) */}
+                    <nav className="hidden md:flex items-center gap-1 lg:gap-3">
+                        {/* 1. Home Link */}
+                        <Link
+                            to="/"
+                            className={`relative flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold transition-colors ${
+                                isHome
+                                    ? 'text-slate-950 dark:text-white font-bold'
+                                    : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
+                            }`}
+                        >
+                            <Home className="w-4 h-4 shrink-0" />
+                            <span>{language === 'bn' ? 'হোম' : 'Home'}</span>
+                            {isHome && (
+                                <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
+                            )}
+                        </Link>
 
-                            // Special Highlighted item (e.g. AI ML or PRO)
-                            if (item.highlight) {
-                                return (
-                                    <Link
-                                        key={item.id}
-                                        to={item.url}
-                                        className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-sky-400/40 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 font-bold text-xs sm:text-sm transition-all whitespace-nowrap shadow-xs ${
-                                            isActive ? 'ring-1 ring-sky-400 bg-sky-500/25 text-white' : ''
-                                        }`}
-                                    >
-                                        <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-                                        <span>{itemLabel}</span>
-                                        {isActive && (
-                                            <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-sky-400 rounded-full" />
-                                        )}
-                                    </Link>
-                                );
-                            }
+                        {/* 2. Courses Dropdown Link */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setCoursesDropdownOpen(true)}
+                            onMouseLeave={() => setCoursesDropdownOpen(false)}
+                        >
+                            <Link
+                                to="/courses"
+                                onClick={() => setCoursesDropdownOpen(false)}
+                                className={`relative flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+                                    isCourses || coursesDropdownOpen
+                                        ? 'text-slate-950 dark:text-white font-bold'
+                                        : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
+                                }`}
+                            >
+                                <GraduationCap className="w-4 h-4 shrink-0" />
+                                <span>{language === 'bn' ? 'কোর্সসমূহ' : 'Courses'}</span>
+                                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${coursesDropdownOpen ? 'rotate-180 text-slate-900 dark:text-white' : ''}`} />
+                                {isCourses && (
+                                    <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-slate-950 dark:bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.3)] dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
+                                )}
+                            </Link>
 
-                            // Items with Children Dropdown
-                            if (hasChildren) {
-                                return (
-                                    <div
-                                        key={item.id}
-                                        className="relative"
-                                        onMouseEnter={() => setOpenDropdownId(item.id)}
-                                        onMouseLeave={() => setOpenDropdownId(null)}
-                                    >
-                                        <button
-                                            type="button"
-                                            onClick={() => setOpenDropdownId(isOpen ? null : item.id)}
-                                            className={`relative flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
-                                                isOpen || isActive
-                                                    ? 'text-white font-bold'
-                                                    : 'text-slate-300 hover:text-white'
-                                            }`}
+                            {/* Courses Dropdown Menu */}
+                            {coursesDropdownOpen && (
+                                <div className="absolute left-0 top-full mt-2 min-w-[210px] bg-white/95 dark:bg-[#12141c]/95 backdrop-blur-2xl rounded-2xl shadow-xl dark:shadow-2xl border border-slate-200/90 dark:border-white/10 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                                    {courseCategories.map((cat) => (
+                                        <Link
+                                            key={cat.id}
+                                            to={cat.url}
+                                            className="block px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-950 dark:hover:text-white transition-colors"
                                         >
-                                            {getNavIcon(item)}
-                                            <span>{itemLabel}</span>
-                                            <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-white' : ''}`} />
-                                            {isActive && (
-                                                <span className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
-                                            )}
-                                        </button>
+                                            {language === 'bn' ? cat.label_bn : cat.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
 
-                                        {/* Dropdown Menu */}
-                                        {isOpen && (
-                                            <div className="absolute left-0 top-full mt-2 min-w-[220px] w-max max-w-xs bg-[#12141c]/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/10 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                                                {item.children!.map((sub) => {
-                                                    const subLabel = getLocalizedText(sub.label, sub.label_en, language) || sub.label;
-                                                    return sub.is_external || sub.url.startsWith('http') ? (
-                                                        <a
-                                                            key={sub.id}
-                                                            href={sub.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                                                        >
-                                                            <span>{subLabel}</span>
-                                                            <ExternalLink className="w-3 h-3 text-slate-400" />
-                                                        </a>
-                                                    ) : (
-                                                        <Link
-                                                            key={sub.id}
-                                                            to={sub.url}
-                                                            className="block px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                                                        >
-                                                            {subLabel}
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            }
-
-                            // External Link
-                            if (item.is_external || item.url.startsWith('http')) {
-                                return (
-                                    <a
-                                        key={item.id}
-                                        href={item.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="relative flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors"
-                                    >
-                                        {getNavIcon(item)}
-                                        <span>{itemLabel}</span>
-                                        <ExternalLink className="w-3 h-3 text-slate-400" />
-                                    </a>
-                                );
-                            }
-
-                            // Standard Nav Link (Matches reference image with underline indicator on active)
-                            return (
-                                <Link
-                                    key={item.id}
-                                    to={item.url}
-                                    className={`relative flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold transition-colors ${
-                                        isActive
-                                            ? 'text-white font-bold'
-                                            : 'text-slate-300 hover:text-white'
+                        {/* 3. More Dropdown (If extra pages exist, neatly compact) */}
+                        {otherMenuItems.length > 0 && (
+                            <div
+                                className="relative"
+                                onMouseEnter={() => setMoreDropdownOpen(true)}
+                                onMouseLeave={() => setMoreDropdownOpen(false)}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                                    className={`relative flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+                                        moreDropdownOpen
+                                            ? 'text-slate-950 dark:text-white font-bold'
+                                            : 'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white'
                                     }`}
                                 >
-                                    {getNavIcon(item)}
-                                    <span>{itemLabel}</span>
-                                    {isActive && (
-                                        <span className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
-                                    )}
-                                </Link>
-                            );
-                        })}
+                                    <Boxes className="w-4 h-4 shrink-0" />
+                                    <span>{language === 'bn' ? 'আরও' : 'More'}</span>
+                                    <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180 text-slate-900 dark:text-white' : ''}`} />
+                                </button>
+
+                                {moreDropdownOpen && (
+                                    <div className="absolute left-0 top-full mt-2 min-w-[200px] bg-white/95 dark:bg-[#12141c]/95 backdrop-blur-2xl rounded-2xl shadow-xl dark:shadow-2xl border border-slate-200/90 dark:border-white/10 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                                        {otherMenuItems.map((item) => {
+                                            const itemLabel = getLocalizedText(item.label, item.label_en, language) || item.label;
+                                            return item.is_external || item.url.startsWith('http') ? (
+                                                <a
+                                                    key={item.id}
+                                                    href={item.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-950 dark:hover:text-white transition-colors"
+                                                >
+                                                    <span>{itemLabel}</span>
+                                                    <ExternalLink className="w-3 h-3 text-slate-400" />
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    key={item.id}
+                                                    to={item.url}
+                                                    className="block px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-950 dark:hover:text-white transition-colors"
+                                                >
+                                                    {itemLabel}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </nav>
 
-                    {/* Right Side Actions Group */}
+                    {/* Right Side Actions Group (Contained securely within the capsule) */}
                     <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
                         {/* Search Button */}
                         <button
                             type="button"
                             onClick={() => setSearchModalOpen(true)}
-                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer"
                             title="Search Courses"
                             aria-label="Search"
                         >
@@ -541,7 +409,7 @@ export const Navbar: React.FC = () => {
                         <button
                             type="button"
                             onClick={toggleCart}
-                            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer"
                             title="Shopping Cart"
                             aria-label="Shopping Cart"
                         >
@@ -553,70 +421,70 @@ export const Navbar: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Reward Points Pill (Preserved as requested) */}
+                        {/* Reward Points Pill (Preserved) */}
                         {isPointsActive && (
                             <Link
                                 to="/earn-points"
-                                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 hover:bg-amber-500/25 text-amber-400 font-bold text-xs transition-all shadow-sm group"
+                                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 text-amber-600 dark:bg-amber-500/15 dark:border-amber-500/30 dark:text-amber-400 font-bold text-xs transition-all shadow-2xs group"
                                 title="My Reward Points"
                             >
-                                <Gem className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
-                                <span>{user ? (user.points ?? 0) : 'Points'}</span>
+                                <Gem className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                                <span>{user ? (user.points ?? 0) : (language === 'bn' ? 'পয়েন্ট' : 'Points')}</span>
                             </Link>
                         )}
 
-                        {/* Theme Switcher Button (Circular, matching screenshot) */}
+                        {/* Theme Switcher Button (Light Mode: Moon, Dark Mode: Sun) */}
                         {headerSettings?.show_theme_toggle !== false && (
                             <button
                                 type="button"
                                 onClick={toggleTheme}
                                 title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
                                 aria-label="Theme toggle"
-                                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer select-none"
+                                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer select-none"
                             >
                                 {isDark ? (
                                     <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
                                 ) : (
-                                    <Moon className="w-4 h-4 text-slate-300 transition-transform duration-300 rotate-0 hover:-rotate-12" />
+                                    <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 rotate-0 hover:-rotate-12" />
                                 )}
                             </button>
                         )}
 
                         {/* Auth Area */}
                         {user ? (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1.5 sm:gap-2">
                                 {/* Notification Bell */}
                                 <div className="relative">
                                     <button
                                         type="button"
                                         onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
-                                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer relative"
+                                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer relative"
                                         title="Notifications"
                                     >
                                         <Bell className="w-4 h-4" />
                                         {unreadCount > 0 && (
-                                            <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-[#0c0d12] animate-pulse" />
+                                            <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white dark:ring-[#0c0d12] animate-pulse" />
                                         )}
                                     </button>
 
                                     {notifDropdownOpen && (
                                         <div
-                                            className="absolute right-0 mt-2 w-72 sm:w-80 bg-[#12141c]/98 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/10 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                                            className="absolute right-0 mt-2 w-72 sm:w-80 bg-white/95 dark:bg-[#12141c]/98 backdrop-blur-2xl rounded-2xl shadow-xl dark:shadow-2xl border border-slate-200/90 dark:border-white/10 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
                                             onMouseLeave={() => setNotifDropdownOpen(false)}
                                         >
-                                            <div className="px-4 py-2 border-b border-white/10 flex items-center justify-between">
-                                                <span className="text-xs font-bold text-white">Notifications</span>
+                                            <div className="px-4 py-2 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
+                                                <span className="text-xs font-bold text-slate-900 dark:text-white">Notifications</span>
                                                 {unreadCount > 0 && (
                                                     <button
                                                         onClick={markAllRead}
-                                                        className="text-[10px] font-bold text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                                                        className="text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
                                                     >
                                                         <CheckCheck className="w-3 h-3" />
                                                         <span>Mark all as read</span>
                                                     </button>
                                                 )}
                                             </div>
-                                            <div className="max-h-60 overflow-y-auto divide-y divide-white/5">
+                                            <div className="max-h-60 overflow-y-auto divide-y divide-slate-100 dark:divide-white/5">
                                                 {notifications.length === 0 ? (
                                                     <div className="p-4 text-center text-xs text-slate-400">
                                                         No new notifications
@@ -626,19 +494,19 @@ export const Navbar: React.FC = () => {
                                                         <div
                                                             key={n.id}
                                                             onClick={() => handleNotificationClick(n)}
-                                                            className={`p-3 hover:bg-white/5 transition-colors cursor-pointer ${
-                                                                !n.read_at ? 'bg-sky-500/10' : ''
+                                                            className={`p-3 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer ${
+                                                                !n.read_at ? 'bg-sky-50/60 dark:bg-sky-500/10' : ''
                                                             }`}
                                                         >
                                                             <div className="flex items-center justify-between gap-1">
-                                                                <p className="text-xs font-bold text-white line-clamp-1">
+                                                                <p className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">
                                                                     {n.data?.title || n.title || 'Notice'}
                                                                 </p>
                                                                 {!n.read_at && (
-                                                                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
+                                                                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
                                                                 )}
                                                             </div>
-                                                            <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-2">
+                                                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
                                                                 {n.data?.message || n.message}
                                                             </p>
                                                         </div>
@@ -652,12 +520,12 @@ export const Navbar: React.FC = () => {
                                 {/* User Dashboard Pill */}
                                 <Link
                                     to={getDashboardPath()}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white transition-all group"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 dark:border-white/15 text-slate-800 dark:text-white transition-all group"
                                 >
-                                    <div className="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">
+                                    <div className="w-5 h-5 rounded-full bg-sky-500 text-white font-bold text-[11px] flex items-center justify-center">
                                         {user.name.charAt(0).toUpperCase()}
                                     </div>
-                                    <span className="font-bold text-xs hidden sm:inline max-w-[100px] truncate">
+                                    <span className="font-bold text-xs hidden sm:inline max-w-[90px] truncate">
                                         {user.name.split(' ')[0]}
                                     </span>
                                 </Link>
@@ -665,7 +533,7 @@ export const Navbar: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={logout}
-                                    className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-full transition-colors cursor-pointer"
+                                    className="p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-full transition-colors cursor-pointer"
                                     title="Logout"
                                 >
                                     <LogOut className="w-4 h-4" />
@@ -673,18 +541,10 @@ export const Navbar: React.FC = () => {
                             </div>
                         ) : (
                             <div className="flex items-center gap-2">
-                                {/* Registration Text Link (Subtle) */}
-                                <Link
-                                    to="/register"
-                                    className="hidden xl:inline-block text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors px-2 py-1"
-                                >
-                                    {language === 'bn' ? 'রেজিস্ট্রেশন' : 'Register'}
-                                </Link>
-
-                                {/* High-Contrast White Pill Button (Matching Screenshot "লগইন") */}
+                                {/* High-Contrast Rounded Pill Login Button (Light Mode: Black, Dark Mode: White) */}
                                 <Link
                                     to="/login"
-                                    className="bg-white text-slate-950 hover:bg-slate-200 font-bold px-4 sm:px-6 py-1.5 sm:py-2 rounded-full transition-all shadow-md text-xs sm:text-sm cursor-pointer whitespace-nowrap flex items-center justify-center"
+                                    className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-4 sm:px-6 py-1.5 sm:py-2 rounded-full transition-all shadow-md text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
                                 >
                                     {language === 'bn' ? 'লগইন' : 'Login'}
                                 </Link>
@@ -700,7 +560,7 @@ export const Navbar: React.FC = () => {
                                     setOpenMobileSubmenuIds({});
                                 }
                             }}
-                            className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center transition-colors cursor-pointer"
+                            className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white flex items-center justify-center transition-colors cursor-pointer"
                             aria-label="Toggle Menu"
                         >
                             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -708,9 +568,9 @@ export const Navbar: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Mobile Floating Drawer (Fully responsive dark glass card) */}
+                {/* Mobile Floating Drawer (Fully responsive & theme-adaptive) */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden mt-2 bg-[#0c0d12]/98 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-2xl text-white space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="md:hidden mt-2 bg-white/95 dark:bg-[#0c0d12]/98 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 rounded-3xl p-4 shadow-2xl text-slate-800 dark:text-white space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
                         {/* Mobile Search Bar */}
                         <form
                             onSubmit={(e) => {
@@ -727,12 +587,12 @@ export const Navbar: React.FC = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search courses or topics..."
-                                className="w-full pl-10 pr-20 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-sky-500"
+                                className="w-full pl-10 pr-20 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-sky-500"
                             />
                             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                             <button
                                 type="submit"
-                                className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1 bg-white text-slate-950 font-bold text-xs rounded-lg hover:bg-slate-200 transition-colors cursor-pointer"
+                                className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold text-xs rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
                             >
                                 Search
                             </button>
@@ -740,98 +600,86 @@ export const Navbar: React.FC = () => {
 
                         {/* Navigation Links */}
                         <div className="space-y-1">
-                            {menuItems.map((item) => {
-                                const itemLabel = getLocalizedText(item.label, item.label_en, language) || item.label;
-                                const hasChildren = Boolean(item.children && item.children.length > 0);
-                                const isSubmenuOpen = Boolean(openMobileSubmenuIds[item.id]);
-                                const isActive = isRouteActive(item);
+                            {/* 1. Home */}
+                            <Link
+                                to="/"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-colors ${
+                                    isHome
+                                        ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold'
+                                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10'
+                                }`}
+                            >
+                                <Home className="w-4 h-4 text-sky-500 shrink-0" />
+                                <span>{language === 'bn' ? 'হোম' : 'Home'}</span>
+                            </Link>
 
-                                return (
-                                    <div key={item.id} className="space-y-1">
-                                        {hasChildren ? (
-                                            <button
-                                                type="button"
-                                                onClick={() => toggleMobileSubmenu(item.id)}
-                                                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm hover:bg-white/10 transition-colors cursor-pointer text-left ${
-                                                    isActive ? 'text-sky-400 font-bold bg-white/5' : 'text-slate-200'
-                                                }`}
-                                            >
-                                                <span className="flex items-center gap-2.5">
-                                                    {getNavIcon(item)}
-                                                    <span>{itemLabel}</span>
-                                                    {item.highlight && (
-                                                        <span className="text-[10px] border border-sky-400/50 bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-bold">PRO</span>
-                                                    )}
-                                                </span>
-                                                <ChevronDown
-                                                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                                                        isSubmenuOpen ? 'rotate-180 text-white' : ''
-                                                    }`}
-                                                />
-                                            </button>
-                                        ) : item.is_external || item.url.startsWith('http') ? (
-                                            <a
-                                                href={item.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                onClick={() => setMobileMenuOpen(false)}
-                                                className="flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-200 hover:bg-white/10 hover:text-white"
-                                            >
-                                                <span className="flex items-center gap-2.5">
-                                                    {getNavIcon(item)}
-                                                    <span>{itemLabel}</span>
-                                                </span>
-                                                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                                            </a>
-                                        ) : (
+                            {/* 2. Courses (Expandable) */}
+                            <div className="space-y-1">
+                                <button
+                                    type="button"
+                                    onClick={() => toggleMobileSubmenu('courses')}
+                                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer text-left ${
+                                        isCourses ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-700 dark:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="flex items-center gap-2.5">
+                                        <GraduationCap className="w-4 h-4 text-sky-500 shrink-0" />
+                                        <span>{language === 'bn' ? 'কোর্সসমূহ' : 'Courses'}</span>
+                                    </span>
+                                    <ChevronDown
+                                        className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                                            openMobileSubmenuIds['courses'] ? 'rotate-180 text-sky-500' : ''
+                                        }`}
+                                    />
+                                </button>
+
+                                {openMobileSubmenuIds['courses'] && (
+                                    <div className="pl-6 space-y-1 border-l-2 border-sky-500/30 ml-4 my-1">
+                                        {courseCategories.map((cat) => (
                                             <Link
-                                                to={item.url}
+                                                key={cat.id}
+                                                to={cat.url}
                                                 onClick={() => setMobileMenuOpen(false)}
-                                                className={`flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm hover:bg-white/10 hover:text-white ${
-                                                    isActive ? 'text-sky-400 font-bold bg-white/5' : 'text-slate-200'
-                                                }`}
+                                                className="block px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white"
                                             >
-                                                <span className="flex items-center gap-2.5">
-                                                    {getNavIcon(item)}
-                                                    <span>{itemLabel}</span>
-                                                </span>
-                                                {item.highlight && (
-                                                    <span className="text-[10px] border border-sky-400/50 bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-bold">PRO</span>
-                                                )}
+                                                • {language === 'bn' ? cat.label_bn : cat.label}
                                             </Link>
-                                        )}
-
-                                        {/* Sub-items if any */}
-                                        {hasChildren && isSubmenuOpen && (
-                                            <div className="pl-6 space-y-1 border-l border-white/15 ml-4 my-1">
-                                                {item.children!.map((sub) => {
-                                                    const subLabel = getLocalizedText(sub.label, sub.label_en, language) || sub.label;
-                                                    return sub.is_external || sub.url.startsWith('http') ? (
-                                                        <a
-                                                            key={sub.id}
-                                                            href={sub.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                            className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5"
-                                                        >
-                                                            <span>• {subLabel}</span>
-                                                            <ExternalLink className="w-3 h-3 text-slate-500" />
-                                                        </a>
-                                                    ) : (
-                                                        <Link
-                                                            key={sub.id}
-                                                            to={sub.url}
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                            className="block px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5"
-                                                        >
-                                                            • {subLabel}
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
+                                        ))}
                                     </div>
+                                )}
+                            </div>
+
+                            {/* 3. Other Pages from Settings */}
+                            {otherMenuItems.map((item) => {
+                                const itemLabel = getLocalizedText(item.label, item.label_en, language) || item.label;
+                                return item.is_external || item.url.startsWith('http') ? (
+                                    <a
+                                        key={item.id}
+                                        href={item.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
+                                    >
+                                        <span className="flex items-center gap-2.5">
+                                            <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
+                                            <span>{itemLabel}</span>
+                                        </span>
+                                        <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                                    </a>
+                                ) : (
+                                    <Link
+                                        key={item.id}
+                                        to={item.url}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
+                                    >
+                                        <span className="flex items-center gap-2.5">
+                                            <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
+                                            <span>{itemLabel}</span>
+                                        </span>
+                                    </Link>
                                 );
                             })}
                         </div>
@@ -843,10 +691,10 @@ export const Navbar: React.FC = () => {
                                 setMobileMenuOpen(false);
                                 toggleCart();
                             }}
-                            className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-200 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+                            className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
                         >
                             <span className="flex items-center gap-2.5">
-                                <ShoppingCart className="w-4 h-4 text-sky-400" />
+                                <ShoppingCart className="w-4 h-4 text-sky-500 shrink-0" />
                                 <span>Cart</span>
                             </span>
                             {cartCount > 0 && (
@@ -857,19 +705,19 @@ export const Navbar: React.FC = () => {
                         </button>
 
                         {/* Mobile Points & Auth */}
-                        <div className="pt-3 border-t border-white/10 space-y-2">
+                        <div className="pt-3 border-t border-slate-200 dark:border-white/10 space-y-2">
                             {isPointsActive && (
                                 <Link
                                     to="/earn-points"
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center justify-between px-3 py-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs font-bold text-amber-400"
+                                    className="flex items-center justify-between px-3 py-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs font-bold text-amber-600 dark:text-amber-400"
                                 >
                                     <span className="flex items-center gap-2">
-                                        <Gem className="w-4 h-4 text-amber-400" />
+                                        <Gem className="w-4 h-4 text-amber-500" />
                                         <span>My Reward Points</span>
                                     </span>
-                                    <span className="px-2 py-0.5 bg-amber-500 text-slate-950 rounded-md text-[11px] font-extrabold flex items-center gap-1">
-                                        <Gem className="w-3 h-3 text-slate-950" />
+                                    <span className="px-2 py-0.5 bg-amber-500 text-white rounded-md text-[11px] font-extrabold flex items-center gap-1">
+                                        <Gem className="w-3 h-3 text-white" />
                                         <span>{user ? (user.points ?? 0) : 0}</span>
                                     </span>
                                 </Link>
@@ -891,7 +739,7 @@ export const Navbar: React.FC = () => {
                                             setMobileMenuOpen(false);
                                             logout();
                                         }}
-                                        className="p-2.5 text-rose-400 hover:bg-rose-500/20 border border-white/10 rounded-xl transition-colors cursor-pointer"
+                                        className="p-2.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/20 border border-slate-200 dark:border-white/10 rounded-xl transition-colors cursor-pointer"
                                         title="Logout"
                                     >
                                         <LogOut className="w-4 h-4" />
@@ -902,14 +750,14 @@ export const Navbar: React.FC = () => {
                                     <Link
                                         to="/login"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="py-2.5 text-center font-bold text-slate-950 bg-white hover:bg-slate-200 rounded-xl text-xs transition-all shadow-md"
+                                        className="py-2.5 text-center font-bold text-white dark:text-slate-950 bg-slate-950 dark:bg-white hover:opacity-90 rounded-xl text-xs transition-all shadow-md"
                                     >
                                         {language === 'bn' ? 'লগইন' : 'Login'}
                                     </Link>
                                     <Link
                                         to="/register"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="py-2.5 text-center font-bold text-white bg-white/10 hover:bg-white/15 border border-white/15 rounded-xl text-xs transition-all"
+                                        className="py-2.5 text-center font-bold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 rounded-xl text-xs transition-all"
                                     >
                                         {language === 'bn' ? 'রেজিস্ট্রেশন' : 'Register'}
                                     </Link>
@@ -922,17 +770,17 @@ export const Navbar: React.FC = () => {
 
             {/* Quick Search Modal */}
             {searchModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/75 backdrop-blur-sm">
-                    <div className="bg-[#10121a] text-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-white/10 relative animate-in fade-in zoom-in-95 duration-150">
-                        <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                            <div className="flex items-center gap-2 font-bold text-white text-sm">
-                                <Search className="w-4 h-4 text-sky-400" />
+                <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-xs">
+                    <div className="bg-white dark:bg-[#10121a] text-slate-900 dark:text-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-white/10 relative animate-in fade-in zoom-in-95 duration-150">
+                        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/10">
+                            <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-white text-sm">
+                                <Search className="w-4 h-4 text-sky-500" />
                                 <span>Search Courses or Topics</span>
                             </div>
                             <button
                                 type="button"
                                 onClick={() => setSearchModalOpen(false)}
-                                className="p-1 text-slate-400 hover:text-white rounded-lg cursor-pointer transition-colors"
+                                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg cursor-pointer transition-colors"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -942,7 +790,7 @@ export const Navbar: React.FC = () => {
                             <div className="relative">
                                 <button
                                     type="submit"
-                                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-sky-400 cursor-pointer"
+                                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-sky-500 cursor-pointer"
                                     title="Search"
                                 >
                                     <Search className="w-4 h-4" />
@@ -953,15 +801,15 @@ export const Navbar: React.FC = () => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder="Type course name (e.g. Fundamental Calculus, Physics...)"
-                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 text-white placeholder:text-slate-400"
+                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 text-slate-900 dark:text-white placeholder:text-slate-400"
                                 />
                             </div>
 
                             <button
                                 type="submit"
-                                className="w-full py-3 bg-white text-slate-950 hover:bg-slate-200 font-bold rounded-2xl text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                                className="w-full py-3 bg-slate-950 dark:bg-white text-white dark:text-slate-950 hover:opacity-90 font-bold rounded-2xl text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                             >
-                                <Search className="w-4 h-4 text-slate-950" />
+                                <Search className="w-4 h-4" />
                                 <span>Search Courses</span>
                             </button>
                         </form>
