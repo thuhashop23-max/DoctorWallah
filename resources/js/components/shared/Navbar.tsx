@@ -247,37 +247,25 @@ export const Navbar: React.FC = () => {
             )}
 
             {/* Floating Capsule Header */}
-            <header className="w-full pt-2 sm:pt-3.5 px-2.5 sm:px-4 lg:px-8 max-w-6xl mx-auto">
-                <div className="w-full bg-white/95 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-full px-3 sm:px-5 py-2 sm:py-2.5 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-1.5 sm:gap-4 transition-all duration-200">
+            <header className="w-full pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+                <div className="w-full bg-white/95 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 sm:py-2.5 min-h-[60px] sm:min-h-[64px] shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-2 sm:gap-4 transition-all duration-200">
                     
-                    {/* Brand Logo (Left) */}
-                    <div className="flex items-center shrink-0 min-w-0">
-                        <Link to="/" className="flex items-center gap-1.5 sm:gap-2.5 group">
+                    {/* Brand Logo (Left - Just the Logo as requested, no text) */}
+                    <div className="flex items-center shrink-0">
+                        <Link to="/" className="flex items-center group" title="DoctorWallah">
                             {logoUrl && !logoError ? (
                                 <img
                                     src={logoUrl}
                                     alt={settings?.site_name || 'DoctorWallah'}
                                     onError={() => setLogoError(true)}
-                                    style={{ height: `${logoHeight}px` }}
-                                    className="w-auto max-w-[110px] sm:max-w-[160px] object-contain group-hover:opacity-95 transition-opacity"
+                                    style={{ height: `${Math.max(logoHeight, 38)}px` }}
+                                    className="w-auto max-w-[120px] sm:max-w-[160px] object-contain group-hover:opacity-95 transition-opacity"
                                 />
                             ) : loading ? (
-                                <div style={{ height: `${logoHeight}px`, width: '100px' }} className="shrink-0" />
+                                <div style={{ height: '40px', width: '40px' }} className="shrink-0" />
                             ) : (
-                                <div className="flex items-center gap-1.5 sm:gap-2.5">
-                                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
-                                        <GraduationCap className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
-                                    </div>
-                                    <div className="flex items-baseline gap-1">
-                                        <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase font-sans">
-                                            Doctor<span className="text-sky-500">Wallah</span>
-                                        </span>
-                                        {brandSubtitle && (
-                                            <span className="text-[10px] font-bold text-sky-500 uppercase tracking-widest hidden lg:inline">
-                                                {brandSubtitle}
-                                            </span>
-                                        )}
-                                    </div>
+                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl sm:rounded-full bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform shrink-0">
+                                    <GraduationCap className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" />
                                 </div>
                             )}
                         </Link>
@@ -409,13 +397,13 @@ export const Navbar: React.FC = () => {
                         <button
                             type="button"
                             onClick={toggleCart}
-                            className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer shrink-0"
+                            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer shrink-0"
                             title="Shopping Cart"
                             aria-label="Shopping Cart"
                         >
-                            <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            <ShoppingCart className="w-4 h-4" />
                             {cartCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-sky-500 text-white text-[9px] sm:text-[10px] font-black min-w-[15px] h-[15px] sm:min-w-[18px] sm:h-[18px] px-1 rounded-full flex items-center justify-center shadow-xs">
+                                <span className="absolute -top-1 -right-1 bg-sky-500 text-white text-[9px] sm:text-[10px] font-black min-w-[16px] h-[16px] sm:min-w-[18px] sm:h-[18px] px-1 rounded-full flex items-center justify-center shadow-xs">
                                     {cartCount > 9 ? '9+' : cartCount}
                                 </span>
                             )}
@@ -440,12 +428,12 @@ export const Navbar: React.FC = () => {
                                 onClick={toggleTheme}
                                 title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
                                 aria-label="Theme toggle"
-                                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer select-none shrink-0"
+                                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-700 hover:text-slate-950 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer select-none shrink-0"
                             >
                                 {isDark ? (
-                                    <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 transition-transform duration-300" />
+                                    <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300" />
                                 ) : (
-                                    <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700 transition-transform duration-300" />
+                                    <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300" />
                                 )}
                             </button>
                         )}
@@ -543,7 +531,7 @@ export const Navbar: React.FC = () => {
                         ) : (
                             <Link
                                 to="/login"
-                                className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-3 sm:px-5 py-1 sm:py-1.5 rounded-full transition-all shadow-xs text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
+                                className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full transition-all shadow-xs text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
                             >
                                 {language === 'bn' ? 'লগইন' : 'Login'}
                             </Link>
@@ -558,10 +546,10 @@ export const Navbar: React.FC = () => {
                                     setOpenMobileSubmenuIds({});
                                 }
                             }}
-                            className="md:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                            className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
                             aria-label="Toggle Menu"
                         >
-                            {mobileMenuOpen ? <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+                            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
                         </button>
                     </div>
                 </div>
