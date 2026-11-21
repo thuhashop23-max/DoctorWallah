@@ -19,6 +19,28 @@ foreach ($storageDirs as $sDir) {
     }
 }
 
+// Set environment variables directly in PHP runtime for production
+putenv('APP_NAME=DoctorWallah');
+putenv('APP_ENV=production');
+putenv('APP_KEY=base64:ajmsflCfT24fHNskELz7tcw5FTJZVzXl2RvU+yb+gZQ=');
+putenv('APP_DEBUG=false');
+putenv('APP_URL=https://doctorwallah.com');
+putenv('DB_CONNECTION=mysql');
+putenv('DB_HOST=127.0.0.1');
+putenv('DB_PORT=3306');
+putenv('DB_DATABASE=u825551938_doctorw');
+putenv('DB_USERNAME=u825551938_doctorw');
+putenv('DB_PASSWORD=DoctorWallah2026Secured');
+putenv('SESSION_DRIVER=file');
+putenv('CACHE_STORE=file');
+
+$_ENV['DB_DATABASE'] = 'u825551938_doctorw';
+$_ENV['DB_USERNAME'] = 'u825551938_doctorw';
+$_ENV['DB_PASSWORD'] = 'DoctorWallah2026Secured';
+$_SERVER['DB_DATABASE'] = 'u825551938_doctorw';
+$_SERVER['DB_USERNAME'] = 'u825551938_doctorw';
+$_SERVER['DB_PASSWORD'] = 'DoctorWallah2026Secured';
+
 // Auto-generate or update .env on production server
 $envFile = __DIR__ . '/../.env';
 if (!file_exists($envFile) || strpos(@file_get_contents($envFile), 'DoctorWallah2026Secured') === false) {

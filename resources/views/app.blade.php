@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $siteSettings = \App\Models\WebsiteSetting::current();
+        try {
+            $siteSettings = \App\Models\WebsiteSetting::current();
+        } catch (\Throwable $e) {
+            $siteSettings = null;
+        }
         $siteFavicon = $siteSettings->favicon_url ?? null;
         $siteTitle = $siteSettings->site_name ?? 'DoctorWallah';
         $siteTagline = $siteSettings->site_tagline ?? 'Premier Online Learning & EdTech Platform';
