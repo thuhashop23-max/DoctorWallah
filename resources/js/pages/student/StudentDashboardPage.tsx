@@ -210,15 +210,6 @@ export const StudentDashboardPage: React.FC = () => {
                                 Redeem
                             </Link>
                         </div>
-
-                        {/* View Courses Button */}
-                        <Link
-                            to="/student/my-courses"
-                            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-[#A60201] hover:bg-[#880101] text-white text-xs font-bold shadow-md shadow-[#A60201]/25 hover:shadow-lg transition-all"
-                        >
-                            <BookOpen className="w-4 h-4" />
-                            <span>My Classes</span>
-                        </Link>
                     </div>
                 </div>
             </div>

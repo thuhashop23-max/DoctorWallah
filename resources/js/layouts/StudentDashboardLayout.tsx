@@ -117,7 +117,7 @@ export const StudentDashboardLayout: React.FC = () => {
 
     const menuItems: MenuItem[] = [
         {
-            title: 'Dashboard Overview',
+            title: 'Home',
             path: '/student',
             icon: Home,
             exact: true
@@ -133,22 +133,22 @@ export const StudentDashboardLayout: React.FC = () => {
             icon: Radio
         },
         {
-            title: 'Routine & Routine Book',
+            title: 'Routine',
             path: '/student/routine',
             icon: Calendar,
         },
         {
-            title: 'Exams & Model Tests',
+            title: 'Exams',
             path: '/student/exams',
             icon: ClipboardList
         },
         {
-            title: 'Academic Leaderboard',
+            title: 'Leaderboard',
             path: '/student/leaderboard',
             icon: Trophy
         },
         {
-            title: 'Payment Orders',
+            title: 'Orders',
             path: '/student/orders',
             icon: ShoppingCart
         },
@@ -158,7 +158,7 @@ export const StudentDashboardLayout: React.FC = () => {
             icon: Share2
         },
         {
-            title: 'Profile & Security',
+            title: 'Profile & Settings',
             path: '/student/settings',
             icon: Settings,
             children: [
@@ -168,7 +168,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     icon: Smartphone
                 },
                 {
-                    title: 'Profile Information',
+                    title: 'Profile Info',
                     path: '/student/settings/profile',
                     icon: UserIcon
                 },
@@ -398,7 +398,7 @@ export const StudentDashboardLayout: React.FC = () => {
                             className="px-3.5 py-2 bg-red-50 dark:bg-[#A60201]/20 hover:bg-red-100 dark:hover:bg-[#A60201]/30 text-[#A60201] dark:text-red-300 text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0 cursor-pointer border border-red-200 dark:border-[#A60201]/40"
                         >
                             <SlidersHorizontal className="w-3.5 h-3.5" />
-                            <span>Portal Menu</span>
+                            <span>Student Menu</span>
                         </button>
                     </div>
                 </div>
