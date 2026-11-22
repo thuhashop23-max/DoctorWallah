@@ -15,27 +15,29 @@ import {
     Unlock,
     Sparkles, 
     ChevronDown, 
-    ChevronUp,
-    ShieldCheck,
-    ArrowRight,
-    Calendar,
-    GraduationCap,
-    FileText,
-    ExternalLink,
-    X,
-    Copy,
-    Check,
-    Key,
-    ShoppingCart
+    ChevronUp, 
+    ShieldCheck, 
+    ArrowRight, 
+    Calendar, 
+    GraduationCap, 
+    FileText, 
+    ExternalLink, 
+    X, 
+    Copy, 
+    Check, 
+    Key, 
+    ShoppingCart,
+    Award
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { PagePreloader } from '../../components/shared/PagePreloader';
 
 const DEFAULT_FEATURES = [
-    'Full HD video lectures & live discussions',
-    'Downloadable practice sheets & lecture notes',
-    'Direct Q&A doubt-solving support with instructors',
-    'Lifetime course access from any device',
+    'Full HD Clinical Video Lectures & Live Discussions',
+    'Downloadable BMDC / Professional Exam Notes & Formulas',
+    'Direct Q&A Doubt-Solving Support with Medical Mentors',
+    'High-Yield Medical Question Bank & Model Tests',
+    'Lifetime Course Access from any Smartphone or PC',
 ];
 
 export const CourseDetailsPage: React.FC = () => {
@@ -150,7 +152,7 @@ export const CourseDetailsPage: React.FC = () => {
         return (
             <PagePreloader
                 title="Loading course details..."
-                subtitle="Fetching curriculum, live class records, and syllabus"
+                subtitle="Fetching medical curriculum, clinical records, and syllabus"
             />
         );
     }
@@ -183,36 +185,54 @@ export const CourseDetailsPage: React.FC = () => {
     };
 
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
+        <div className="bg-[#060202] text-white min-h-screen pb-20 selection:bg-[#A60201] selection:text-white relative overflow-hidden">
+            {/* Ambient Background Radial Glows */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-[#A60201]/10 rounded-full blur-[160px] pointer-events-none" />
+            <div className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-[#A60201]/5 rounded-full blur-[140px] pointer-events-none" />
+
             {/* Header Hero */}
-            <div className="bg-slate-900 text-white pt-8 pb-14 sm:pt-10 sm:pb-20 lg:pt-10 lg:pb-28 border-b border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative bg-[#090303] text-white pt-8 pb-14 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-28 border-b border-[#A60201]/20 overflow-hidden">
+                {/* Background Grid Pattern & Red Ambient Accent */}
+                <div className="absolute inset-0 bg-[radial-gradient(#A60201_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+                <div className="absolute -top-32 right-1/4 w-96 h-96 bg-[#A60201]/15 rounded-full blur-[120px] pointer-events-none" />
+
+                {/* Subtle ECG Line Header Decor */}
+                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#A60201]/50 to-transparent" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                        <div className="lg:col-span-8 space-y-3.5 sm:space-y-4">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-400 text-xs font-bold border border-sky-500/30">
-                                <Sparkles className="w-3.5 h-3.5" />
-                                <span>Online Batch</span>
+                        <div className="lg:col-span-8 space-y-4">
+                            {/* Eyebrow Badge */}
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#A60201]/15 text-red-300 text-xs font-black tracking-wider border border-[#A60201]/40 shadow-[0_0_15px_rgba(166,2,1,0.25)]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#A60201] animate-ping" />
+                                <Sparkles className="w-3.5 h-3.5 text-[#A60201]" />
+                                <span>MBBS CLINICAL BATCH • DOCTORWALLAH</span>
                             </div>
 
-                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+                            {/* Course Title */}
+                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight text-white drop-shadow-sm">
                                 {course.title}
                             </h1>
 
-                            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                                {course.short_description || 'Special course prepared according to the complete syllabus.'}
+                            {/* Short Description */}
+                            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+                                {course.short_description || 'BMDC ও প্রফেশনাল পরীক্ষার সিলেবাস অনুযায়ী সাজানো বিশেষায়িত ক্লিনিক্যাল ও অ্যাকাডেমিক মেডিকেল কোর্স।'}
                             </p>
 
-                            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs sm:text-sm text-slate-400">
-                                <span className="flex items-center gap-1.5">
-                                    <BookOpen className="w-4 h-4 text-sky-400" />
-                                    {course.lessons_count || 0} Lessons
+                            {/* Meta Badges */}
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 text-xs sm:text-sm">
+                                <span className="flex items-center gap-2 bg-[#120505] px-3.5 py-2 rounded-xl border border-[#A60201]/25 text-slate-300 shadow-2xs">
+                                    <BookOpen className="w-4 h-4 text-[#A60201]" />
+                                    <span><strong className="text-white font-bold">{course.lessons_count || 0}</strong> Classes</span>
                                 </span>
-                                <span className="flex items-center gap-1.5">
-                                    <Users className="w-4 h-4 text-sky-400" />
-                                    {totalEnrolled} Students
+
+                                <span className="flex items-center gap-2 bg-[#120505] px-3.5 py-2 rounded-xl border border-[#A60201]/25 text-slate-300 shadow-2xs">
+                                    <Users className="w-4 h-4 text-[#A60201]" />
+                                    <span><strong className="text-white font-bold">{totalEnrolled}</strong> Medical Students</span>
                                 </span>
+
                                 {allInstructors.length > 0 && (
-                                    <div className="flex items-center gap-2 border-l border-slate-700/80 pl-4 sm:pl-5">
+                                    <div className="flex items-center gap-2.5 bg-[#120505] px-3.5 py-2 rounded-xl border border-[#A60201]/25 text-slate-300 shadow-2xs">
                                         <div className="flex -space-x-2 overflow-hidden">
                                             {allInstructors.slice(0, 3).map((inst: any) => {
                                                 const p = inst.photo_url || inst.teacher_profile?.photo_url || inst.teacherProfile?.photo_url;
@@ -221,20 +241,20 @@ export const CourseDetailsPage: React.FC = () => {
                                                         key={inst.id}
                                                         src={getImageUrl(p)}
                                                         alt={inst.name}
-                                                        className="inline-block h-6 w-6 rounded-full ring-2 ring-slate-900 object-cover object-top"
+                                                        className="inline-block h-6 w-6 rounded-full ring-2 ring-[#0A0303] object-cover object-top"
                                                     />
                                                 ) : (
                                                     <div
                                                         key={inst.id}
-                                                        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-600 text-[10px] font-bold text-white ring-2 ring-slate-900"
+                                                        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#A60201] text-[10px] font-bold text-white ring-2 ring-[#0A0303]"
                                                     >
                                                         {inst.name.charAt(0).toUpperCase()}
                                                     </div>
                                                 );
                                             })}
                                         </div>
-                                        <span className="text-xs text-slate-300 font-medium">
-                                            Instructor: <strong className="text-white font-bold">{allInstructors.map((i: any) => i.name).join(', ')}</strong>
+                                        <span className="text-xs text-slate-300">
+                                            Mentor: <strong className="text-white font-bold">{allInstructors.map((i: any) => i.name).join(', ')}</strong>
                                         </span>
                                     </div>
                                 )}
@@ -248,30 +268,36 @@ export const CourseDetailsPage: React.FC = () => {
             </div>
 
             {/* Main Content Layout */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
                     {/* Left: Description & Curriculum */}
-                    <div className="order-2 lg:order-1 lg:col-span-8 space-y-10 pt-8 sm:pt-10">
-                        {/* Course Overview */}
-                        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-                            <h2 className="text-xl font-bold text-slate-900">Course Details & Overview</h2>
+                    <div className="order-2 lg:order-1 lg:col-span-8 space-y-8 pt-8 sm:pt-10">
+                        {/* Course Overview Card */}
+                        <div className="bg-[#0B0404]/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#A60201]/25 shadow-xl shadow-black/40 space-y-4">
+                            <div className="flex items-center gap-2.5 pb-3 border-b border-[#A60201]/15">
+                                <FileText className="w-5 h-5 text-[#A60201]" />
+                                <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">Course Overview & Clinical Guidelines</h2>
+                            </div>
                             {course.description ? (
                                 <MathView
                                     content={course.description}
-                                    className="text-sm text-slate-700 leading-relaxed"
+                                    className="text-sm text-slate-300 leading-relaxed font-sans max-w-none"
                                 />
                             ) : (
-                                <p className="text-sm text-slate-400 italic">Course details will be published soon.</p>
+                                <p className="text-sm text-slate-500 italic">Course details and syllabus will be published soon.</p>
                             )}
                         </div>
 
-                        {/* Curriculum Preview */}
-                        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-2xs space-y-6">
-                            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                        {/* Curriculum Preview Card */}
+                        <div className="bg-[#0B0404]/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#A60201]/25 shadow-xl shadow-black/40 space-y-6">
+                            <div className="flex items-center justify-between border-b border-[#A60201]/15 pb-4">
                                 <div>
-                                    <h2 className="text-xl font-bold text-slate-900">Course Curriculum & Syllabus</h2>
-                                    <p className="text-xs text-slate-400 mt-0.5">
-                                        Total {course.sections?.length || 0} Sections • {course.lessons_count || 0} Lessons
+                                    <h2 className="text-lg sm:text-xl font-black text-white tracking-tight flex items-center gap-2">
+                                        <BookOpen className="w-5 h-5 text-[#A60201]" />
+                                        <span>Course Curriculum & Syllabus</span>
+                                    </h2>
+                                    <p className="text-xs text-slate-400 mt-1">
+                                        Total <strong className="text-white">{course.sections?.length || 0}</strong> Clinical Modules • <strong className="text-white">{course.lessons_count || 0}</strong> High-Yield Classes
                                     </p>
                                 </div>
                             </div>
@@ -283,28 +309,30 @@ export const CourseDetailsPage: React.FC = () => {
                                         return (
                                             <div
                                                 key={section.id}
-                                                className="border border-slate-200 rounded-xl overflow-hidden"
+                                                className="border border-[#A60201]/25 rounded-2xl overflow-hidden bg-[#0F0505]"
                                             >
                                                 <button
                                                     onClick={() => toggleSection(section.id)}
-                                                    className="w-full px-5 py-4 bg-slate-50/80 hover:bg-slate-100 flex items-center justify-between text-left transition-colors"
+                                                    className="w-full px-5 py-4 bg-[#140606] hover:bg-[#1A0808] flex items-center justify-between text-left transition-colors cursor-pointer"
                                                 >
                                                     <div>
-                                                        <span className="text-xs font-bold text-sky-600 uppercase tracking-wider block">
-                                                            Topic 0{sIndex + 1}
+                                                        <span className="text-[11px] font-black text-[#A60201] uppercase tracking-wider block">
+                                                            Module 0{sIndex + 1}
                                                         </span>
-                                                        <h4 className="text-base font-bold text-slate-800">
+                                                        <h4 className="text-sm sm:text-base font-bold text-white mt-0.5">
                                                             {section.title}
                                                         </h4>
                                                     </div>
-                                                    <div className="flex items-center gap-3 text-xs text-slate-500">
-                                                        <span>{section.lessons?.length || 0} Classes</span>
-                                                        {isOpen ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
+                                                    <div className="flex items-center gap-3 text-xs text-slate-400">
+                                                        <span className="bg-[#080202] px-2.5 py-1 rounded-lg border border-[#A60201]/20 font-bold text-slate-300">
+                                                            {section.lessons?.length || 0} Classes
+                                                        </span>
+                                                        {isOpen ? <ChevronUp className="w-4 h-4 text-[#A60201]" /> : <ChevronDown className="w-4 h-4 text-slate-500" />}
                                                     </div>
                                                 </button>
 
                                                 {isOpen && (
-                                                    <div className="divide-y divide-slate-100 bg-white">
+                                                    <div className="divide-y divide-[#A60201]/15 bg-[#090303]">
                                                         {section.lessons?.map((lesson, lIndex) => {
                                                             const isTeacherOrAdmin = Boolean(user && (user.role === 'admin' || (user.role === 'teacher' && course?.instructors?.some((i: any) => i.id === user.id))));
                                                             const isPurchased = Boolean(isEnrolled || isTeacherOrAdmin);
@@ -316,31 +344,31 @@ export const CourseDetailsPage: React.FC = () => {
                                                                     <Link
                                                                         key={lesson.id}
                                                                         to={lessonUrl}
-                                                                        className="px-5 py-3.5 flex items-center justify-between hover:bg-sky-50/80 transition-colors text-sm group cursor-pointer"
+                                                                        className="px-5 py-3.5 flex items-center justify-between hover:bg-[#170707] transition-colors text-sm group cursor-pointer"
                                                                     >
                                                                         <div className="flex items-center gap-3 min-w-0">
                                                                             {isPurchased ? (
-                                                                                <Unlock className="w-4 h-4 text-emerald-600 shrink-0 group-hover:scale-110 transition-transform" />
+                                                                                <Unlock className="w-4 h-4 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
                                                                             ) : (
-                                                                                <PlayCircle className="w-4 h-4 text-emerald-600 shrink-0 group-hover:scale-110 transition-transform" />
+                                                                                <PlayCircle className="w-4 h-4 text-[#A60201] shrink-0 group-hover:scale-110 transition-transform" />
                                                                             )}
-                                                                            <span className="text-slate-800 font-medium group-hover:text-sky-600 transition-colors truncate">
+                                                                            <span className="text-slate-200 font-medium group-hover:text-red-300 transition-colors truncate">
                                                                                 Class {lIndex + 1}: {lesson.title}
                                                                             </span>
                                                                         </div>
 
                                                                         <div className="flex items-center gap-3 shrink-0">
                                                                             {lesson.is_preview && !isPurchased ? (
-                                                                                <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded flex items-center gap-1">
-                                                                                    <PlayCircle className="w-3 h-3" /> Free Preview
+                                                                                <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1">
+                                                                                    <PlayCircle className="w-3 h-3 text-emerald-400" /> Free Preview
                                                                                 </span>
                                                                             ) : (
-                                                                                <span className="text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                                                                                <span className="text-xs font-bold text-[#A60201] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                                                                                     <span>Watch</span>
                                                                                     <ArrowRight className="w-3.5 h-3.5" />
                                                                                 </span>
                                                                             )}
-                                                                            <span className="text-xs text-slate-400">
+                                                                            <span className="text-xs text-slate-500 font-mono">
                                                                                 {lesson.duration_minutes} mins
                                                                             </span>
                                                                         </div>
@@ -357,22 +385,22 @@ export const CourseDetailsPage: React.FC = () => {
                                                                             enrollCard.scrollIntoView({ behavior: 'smooth' });
                                                                         }
                                                                     }}
-                                                                    className="px-5 py-3.5 flex items-center justify-between bg-slate-50/30 hover:bg-slate-50 text-sm cursor-not-allowed opacity-75 transition-colors"
-                                                                    title="Enroll in this course to unlock this lesson"
+                                                                    className="px-5 py-3.5 flex items-center justify-between bg-[#080202]/50 hover:bg-[#100505] text-sm cursor-not-allowed opacity-75 transition-colors"
+                                                                    title="Enroll in this course to unlock this class"
                                                                 >
                                                                     <div className="flex items-center gap-3 min-w-0">
-                                                                        <Lock className="w-4 h-4 text-slate-400 shrink-0" />
+                                                                        <Lock className="w-4 h-4 text-slate-600 shrink-0" />
                                                                         <span className="text-slate-500 font-medium truncate">
                                                                             Class {lIndex + 1}: {lesson.title}
                                                                         </span>
                                                                     </div>
 
                                                                     <div className="flex items-center gap-3 shrink-0">
-                                                                        <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+                                                                        <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1">
                                                                             <Lock className="w-3 h-3" />
                                                                             Locked
                                                                         </span>
-                                                                        <span className="text-xs text-slate-400">
+                                                                        <span className="text-xs text-slate-600 font-mono">
                                                                             {lesson.duration_minutes} mins
                                                                         </span>
                                                                     </div>
@@ -385,20 +413,20 @@ export const CourseDetailsPage: React.FC = () => {
                                         );
                                     })
                                 ) : (
-                                    <p className="text-sm text-slate-400 text-center py-6">
+                                    <p className="text-sm text-slate-500 text-center py-6">
                                         Curriculum for this course will be published soon.
                                     </p>
                                 )}
                             </div>
                         </div>
 
-                        {/* Instructors */}
-                        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-5">
-                            <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold">
+                        {/* Instructors Card */}
+                        <div className="bg-[#0B0404]/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#A60201]/25 shadow-xl shadow-black/40 space-y-5">
+                            <div className="flex items-center gap-2.5 pb-3 border-b border-[#A60201]/15">
+                                <div className="w-8 h-8 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center font-bold">
                                     <GraduationCap className="w-5 h-5" />
                                 </div>
-                                <h2 className="text-xl font-black text-slate-900 tracking-tight">Course Instructors</h2>
+                                <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">Course Instructors & Clinical Mentors</h2>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {allInstructors.length > 0 ? (
@@ -412,7 +440,7 @@ export const CourseDetailsPage: React.FC = () => {
                                         const designation = teacher.designation 
                                             || teacher.teacher_profile?.designation 
                                             || teacher.teacherProfile?.designation 
-                                            || 'Online Instructor & Mentor';
+                                            || 'MBBS, Clinical Faculty & Mentor';
                                         const institution = teacher.institution 
                                             || teacher.teacher_profile?.institution 
                                             || teacher.teacherProfile?.institution;
@@ -420,15 +448,15 @@ export const CourseDetailsPage: React.FC = () => {
                                         return (
                                             <div 
                                                 key={teacher.id} 
-                                                className="p-4 sm:p-5 rounded-2xl border border-slate-100 bg-slate-50/70 hover:bg-white hover:border-sky-300 hover:shadow-md transition-all flex items-center gap-4 group"
+                                                className="p-4 sm:p-5 rounded-2xl border border-[#A60201]/25 bg-[#100505] hover:bg-[#160707] hover:border-[#A60201]/70 hover:shadow-[0_0_25px_rgba(166,2,1,0.2)] transition-all flex items-center gap-4 group"
                                             >
                                                 {/* Teacher Photo / Avatar with rounded frame and fallback */}
-                                                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 bg-gradient-to-tr from-sky-500 to-amber-500 p-0.5 shadow-md shadow-sky-500/15 group-hover:scale-105 transition-transform">
+                                                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 bg-gradient-to-tr from-[#A60201] to-[#880101] p-0.5 shadow-md shadow-[#A60201]/25 group-hover:scale-105 transition-transform">
                                                     {photoSrc ? (
                                                         <img
                                                             src={photoSrc}
                                                             alt={teacher.name}
-                                                            className="w-full h-full object-cover object-top rounded-[14px] bg-slate-200"
+                                                            className="w-full h-full object-cover object-top rounded-[14px] bg-slate-900"
                                                             onError={(e) => {
                                                                 (e.currentTarget as HTMLElement).style.display = 'none';
                                                                 const fallback = e.currentTarget.parentElement?.querySelector('.teacher-fallback-avatar') as HTMLElement;
@@ -436,7 +464,7 @@ export const CourseDetailsPage: React.FC = () => {
                                                             }}
                                                         />
                                                     ) : null}
-                                                    <div className={`teacher-fallback-avatar w-full h-full ${photoSrc ? 'hidden' : 'flex'} items-center justify-center rounded-[14px] bg-gradient-to-tr from-sky-600 to-slate-900 text-white font-black text-2xl`}>
+                                                    <div className={`teacher-fallback-avatar w-full h-full ${photoSrc ? 'hidden' : 'flex'} items-center justify-center rounded-[14px] bg-gradient-to-tr from-[#A60201] to-black text-white font-black text-2xl`}>
                                                         {teacher.name ? teacher.name.charAt(0).toUpperCase() : 'T'}
                                                     </div>
                                                 </div>
@@ -445,15 +473,15 @@ export const CourseDetailsPage: React.FC = () => {
                                                 <div className="min-w-0 flex-1">
                                                     <Link 
                                                         to={`/instructors/${teacher.id}`}
-                                                        className="font-black text-slate-900 text-base sm:text-lg hover:text-sky-600 transition-colors line-clamp-1 block cursor-pointer"
+                                                        className="font-black text-white text-base sm:text-lg hover:text-red-400 transition-colors line-clamp-1 block cursor-pointer"
                                                     >
                                                         {teacher.name}
                                                     </Link>
-                                                    <p className="text-xs text-sky-600 font-bold mt-0.5 line-clamp-1">
+                                                    <p className="text-xs text-red-300 font-bold mt-0.5 line-clamp-1">
                                                         {designation}
                                                     </p>
                                                     {institution && (
-                                                        <p className="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                                                        <p className="text-[11px] text-slate-400 font-medium mt-0.5 line-clamp-1">
                                                             {institution}
                                                         </p>
                                                     )}
@@ -462,15 +490,15 @@ export const CourseDetailsPage: React.FC = () => {
                                         );
                                     })
                                 ) : (
-                                    <div className="p-4 sm:p-5 rounded-2xl border border-slate-100 bg-slate-50/70 flex items-center gap-4">
-                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-sky-500 to-amber-500 p-0.5 shadow-md shrink-0 flex items-center justify-center">
-                                            <div className="w-full h-full rounded-[14px] bg-slate-900 text-white flex items-center justify-center font-black text-2xl">
-                                                N
+                                    <div className="p-4 sm:p-5 rounded-2xl border border-[#A60201]/25 bg-[#100505] flex items-center gap-4">
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-[#A60201] to-red-600 p-0.5 shadow-md shrink-0 flex items-center justify-center">
+                                            <div className="w-full h-full rounded-[14px] bg-black text-white flex items-center justify-center font-black text-2xl">
+                                                D
                                             </div>
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-base">DoctorWallah Expert Faculty</h4>
-                                            <p className="text-xs text-slate-500 font-medium mt-0.5">Experienced Academic & Admission Mentors</p>
+                                            <h4 className="font-bold text-white text-base">DoctorWallah Clinical Faculty</h4>
+                                            <p className="text-xs text-slate-400 font-medium mt-0.5">Experienced Medical Doctors & Academic Specialists</p>
                                         </div>
                                     </div>
                                 )}
@@ -480,14 +508,17 @@ export const CourseDetailsPage: React.FC = () => {
 
                     {/* Right: Sticky Enrollment Card */}
                     <div className="order-1 lg:order-2 lg:col-span-4 -mt-8 sm:-mt-10 lg:-mt-48 xl:-mt-52 relative z-20">
-                        <div id="enroll-section-card" className="sticky top-24 bg-white rounded-2xl border border-slate-200/90 shadow-2xl overflow-hidden space-y-6 p-5 sm:p-6 ring-1 ring-black/5">
+                        <div id="enroll-section-card" className="sticky top-24 bg-[#0B0404]/95 backdrop-blur-xl rounded-3xl border border-[#A60201]/35 shadow-2xl shadow-black/80 overflow-hidden space-y-6 p-5 sm:p-6 ring-1 ring-[#A60201]/20">
+                            {/* Glowing laser hairline */}
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#A60201] to-transparent shadow-[0_0_15px_#A60201]" />
+
                             {/* Course Image */}
-                            <div className="aspect-video bg-slate-900 rounded-xl overflow-hidden -mx-2 -mt-2">
+                            <div className="aspect-video bg-black rounded-2xl overflow-hidden -mx-2 -mt-2 border border-[#A60201]/25 relative group">
                                 {(course.thumbnail || (course as any).thumbnail_url) ? (
                                     <img 
                                         src={getImageUrl(course.thumbnail || (course as any).thumbnail_url)} 
                                         alt={course.title} 
-                                        className="w-full h-full object-cover" 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                                         onError={(e) => {
                                             (e.currentTarget as HTMLElement).style.display = 'none';
                                             const fallback = e.currentTarget.parentElement?.querySelector('.course-fallback-img') as HTMLElement;
@@ -495,17 +526,17 @@ export const CourseDetailsPage: React.FC = () => {
                                         }}
                                     />
                                 ) : null}
-                                <div className={`course-fallback-img w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center text-white bg-slate-900`}>
-                                    <BookOpen className="w-12 h-12 text-sky-400 opacity-60" />
+                                <div className={`course-fallback-img w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center text-white bg-[#0A0303]`}>
+                                    <BookOpen className="w-12 h-12 text-[#A60201] opacity-70" />
                                 </div>
                             </div>
 
-                            {/* Admission Count & Class Start Badges (Sky Blue & Amber/Yellow Theme) */}
+                            {/* Admission Count & Class Start Badges */}
                             <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-                                {/* Admission Count Badge (Sky Blue) */}
-                                <div className="bg-sky-50/80 border border-sky-200/90 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 shadow-2xs">
-                                    <div className="w-10 h-10 flex items-center justify-center shrink-0 text-sky-600">
-                                        <svg viewBox="0 0 48 48" className="w-9 h-9" fill="currentColor">
+                                {/* Admission Count Badge */}
+                                <div className="bg-[#120505] border border-[#A60201]/30 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 shadow-inner">
+                                    <div className="w-10 h-10 rounded-xl bg-[#A60201]/15 flex items-center justify-center shrink-0 text-[#A60201]">
+                                        <svg viewBox="0 0 48 48" className="w-8 h-8" fill="currentColor">
                                             {/* Graduation cap */}
                                             <path d="M24 6L6 15l18 9 14-7V30h3V16.5L42 15 24 6z" />
                                             {/* Center student bust */}
@@ -520,19 +551,19 @@ export const CourseDetailsPage: React.FC = () => {
                                         </svg>
                                     </div>
                                     <div className="min-w-0">
-                                        <span className="text-xs sm:text-sm font-bold text-slate-700 block truncate">
+                                        <span className="text-[11px] sm:text-xs font-bold text-slate-400 block truncate">
                                             Enrolled Students
                                         </span>
-                                        <span className="text-2xl sm:text-3xl font-black text-sky-600 leading-tight block">
+                                        <span className="text-xl sm:text-2xl font-black text-white leading-tight block">
                                             {totalEnrolled}
                                         </span>
                                     </div>
                                 </div>
 
-                                {/* Class Start Badge (Amber / Yellow) */}
-                                <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 shadow-2xs">
-                                    <div className="w-10 h-10 flex items-center justify-center shrink-0 text-amber-500">
-                                        <svg viewBox="0 0 48 48" className="w-9 h-9" fill="currentColor">
+                                {/* Class Start Badge */}
+                                <div className="bg-[#120505] border border-[#A60201]/30 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 shadow-inner">
+                                    <div className="w-10 h-10 rounded-xl bg-[#A60201]/15 flex items-center justify-center shrink-0 text-red-400">
+                                        <svg viewBox="0 0 48 48" className="w-8 h-8" fill="currentColor">
                                             {/* Calendar body */}
                                             <rect x="7" y="11" width="34" height="28" rx="5" fill="none" stroke="currentColor" strokeWidth="3" />
                                             <path d="M7 19h34" stroke="currentColor" strokeWidth="3" />
@@ -547,16 +578,16 @@ export const CourseDetailsPage: React.FC = () => {
                                             <circle cx="20" cy="29" r="1.5" />
                                             {/* Clock badge */}
                                             <circle cx="32" cy="31" r="7" fill="currentColor" />
-                                            <circle cx="32" cy="31" r="5" fill="#FEF3C7" />
+                                            <circle cx="32" cy="31" r="5" fill="#3A0808" />
                                             <path d="M32 28v3.5l2.5 1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                                         </svg>
                                     </div>
                                     <div className="min-w-0">
-                                        <span className="text-xs sm:text-sm font-bold text-slate-700 block truncate">
+                                        <span className="text-[11px] sm:text-xs font-bold text-slate-400 block truncate">
                                             Classes Start
                                         </span>
-                                        <span className="text-base sm:text-lg font-black text-amber-600 truncate block leading-tight">
-                                            {course.class_starts_at || 'Nov 09, 2026'}
+                                        <span className="text-xs sm:text-sm font-black text-red-200 truncate block leading-tight">
+                                            {course.class_starts_at || 'Immediate Access'}
                                         </span>
                                     </div>
                                 </div>
@@ -564,22 +595,22 @@ export const CourseDetailsPage: React.FC = () => {
 
                             {/* Coupon & Live Countdown Timer (Enabled via Admin) */}
                             {!isEnrolled && Boolean(course.show_coupon_timer) && (Boolean(promoCoupon) || (Boolean(course.discount_deadline) && (timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0))) && (
-                                <div className="border-[1.5px] border-dashed border-sky-300 bg-gradient-to-br from-sky-50/70 via-white to-amber-50/40 rounded-2xl p-3 sm:p-4 space-y-3">
+                                <div className="border-[1.5px] border-dashed border-[#A60201]/50 bg-[#140606] rounded-2xl p-3 sm:p-4 space-y-3">
                                     {/* Top Row: Coupon code, discount label, and Apply button */}
                                     {Boolean(promoCoupon) && (
                                         <div className="flex items-center justify-between gap-2">
-                                            <div className="bg-white border border-sky-300 rounded-xl px-3 sm:px-4 py-1.5 font-mono font-black text-sky-600 text-xs sm:text-sm tracking-wide shadow-2xs truncate">
+                                            <div className="bg-black border border-[#A60201]/60 rounded-xl px-3 sm:px-4 py-1.5 font-mono font-black text-red-300 text-xs sm:text-sm tracking-wide shadow-2xs truncate">
                                                 {promoCoupon}
                                             </div>
                                             {Boolean(discountText) && (
-                                                <span className="text-xs sm:text-sm font-black text-amber-600 whitespace-nowrap">
+                                                <span className="text-xs sm:text-sm font-black text-red-400 whitespace-nowrap">
                                                     {discountText}
                                                 </span>
                                             )}
                                             <button
                                                 type="button"
                                                 onClick={handleApplyCoupon}
-                                                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black shadow-xs transition cursor-pointer whitespace-nowrap"
+                                                className="bg-[#A60201] hover:bg-[#880101] text-white px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black shadow-md shadow-[#A60201]/30 transition cursor-pointer whitespace-nowrap"
                                             >
                                                 {copiedCoupon ? 'Applied!' : 'Apply'}
                                             </button>
@@ -589,46 +620,46 @@ export const CourseDetailsPage: React.FC = () => {
                                     {/* Bottom Row: 4 Countdown Pills */}
                                     {Boolean(course.discount_deadline) && (timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0) && (
                                         <div className="grid grid-cols-4 gap-2 text-center">
-                                            <div className="bg-white rounded-xl shadow-2xs py-2 px-1 border border-sky-100 flex flex-col items-center justify-center">
-                                                <span className="text-base sm:text-lg font-black text-sky-600 leading-tight">{timeLeft.days}</span>
-                                                <span className="text-[10px] sm:text-[11px] font-bold text-amber-600">Days</span>
+                                            <div className="bg-black/80 rounded-xl py-2 px-1 border border-[#A60201]/30 flex flex-col items-center justify-center">
+                                                <span className="text-base sm:text-lg font-black text-[#A60201] leading-tight">{timeLeft.days}</span>
+                                                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400">Days</span>
                                             </div>
-                                            <div className="bg-white rounded-xl shadow-2xs py-2 px-1 border border-sky-100 flex flex-col items-center justify-center">
-                                                <span className="text-base sm:text-lg font-black text-sky-600 leading-tight">{timeLeft.hours}</span>
-                                                <span className="text-[10px] sm:text-[11px] font-bold text-amber-600">Hours</span>
+                                            <div className="bg-black/80 rounded-xl py-2 px-1 border border-[#A60201]/30 flex flex-col items-center justify-center">
+                                                <span className="text-base sm:text-lg font-black text-[#A60201] leading-tight">{timeLeft.hours}</span>
+                                                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400">Hours</span>
                                             </div>
-                                            <div className="bg-white rounded-xl shadow-2xs py-2 px-1 border border-sky-100 flex flex-col items-center justify-center">
-                                                <span className="text-base sm:text-lg font-black text-sky-600 leading-tight">{timeLeft.minutes}</span>
-                                                <span className="text-[10px] sm:text-[11px] font-bold text-amber-600">Mins</span>
+                                            <div className="bg-black/80 rounded-xl py-2 px-1 border border-[#A60201]/30 flex flex-col items-center justify-center">
+                                                <span className="text-base sm:text-lg font-black text-[#A60201] leading-tight">{timeLeft.minutes}</span>
+                                                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400">Mins</span>
                                             </div>
-                                            <div className="bg-white rounded-xl shadow-2xs py-2 px-1 border border-sky-100 flex flex-col items-center justify-center">
-                                                <span className="text-base sm:text-lg font-black text-sky-600 leading-tight">{timeLeft.seconds}</span>
-                                                <span className="text-[10px] sm:text-[11px] font-bold text-amber-600">Secs</span>
+                                            <div className="bg-black/80 rounded-xl py-2 px-1 border border-[#A60201]/30 flex flex-col items-center justify-center">
+                                                <span className="text-base sm:text-lg font-black text-[#A60201] leading-tight">{timeLeft.seconds}</span>
+                                                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400">Secs</span>
                                             </div>
                                         </div>
                                     )}
                                 </div>
                             )}
 
-                            {/* Centered Price Section (Sky Blue) or Enrolled Badge */}
+                            {/* Centered Price Section or Enrolled Badge */}
                             {isEnrolled ? (
                                 <div className="text-center py-2">
-                                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-extrabold text-sm rounded-full border border-emerald-200 dark:border-emerald-800 shadow-2xs">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                                    <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-950/80 text-emerald-300 font-extrabold text-sm rounded-full border border-emerald-500/40 shadow-md">
+                                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                                         <span>Enrolled (You own this course)</span>
                                     </span>
                                 </div>
                             ) : (
                                 <div className="text-center py-1 flex items-baseline justify-center gap-3">
                                     {course.price === 0 ? (
-                                        <span className="text-3xl sm:text-4xl font-black text-emerald-600">Free</span>
+                                        <span className="text-3xl sm:text-4xl font-black text-emerald-400">Free</span>
                                     ) : (
                                         <>
-                                            <span className="text-3xl sm:text-4xl font-black text-sky-600 tracking-tight">
+                                            <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                                                 {formatBDT(effectivePrice)}
                                             </span>
                                             {hasDiscount && (
-                                                <span className="text-xl sm:text-2xl font-bold text-slate-400 line-through">
+                                                <span className="text-xl sm:text-2xl font-bold text-slate-500 line-through">
                                                     {formatBDT(course.price)}
                                                 </span>
                                             )}
@@ -637,12 +668,12 @@ export const CourseDetailsPage: React.FC = () => {
                                 </div>
                             )}
 
-                            {/* Action CTA (Sky Blue & Amber Theme) */}
-                            <div className="space-y-2.5">
+                            {/* Action CTA Buttons */}
+                            <div className="space-y-3">
                                 {isEnrolled ? (
                                     <Link
                                         to={firstLessonId ? `/learning/${course.id}/lessons/${firstLessonId}` : (user?.role === 'teacher' ? '/teacher/courses' : '/student/my-courses')}
-                                        className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all"
+                                        className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black text-base sm:text-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all cursor-pointer"
                                     >
                                         <PlayCircle className="w-5 h-5" />
                                         <span>Start Learning</span>
@@ -651,7 +682,7 @@ export const CourseDetailsPage: React.FC = () => {
                                     <button
                                         onClick={handleFreeEnroll}
                                         disabled={enrollingFree}
-                                        className="w-full py-4 rounded-2xl bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white font-black text-lg flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 transition-all disabled:opacity-50 cursor-pointer"
+                                        className="w-full py-4 rounded-2xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-base sm:text-lg flex items-center justify-center gap-2 shadow-lg shadow-[#A60201]/30 transition-all disabled:opacity-50 cursor-pointer"
                                     >
                                         <Sparkles className="w-5 h-5" />
                                         <span>{enrollingFree ? 'Enrolling...' : 'Start Learning for Free'}</span>
@@ -660,14 +691,14 @@ export const CourseDetailsPage: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={() => addToCart(course)}
-                                        className={`w-full py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-lg ${
+                                        className={`w-full py-4 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-xl ${
                                             isInCart(course.id)
-                                                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-emerald-500/25 hover:from-emerald-700 hover:to-teal-700'
-                                                : 'bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/35'
+                                                ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/30'
+                                                : 'bg-[#A60201] hover:bg-[#880101] text-white shadow-lg shadow-[#A60201]/35 hover:shadow-2xl hover:shadow-[#A60201]/50 hover:-translate-y-0.5'
                                         }`}
                                     >
                                         <ShoppingCart className="w-5 h-5" />
-                                        <span>{isInCart(course.id) ? 'Course in Cart (Open Cart)' : 'Add to Cart'}</span>
+                                        <span>{isInCart(course.id) ? 'Course in Cart (Open Cart)' : 'ENROL IN THIS COURSE'}</span>
                                     </button>
                                 )}
 
@@ -676,10 +707,10 @@ export const CourseDetailsPage: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={() => setShowHowToBuyModal(true)}
-                                        className="w-full py-3.5 px-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-sky-600 font-bold text-base flex items-center justify-center gap-2.5 shadow-2xs transition group cursor-pointer"
+                                        className="w-full py-3 px-4 rounded-2xl border border-[#A60201]/30 bg-[#120505] hover:bg-[#1A0808] text-slate-300 hover:text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-2xs transition group cursor-pointer"
                                     >
-                                        <PlayCircle className="w-5 h-5 text-slate-400 group-hover:text-sky-600 transition" />
-                                        <span>How to Enroll</span>
+                                        <PlayCircle className="w-4 h-4 text-[#A60201] group-hover:scale-110 transition" />
+                                        <span>How to Enroll • Video Guide</span>
                                     </button>
                                 )}
 
@@ -692,12 +723,12 @@ export const CourseDetailsPage: React.FC = () => {
                                                 href={btn.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="w-full py-3.5 px-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-sky-600 font-bold text-sm flex items-center justify-center gap-2 shadow-2xs transition group"
+                                                className="w-full py-3.5 px-4 rounded-2xl border border-[#A60201]/30 bg-[#120505] hover:bg-[#1A0808] text-slate-200 hover:text-white font-bold text-sm flex items-center justify-center gap-2 shadow-2xs transition group"
                                             >
                                                 {btn.type === 'file' ? (
-                                                    <FileText className="w-4 h-4 text-slate-400 group-hover:text-sky-600 transition" />
+                                                    <FileText className="w-4 h-4 text-[#A60201] group-hover:scale-110 transition" />
                                                 ) : (
-                                                    <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-sky-600 transition" />
+                                                    <ExternalLink className="w-4 h-4 text-[#A60201] group-hover:scale-110 transition" />
                                                 )}
                                                 <span>{btn.label}</span>
                                             </a>
@@ -707,12 +738,15 @@ export const CourseDetailsPage: React.FC = () => {
                             </div>
 
                             {/* Course Features Checklist */}
-                            <div className="space-y-3 pt-4 border-t border-slate-100 text-xs text-slate-600 font-medium">
-                                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">What is included in this course:</h4>
+                            <div className="space-y-3 pt-4 border-t border-[#A60201]/20 text-xs text-slate-300 font-medium">
+                                <h4 className="text-xs font-black text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <ShieldCheck className="w-4 h-4 text-[#A60201]" />
+                                    <span>Course Privileges & Features:</span>
+                                </h4>
                                 {courseFeatures.map((feat, idx) => (
                                     <div key={idx} className="flex items-start gap-2.5">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                                        <span className="leading-tight text-slate-700">{feat}</span>
+                                        <CheckCircle2 className="w-4 h-4 text-[#A60201] shrink-0 mt-0.5" />
+                                        <span className="leading-tight text-slate-300">{feat}</span>
                                     </div>
                                 ))}
                             </div>
@@ -723,28 +757,28 @@ export const CourseDetailsPage: React.FC = () => {
 
             {/* How to Buy Modal */}
             {showHowToBuyModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-                    <div className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-100 space-y-4 p-6 relative">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+                    <div className="bg-[#0B0404] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-[#A60201]/40 space-y-4 p-6 relative text-white">
                         <button
                             type="button"
                             onClick={() => setShowHowToBuyModal(false)}
-                            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition cursor-pointer"
+                            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white hover:bg-[#180707] rounded-full transition cursor-pointer"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
-                        <div className="flex items-center gap-2.5">
-                            <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0">
+                        <div className="flex items-center gap-2.5 pb-2 border-b border-[#A60201]/20">
+                            <div className="w-10 h-10 rounded-xl bg-[#A60201]/20 flex items-center justify-center text-[#A60201] shrink-0 shadow-inner">
                                 <PlayCircle className="w-6 h-6" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-black text-slate-900">How to Enroll in this Course?</h3>
-                                <p className="text-xs text-slate-500">Enroll easily in 4 simple steps</p>
+                                <h3 className="text-lg font-black text-white">How to Enroll in this Course?</h3>
+                                <p className="text-xs text-slate-400">Enroll easily in 4 simple steps</p>
                             </div>
                         </div>
 
                         {course.how_to_buy_url ? (
-                            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black border border-[#A60201]/30 shadow-inner">
                                 {course.how_to_buy_url.includes('youtube.com') || course.how_to_buy_url.includes('youtu.be') ? (
                                     <iframe
                                         src={
@@ -767,23 +801,23 @@ export const CourseDetailsPage: React.FC = () => {
                             </div>
                         ) : (
                             <div className="space-y-2.5 py-1">
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-sky-50/70 border border-sky-100">
-                                    <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
-                                    <p className="text-xs text-slate-700 font-medium">Click the <strong className="text-sky-700">"Add to Cart"</strong> button in the sidebar to add this course to your cart, then proceed to checkout.</p>
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-[#130606] border border-[#A60201]/25">
+                                    <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                                    <p className="text-xs text-slate-300 font-medium">Click the <strong className="text-white">"ENROL IN THIS COURSE"</strong> button in the sidebar to add this course to your cart, then proceed to checkout.</p>
                                 </div>
                                 {Boolean(course.show_coupon_timer && promoCoupon) && (
-                                    <div className="flex items-start gap-3 p-3 rounded-2xl bg-sky-50/70 border border-sky-100">
-                                        <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
-                                        <p className="text-xs text-slate-700 font-medium">Coupon code <strong className="text-sky-700 font-mono">{promoCoupon}</strong> will automatically apply your discount.</p>
+                                    <div className="flex items-start gap-3 p-3 rounded-2xl bg-[#130606] border border-[#A60201]/25">
+                                        <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                                        <p className="text-xs text-slate-300 font-medium">Coupon code <strong className="text-red-300 font-mono">{promoCoupon}</strong> will automatically apply your discount.</p>
                                     </div>
                                 )}
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-sky-50/70 border border-sky-100">
-                                    <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
-                                    <p className="text-xs text-slate-700 font-medium">Complete payment via bKash, Nagad, Rocket, or shurjoPay online gateway.</p>
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-[#130606] border border-[#A60201]/25">
+                                    <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                                    <p className="text-xs text-slate-300 font-medium">Complete payment securely via bKash, Nagad, Rocket, or online card payment.</p>
                                 </div>
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-sky-50/70 border border-sky-100">
-                                    <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
-                                    <p className="text-xs text-slate-700 font-medium">Once payment is confirmed, the course will be unlocked immediately in your dashboard.</p>
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-[#130606] border border-[#A60201]/25">
+                                    <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                                    <p className="text-xs text-slate-300 font-medium">Once payment is verified, the course will be unlocked immediately in your student dashboard.</p>
                                 </div>
                             </div>
                         )}
@@ -795,10 +829,10 @@ export const CourseDetailsPage: React.FC = () => {
                                     setShowHowToBuyModal(false);
                                     addToCart(course);
                                 }}
-                                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md transition cursor-pointer"
+                                className="w-full py-3.5 rounded-2xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#A60201]/30 transition cursor-pointer"
                             >
                                 <ShoppingCart className="w-4 h-4" />
-                                <span>{isInCart(course.id) ? 'Course in Cart (Open Cart)' : 'Add to Cart'}</span>
+                                <span>{isInCart(course.id) ? 'Course in Cart (Open Cart)' : 'ENROL NOW'}</span>
                             </button>
                         </div>
                     </div>
