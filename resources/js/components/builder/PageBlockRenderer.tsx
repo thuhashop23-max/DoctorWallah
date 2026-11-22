@@ -33,7 +33,12 @@ import {
     Plus,
     Minus,
     Check,
-    ShoppingCart
+    ShoppingCart,
+    Stethoscope,
+    Activity,
+    Microscope,
+    HeartPulse,
+    Dna
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { StudentReviewsMarquee } from '../home/StudentReviewsMarquee';
@@ -140,7 +145,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
     const trust2 = getLocalizedText(s.trust2, s.trust2_en, language) || t.hero.trustLifetime;
     const trust3 = getLocalizedText(s.trust3, s.trust3_en, language) || t.hero.trustDoubts;
 
-    const cardBadge = getLocalizedText(s.cardBadge, s.cardBadge_en, language) || 'Live Academy Status';
+    const cardBadge = getLocalizedText(s.cardBadge, s.cardBadge_en, language) || 'MBBS Clinical Hub';
     const physicsTitle = getLocalizedText(s.physicsTitle, s.physicsTitle_en, language) || t.hero.physicsTitle;
     const physicsSub = getLocalizedText(s.physicsSub, s.physicsSub_en, language) || t.hero.physicsSub;
     const teachersTitle = getLocalizedText(s.teachersTitle, s.teachersTitle_en, language) || t.hero.teachersTitle;
@@ -150,21 +155,21 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
     const joinTodayBtn = getLocalizedText(s.joinTodayBtn, s.joinTodayBtn_en, language) || t.hero.joinToday;
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-16 pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors duration-150">
+        <section className="relative overflow-hidden bg-gradient-to-b from-teal-50/70 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-16 pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors duration-150">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     {/* Left Text */}
                     <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                         {badge && (
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-100 dark:bg-sky-950/80 text-sky-800 dark:text-sky-300 text-xs sm:text-sm font-bold tracking-wide">
-                                <Sparkles className="w-4 h-4 text-sky-600 animate-pulse" />
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 dark:bg-teal-950/80 text-teal-800 dark:text-teal-300 text-xs sm:text-sm font-bold tracking-wide">
+                                <Stethoscope className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
                                 <span>{badge}</span>
                             </div>
                         )}
 
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight">
                             {titlePart1} <br />
-                            <span className="bg-gradient-to-r from-sky-600 via-sky-500 to-amber-500 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-500 bg-clip-text text-transparent">
                                 {titleHighlight}
                             </span> <br />
                             {titlePart2}
@@ -178,7 +183,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
                             {browseCoursesBtn && (
                                 <Link
                                     to={s.browseCoursesLink || '/courses'}
-                                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-sky-600 text-white font-bold text-base shadow-lg shadow-sky-600/30 hover:bg-sky-700 hover:shadow-xl hover:shadow-sky-600/40 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-teal-600 text-white font-bold text-base shadow-lg shadow-teal-600/30 hover:bg-teal-700 hover:shadow-xl hover:shadow-teal-600/40 transition-all flex items-center justify-center gap-2 group cursor-pointer"
                                 >
                                     <span>{browseCoursesBtn}</span>
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -189,7 +194,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
                                     to={s.startFreeClassLink || '/courses'}
                                     className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                                 >
-                                    <PlayCircle className="w-5 h-5 text-emerald-600" />
+                                    <PlayCircle className="w-5 h-5 text-teal-600" />
                                     <span>{startFreeClassBtn}</span>
                                 </Link>
                             )}
@@ -220,7 +225,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
 
                     {/* Right Visual Card */}
                     <div className="lg:col-span-5 relative">
-                        <div className="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-tr from-sky-500 via-sky-600 to-amber-500 p-1 rounded-3xl shadow-2xl shadow-sky-500/20">
+                        <div className="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-tr from-teal-500 via-sky-600 to-emerald-500 p-1 rounded-3xl shadow-2xl shadow-teal-500/20">
                             <div className="bg-slate-900 rounded-[22px] p-6 text-white space-y-6">
                                 <div className="flex items-center justify-between border-b border-slate-800 pb-4">
                                     <div className="flex items-center gap-2">
@@ -228,13 +233,13 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
                                         <div className="w-3 h-3 rounded-full bg-amber-500" />
                                         <div className="w-3 h-3 rounded-full bg-emerald-500" />
                                     </div>
-                                    <span className="text-xs font-semibold text-slate-400">{cardBadge}</span>
+                                    <span className="text-xs font-semibold text-teal-400">{cardBadge}</span>
                                 </div>
 
                                 <div className="space-y-4">
                                     <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
-                                            <BookOpen className="w-6 h-6" />
+                                        <div className="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0">
+                                            <Activity className="w-6 h-6" />
                                         </div>
                                         <div>
                                             <h4 className="text-sm font-bold text-white">{physicsTitle}</h4>
@@ -244,7 +249,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
 
                                     <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
                                         <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                                            <Users className="w-6 h-6" />
+                                            <Microscope className="w-6 h-6" />
                                         </div>
                                         <div>
                                             <h4 className="text-sm font-bold text-white">{teachersTitle}</h4>
@@ -253,8 +258,8 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
                                     </div>
 
                                     <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-                                            <Award className="w-6 h-6" />
+                                        <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                                            <FileText className="w-6 h-6" />
                                         </div>
                                         <div>
                                             <h4 className="text-sm font-bold text-white">{studyMatTitle}</h4>
@@ -266,7 +271,7 @@ const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block 
                                 <div className="pt-2 text-center">
                                     <Link
                                         to="/register"
-                                        className="block w-full py-3 bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white font-bold rounded-xl text-sm shadow-md shadow-sky-500/25 transition-all cursor-pointer"
+                                        className="block w-full py-3 bg-gradient-to-r from-teal-500 via-teal-600 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold rounded-xl text-sm shadow-md shadow-teal-500/25 transition-all cursor-pointer"
                                     >
                                         {joinTodayBtn}
                                     </Link>
@@ -705,13 +710,19 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
     const getIcon = (iconName: string) => {
         switch (iconName) {
+            case 'Stethoscope': return <Stethoscope className="w-6 h-6" />;
+            case 'Activity': return <Activity className="w-6 h-6" />;
+            case 'Microscope': return <Microscope className="w-6 h-6" />;
+            case 'HeartPulse': return <HeartPulse className="w-6 h-6" />;
+            case 'FileText': return <FileText className="w-6 h-6" />;
+            case 'BookOpen': return <BookOpen className="w-6 h-6" />;
             case 'Award': return <Award className="w-6 h-6" />;
             case 'HelpCircle': return <HelpCircle className="w-6 h-6" />;
             case 'Clock': return <Clock className="w-6 h-6" />;
             case 'Zap': return <Zap className="w-6 h-6" />;
             case 'ShieldCheck': return <ShieldCheck className="w-6 h-6" />;
             case 'Heart': return <Heart className="w-6 h-6" />;
-            default: return <Award className="w-6 h-6" />;
+            default: return <Stethoscope className="w-6 h-6" />;
         }
     };
 
@@ -1181,13 +1192,13 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
 const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Mentor Panel';
-    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Prepare with Top Educators';
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Guiding thousands of students across the nation to achieve their dream university admissions.';
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Medical Faculty';
+    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Learn from Top Medical Educators';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Experienced medical mentors from premier medical colleges (DMC, CMC, SSMC, SOMC) guiding you through Items, Cards & 1st Prof.';
     const limit = Number(s.limit || 8);
 
     const [teachers, setTeachers] = useState<any[]>([]);
-    const [filter, setFilter] = useState<'all' | 'ssc' | 'hsc' | 'admission' | 'arts'>('all');
+    const [filter, setFilter] = useState<'all' | 'anatomy' | 'physiology' | 'biochemistry' | 'clinical'>('all');
 
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -1205,10 +1216,10 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
     const filtered = teachers.filter((t) => {
         if (filter === 'all') return true;
         const text = `${t.expertise || ''} ${t.designation || ''} ${t.bio || ''}`.toLowerCase();
-        if (filter === 'ssc') return text.includes('ssc');
-        if (filter === 'hsc') return text.includes('hsc');
-        if (filter === 'admission') return text.includes('admission');
-        if (filter === 'arts') return text.includes('arts') || text.includes('commerce');
+        if (filter === 'anatomy') return text.includes('anat') || text.includes('dissect') || text.includes('viscera');
+        if (filter === 'physiology') return text.includes('physio') || text.includes('guyton');
+        if (filter === 'biochemistry') return text.includes('biochem') || text.includes('harper');
+        if (filter === 'clinical') return text.includes('clinic') || text.includes('viva') || text.includes('prof');
         return true;
     });
 
@@ -1217,8 +1228,8 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
                     {sectionTag && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 text-xs font-bold uppercase tracking-wider">
-                            <GraduationCap className="w-3.5 h-3.5" />
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 text-xs font-bold uppercase tracking-wider">
+                            <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
                             <span>{sectionTag}</span>
                         </div>
                     )}
@@ -1234,17 +1245,18 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
                     {/* Filter Pills */}
                     <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
                         {[
-                            { key: 'all', label: 'All Mentors' },
-                            { key: 'hsc', label: 'HSC' },
-                            { key: 'admission', label: 'Admission' },
-                            { key: 'ssc', label: 'SSC' },
+                            { key: 'all', label: 'All Faculty' },
+                            { key: 'anatomy', label: 'Anatomy' },
+                            { key: 'physiology', label: 'Physiology' },
+                            { key: 'biochemistry', label: 'Biochemistry' },
+                            { key: 'clinical', label: 'Clinical & Viva' },
                         ].map((btn) => (
                             <button
                                 key={btn.key}
                                 type="button"
                                 onClick={() => setFilter(btn.key as any)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${filter === btn.key
-                                    ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20'
+                                    ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
                                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                                     }`}
                             >
@@ -1308,10 +1320,10 @@ const LearningPathBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
     const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'A structured blueprint from conceptual mastery to exam excellence.';
 
     const defaultSteps = [
-        { id: '1', num: '01', title: 'Conceptual Clarity & Fundamentals', desc: 'Every topic explained thoroughly with real-world applications.' },
-        { id: '2', num: '02', title: 'Topic-wise Problem Solving', desc: 'Comprehensive solutions and shortcuts for previous years exam questions.' },
-        { id: '3', num: '03', title: '24/7 AI Doubt Solving', desc: 'Instant support with NexPilot AI whenever you encounter a question.' },
-        { id: '4', num: '04', title: 'Live Model Tests & Analytics', desc: 'Real-time timed exams with instant scoring, solutions and rank.' },
+        { id: '1', num: '01', title: 'Conceptual Clarity & Item Mastery', desc: 'Every topic explained thoroughly from standard books (BDC, Guyton, Harper) with 3D models and viscera demo.' },
+        { id: '2', num: '02', title: 'Cadaveric Dissection & Histology', desc: 'High-yield demonstrations of muscles, nerves, vessels and viscera landmarks for OSPE.' },
+        { id: '3', num: '03', title: 'Marked Textbooks & Item Viva Qs', desc: 'Directly marked lines, card viva questions, and high-yield past Prof questions ready for review.' },
+        { id: '4', num: '04', title: 'Card & Term Standard Model Tests', desc: 'Clinical MCQs, SBA questions, and structured written tests with nationwide medical college rankings.' },
     ];
     const steps = s.steps || defaultSteps;
 
@@ -1372,23 +1384,23 @@ const TestimonialsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
         {
             id: '1',
             name: 'Tanveer Ahmed',
-            role: 'BUET \'23 Batch',
+            role: 'Dhaka Medical College (DMC), K-79',
             rating: 5,
-            quote: 'The Physics and Math classes completely transformed my understanding. The doubt solving system is simply outstanding!'
+            quote: 'Gross Anatomy and Thorax dissection classes completely transformed my card preparation. Cleared 1st Prof with Honours marks!'
         },
         {
             id: '2',
             name: 'Sadia Afrin',
-            role: 'Dhaka Medical College',
+            role: 'Chittagong Medical College (CMC)',
             rating: 5,
-            quote: 'The online exam platform feels just like real exams. The ranking and detailed explanations helped me improve quickly.'
+            quote: 'Guyton and Ganong Physiology concepts were so clear. The 10-minute item quick revision before viva saved me every single card.'
         },
         {
             id: '3',
             name: 'Farhan Kabir',
-            role: 'Notre Dame College, GPA 5',
+            role: 'Sir Salimullah Medical College (SSMC)',
             rating: 5,
-            quote: 'The lecture sheets and video explanations are so organized that I achieved full preparation without extra private tutors.'
+            quote: 'The marked PDF soft-books and OSPE viscera stations gave me unmatched confidence during clinical practicals.'
         },
     ];
     const items = s.items || defaultItems;

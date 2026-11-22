@@ -32,7 +32,7 @@ class Page extends Model
     }
 
     /**
-     * Default home page block template matching current design
+     * Default home page block template matching DoctorWallah MBBS Medical design
      */
     public static function defaultHomeBlocks(): array
     {
@@ -42,11 +42,11 @@ class Page extends Model
                 'type' => 'top_announcement',
                 'title' => 'Top Campaign Ribbon',
                 'settings' => [
-                    'badge' => 'Special Offer',
-                    'text' => 'Admissions open for Academic Cycles and Admission Master Batches with special discounts!',
-                    'linkText' => 'View All Courses →',
+                    'badge' => '🩺 MBBS 2026 Batch',
+                    'text' => 'Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs! Access 1,250+ video lectures & marked standard books.',
+                    'linkText' => 'Explore MBBS Courses →',
                     'linkUrl' => '/courses',
-                    'bgColor' => 'from-sky-700 via-sky-600 to-amber-500',
+                    'bgColor' => 'from-teal-800 via-sky-700 to-emerald-600',
                 ]
             ],
             [
@@ -54,26 +54,26 @@ class Page extends Model
                 'type' => 'hero',
                 'title' => 'Hero Banner Section',
                 'settings' => [
-                    'badge' => "Bangladesh's Most Advanced Online Learning Platform",
-                    'titlePart1' => 'Where Dreams Become Reality,',
-                    'titleHighlight' => 'From Concept Clearing',
-                    'titlePart2' => 'To Admission Success!',
-                    'subtitle' => 'Prepare with 100% confidence through live and full HD recorded classes by experienced mentors, chapter-wise lecture sheets, 24/7 NexPilot AI doubt solving, and real-time model tests.',
-                    'browseCoursesBtn' => 'Browse Courses',
+                    'badge' => "🩺 Bangladesh's #1 MBBS & Medical Learning Platform",
+                    'titlePart1' => 'Medical Academic Excellence,',
+                    'titleHighlight' => 'From Item & Card Preparation',
+                    'titlePart2' => 'To 1st Prof Success!',
+                    'subtitle' => 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য MBBS First Phase, Card, Term & 1st Prof প্রস্তুতির পূর্ণাঙ্গ প্ল্যাটফর্ম। রিসার্চ বেজড অ্যানাটমি ডিসেকশন ক্লাস, ফিজিওলজি-বায়োকেমিস্ট্রি কনসেপচুয়াল লেকচার এবং স্ট্যান্ডার্ড দাগানো টেক্সটবুক (BDC, Guyton, Datta, Langman, Ganong)।',
+                    'browseCoursesBtn' => 'সকল MBBS কোর্স দেখুন',
                     'browseCoursesLink' => '/courses',
-                    'startFreeClassBtn' => 'Take Online Exam',
-                    'startFreeClassLink' => '/student/exams',
-                    'trust1' => '50,000+ Active Students',
-                    'trust2' => '100+ Flagship Courses',
-                    'trust3' => '24/7 AI Doubt Solver',
-                    'cardBadge' => 'Live Academy Status',
-                    'physicsTitle' => 'HSC Physics 1st & 2nd Paper',
-                    'physicsSub' => 'Chapter-wise Complete Mathematical Analysis',
-                    'teachersTitle' => 'Top Mentors from BUET & DU',
-                    'teachersSub' => 'Direct Expert Mentorship',
-                    'studyMatTitle' => 'Premium Handnotes & Question Bank',
-                    'studyMatSub' => 'Downloadable Printable Sheets',
-                    'joinTodayBtn' => 'Join Today',
+                    'startFreeClassBtn' => 'ডেমো ক্লাস ও ডিসেকশন',
+                    'startFreeClassLink' => '/courses',
+                    'trust1' => '১,২৫০+ প্রিমিয়াম MBBS ক্লাস',
+                    'trust2' => 'দাগানো টেক্সটবুক ও স্লাইড নোটস',
+                    'trust3' => '২৪/৭ ডেডিকেটেড ডিসকাশন সাপোর্ট',
+                    'cardBadge' => 'MBBS Clinical & Academic Hub',
+                    'physicsTitle' => 'Anatomy Dissection & Gross Viscera',
+                    'physicsSub' => 'Thorax, Abdomen, Extremities, Embryo & Histo',
+                    'teachersTitle' => 'Physiology & Biochemistry Mastery',
+                    'teachersSub' => 'Guyton, Ganong, Harper & Lippincott Concepts',
+                    'studyMatTitle' => 'Marked Standard Books & Slides',
+                    'studyMatSub' => 'Downloadable Soft-Copy Books with Item Qs',
+                    'joinTodayBtn' => 'আজই যুক্ত হোন (Join Today)',
                 ]
             ],
             [
@@ -81,33 +81,33 @@ class Page extends Model
                 'type' => 'features',
                 'title' => 'Why Choose Us Section',
                 'settings' => [
-                    'sectionTag' => 'Our Features',
-                    'sectionTitle' => 'Why DoctorWallah Is the First Choice for Students',
-                    'sectionSub' => 'Beyond rote memorization, we teach deep concepts and practical problem-solving tricks to guide students to the top.',
+                    'sectionTag' => 'মেডিকেল লার্নিং ফিচারসমূহ',
+                    'sectionTitle' => 'কেন DoctorWallah মেডিকেল শিক্ষার্থীদের প্রথম পছন্দ?',
+                    'sectionSub' => 'শুধুমাত্র মুখস্থ নয়, নিখুঁত কনসেপ্ট ক্লিয়ারিং, আইটেম ও ভাইভা ট্রিকস এবং প্রফ পরীক্ষার নিশ্চিত প্রস্তুতির জন্য বিশেষভাবে ডিজাইন করা।',
                     'items' => [
                         [
                             'id' => 'feat_1',
                             'icon' => 'Award',
-                            'title' => 'Top University Mentors',
-                            'desc' => 'Classes directly supervised by experienced instructors from BUET, Dhaka University, and top medical colleges.'
+                            'title' => 'রিসার্চ বেজড কনসেপচুয়াল ক্লাস',
+                            'desc' => 'প্রতিটি আইটেম ও কার্ডের জন্য রয়েছে গভীর কনসেপচুয়াল ক্লাস, ক্লিনিক্যাল কো-রিলেশন ও হাই-ইল্ড অ্যানালাইসিস।'
                         ],
                         [
                             'id' => 'feat_2',
                             'icon' => 'Zap',
-                            'title' => 'NexPilot AI Doubt Solver',
-                            'desc' => 'Snap a photo or type any question for instant, accurate step-by-step solutions within seconds.'
+                            'title' => '১০ মিনিট আইটেম ওভারভিউ ক্লাস',
+                            'desc' => 'আইটেম বা কার্ড পরীক্ষার ঠিক আগের দিন দ্রুত রিভিশনের জন্য সাজানো হয়েছে স্পেশাল ১০ মিনিটের আইটেম ক্র্যাশ লেকচার।'
                         ],
                         [
                             'id' => 'feat_3',
-                            'icon' => 'HelpCircle',
-                            'title' => 'Chapter Doubt Box',
-                            'desc' => 'Ask questions right below any lecture video with direct replies from course mentors.'
+                            'icon' => 'Video',
+                            'title' => 'ডিসেকশন ও ভিজ্যুয়ালাইজেশন ডেমোনস্ট্রেশন',
+                            'desc' => 'অ্যানাটমির ক্যাডাভারিক ডিসেকশন ভিডিও এবং ভিসেরা ডেমো ক্লাস যাতে অস্পি ও ভাইভায় সর্বোচ্চ কনফিডেন্স পাওয়া যায়।'
                         ],
                         [
                             'id' => 'feat_4',
-                            'icon' => 'ShieldCheck',
-                            'title' => 'Real-time Merit Ranking',
-                            'desc' => 'Board-standard online model tests with negative marking and competitive nation-wide rankings.'
+                            'icon' => 'FileText',
+                            'title' => 'সোফিস্টিকেটেড দাগানো বই (Marked Books)',
+                            'desc' => 'Guyton, BDC, Datta, Snell, Langman বইগুলোর কোন কোন লাইন আইটেমে জানতে চাওয়া হয়, তা দাগানো সফট-কপি ও স্লাইড।'
                         ]
                     ]
                 ]
@@ -117,10 +117,10 @@ class Page extends Model
                 'type' => 'bundle_showcase',
                 'title' => 'Course Bundles Section',
                 'settings' => [
-                    'sectionTag' => 'Special Packages',
-                    'sectionTitle' => 'Popular Course Bundles & Combos',
-                    'sectionSub' => 'Bundle multiple courses together and save up to 50%!',
-                    'limit' => 4,
+                    'sectionTag' => 'অল-ইন-ওয়ান টার্ম প্যাকেজ',
+                    'sectionTitle' => 'MBBS First Phase কমপ্লিট কার্ড ও টার্ম বান্ডেল',
+                    'sectionSub' => 'একক সাবজেক্টের পাশাপাশি পুরো টার্ম বা কার্ড বান্ডেলে এনরোল করে এক ক্লিকেই সব ক্লাস ও মেটেরিয়াল অ্যাক্সেস করুন।',
+                    'limit' => 6,
                 ]
             ],
             [
@@ -128,15 +128,15 @@ class Page extends Model
                 'type' => 'course_tabs',
                 'title' => 'Courses Grid & Tabs',
                 'settings' => [
-                    'headingTag' => 'Popular Courses',
-                    'headingTitle' => 'Our Flagship Academic & Admission Courses',
-                    'viewAllText' => 'View All Courses',
+                    'headingTag' => 'MBBS অ্যাকাডেমিক কারিকুলাম',
+                    'headingTitle' => 'আমাদের ফ্ল্যাগশিপ MBBS কোর্স ও কার্ডসমূহ',
+                    'viewAllText' => 'সকল কোর্স দেখুন',
                     'viewAllLink' => '/courses',
                     'limit' => 12,
                     'tabs' => [
                         [
                             'id' => 'tab_all',
-                            'label' => 'All Courses',
+                            'label' => 'All MBBS Courses',
                             'type' => 'category',
                             'categorySlug' => 'all',
                         ],
@@ -150,10 +150,10 @@ class Page extends Model
                 'title' => 'Stats & Counter',
                 'settings' => [
                     'stats' => [
-                        ['label' => 'Active Students', 'value' => '50,000+'],
-                        ['label' => 'Premium Courses', 'value' => '100+'],
-                        ['label' => 'HD Video Classes', 'value' => '5,000+'],
-                        ['label' => 'Success Rate', 'value' => '98%'],
+                        ['label' => 'এনরোল্ড মেডিকেল শিক্ষার্থী', 'value' => '৫৫০+'],
+                        ['label' => 'মোট MBBS লেকচার', 'value' => '১,২৫০+'],
+                        ['label' => 'দাগানো স্ট্যান্ডার্ড বই ও মেটেরিয়াল', 'value' => '১২০+'],
+                        ['label' => 'সাকসেস ও স্যাটিসফ্যাকশন রেট', 'value' => '৯৯%'],
                     ]
                 ]
             ],
@@ -162,9 +162,9 @@ class Page extends Model
                 'type' => 'teachers_showcase',
                 'title' => 'Faculty & Mentors Section',
                 'settings' => [
-                    'sectionTag' => 'Mentor Panel',
-                    'sectionTitle' => 'Prepare with the Nation’s Best Mentors',
-                    'sectionSub' => 'Guiding thousands of learners year-round toward their dream campuses.',
+                    'sectionTag' => 'মেন্টর ও ফ্যাকাল্টি প্যানেল',
+                    'sectionTitle' => 'দেশসেরা মেডিকেল মেন্টরদের সাথে প্রস্তুতি নিন',
+                    'sectionSub' => 'মেডিকেল কারিকুলামের জটিল বিষয়গুলোকে সহজ ও প্রাঞ্জল করে উপস্থাপনকারী অভিজ্ঞ মেন্টরবৃন্দ।',
                     'limit' => 8,
                 ]
             ],
@@ -173,21 +173,21 @@ class Page extends Model
                 'type' => 'video_testimonials',
                 'title' => 'Video Testimonials Section',
                 'settings' => [
-                    'sectionTag' => 'Student Stories & Video Reviews',
-                    'sectionTitle' => 'What Our Students Say',
-                    'sectionSub' => 'Real journeys, genuine experiences, and success stories shared on camera.',
+                    'sectionTag' => 'মেডিকেল শিক্ষার্থীদের রিভিউ',
+                    'sectionTitle' => 'আমাদের শিক্ষার্থীরা যা বলছে',
+                    'sectionSub' => 'ক্যামেরার সামনে শিক্ষার্থীদের সরাসরি অভিজ্ঞতা ও মতামত।',
                     'items' => [
                         [
                             'id' => 'v1',
                             'name' => 'Samiul',
-                            'role' => 'DoctorWallah Student Review',
+                            'role' => 'DoctorWallah Medical Student Review',
                             'videoUrl' => 'https://youtu.be/Cbw_yhBGM_4',
                             'thumbnailUrl' => '',
                         ],
                         [
                             'id' => 'v2',
                             'name' => 'Khurshed',
-                            'role' => 'DoctorWallah Student Review',
+                            'role' => 'DoctorWallah Medical Student Review',
                             'videoUrl' => 'https://youtu.be/Zt7yfNIbInQ',
                             'thumbnailUrl' => '',
                         ],
@@ -199,14 +199,14 @@ class Page extends Model
                 'type' => 'learning_path',
                 'title' => 'Learning Methodology Section',
                 'settings' => [
-                    'sectionTag' => 'Learning Methodology',
-                    'sectionTitle' => '4-Step Proven Methodology for 100% Preparation',
-                    'sectionSub' => 'A structured roadmap from core concepts to top exam performance.',
+                    'sectionTag' => 'প্রফ প্রিপারেশন রোডম্যাপ',
+                    'sectionTitle' => '৪ ধাপে MBBS আইটেম, কার্ড ও ১st প্রফ প্রস্তুতি',
+                    'sectionSub' => 'বেসিক কনসেপ্ট ক্লিয়ারিং থেকে প্রফ পরীক্ষায় ডিস্টিংশন মার্কস অর্জনের কার্যকরী গাইডলাইন।',
                     'steps' => [
-                        ['id' => 'step_1', 'num' => '01', 'title' => 'Basics & Concept Clearing', 'desc' => 'Clear theory breakdown using animations and real-world examples.'],
-                        ['id' => 'step_2', 'num' => '02', 'title' => 'Topic-wise Problem Solving', 'desc' => 'Complete solutions for past board and top college exam problems.'],
-                        ['id' => 'step_3', 'num' => '03', 'title' => '24/7 AI Doubt Resolution', 'desc' => 'Instant doubt assistance anytime during your self-study.'],
-                        ['id' => 'step_4', 'num' => '04', 'title' => 'Live Model Tests & Rankings', 'desc' => 'Timed assessments in a real exam environment to boost confidence.'],
+                        ['id' => 'step_1', 'num' => '০১', 'title' => 'কনসেপ্ট ক্লিয়ারিং ও থিওরি ক্লাস', 'desc' => 'ক্লিনিক্যাল কো-রিলেশন ও ডায়াগ্রামের সাহায্যে প্রতিটি চ্যাপ্টারের গভীর কনসেপ্ট অর্জন।'],
+                        ['id' => 'step_2', 'num' => '০২', 'title' => '১০ মিনিট কুইক আইটেম ওভারভিউ', 'desc' => 'আইটেমের আগের রাতে পুরো অধ্যায় ১০ মিনিটে রিভিশন ও ভাইভা প্রশ্নের পূর্ণ প্রস্তুতি।'],
+                        ['id' => 'step_3', 'num' => '০৩', 'title' => 'ডিসেকশন, ভিসেরা ও ওস্পি ডেমো', 'desc' => 'ক্যাডাভারিক ডিসেকশন ভিডিও ও ভিসেরা ভিজ্যুয়ালাইজেশনের মাধ্যমে প্র্যাকটিক্যাল এক্সিলেন্স।'],
+                        ['id' => 'step_4', 'num' => '০৪', 'title' => 'দাগানো বই (Marked Book) রিভিশন', 'desc' => 'স্ট্যান্ডার্ড টেক্সটবুকের দাগানো অংশ পড়ে রিটেন ও ভাইভায় সর্বোচ্চ নম্বর নিশ্চিত করা।'],
                     ]
                 ]
             ],
@@ -215,33 +215,33 @@ class Page extends Model
                 'type' => 'testimonials',
                 'title' => 'Student Reviews & Testimonials',
                 'settings' => [
-                    'sectionTag' => 'Student Reviews',
-                    'sectionTitle' => 'Success Stories from Our Students',
-                    'sectionSub' => 'Real experiences and milestones shared by our learners.',
+                    'sectionTag' => 'মেডিকেল শিক্ষার্থীদের অভিজ্ঞতা',
+                    'sectionTitle' => 'আমাদের শিক্ষার্থীদের অভিমত',
+                    'sectionSub' => 'দেশের বিভিন্ন মেডিকেল কলেজের ছাত্র-ছাত্রীদের বাস্তব অভিজ্ঞতা ও রিভিউ।',
                     'items' => [
                         [
                             'id' => 'test_1',
-                            'name' => 'Tanvir Ahmed',
-                            'role' => "BUET '23 Batch",
+                            'name' => 'Dr. Tanvir Ahmed',
+                            'role' => "Dhaka Medical College",
                             'rating' => 5,
                             'avatar' => '',
-                            'quote' => 'The physics and mathematics classes completely transformed my concept clarity. The doubt solving system is simply outstanding!'
+                            'quote' => 'DoctorWallah এর অ্যানাটমি ডিসেকশন ক্লাস এবং দাগানো বই আমার ফার্স্ট প্রফের অ্যানাটমি কার্ডে ডিস্টিংশন মার্কস পেতে সবচেয়ে বড় সাহায্য করেছে!'
                         ],
                         [
                             'id' => 'test_2',
                             'name' => 'Sadia Afrin',
-                            'role' => 'Dhaka Medical College',
+                            'role' => 'Chittagong Medical College',
                             'rating' => 5,
                             'avatar' => '',
-                            'quote' => 'The online exam environment feels just like the actual test. Checking the merit ranking helped me spot and fix my mistakes easily.'
+                            'quote' => 'ফিজিওলজির গাইটনের জটিল মেকানিজমগুলো এত সহজে ১০ মিনিট ওভারভিউ ক্লাসে বুঝিয়ে দেওয়া হয়েছে যে আইটেম দেওয়া এখন একদম সহজ!'
                         ],
                         [
                             'id' => 'test_3',
-                            'name' => 'Farhan Kabir',
-                            'role' => 'Notre Dame College, GPA 5',
+                            'name' => 'Nafis Fuad',
+                            'role' => 'Sir Salimullah Medical College',
                             'rating' => 5,
                             'avatar' => '',
-                            'quote' => 'The lecture sheets are so well-organized that I could complete my entire revision without needing any other books.'
+                            'quote' => 'বায়োকেমিস্ট্রির সাইকেল আর মেটাবলিজমের কনসেপ্ট ক্লিয়ারিং ক্লাসের কোনো তুলনা নেই। মেডিকেল লাইফে এটি সেরা গাইডলাইন।'
                         ],
                     ]
                 ]
@@ -251,34 +251,34 @@ class Page extends Model
                 'type' => 'faq_accordion',
                 'title' => 'FAQ Accordion Section',
                 'settings' => [
-                    'sectionTag' => 'Frequently Asked Questions',
-                    'sectionTitle' => 'Answers to Common Questions',
-                    'sectionSub' => 'Key information regarding enrollment, classes, and exams.',
+                    'sectionTag' => 'সাধারণ জিজ্ঞাসাসমূহ (FAQ)',
+                    'sectionTitle' => 'মেডিকেল শিক্ষার্থীদের সাধারণ প্রশ্নের উত্তর',
+                    'sectionSub' => 'কোর্স এনরোলমেন্ট, ক্লাস এক্সেস ও স্টাডি মেটেরিয়াল সম্পর্কিত তথ্য।',
                     'items' => [
                         [
                             'id' => 'faq_1',
-                            'q' => 'How do I purchase or enroll in a DoctorWallah course?',
-                            'a' => 'Click the "Enroll Now" or "Buy Course" button on any course card. Complete the payment via bKash, Nagad, or Rocket and submit your TrxID for fast activation.'
+                            'q' => 'DoctorWallah-তে কোন কোন মেডিকেল কলেজের শিক্ষার্থীরা পড়তে পারবে?',
+                            'a' => 'বাংলাদেশের যেকোনো সরকারি ও বেসরকারি মেডিকেল কলেজের MBBS শিক্ষার্থীরা (ঢাকা বিশ্ববিদ্যালয়, চমেবি, রাবি, শেবাচিম বা বিএসএমএমইউ অধিভুক্ত) আমাদের কোর্সগুলো করে তাদের আইটেম, কার্ড, টার্ম ও প্রফ পরীক্ষার সম্পূর্ণ প্রস্তুতি নিতে পারবে।'
                         ],
                         [
                             'id' => 'faq_2',
-                            'q' => 'Are recorded classes and lecture sheets provided alongside live sessions?',
-                            'a' => 'Yes, every live class is automatically saved in full HD in your archive, accessible for unlimited revisions until exam day, complete with printable lecture notes.'
+                            'q' => 'ভিডিও ক্লাসের পাশাপাশি কি দাগানো স্ট্যান্ডার্ড বই ও লেকচার নোটস পাওয়া যাবে?',
+                            'a' => 'হ্যাঁ! প্রতিটি ক্লাসের সাথে রয়েছে স্ট্যান্ডার্ড বইয়ের হাই-ইল্ড দাগানো সফট-কপি (Marked Books - BDC, Guyton, Datta, Langman), স্লাইড ড্রাইভ ফোল্ডার এবং এক্সপ্ল্যানেশন নোটস।'
                         ],
                         [
                             'id' => 'faq_3',
-                            'q' => 'How does NexPilot AI Doubt Solver assist in studies?',
-                            'a' => 'NexPilot is a 24/7 AI tutor aligned with your curriculum. Whenever you are stuck on a formula or problem, get instant explanations within seconds.'
+                            'q' => 'অ্যানাটমির প্র্যাকটিক্যাল, ভিসেরা ও ডিসেকশন কীভাবে শেখানো হয়?',
+                            'a' => 'আমাদের অ্যানাটমি কোর্সগুলোতে রয়েছে ক্যাডাভারিক ডিসেকশন ভিডিও, ভিসেরা ডেমোনস্ট্রেশন এবং অস্পি (OSPE) স্পেশাল ক্লাস যা রিয়েল প্র্যাকটিক্যাল ফিল দেয়।'
                         ],
                         [
                             'id' => 'faq_4',
-                            'q' => 'How do online model tests and merit positions work?',
-                            'a' => 'Tests feature timers and negative marking matching real board and university formats. Immediate scores, solution explanations, and rankings are displayed upon submission.'
+                            'q' => 'আমি কি মোবাইল ও ল্যাপটপ উভয় ডিভাইস থেকেই ক্লাস করতে পারব?',
+                            'a' => 'হ্যাঁ, আমাদের প্ল্যাটফর্ম পুরোপুরি রেসপনসিভ। যেকোনো স্মার্টফোন, ট্যাবলেট, ল্যাপটপ বা ডেস্কটপ থেকে হাই-স্পিড ভিমিও প্লেয়ারে বাফারলেস ক্লাস দেখা যাবে।'
                         ],
                         [
                             'id' => 'faq_5',
-                            'q' => 'Can I access the courses on both mobile and computer devices?',
-                            'a' => 'Yes! Our platform runs seamlessly across all smartphones, tablets, laptops, and desktop computers.'
+                            'q' => 'আইটেম বা কার্ড পরীক্ষার আগে কুইক রিভিশনের কোনো ব্যবস্থা আছে কি?',
+                            'a' => 'একদমই তাই! প্রতিটি টপিকের জন্য রয়েছে "১০ মিনিট আইটেম ওভারভিউ ক্লাস", যা আইটেম পরীক্ষার ঠিক আগের রাতে পুরো অধ্যায় দ্রুত রিভিশন করতে সহায়তা করে।'
                         ]
                     ]
                 ]
@@ -288,10 +288,10 @@ class Page extends Model
                 'type' => 'cta_banner',
                 'title' => 'Bottom CTA Banner',
                 'settings' => [
-                    'badge' => 'Admissions Open',
-                    'title' => 'Join the Premier Online Learning Platform Today',
-                    'subtitle' => 'We are with you at every step of your journey. Enroll in your target course now and start preparing.',
-                    'buttonText' => 'Browse Courses',
+                    'badge' => '🩺 MBBS এনরোলমেন্ট চলমান',
+                    'title' => 'বাংলাদেশের মেডিকেল শিক্ষার্থীদের ১ নম্বর প্ল্যাটফর্মে আজই যুক্ত হোন',
+                    'subtitle' => 'আইটেম ক্লিয়ারিং থেকে প্রফ পরীক্ষা — আপনার মেডিকেল শিক্ষা জীবনের প্রতিটি পদক্ষেপে ডক্টরওয়ালাহ সবসময় আপনার পাশে রয়েছে।',
+                    'buttonText' => 'সকল MBBS কোর্স দেখুন',
                     'buttonLink' => '/courses',
                     'bgColor' => 'sky',
                 ]

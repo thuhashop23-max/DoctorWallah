@@ -97,9 +97,9 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
     isBuilder = false,
 }) => {
     // Determine configured texts with defaults
-    const sectionTag = settings?.sectionTag !== undefined ? settings.sectionTag : 'Real Feedback & Success Stories';
-    const sectionTitle = settings?.sectionTitle !== undefined ? settings.sectionTitle : 'Loved by Thousands of Learners Across Bangladesh';
-    const sectionSub = settings?.sectionSub !== undefined ? settings.sectionSub : 'Swipe through genuine screenshots and student reviews from our academic, admission, and skill batches.';
+    const sectionTag = settings?.sectionTag !== undefined ? settings.sectionTag : 'Medical Student Feedback & Viva Reviews';
+    const sectionTitle = settings?.sectionTitle !== undefined ? settings.sectionTitle : 'Loved by Hundreds of MBBS Students Across Bangladesh';
+    const sectionSub = settings?.sectionSub !== undefined ? settings.sectionSub : 'Real feedback from medical students mastering Anatomy, Physiology, and Biochemistry for Card, Term & 1st Prof.';
     const scrollSpeed = Math.max(10, Math.min(180, Number(settings?.speed) || 45));
 
     const [fetchedReviews, setFetchedReviews] = useState<ReviewItem[]>(() =>

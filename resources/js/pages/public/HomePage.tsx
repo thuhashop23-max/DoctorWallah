@@ -30,7 +30,12 @@ import {
     Video,
     Check,
     Tag,
-    ShoppingCart
+    ShoppingCart,
+    Stethoscope,
+    Activity,
+    Microscope,
+    HeartPulse,
+    Dna
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { StudentReviewsMarquee } from '../../components/home/StudentReviewsMarquee';
@@ -84,7 +89,7 @@ export const HomePage: React.FC = () => {
     const [bundles, setBundles] = useState<FeaturedBundle[]>([]);
     const [activeCategory, setActiveCategory] = useState<string>('all');
     const [teachers, setTeachers] = useState<FeaturedTeacher[]>([]);
-    const [teacherFilter, setTeacherFilter] = useState<'all' | 'ssc' | 'hsc' | 'admission' | 'arts'>('all');
+    const [teacherFilter, setTeacherFilter] = useState<'all' | 'anatomy' | 'physiology' | 'biochemistry' | 'clinical'>('all');
     const [loading, setLoading] = useState<boolean>(() => {
         try {
             const cached = sessionStorage.getItem('DoctorWallah_home_custom_page');
@@ -161,26 +166,28 @@ export const HomePage: React.FC = () => {
     // Only real platform teachers from database
     const allFaculty: FeaturedTeacher[] = teachers.map((t) => {
         const combined = `${t.expertise || ''} ${t.designation || ''} ${t.bio || ''}`.toLowerCase();
-        let cat: 'ssc' | 'hsc' | 'admission' | 'arts' | 'all' = 'all';
-        if (combined.includes('ssc') || combined.includes('class 9') || combined.includes('class 10')) {
-            cat = 'ssc';
-        } else if (combined.includes('admission') || combined.includes('medical') || combined.includes('engineering') || combined.includes('du') || combined.includes('bcs')) {
-            cat = 'admission';
-        } else if (combined.includes('commerce') || combined.includes('arts')) {
-            cat = 'arts';
+        let cat: 'anatomy' | 'physiology' | 'biochemistry' | 'clinical' | 'all' = 'all';
+        if (combined.includes('anat') || combined.includes('dissect') || combined.includes('viscera') || combined.includes('histo') || combined.includes('embryo')) {
+            cat = 'anatomy';
+        } else if (combined.includes('physio') || combined.includes('guyton') || combined.includes('ganong') || combined.includes('cvs') || combined.includes('renal')) {
+            cat = 'physiology';
+        } else if (combined.includes('biochem') || combined.includes('harper') || combined.includes('lippincott') || combined.includes('genetics') || combined.includes('metabolism')) {
+            cat = 'biochemistry';
+        } else if (combined.includes('clinic') || combined.includes('viva') || combined.includes('ospe') || combined.includes('card') || combined.includes('prof')) {
+            cat = 'clinical';
         } else {
-            cat = 'hsc';
+            cat = 'anatomy';
         }
 
         const tags = t.expertise 
             ? t.expertise.split(',').map((s: string) => s.trim()) 
-            : ['HSC', 'Admission'];
+            : ['MBBS Faculty', '1st Prof'];
 
         return {
             ...t,
-            designation: t.designation || 'Instructor & Mentor',
-            institution: t.institution || 'DoctorWallah',
-            experience: t.bio ? (t.bio.length > 50 ? t.bio.substring(0, 50) + '...' : t.bio) : 'Faculty Member',
+            designation: t.designation || 'MBBS Instructor & Mentor',
+            institution: t.institution || 'DoctorWallah Medical Faculty',
+            experience: t.bio ? (t.bio.length > 50 ? t.bio.substring(0, 50) + '...' : t.bio) : 'MBBS Faculty Member',
             tags,
             category: cat
         };
@@ -188,17 +195,17 @@ export const HomePage: React.FC = () => {
 
     const displayedFaculty = allFaculty.filter((t) => {
         if (teacherFilter === 'all') return true;
-        if (teacherFilter === 'ssc') {
-            return t.category === 'ssc' || t.tags?.some(tag => tag.toLowerCase().includes('ssc') || tag.toLowerCase().includes('class 10') || tag.toLowerCase().includes('class 9'));
+        if (teacherFilter === 'anatomy') {
+            return t.category === 'anatomy' || t.tags?.some(tag => tag.toLowerCase().includes('anat') || tag.toLowerCase().includes('viscera') || tag.toLowerCase().includes('dissect'));
         }
-        if (teacherFilter === 'hsc') {
-            return t.category === 'hsc' || t.tags?.some(tag => tag.toLowerCase().includes('hsc'));
+        if (teacherFilter === 'physiology') {
+            return t.category === 'physiology' || t.tags?.some(tag => tag.toLowerCase().includes('physio') || tag.toLowerCase().includes('guyton'));
         }
-        if (teacherFilter === 'admission') {
-            return t.category === 'admission' || t.tags?.some(tag => tag.toLowerCase().includes('admission') || tag.toLowerCase().includes('engineering') || tag.toLowerCase().includes('medical'));
+        if (teacherFilter === 'biochemistry') {
+            return t.category === 'biochemistry' || t.tags?.some(tag => tag.toLowerCase().includes('biochem') || tag.toLowerCase().includes('harper'));
         }
-        if (teacherFilter === 'arts') {
-            return t.category === 'arts' || t.tags?.some(tag => tag.toLowerCase().includes('arts') || tag.toLowerCase().includes('commerce'));
+        if (teacherFilter === 'clinical') {
+            return t.category === 'clinical' || t.tags?.some(tag => tag.toLowerCase().includes('clinic') || tag.toLowerCase().includes('viva') || tag.toLowerCase().includes('ospe'));
         }
         return true;
     });
@@ -238,24 +245,24 @@ export const HomePage: React.FC = () => {
 
     const faqs = [
         {
-            q: 'How do I purchase or enroll in a course on DoctorWallah?',
-            a: 'Click the "Add to Cart" button on any course card and proceed to checkout from your cart. Complete payment via bKash, Nagad, Rocket, Cards or online payment gateway, and submit your transaction details to activate course access immediately.',
+            q: 'How do I enroll in MBBS Card, Term, or All-in-One courses on DoctorWallah?',
+            a: 'Select your desired MBBS discipline or bundle (e.g. Thorax Card, Abdomen, Physiology, or Full 1st Prof Package), click "Add to Cart", and checkout. Pay easily via bKash, Nagad, Rocket, or card, and access your high-yield lectures and materials instantly.',
         },
         {
-            q: 'Will I have access to recorded classes and lecture sheets alongside live classes?',
-            a: 'Yes, every live class is automatically recorded in Full HD and stored in your course archive, available for unlimited revision until the exam concludes. You also receive chapter-wise practice sheets and PDF lecture notes.',
+            q: 'Do I get recorded classes, viscera demonstrations, and marked soft-copy books?',
+            a: 'Yes! Every high-yield class is available in 1080p Full HD with unlimited replay. You also receive high-yield marked standard textbooks (BDC, Guyton, Datta, Langman), dissection & viscera video demonstrations, and OSPE guides.',
         },
         {
-            q: 'How does NexPilot AI Doubt Solver assist my learning?',
-            a: 'NexPilot is an intelligent 24/7 AI tutor connected directly to your curriculum. Whenever you encounter a doubt, formula question, or complex math problem, chat with NexPilot for instant step-by-step conceptual explanations.',
+            q: 'Can DoctorWallah help me prepare for tomorrow’s Item or Card viva?',
+            a: 'Absolutely! Our "10-Minute Item Quick Recap" lectures and card-specific viva question lists are specifically designed to help medical students revise key structures, relations, and clinical correlations the night before viva.',
         },
         {
-            q: 'How do online model tests and merit positions work?',
-            a: 'Exams are timed with realistic negative marking matching actual board and admission tests. Submitting an exam gives you instant evaluations, solution explanations, and your overall merit position among all candidates.',
+            q: 'Does DoctorWallah align with the official BM&DC 1st Prof curriculum?',
+            a: 'Yes, 100%. Our courses cover the exact syllabi followed by Dhaka University, Chittagong Medical University, Rajshahi Medical University, and Sylhet Medical University for DMC, SSMC, CMC, SOMC, and all medical colleges across Bangladesh.',
         },
         {
-            q: 'Can I access the courses on both mobile and desktop devices?',
-            a: 'Absolutely! Our platform is fully responsive and optimized for ultra-smooth performance on any smartphone, tablet, laptop, or desktop computer.',
+            q: 'Can I access the courses and marked books on both phone and laptop?',
+            a: 'Yes, our platform is fully responsive and optimized for ultra-fast streaming on Android, iPhone, iPad, Windows, and Mac devices.',
         },
     ];
 
@@ -330,149 +337,146 @@ export const HomePage: React.FC = () => {
     return (
         <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden font-sans">
             {/* Top Live Campaign Ribbon */}
-            <div className="bg-gradient-to-r from-[#25a2ee] via-[#25a2ee] to-[#CC1200] text-white text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 shadow-inner">
+            <div className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-600 text-white text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 shadow-inner">
                 <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
-                <span>🔥 Special discount enrollment is open for HSC Academic Cycle & Admission Master Batch!</span>
-                <Link to="/courses" className="underline font-extrabold text-white hover:text-red-100 transition-colors ml-1 hidden sm:inline">
+                <span>🩺 MBBS 2026 Batch: Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs!</span>
+                <Link to="/courses" className="underline font-extrabold text-white hover:text-teal-100 transition-colors ml-1 hidden sm:inline">
                     View All Courses →
                 </Link>
             </div>
 
             {/* 1. HERO SECTION */}
-            <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-white to-slate-50/50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors">
+            <section className="relative overflow-hidden bg-gradient-to-b from-teal-50/70 via-white to-slate-50/50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors">
                 {/* Decorative background blurs */}
-                <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#25a2ee]/10 rounded-full blur-3xl -z-10 pointer-events-none" />
-                <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#CC1200]/10 rounded-full blur-3xl -z-10 pointer-events-none" />
+                <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
+                <div className="absolute bottom-0 left-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                         {/* Left Content Column */}
                         <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                             {/* Trust Badge */}
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#25a2ee]/10 to-[#CC1200]/10 text-[#25a2ee] border border-[#25a2ee]/30 text-xs sm:text-sm font-extrabold tracking-wide shadow-2xs">
-                                <span className="flex h-2.5 w-2.5 relative">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CC1200] opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#CC1200]"></span>
-                                </span>
-                                <span>Bangladesh's Premier Online Learning Platform</span>
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs sm:text-sm font-extrabold tracking-wide shadow-2xs">
+                                <Stethoscope className="w-4 h-4 text-teal-600 animate-pulse" />
+                                <span>Bangladesh's #1 MBBS & Medical Learning Platform</span>
                             </div>
 
                             {/* Headline */}
                             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight">
-                                Where Dreams Turn into Reality, <br />
-                                <span className="bg-gradient-to-r from-[#25a2ee] via-[#25a2ee] to-[#CC1200] bg-clip-text text-transparent">
-                                    From Concept Clarity
+                                Medical Academic Excellence, <br />
+                                <span className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-500 bg-clip-text text-transparent">
+                                    From Item & Card Prep
                                 </span> <br />
-                                To Admission Success!
+                                To 1st Prof Success!
                             </h1>
 
                             {/* Subtitle */}
                             <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                                Master every topic with 100% confidence through expert-led Live & Full HD recorded classes, chapter-wise lecture sheets, <strong className="text-[#25a2ee] font-bold">24/7 NexPilot AI Doubt Solving</strong>, and real-time model tests.
+                                Master Gross Anatomy, Physiology & Biochemistry with clinical confidence through expert-led high-yield lectures, cadaveric dissection & viscera demos, and marked standard textbooks (BDC, Guyton, Datta, Langman, Ganong).
                             </p>
 
                             {/* Dual CTAs */}
                             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                                 <Link
                                     to="/courses"
-                                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#CC1200] hover:bg-[#a80e00] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-[#CC1200]/30 hover:shadow-xl hover:shadow-[#CC1200]/40 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-teal-600/30 hover:shadow-xl hover:shadow-teal-600/40 transition-all flex items-center justify-center gap-2 group cursor-pointer"
                                 >
-                                    <span>Explore Courses</span>
+                                    <span>Explore MBBS Courses</span>
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
                                 </Link>
 
                                 <Link
-                                    to="/student/exams"
-                                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white dark:bg-slate-900 border-2 border-[#25a2ee] text-[#25a2ee] font-extrabold text-sm sm:text-base hover:bg-[#25a2ee] hover:text-white transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                                    to="/courses"
+                                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white dark:bg-slate-900 border-2 border-teal-600 text-teal-700 dark:text-teal-300 font-extrabold text-sm sm:text-base hover:bg-teal-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                                 >
-                                    <ClipboardList className="w-5 h-5 text-current" />
-                                    <span>Take Online Exams</span>
+                                    <PlayCircle className="w-5 h-5 text-teal-600" />
+                                    <span>Watch Free Demos</span>
                                 </Link>
                             </div>
 
                             {/* Metrics Counter Bar */}
                             <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-200/80 dark:border-slate-800 text-left">
                                 <div className="space-y-0.5">
-                                    <div className="text-2xl sm:text-3xl font-black text-[#25a2ee]">50,000+</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Active Learners</div>
+                                    <div className="text-2xl sm:text-3xl font-black text-teal-600">550+</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Medical Students</div>
                                 </div>
                                 <div className="space-y-0.5">
-                                    <div className="text-2xl sm:text-3xl font-black text-[#CC1200]">100+</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Flagship Courses</div>
+                                    <div className="text-2xl sm:text-3xl font-black text-sky-600">1,250+</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">MBBS Lectures</div>
                                 </div>
                                 <div className="space-y-0.5">
-                                    <div className="text-2xl sm:text-3xl font-black text-[#25a2ee]">98%</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Success Rate</div>
+                                    <div className="text-2xl sm:text-3xl font-black text-emerald-600">100%</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Prof Syllabus Covered</div>
                                 </div>
                                 <div className="space-y-0.5">
-                                    <div className="text-2xl sm:text-3xl font-black text-[#CC1200]">24/7</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">AI Doubt Solver</div>
+                                    <div className="text-2xl sm:text-3xl font-black text-amber-500">24/7</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Marked Soft Books</div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right Interactive Visual Card */}
                         <div className="lg:col-span-5 relative">
-                            <div className="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-tr from-[#25a2ee] to-[#CC1200] p-1 rounded-3xl shadow-2xl shadow-[#25a2ee]/25">
+                            <div className="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-tr from-teal-500 via-sky-600 to-emerald-500 p-1 rounded-3xl shadow-2xl shadow-teal-500/25">
                                 <div className="bg-slate-900 rounded-[22px] p-6 text-white space-y-5">
                                     {/* Card Header */}
                                     <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                                         <div className="flex items-center gap-2">
                                             <span className="flex h-2.5 w-2.5 relative">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CC1200] opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#CC1200]"></span>
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
                                             </span>
-                                            <span className="text-xs font-bold text-[#CC1200] uppercase tracking-wide">
-                                                Live Flagship Program
+                                            <span className="text-xs font-bold text-teal-400 uppercase tracking-wide">
+                                                MBBS Academic Hub
                                             </span>
                                         </div>
-                                        <span className="text-[11px] font-bold px-2 py-0.5 bg-[#25a2ee]/20 text-[#25a2ee] rounded-md">
-                                            Academic Cycle 2026-27
+                                        <span className="text-[11px] font-bold px-2 py-0.5 bg-teal-500/20 text-teal-300 rounded-md">
+                                            1st Phase 2026-27
                                         </span>
                                     </div>
 
                                     {/* Program Card Title */}
                                     <div>
                                         <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
-                                            HSC Academic & Admission Complete Preparation Cycle
+                                            MBBS 1st Phase Complete Card & Prof Preparation
                                         </h3>
                                         <p className="text-xs text-slate-400 mt-1">
-                                            Complete board syllabus and admission prep for Physics, Chemistry, Higher Math, and Biology on a single platform.
+                                            Anatomy, Physiology & Biochemistry complete syllabus aligned with BM&DC curriculum for DMC, SSMC, CMC, SOMC & all medical colleges.
                                         </p>
                                     </div>
 
                                     {/* Highlights list with icons */}
                                     <div className="space-y-2.5">
                                         <div className="bg-slate-800/90 p-3 rounded-xl border border-slate-700/60 flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-[#25a2ee]/20 text-[#25a2ee] flex items-center justify-center shrink-0">
-                                                <Video className="w-5 h-5" />
+                                            <div className="w-9 h-9 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0">
+                                                <Activity className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <h4 className="text-xs font-bold text-white">Live & Full HD Recorded Classes</h4>
-                                                <p className="text-[11px] text-slate-400">Unlimited revision archive until exams conclude</p>
+                                                <h4 className="text-xs font-bold text-white">Anatomy Dissection & Viscera</h4>
+                                                <p className="text-[11px] text-slate-400">Thorax, Abdomen, Superior/Inferior Extremities, Histo & Embryo</p>
                                             </div>
                                         </div>
 
                                         <div className="bg-slate-800/90 p-3 rounded-xl border border-slate-700/60 flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-[#25a2ee]/20 text-[#25a2ee] flex items-center justify-center shrink-0">
-                                                <Bot className="w-5 h-5" />
+                                            <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                                                <Microscope className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <h4 className="text-xs font-bold text-white">NexPilot AI Doubt Solver</h4>
-                                                <p className="text-[11px] text-slate-400">Instant conceptual explanation whenever you get stuck</p>
+                                                <h4 className="text-xs font-bold text-white">Physiology & Biochemistry Mastery</h4>
+                                                <p className="text-[11px] text-slate-400">Guyton, Ganong, Harper & Lippincott based concept clarity</p>
                                             </div>
                                         </div>
 
                                         <div className="bg-slate-800/90 p-3 rounded-xl border border-slate-700/60 flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-[#CC1200]/20 text-[#CC1200] flex items-center justify-center shrink-0">
-                                                <ClipboardList className="w-5 h-5" />
+                                            <div className="w-9 h-9 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                                                <FileText className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <h4 className="text-xs font-bold text-white">Board & Admission Standard Model Tests</h4>
-                                                <p className="text-[11px] text-slate-400">Real-time merit position and analysis with negative marking</p>
+                                                <h4 className="text-xs font-bold text-white">Marked Standard Books & Item Qs</h4>
+                                                <p className="text-[11px] text-slate-400">High-yield marked lines, viva questions & OSPE sheets</p>
                                             </div>
                                         </div>
                                     </div>
@@ -481,9 +485,9 @@ export const HomePage: React.FC = () => {
                                     <div className="pt-2">
                                         <Link
                                             to="/courses"
-                                            className="block w-full py-3.5 bg-gradient-to-r from-[#25a2ee] to-[#CC1200] hover:opacity-95 text-white font-extrabold rounded-xl text-center text-sm shadow-md shadow-[#25a2ee]/25 transition-all cursor-pointer"
+                                            className="block w-full py-3.5 bg-gradient-to-r from-teal-500 via-teal-600 to-emerald-600 hover:opacity-95 text-white font-extrabold rounded-xl text-center text-sm shadow-md shadow-teal-500/25 transition-all cursor-pointer"
                                         >
-                                            Enroll in Batch Now
+                                            Enroll in MBBS Batch
                                         </Link>
                                     </div>
                                 </div>
@@ -493,58 +497,58 @@ export const HomePage: React.FC = () => {
                 </div>
             </section>
 
-            {/* 2. BONDI PATHSHALA STYLE ACADEMIC SEGMENTS (Quick Jump Cards) */}
+            {/* 2. MEDICAL DISCIPLINES & ACADEMIC SEGMENTS */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-                    <span className="text-xs font-bold text-sky-600 uppercase tracking-widest bg-sky-50 dark:bg-sky-950/60 px-3 py-1 rounded-full">
-                        Academic Segments
+                    <span className="text-xs font-bold text-teal-600 uppercase tracking-widest bg-teal-50 dark:bg-teal-950/60 px-3 py-1 rounded-full border border-teal-200 dark:border-teal-800">
+                        MBBS Disciplines
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                        Which Exam are You Preparing For?
+                        Which Subject or Card are You Preparing For?
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                        Choose your target program and begin your journey towards success today.
+                        Choose your target discipline and master your item, card & 1st Prof syllabus.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
-                    {/* HSC Academic */}
+                    {/* Anatomy */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-sky-100 dark:border-slate-800 text-center hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-gradient-to-b from-teal-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-teal-100 dark:border-slate-800 text-center hover:border-teal-400 dark:hover:border-teal-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <BookOpen className="w-6 h-6" />
+                        <div className="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <Activity className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">HSC Academic</h3>
-                        <p className="text-[11px] text-slate-500 mt-1">1st & 2nd Year Cycle</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Gross Anatomy</h3>
+                        <p className="text-[11px] text-slate-500 mt-1">Dissection, Viscera & Histo</p>
                     </div>
 
-                    {/* Engineering Admission */}
+                    {/* Physiology */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-sky-100 dark:border-slate-800 text-center hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-gradient-to-b from-rose-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-rose-100 dark:border-slate-800 text-center hover:border-rose-400 dark:hover:border-rose-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <Zap className="w-6 h-6" />
+                        <div className="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <HeartPulse className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Engineering Prep</h3>
-                        <p className="text-[11px] text-slate-500 mt-1">BUET & CKRUET Prep</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Physiology</h3>
+                        <p className="text-[11px] text-slate-500 mt-1">Guyton & Ganong Concepts</p>
                     </div>
 
-                    {/* Varsity Admission */}
+                    {/* Biochemistry */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
                         className="bg-gradient-to-b from-purple-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-purple-100 dark:border-slate-800 text-center hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
                     >
                         <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <Award className="w-6 h-6" />
+                            <Microscope className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Varsity Admission</h3>
-                        <p className="text-[11px] text-slate-500 mt-1">DU & Combined University</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Biochemistry</h3>
+                        <p className="text-[11px] text-slate-500 mt-1">Metabolism & Genetics</p>
                     </div>
 
-                    {/* Course Bundles */}
+                    {/* Card & Term Bundles */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
                         className="bg-gradient-to-b from-amber-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-amber-100 dark:border-slate-800 text-center hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
@@ -552,20 +556,20 @@ export const HomePage: React.FC = () => {
                         <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <Boxes className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Combo Bundles</h3>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Card & Term Combos</h3>
                         <p className="text-[11px] text-slate-500 mt-1">All-in-One Programs</p>
                     </div>
 
-                    {/* Online Model Tests */}
+                    {/* Marked Books & OSPE */}
                     <Link 
-                        to="/student/exams"
-                        className="col-span-2 sm:col-span-1 bg-gradient-to-b from-emerald-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-emerald-100 dark:border-slate-800 text-center hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        to="/courses"
+                        className="col-span-2 sm:col-span-1 bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-950 p-4 sm:p-5 rounded-2xl border border-sky-100 dark:border-slate-800 text-center hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <ClipboardList className="w-6 h-6" />
+                        <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <BookOpen className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Online Exams</h3>
-                        <p className="text-[11px] text-slate-500 mt-1">Real-Time Exam Hall</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Marked Books & OSPE</h3>
+                        <p className="text-[11px] text-slate-500 mt-1">Soft Books & Viva Qs</p>
                     </Link>
                 </div>
             </section>
@@ -980,11 +984,11 @@ export const HomePage: React.FC = () => {
                         {/* Center: Category Filter Pills */}
                         <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none">
                             {[
-                                { id: 'all', label: 'All' },
-                                { id: 'ssc', label: 'Class 9-10' },
-                                { id: 'hsc', label: 'HSC' },
-                                { id: 'admission', label: 'Admission' },
-                                { id: 'arts', label: 'Arts & Commerce' }
+                                { id: 'all', label: 'All Faculty' },
+                                { id: 'anatomy', label: 'Anatomy' },
+                                { id: 'physiology', label: 'Physiology' },
+                                { id: 'biochemistry', label: 'Biochemistry' },
+                                { id: 'clinical', label: 'Clinical & Viva' }
                             ].map((tab) => {
                                 const isActive = teacherFilter === tab.id;
                                 return (
@@ -993,8 +997,8 @@ export const HomePage: React.FC = () => {
                                         onClick={() => setTeacherFilter(tab.id as any)}
                                         className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
                                             isActive
-                                                ? 'bg-sky-500 hover:bg-sky-600 text-white shadow-md shadow-sky-500/25'
-                                                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-sky-300'
+                                                ? 'bg-teal-600 hover:bg-teal-700 text-white shadow-md shadow-teal-600/25'
+                                                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-teal-300'
                                         }`}
                                     >
                                         {tab.label}
@@ -1172,45 +1176,45 @@ export const HomePage: React.FC = () => {
             <section className="bg-slate-900 text-white py-16 sm:py-20 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-                        <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950 px-3 py-1 rounded-full border border-sky-800">
+                        <span className="text-xs font-bold uppercase tracking-widest text-teal-400 bg-teal-950 px-3 py-1 rounded-full border border-teal-800">
                             Why Choose DoctorWallah?
                         </span>
                         <h2 className="text-2xl sm:text-4xl font-black tracking-tight">
-                            Strategic Guidance & Ultimate Preparation
+                            The Complete MBBS Academic Excellence Platform
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm">
-                            We do not just teach; we empower every student to master concepts and achieve peak academic excellence.
+                            We bridge textbook theory, cadaveric dissection, and clinical viva questions to ensure top honours in 1st Prof.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 space-y-3 hover:border-sky-500 transition-colors">
-                            <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center">
-                                <Video className="w-6 h-6" />
+                        <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 space-y-3 hover:border-teal-500 transition-colors">
+                            <div className="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center">
+                                <Activity className="w-6 h-6" />
                             </div>
-                            <h3 className="text-base font-bold text-white">Concept-First Learning</h3>
+                            <h3 className="text-base font-bold text-white">Research-Based Conceptual Classes</h3>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                No rote memorization. Master foundational principles deeply to solve any standard of problem with ease.
+                                High-yield medical lectures breaking down complex pathways into unforgettable clinical concepts.
                             </p>
                         </div>
 
-                        <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 space-y-3 hover:border-sky-500 transition-colors">
-                            <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center">
-                                <Bot className="w-6 h-6" />
+                        <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 space-y-3 hover:border-teal-500 transition-colors">
+                            <div className="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center">
+                                <Video className="w-6 h-6" />
                             </div>
-                            <h3 className="text-base font-bold text-white">NexPilot AI Doubt Solver</h3>
+                            <h3 className="text-base font-bold text-white">10-Minute Item Quick Recap</h3>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                Studying late at night? Get instant conceptual explanations in seconds with our 24/7 dedicated AI tutor.
+                                Short, high-yield summary videos to rapidly revise key landmarks and viva points the night before your oral exam.
                             </p>
                         </div>
 
                         <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 space-y-3 hover:border-emerald-500 transition-colors">
                             <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                                <ClipboardList className="w-6 h-6" />
+                                <Microscope className="w-6 h-6" />
                             </div>
-                            <h3 className="text-base font-bold text-white">Real-Time Model Tests</h3>
+                            <h3 className="text-base font-bold text-white">Dissection & Viscera Demos</h3>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                Conquer exam anxiety through regular timed chapter tests, negative marking, and nationwide merit ranks.
+                                Clear video demonstrations of organs, muscle attachments, and histology slides for perfect OSPE score.
                             </p>
                         </div>
 
@@ -1218,9 +1222,9 @@ export const HomePage: React.FC = () => {
                             <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
                                 <FileText className="w-6 h-6" />
                             </div>
-                            <h3 className="text-base font-bold text-white">Comprehensive Lecture Sheets & Notes</h3>
+                            <h3 className="text-base font-bold text-white">Marked Standard Books</h3>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                Receive organized board-standard lecture sheets and formula books right alongside classes for rapid revision.
+                                Soft-copy standard textbooks (BDC, Guyton, Datta, Langman) with marked high-yield lines and item questions.
                             </p>
                         </div>
                     </div>

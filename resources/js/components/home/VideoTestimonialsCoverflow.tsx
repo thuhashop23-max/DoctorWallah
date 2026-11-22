@@ -51,14 +51,14 @@ const DEFAULT_ITEMS: VideoTestimonialItem[] = [
     {
         id: '1',
         name: 'Samiul',
-        role: 'DoctorWallah Student Review',
+        role: 'MBBS 1st Phase Student',
         videoUrl: 'https://youtu.be/Cbw_yhBGM_4',
         thumbnailUrl: '',
     },
     {
         id: '2',
         name: 'Khurshed',
-        role: 'DoctorWallah Student Review',
+        role: 'MBBS Card & Prof Prep',
         videoUrl: 'https://youtu.be/Zt7yfNIbInQ',
         thumbnailUrl: '',
     },
@@ -68,9 +68,9 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
     settings,
     isBuilder = false,
 }) => {
-    const sectionTag = settings?.sectionTag ?? 'Student Stories & Video Reviews';
-    const sectionTitle = settings?.sectionTitle ?? 'What Our Students Say';
-    const sectionSub = settings?.sectionSub ?? 'Real journeys, genuine experiences, and success stories shared on camera.';
+    const sectionTag = settings?.sectionTag ?? 'MBBS Student Stories & Video Reviews';
+    const sectionTitle = settings?.sectionTitle ?? 'What Medical Students Say About DoctorWallah';
+    const sectionSub = settings?.sectionSub ?? 'Real experiences and viva preparation journeys shared on camera by medical students across Bangladesh.';
 
     const rawItems = settings?.items;
     const items: VideoTestimonialItem[] = (Array.isArray(rawItems) && rawItems.length > 0)

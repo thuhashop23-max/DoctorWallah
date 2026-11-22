@@ -77,6 +77,29 @@ Route::get('teachers/{id}', [TeacherPublicController::class, 'getTeacherProfile'
 Route::get('instructors/{id}', [TeacherPublicController::class, 'getTeacherProfile']);
 Route::get('testimonials/marquee', [PublicCourseController::class, 'marqueeReviews']);
 
+Route::get('sync-medical-home', function(\Illuminate\Http\Request $request) {
+    if ($request->query('key') !== 'DWMedicalSync2026') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+    $page = \App\Models\Page::where('slug', 'home')->first();
+    if (!$page) {
+        $page = new \App\Models\Page();
+        $page->title = 'Home';
+        $page->slug = 'home';
+        $page->is_published = true;
+    }
+    $page->meta_title = 'DoctorWallah | Bangladesh’s #1 MBBS Online Learning Platform';
+    $page->meta_description = 'Comprehensive preparation for MBBS First Phase, Cards, Terms, and 1st Prof with dissection videos and marked standard books.';
+    $page->blocks = \App\Models\Page::defaultHomeBlocks();
+    $page->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Home page updated to MBBS medical theme successfully!',
+        'blocks_count' => count($page->blocks),
+    ]);
+});
+
 // Public Earn Points
 Route::prefix('earn-points')->group(function () {
     Route::get('courses', [EarnPointController::class, 'getCourses']);
