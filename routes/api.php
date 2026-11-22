@@ -709,54 +709,6 @@ Route::get('verify-imported-students', function (Request $request) {
     }
 });
 
-Route::get('create-admin-account', function (Request $request) {
-    if ($request->query('key') !== 'DWInspect2026Secret') {
-        return response()->json(['error' => 'Unauthorized'], 403);
-    }
-
-    $phone = '+8801580401289';
-    $user = \App\Models\User::where('phone', $phone)->orWhere('phone', '01580401289')->first();
-    if (!$user) {
-        $user = \App\Models\User::where('email', 'arpon@doctorwallah.com')->first();
-    }
-
-    if ($user) {
-        $user->name = 'Arpon';
-        $user->phone = $phone;
-        if (empty($user->email)) {
-            $user->email = 'arpon@doctorwallah.com';
-        }
-        $user->password = 'MJt#27766';
-        $user->role = \App\Models\User::ROLE_ADMIN;
-        $user->status = \App\Models\User::STATUS_ACTIVE;
-        $user->save();
-        $action = 'updated';
-    } else {
-        $user = \App\Models\User::create([
-            'name' => 'Arpon',
-            'phone' => $phone,
-            'email' => 'arpon@doctorwallah.com',
-            'password' => 'MJt#27766',
-            'role' => \App\Models\User::ROLE_ADMIN,
-            'status' => \App\Models\User::STATUS_ACTIVE,
-        ]);
-        $action = 'created';
-    }
-
-    return response()->json([
-        'status' => 'success',
-        'action' => $action,
-        'user' => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'phone' => $user->phone,
-            'email' => $user->email,
-            'role' => $user->role,
-            'status' => $user->status,
-        ],
-    ]);
-});
-
 Route::post('deploy/post-update', function (Request $request) {
     $secret = env('DEPLOY_SECRET');
     if (!$secret || $request->header('X-Deploy-Secret') !== $secret) {
