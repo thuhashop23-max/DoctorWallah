@@ -41,6 +41,7 @@ import { useCart } from '../../context/CartContext';
 import { StudentReviewsMarquee } from '../../components/home/StudentReviewsMarquee';
 import { PagePreloader } from '../../components/shared/PagePreloader';
 import { VideoTestimonialsCoverflow } from '../../components/home/VideoTestimonialsCoverflow';
+import { ClinicalCourseCard } from '../../components/shared/ClinicalCourseCard';
 
 interface FeaturedTeacher {
     id: number;
@@ -651,161 +652,12 @@ export const HomePage: React.FC = () => {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                         {courses.map((course) => (
-                            <div
+                            <ClinicalCourseCard
                                 key={course.id}
-                                className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-2xl hover:border-sky-400 dark:hover:border-sky-500 transition-all flex flex-col overflow-hidden relative"
-                            >
-                                {/* Thumbnail Header */}
-                                <Link to={`/courses/${course.slug}`} className="block relative aspect-video bg-slate-900 overflow-hidden cursor-pointer group/thumb">
-                                    {(course.thumbnail || (course as any).thumbnail_url) ? (
-                                        <img
-                                            src={getImageUrl(course.thumbnail || (course as any).thumbnail_url)}
-                                            alt={course.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 group-hover/thumb:scale-105 transition-transform duration-500"
-                                            onError={(e) => {
-                                                (e.currentTarget as HTMLElement).style.display = 'none';
-                                                const fallback = (e.currentTarget.parentElement?.querySelector('.fallback-thumb') as HTMLElement);
-                                                if (fallback) fallback.style.display = 'flex';
-                                            }}
-                                        />
-                                    ) : null}
-                                    <div className={`fallback-thumb w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center bg-gradient-to-tr from-slate-800 to-sky-950 text-white`}>
-                                        <BookOpen className="w-12 h-12 text-sky-400 opacity-60" />
-                                    </div>
-
-                                    {/* Discount Badge */}
-                                    {course.discount_percent && course.discount_percent > 0 ? (
-                                        <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-rose-600 text-white rounded-xl shadow-md">
-                                            {course.discount_percent}% OFF
-                                        </span>
-                                    ) : course.price === 0 ? (
-                                        <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-emerald-600 text-white rounded-xl shadow-md">
-                                            Free Course
-                                        </span>
-                                    ) : null}
-
-                                    {/* Category Pill on image */}
-                                    {course.categories && course.categories.length > 0 && (
-                                        <span className="absolute bottom-3 left-3 px-2.5 py-1 text-[11px] font-bold bg-black/70 backdrop-blur-xs text-white rounded-lg">
-                                            {course.categories[0].name}
-                                        </span>
-                                    )}
-                                </Link>
-
-                                {/* Content Body */}
-                                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                                    <div className="space-y-3">
-                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-                                            <span className="flex items-center gap-1">
-                                                <Video className="w-3.5 h-3.5 text-sky-500" />
-                                                <span>{course.lessons_count || 0} Lessons</span>
-                                            </span>
-                                            <span>•</span>
-                                            <span className="flex items-center gap-1">
-                                                <Users className="w-3.5 h-3.5 text-sky-500" />
-                                                <span>{(course.fake_enrollment_count || 0) + (course.enrollments_count || 0)} Students</span>
-                                            </span>
-                                        </div>
-
-                                        <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 transition-colors line-clamp-2">
-                                            <Link
-                                                to={`/courses/${course.slug}`}
-                                                className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors cursor-pointer"
-                                            >
-                                                {course.title}
-                                            </Link>
-                                        </h3>
-
-                                        {/* Course feature checklist */}
-                                        <div className="space-y-1.5 pt-1 text-xs text-slate-600 dark:text-slate-300">
-                                            {((course.features && Array.isArray(course.features) && course.features.length > 0)
-                                                ? course.features.filter((f: any) => typeof f === 'string' && f.trim().length > 0)
-                                                : [
-                                                    'Live & Full HD Recorded Class Archive',
-                                                    'Chapter-wise Lecture Sheets & Question Bank',
-                                                    'NexPilot AI 24/7 Instant Doubt Solver',
-                                                ]
-                                            ).slice(0, 4).map((feat: string, fIdx: number) => (
-                                                <div key={fIdx} className="flex items-start gap-1.5">
-                                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                                                    <span className="line-clamp-1 leading-tight">{feat}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Pricing & Instructor Row */}
-                                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                                        <div className="flex items-center justify-between">
-                                            <div className="text-xs font-medium text-slate-500 truncate mr-2">
-                                                Instructor: <span className="font-bold text-slate-800 dark:text-slate-200">
-                                                    {course.instructors && course.instructors.length > 0 
-                                                        ? course.instructors[0].name 
-                                                        : (course.instructor?.name || 'Expert Mentor')}
-                                                </span>
-                                            </div>
-
-                                            <div className="text-right shrink-0">
-                                                {course.is_enrolled ? (
-                                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-bold text-xs rounded-full border border-emerald-200 dark:border-emerald-800">
-                                                        <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                                                        <span>Enrolled</span>
-                                                    </span>
-                                                ) : course.price === 0 ? (
-                                                    <span className="text-lg font-black text-emerald-600">Free</span>
-                                                ) : (
-                                                    <div className="flex items-baseline gap-1.5">
-                                                        <span className="text-xl font-black text-sky-600 dark:text-sky-400">
-                                                            {formatBDT(
-                                                                course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price)
-                                                                    ? Number(course.sale_price)
-                                                                    : (course.effective_price ?? Number(course.price))
-                                                            )}
-                                                        </span>
-                                                        {course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price) && (
-                                                            <span className="text-xs text-slate-400 line-through">
-                                                                {formatBDT(course.price)}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        {/* Action buttons */}
-                                        <div className="grid grid-cols-2 gap-2 pt-1">
-                                            <Link
-                                                to={`/courses/${course.slug}`}
-                                                className="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-xs text-slate-700 dark:text-slate-200 text-center transition-all cursor-pointer flex items-center justify-center"
-                                            >
-                                                View Details
-                                            </Link>
-                                            {course.is_enrolled ? (
-                                                <Link
-                                                    to={`/learning/${course.id}`}
-                                                    className="py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20"
-                                                >
-                                                    <PlayCircle className="w-3.5 h-3.5" />
-                                                    <span>Start Class</span>
-                                                </Link>
-                                            ) : (
-                                                <button
-                                                    type="button"
-                                                    onClick={() => addToCart(course)}
-                                                    className={`py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs ${
-                                                        isInCart(course.id)
-                                                            ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
-                                                            : 'bg-[#25a2ee] hover:bg-[#1f8ed1] text-white shadow-sky-500/20'
-                                                    }`}
-                                                >
-                                                    <ShoppingCart className="w-3.5 h-3.5" />
-                                                    <span>{isInCart(course.id) ? 'In Cart' : 'Add to Cart'}</span>
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                course={course}
+                                addToCart={addToCart}
+                                isInCart={isInCart}
+                            />
                         ))}
                     </div>
                 )}
