@@ -405,3 +405,15 @@ html.dark {
   animation-play-state: paused;
 }
 
+/* Global Plyr Theme Colors -> DoctorWallah Brand Red (#A60201) */
+:root {
+  --plyr-color-main: #A60201;
+  --plyr-video-control-color-hover: #ffffff;
+  --plyr-video-control-background-hover: #A60201;
+  --plyr-range-thumb-background: #A60201;
+  --plyr-range-thumb-shadow: 0 0 10px rgba(166, 2, 1, 0.7);
+  --plyr-range-fill-background: #A60201;
+  --plyr-badge-text-color: #ffffff;
+  --plyr-badge-background: #A60201;
+}
+

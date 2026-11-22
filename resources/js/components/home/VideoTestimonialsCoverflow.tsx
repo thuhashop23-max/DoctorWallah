@@ -190,7 +190,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
             <div
                 key={`${item.id}-${targetIdx}-${size}`}
                 onClick={() => setActiveIndex(targetIdx)}
-                className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer border border-slate-700/60 dark:border-slate-800 shadow-xl hover:border-sky-400 hover:shadow-sky-500/30 transition-all duration-300 shrink-0 select-none ${
+                className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer border border-slate-700/60 dark:border-slate-800 shadow-xl hover:border-rose-500 hover:shadow-rose-600/30 transition-all duration-300 shrink-0 select-none ${
                     isSmall
                         ? 'hidden xl:block w-[52px] 2xl:w-[64px] h-[170px] sm:h-[230px] md:h-[260px] opacity-40 hover:opacity-85 scale-90'
                         : 'w-[44px] xs:w-[50px] sm:w-[68px] md:w-[82px] lg:w-[92px] h-[170px] xs:h-[195px] sm:h-[260px] md:h-[305px] lg:h-[340px] opacity-80 hover:opacity-100 hover:scale-[1.03]'
@@ -234,7 +234,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
     return (
         <section className="relative py-16 sm:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-900 dark:text-white overflow-hidden transition-colors duration-150 border-b border-slate-200 dark:border-slate-800">
             {/* Ambient Background Glows */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-sky-500/10 dark:bg-sky-500/15 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#A60201]/10 dark:bg-[#A60201]/15 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute top-1/3 left-1/4 w-[400px] h-[250px] bg-[#CC1200]/5 dark:bg-[#CC1200]/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -277,7 +277,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
                                 className={`absolute left-1 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl text-slate-700 dark:text-slate-200 flex items-center justify-center transition-all ${
                                     activeIndex === 0
                                         ? 'opacity-30 cursor-not-allowed pointer-events-none'
-                                        : 'hover:bg-sky-50 dark:hover:bg-slate-800 hover:text-sky-600 hover:scale-105 active:scale-95 cursor-pointer'
+                                        : 'hover:bg-rose-50 dark:hover:bg-slate-800 hover:text-[#A60201] hover:scale-105 active:scale-95 cursor-pointer'
                                 }`}
                             >
                                 <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -291,7 +291,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
                                 className={`absolute right-1 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl text-slate-700 dark:text-slate-200 flex items-center justify-center transition-all ${
                                     activeIndex === items.length - 1
                                         ? 'opacity-30 cursor-not-allowed pointer-events-none'
-                                        : 'hover:bg-sky-50 dark:hover:bg-slate-800 hover:text-sky-600 hover:scale-105 active:scale-95 cursor-pointer'
+                                        : 'hover:bg-rose-50 dark:hover:bg-slate-800 hover:text-[#A60201] hover:scale-105 active:scale-95 cursor-pointer'
                                 }`}
                             >
                                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -309,7 +309,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
 
                         {/* Center Active 16:9 Video Card */}
                         <div
-                            className="relative w-[260px] xs:w-[310px] sm:w-[460px] md:w-[540px] lg:w-[620px] aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 ring-4 ring-sky-500/20 cursor-pointer shrink-0 z-20 transition-all duration-300 group/center"
+                            className="relative w-[260px] xs:w-[310px] sm:w-[460px] md:w-[540px] lg:w-[620px] aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 ring-4 ring-[#A60201]/30 cursor-pointer shrink-0 z-20 transition-all duration-300 group/center"
                             onClick={() => handlePlayItem(activeItem)}
                         >
                             {/* Video Thumbnail */}
@@ -372,7 +372,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
                                     aria-label={`Go to slide ${dotIdx + 1}`}
                                     className={`transition-all duration-300 rounded-full cursor-pointer ${
                                         dotIdx === activeIndex
-                                            ? 'w-6 sm:w-8 h-2 bg-sky-500 shadow-md shadow-sky-500/40'
+                                            ? 'w-6 sm:w-8 h-2 bg-[#A60201] shadow-md shadow-[#A60201]/40'
                                             : 'w-2 h-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
                                     }`}
                                 />
@@ -405,7 +405,7 @@ export const VideoTestimonialsCoverflow: React.FC<VideoTestimonialsProps> = ({
                         {/* YouTube Embed Iframe */}
                         <iframe
                             className="w-full h-full"
-                            src={`https://www.youtube-nocookie.com/embed/${popupVideoId}?autoplay=1&rel=0&modestbranding=1`}
+                            src={`https://www.youtube-nocookie.com/embed/${popupVideoId}?autoplay=1&rel=0&modestbranding=1&color=red`}
                             title="YouTube video testimonial"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen

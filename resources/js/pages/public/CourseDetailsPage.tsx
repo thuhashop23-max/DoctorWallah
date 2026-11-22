@@ -1019,9 +1019,10 @@ export const CourseDetailsPage: React.FC = () => {
                                 {course.how_to_buy_url.includes('youtube.com') || course.how_to_buy_url.includes('youtu.be') ? (
                                     <iframe
                                         src={
-                                            course.how_to_buy_url.includes('embed')
+                                            (course.how_to_buy_url.includes('embed')
                                                 ? course.how_to_buy_url
-                                                : course.how_to_buy_url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/')
+                                                : course.how_to_buy_url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/')) +
+                                            (course.how_to_buy_url.includes('?') ? '&color=red' : '?color=red')
                                         }
                                         title="How to buy course"
                                         className="w-full h-full border-0"

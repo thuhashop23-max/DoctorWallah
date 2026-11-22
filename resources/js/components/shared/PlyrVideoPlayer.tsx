@@ -285,7 +285,7 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                     /* YouTube Plyr Embed with Protected Pointer Events */
                     <div className="plyr__video-embed w-full h-full">
                         <iframe
-                            src={`https://www.youtube.com/embed/${youtubeId}?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1`}
+                            src={`https://www.youtube.com/embed/${youtubeId}?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1&color=red`}
                             allowFullScreen
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerPolicy="strict-origin-when-cross-origin"
@@ -363,7 +363,7 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                             e.stopPropagation();
                             setQualityOpen((prev) => !prev);
                         }}
-                        className="plyr__control !h-7 !px-2.5 !py-0.5 !rounded-md !bg-white/10 hover:!bg-sky-600 !text-white !font-bold !text-[11px] flex items-center gap-1 transition-all border border-white/10"
+                        className="plyr__control !h-7 !px-2.5 !py-0.5 !rounded-md !bg-white/10 hover:!bg-[#A60201] !text-white !font-bold !text-[11px] flex items-center gap-1 transition-all border border-white/10"
                         title="Video Quality"
                         aria-label="Quality settings"
                     >
@@ -379,7 +379,7 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                         >
                             <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 flex items-center justify-between">
                                 <span>Video Quality</span>
-                                <span className="text-[9px] text-sky-400 font-bold">QUALITY</span>
+                                <span className="text-[9px] text-[#A60201] font-bold">QUALITY</span>
                             </div>
                             <div className="py-1">
                                 {QUALITY_OPTIONS.map((item) => (
@@ -387,9 +387,9 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                                         key={item.value}
                                         type="button"
                                         onClick={() => handleQualitySelect(item.value)}
-                                        className={`w-full px-3 py-2 text-left flex items-center justify-between hover:bg-sky-600/30 hover:text-white transition-colors text-xs ${
+                                        className={`w-full px-3 py-2 text-left flex items-center justify-between hover:bg-[#A60201]/25 hover:text-white transition-colors text-xs ${
                                             currentQuality === item.value 
-                                                ? 'text-sky-400 font-bold bg-sky-500/10' 
+                                                ? 'text-rose-400 font-bold bg-[#A60201]/15' 
                                                 : 'text-slate-300'
                                         }`}
                                     >
@@ -400,7 +400,7 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                                             </span>
                                         </div>
                                         {currentQuality === item.value && (
-                                            <Check className="w-3.5 h-3.5 text-sky-400" />
+                                            <Check className="w-3.5 h-3.5 text-rose-500" />
                                         )}
                                     </button>
                                 ))}
@@ -413,6 +413,16 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
 
             {/* Optimized Plyr Theme & Bottom Control Anchoring */}
             <style>{`
+                /* Plyr DoctorWallah Theme: Brand Red (#A60201) */
+                .plyr-protected-wrapper {
+                    --plyr-color-main: #A60201 !important;
+                    --plyr-video-control-color-hover: #ffffff !important;
+                    --plyr-video-control-background-hover: #A60201 !important;
+                    --plyr-range-thumb-background: #A60201 !important;
+                    --plyr-range-thumb-shadow: 0 0 10px rgba(166, 2, 1, 0.7) !important;
+                    --plyr-range-fill-background: #A60201 !important;
+                }
+
                 /* Ensure Fullscreen is at the extreme right */
                 .plyr-protected-wrapper .plyr__control[data-plyr="fullscreen"] {
                     order: 99 !important;
@@ -472,14 +482,14 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                     padding: 0 !important;
                 }
 
-                /* Custom Plyr theme color (Sky-600 #0284c7) */
+                /* Custom Plyr theme color (Brand Red #A60201) */
                 .plyr-protected-wrapper .plyr--full-ui input[type="range"] {
-                    color: #0284c7 !important;
+                    color: #A60201 !important;
                     cursor: pointer !important;
                 }
 
                 .plyr-protected-wrapper .plyr--full-ui input[type="range"]::-webkit-slider-thumb {
-                    box-shadow: 0 0 10px rgba(2, 132, 199, 0.7) !important;
+                    box-shadow: 0 0 10px rgba(166, 2, 1, 0.7) !important;
                     transition: transform 0.15s ease !important;
                 }
 
@@ -489,9 +499,9 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
 
                 /* Center large play button */
                 .plyr-protected-wrapper .plyr__control--overlaid {
-                    background: rgba(2, 132, 199, 0.95) !important;
+                    background: rgba(166, 2, 1, 0.95) !important;
                     backdrop-filter: blur(8px) !important;
-                    box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.5) !important;
+                    box-shadow: 0 10px 25px -5px rgba(166, 2, 1, 0.5) !important;
                     border-radius: 9999px !important;
                     padding: 18px !important;
                     z-index: 20 !important;
@@ -500,7 +510,7 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                 }
 
                 .plyr-protected-wrapper .plyr__control--overlaid:hover {
-                    background: #0284c7 !important;
+                    background: #A60201 !important;
                     transform: translate(-50%, -50%) scale(1.1) !important;
                 }
 
@@ -512,13 +522,53 @@ export const PlyrVideoPlayer: React.FC<PlyrVideoPlayerProps> = ({
                 }
 
                 .plyr-protected-wrapper .plyr__control:hover {
-                    background: rgba(255, 255, 255, 0.15) !important;
+                    background: rgba(166, 2, 1, 0.25) !important;
                     color: #ffffff !important;
                 }
 
                 .plyr-protected-wrapper .plyr__control:focus-visible {
-                    outline: 2px solid #38bdf8 !important;
+                    outline: 2px solid #A60201 !important;
                     outline-offset: 2px !important;
+                }
+
+                .plyr-protected-wrapper .plyr__control[aria-pressed="true"] {
+                    background: #A60201 !important;
+                    color: #ffffff !important;
+                }
+
+                /* Typography for time indicators */
+                .plyr-protected-wrapper .plyr__time {
+                    font-size: 12px !important;
+                    font-weight: 600 !important;
+                    font-variant-numeric: tabular-nums !important;
+                    color: #cbd5e1 !important;
+                    padding: 0 4px !important;
+                }
+
+                /* Settings popup menu with glassmorphism */
+                .plyr-protected-wrapper .plyr__menu__container {
+                    background: rgba(15, 23, 42, 0.96) !important;
+                    border: 1px solid rgba(51, 65, 85, 0.6) !important;
+                    border-radius: 12px !important;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+                    backdrop-filter: blur(12px) !important;
+                    color: #f8fafc !important;
+                    padding: 6px !important;
+                }
+
+                .plyr-protected-wrapper .plyr__menu__container .plyr__control {
+                    border-radius: 8px !important;
+                    color: #cbd5e1 !important;
+                    font-size: 13px !important;
+                }
+
+                .plyr-protected-wrapper .plyr__menu__container .plyr__control:hover {
+                    background: rgba(166, 2, 1, 0.2) !important;
+                    color: #ffffff !important;
+                }
+
+                .plyr-protected-wrapper .plyr__menu__container .plyr__control[aria-checked="true"] {
+                    color: #f87171 !important;
                 }
 
                 /* Typography for time indicators */
