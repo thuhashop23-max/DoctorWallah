@@ -82,8 +82,8 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <div className="max-w-6xl w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                {/* Left Column: Clinical Studio Brand Identity & Capabilities (Desktop) */}
-                <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
+                {/* Left Column: Clinical Studio Brand Identity & Capabilities */}
+                <div className="lg:col-span-6 space-y-6 text-center lg:text-left order-2 lg:order-1">
                     {/* Brand Logo & Eyebrow */}
                     <div className="space-y-4">
                         {logoUrl && !logoError ? (
@@ -159,7 +159,7 @@ export const LoginPage: React.FC = () => {
                 </div>
 
                 {/* Right Column: Secure Clinical Authentication Terminal */}
-                <div className="lg:col-span-6 max-w-md w-full mx-auto">
+                <div className="lg:col-span-6 max-w-md w-full mx-auto order-1 lg:order-2">
                     <div className="relative bg-[#0B101D]/90 backdrop-blur-2xl p-7 sm:p-9 rounded-[28px] border border-cyan-500/25 shadow-[0_0_60px_-15px_rgba(6,182,212,0.2)] space-y-6">
                         {/* Top Laser Hairline Accent */}
                         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/90 to-transparent pointer-events-none rounded-t-[28px]" />
