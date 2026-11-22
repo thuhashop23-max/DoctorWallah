@@ -52,8 +52,30 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
         ];
+    }
+
+    public function setPasswordAttribute($value): void
+    {
+        if (empty($value)) {
+            return;
+        }
+
+        // If already a WordPress hash or Bcrypt/Argon hash, store directly without double-hashing
+        if (
+            str_starts_with($value, '$P$') || 
+            str_starts_with($value, '$H$') || 
+            str_starts_with($value, '$wp$') || 
+            str_starts_with($value, '$2y$') || 
+            str_starts_with($value, '$2a$') ||
+            str_starts_with($value, '$2b$') ||
+            str_starts_with($value, '$argon2i$') ||
+            str_starts_with($value, '$argon2id$')
+        ) {
+            $this->attributes['password'] = $value;
+        } else {
+            $this->attributes['password'] = \Illuminate\Support\Facades\Hash::make($value);
+        }
     }
 
     public static function booted(): void

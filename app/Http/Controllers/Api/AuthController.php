@@ -114,14 +114,13 @@ class AuthController extends Controller
 
         $user = null;
         if ($normalizedPhone) {
-            $user = User::where('phone', $normalizedPhone)->first();
-        } elseif (filter_var($loginInput, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('phone', $normalizedPhone)->orWhere('phone', $loginInput)->first();
+        }
+        if (! $user && (filter_var($loginInput, FILTER_VALIDATE_EMAIL) || str_contains($loginInput, '@'))) {
             $user = User::where('email', strtolower($loginInput))->first();
-        } else {
-            return response()->json([
-                'message' => 'Please enter a valid mobile number or email.',
-                'errors' => ['phone' => ['Please enter a valid mobile number or email.']],
-            ], 422);
+        }
+        if (! $user) {
+            $user = User::where('phone', $loginInput)->orWhere('email', strtolower($loginInput))->first();
         }
 
         if (! $user) {
@@ -141,6 +140,14 @@ class AuthController extends Controller
             }
         } else {
             $passwordMatches = Hash::check($validated['password'], $user->password);
+            if (! $passwordMatches) {
+                $wpHasher = new \App\Services\WordPressHasher();
+                if ($wpHasher->checkPassword($validated['password'], $user->password)) {
+                    $passwordMatches = true;
+                    $user->password = Hash::make($validated['password']);
+                    $user->save();
+                }
+            }
         }
 
         if (! $passwordMatches) {

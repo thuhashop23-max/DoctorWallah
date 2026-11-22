@@ -656,6 +656,42 @@ Route::get('import-thuhashop-data', function (Request $request) {
     }
 });
 
+Route::get('inspect-thuhashop-students', function (Request $request) {
+    if ($request->query('key') !== 'DWInspect2026Secret') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    try {
+        @set_time_limit(300);
+        $importer = new \App\Services\ThuhashopStudentImporter();
+        return response()->json($importer->inspect());
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'file' => $e->getFile() . ':' . $e->getLine(),
+        ], 500);
+    }
+});
+
+Route::any('import-thuhashop-students', function (Request $request) {
+    if ($request->query('key') !== 'DWInspect2026Secret') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    try {
+        @set_time_limit(600);
+        $importer = new \App\Services\ThuhashopStudentImporter();
+        return response()->json($importer->importStudents());
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'file' => $e->getFile() . ':' . $e->getLine(),
+        ], 500);
+    }
+});
+
 Route::post('deploy/post-update', function (Request $request) {
     $secret = env('DEPLOY_SECRET');
     if (!$secret || $request->header('X-Deploy-Secret') !== $secret) {
