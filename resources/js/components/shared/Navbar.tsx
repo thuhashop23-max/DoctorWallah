@@ -248,7 +248,7 @@ export const Navbar: React.FC = () => {
             )}
 
             {/* Floating Capsule Header */}
-            <header className="w-full pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+            <header className="w-full pt-3 sm:pt-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div className="w-full bg-white/95 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 sm:py-2.5 min-h-[60px] sm:min-h-[64px] shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-2 sm:gap-4 transition-all duration-200">
                     
                     {/* Brand Logo (Left) */}
@@ -899,7 +899,7 @@ export const Navbar: React.FC = () => {
                         )
                     ) : (
                         /* Mode 2: Custom Text & Background Color Banner */
-                        <div className="py-2.5 sm:py-3 px-3 sm:px-6 lg:px-8">
+                        <div className="py-2.5 sm:py-3 px-4 sm:px-6 lg:px-8">
                             <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 text-xs sm:text-sm">
                                 <div className="flex items-center gap-2 min-w-0 pr-4 sm:pr-0">
                                     <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
