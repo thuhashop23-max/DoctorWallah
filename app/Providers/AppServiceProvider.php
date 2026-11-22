@@ -51,28 +51,35 @@ class AppServiceProvider extends ServiceProvider
 
             if (\Illuminate\Support\Facades\Schema::hasTable('website_settings')) {
                 $setting = \App\Models\WebsiteSetting::first();
-                if ($setting && ($setting->site_name !== 'DoctorWallah' || str_contains(json_encode($setting->header_settings), 'NovoNex') || str_contains(json_encode($setting->header_settings), 'Monologue'))) {
-                    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                if ($setting) {
+                    $needsUpdate = false;
                     $header = $setting->header_settings ?? [];
-                    $header['brand_title'] = 'DoctorWallah';
-                    $header['brand_subtitle'] = '';
-                    $footer = $setting->footer_settings ?? [];
-                    $footer['brand_title'] = 'DoctorWallah';
-                    $footer['brand_subtitle'] = '';
-                    $footer['description'] = 'Bangladesh’s premier online learning platform. Prepare for exams with the best mentors.';
-                    $footer['email'] = 'support@doctorwallah.com';
-                    $footer['copyright_text'] = '© 2026 DoctorWallah. All rights reserved.';
-
-                    $setting->update([
-                        'site_name' => 'DoctorWallah',
-                        'site_tagline' => 'Premier Online Learning & EdTech Platform',
-                        'contact_email' => 'support@doctorwallah.com',
-                        'copyright_text' => '© 2026 DoctorWallah. All rights reserved.',
-                        'primary_color' => '#CC1200',
-                        'secondary_color' => '#25a2ee',
-                        'header_settings' => $header,
-                        'footer_settings' => $footer,
-                    ]);
+                    if (str_contains($setting->logo_url ?? '', 'UFd2xvjiUeNRdjDw1f2SN59VXzce051KQo75l2pL')) {
+                        $setting->logo_url = '/logo.svg';
+                        $header['logo_url'] = '/logo.svg';
+                        $needsUpdate = true;
+                    }
+                    if ($setting->site_name !== 'DoctorWallah' || str_contains(json_encode($setting->header_settings), 'NovoNex') || str_contains(json_encode($setting->header_settings), 'Monologue')) {
+                        $header['brand_title'] = 'DoctorWallah';
+                        $header['brand_subtitle'] = '';
+                        $footer = $setting->footer_settings ?? [];
+                        $footer['brand_title'] = 'DoctorWallah';
+                        $footer['brand_subtitle'] = '';
+                        $footer['description'] = 'Bangladesh’s premier online learning platform. Prepare for exams with the best mentors.';
+                        $footer['email'] = 'support@doctorwallah.com';
+                        $footer['copyright_text'] = '© 2026 DoctorWallah. All rights reserved.';
+                        $setting->site_name = 'DoctorWallah';
+                        $setting->site_tagline = 'Premier Online Learning & EdTech Platform';
+                        $setting->contact_email = 'support@doctorwallah.com';
+                        $setting->copyright_text = '© 2026 DoctorWallah. All rights reserved.';
+                        $setting->primary_color = '#A60201';
+                        $setting->footer_settings = $footer;
+                        $needsUpdate = true;
+                    }
+                    if ($needsUpdate) {
+                        $setting->header_settings = $header;
+                        $setting->save();
+                    }
                 }
             }
 

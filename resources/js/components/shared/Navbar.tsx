@@ -29,7 +29,8 @@ import {
     ChevronRight,
     ShoppingCart,
     Sun,
-    Moon
+    Moon,
+    Stethoscope
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { HeaderMenuItem } from '../../types';
@@ -250,22 +251,31 @@ export const Navbar: React.FC = () => {
             <header className="w-full pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto">
                 <div className="w-full bg-white/95 dark:bg-[#0c0d12]/95 backdrop-blur-xl border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 sm:py-2.5 min-h-[60px] sm:min-h-[64px] shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_35px_-5px_rgba(0,0,0,0.7)] flex items-center justify-between gap-2 sm:gap-4 transition-all duration-200">
                     
-                    {/* Brand Logo (Left - Just the Logo as requested, no text) */}
+                    {/* Brand Logo (Left) */}
                     <div className="flex items-center shrink-0">
-                        <Link to="/" className="flex items-center group" title="DoctorWallah">
-                            {logoUrl && !logoError ? (
+                        <Link to="/" className="flex items-center gap-2.5 group" title="DoctorWallah">
+                            {logoUrl && !logoError && !logoUrl.includes('UFd2xvjiUeNRdjDw1f2SN59VXzce051KQo75l2pL') ? (
                                 <img
                                     src={logoUrl}
                                     alt={settings?.site_name || 'DoctorWallah'}
                                     onError={() => setLogoError(true)}
                                     style={{ height: `${Math.max(logoHeight, 38)}px` }}
-                                    className="w-auto max-w-[120px] sm:max-w-[160px] object-contain group-hover:opacity-95 transition-opacity"
+                                    className="w-auto max-w-[140px] sm:max-w-[180px] object-contain group-hover:opacity-95 transition-opacity"
                                 />
-                            ) : loading ? (
-                                <div style={{ height: '40px', width: '40px' }} className="shrink-0" />
                             ) : (
-                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl sm:rounded-full bg-[#A60201] text-white flex items-center justify-center font-black shadow-md shadow-[#A60201]/30 group-hover:scale-105 transition-transform shrink-0">
-                                    <GraduationCap className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" />
+                                <div className="flex items-center gap-2 sm:gap-2.5">
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#A60201] to-[#7B0100] text-white flex items-center justify-center font-black shadow-md shadow-[#A60201]/30 group-hover:scale-105 transition-transform shrink-0">
+                                        <Stethoscope className="w-5 h-5 text-white" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center text-base sm:text-lg font-black tracking-tight leading-none">
+                                            <span className="text-slate-900 dark:text-white">Doctor</span>
+                                            <span className="text-[#A60201]">Wallah</span>
+                                        </div>
+                                        <span className="text-[8px] sm:text-[9px] font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mt-0.5">
+                                            Medical Academy
+                                        </span>
+                                    </div>
                                 </div>
                             )}
                         </Link>
