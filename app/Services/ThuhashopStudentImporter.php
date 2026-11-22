@@ -152,9 +152,24 @@ class ThuhashopStudentImporter
             ];
 
             if (!empty($allUids) && empty($sampleGroupUsers)) {
-                $sampleUidsStr = implode(',', array_map('intval', array_slice($allUids, 0, 3)));
+                $sampleUidsStr = implode(',', array_map('intval', array_slice($allUids, 0, 5)));
                 $uStmt = $pdo->query("SELECT ID, user_login, user_email, display_name, user_pass FROM {$prefix}users WHERE ID IN ($sampleUidsStr)");
                 $sampleGroupUsers = $uStmt->fetchAll();
+
+                // Get meta for these samples
+                $smStmt = $pdo->query("SELECT user_id, meta_key, meta_value FROM {$prefix}usermeta WHERE user_id IN ($sampleUidsStr) AND meta_key IN ('digits_phone_no', 'digits_phone', 'billing_phone', 'phone', 'first_name', 'last_name')");
+                $smRows = $smStmt->fetchAll();
+                $smByUid = [];
+                foreach ($smRows as $r) {
+                    $smByUid[$r['user_id']][$r['meta_key']] = $r['meta_value'];
+                }
+                foreach ($sampleGroupUsers as &$su) {
+                    $su['meta'] = $smByUid[$su['ID']] ?? [];
+                    $su['resolved_phone'] = User::normalizePhone($su['user_login']) 
+                        ?: (User::normalizePhone($su['meta']['digits_phone_no'] ?? null) 
+                        ?: (User::normalizePhone($su['meta']['billing_phone'] ?? null) 
+                        ?: (User::normalizePhone($su['meta']['phone'] ?? null) ?: 'none')));
+                }
             }
         }
 
@@ -400,7 +415,7 @@ class ThuhashopStudentImporter
                 SELECT user_id, meta_key, meta_value 
                 FROM {$prefix}usermeta 
                 WHERE user_id IN ($inClause) 
-                  AND meta_key IN ('first_name', 'last_name', 'billing_phone', 'phone', 'digits_phone', 'digits_phone_no', 'billing_first_name', 'billing_last_name')
+                  AND meta_key IN ('first_name', 'last_name', 'billing_phone', 'phone', 'digits_phone', 'digits_phone_no', 'shipping_phone', 'billing_first_name', 'billing_last_name')
             ");
             $metaRows = $mStmt->fetchAll();
             $metaByUid = [];
@@ -434,16 +449,30 @@ class ThuhashopStudentImporter
                     $phoneCandidate = $loginCandidate;
                 }
 
-                // 2. Check digits_phone_no / digits_phone / billing_phone / phone
+                // 2. Check digits_phone_no / digits_phone concatenated
+                if (!$phoneCandidate && !empty($meta['digits_phone_no'])) {
+                    $p1 = User::normalizePhone($meta['digits_phone_no']);
+                    if ($p1 && User::isValidPhoneNumber($p1)) {
+                        $phoneCandidate = $p1;
+                    } else {
+                        $concat = ($meta['digits_phone'] ?? '') . $meta['digits_phone_no'];
+                        $p2 = User::normalizePhone($concat);
+                        if ($p2 && User::isValidPhoneNumber($p2)) {
+                            $phoneCandidate = $p2;
+                        }
+                    }
+                }
+
+                // 3. Check billing_phone / phone / shipping_phone
                 if (!$phoneCandidate) {
-                    $rawPhone = $meta['digits_phone_no'] ?? ($meta['digits_phone'] ?? ($meta['billing_phone'] ?? ($meta['phone'] ?? null)));
+                    $rawPhone = $meta['billing_phone'] ?? ($meta['phone'] ?? ($meta['shipping_phone'] ?? null));
                     $metaCandidate = User::normalizePhone($rawPhone);
                     if ($metaCandidate && User::isValidPhoneNumber($metaCandidate)) {
                         $phoneCandidate = $metaCandidate;
                     }
                 }
 
-                // 3. If still no valid phone, check display_name or fallback to unique placeholder
+                // 4. If still no valid phone, check display_name or fallback to unique placeholder
                 if (!$phoneCandidate) {
                     $dnCandidate = User::normalizePhone($wpUser['display_name']);
                     if ($dnCandidate && User::isValidPhoneNumber($dnCandidate)) {
@@ -473,7 +502,7 @@ class ThuhashopStudentImporter
                 }
 
                 if ($existingUser) {
-                    // Update user password to WordPress hash if they don't have a modern bcrypt or if keeping sync
+                    // Update user password to WordPress hash to ensure sync
                     $existingUser->password = $rawWpHash;
                     $existingUser->status = User::STATUS_ACTIVE;
                     if (empty($existingUser->phone) && $phoneCandidate) {
@@ -483,7 +512,12 @@ class ThuhashopStudentImporter
                     $targetUser = $existingUser;
                     $usersUpdated++;
                 } else {
-                    // Make email unique if clash exists
+                    // Guarantee phone uniqueness if conflict
+                    if (User::where('phone', $phoneCandidate)->exists()) {
+                        $phoneCandidate = '+8801999' . str_pad((string)$wpUid, 6, '0', STR_PAD_LEFT);
+                    }
+
+                    // Guarantee email uniqueness if conflict
                     if (User::where('email', $email)->exists()) {
                         $email = "wp_{$wpUid}_" . $email;
                     }
