@@ -319,7 +319,7 @@ export const HomePage: React.FC = () => {
         }
 
         return (
-            <div className="space-y-0 overflow-hidden font-sans bg-[#060913] text-white min-h-screen">
+            <div className="space-y-0 overflow-hidden font-sans bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-white min-h-screen transition-colors">
                 {customPage.custom_css && <style>{customPage.custom_css}</style>}
                 {displayBlocks.map((block) => (
                     <PageBlockRenderer key={block.id} block={block} isBuilder={false} />
@@ -336,15 +336,15 @@ export const HomePage: React.FC = () => {
     );
 
     return (
-        <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden font-sans bg-[#060202] text-white min-h-screen">
+        <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden font-sans bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-white min-h-screen transition-colors">
             {/* Top Live Campaign Ribbon */}
-            <div className="bg-[#0B0404]/90 border-b border-[#A60201]/30 text-white text-xs sm:text-sm py-2.5 px-4 font-mono text-center flex items-center justify-center gap-2 backdrop-blur-xl">
+            <div className="bg-red-50 dark:bg-[#0B0404]/90 border-b border-red-200 dark:border-[#A60201]/30 text-slate-800 dark:text-white text-xs sm:text-sm py-2.5 px-4 font-mono text-center flex items-center justify-center gap-2 backdrop-blur-xl">
                 <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
                 </span>
-                <span className="text-red-200">CLINICAL SUITE 2026: Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs!</span>
-                <Link to="/courses" className="underline font-bold text-red-400 hover:text-white transition-colors ml-1 hidden sm:inline">
+                <span className="text-slate-800 dark:text-red-200">CLINICAL SUITE 2026: Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs!</span>
+                <Link to="/courses" className="underline font-bold text-[#A60201] dark:text-red-400 hover:text-[#880101] dark:hover:text-white transition-colors ml-1 hidden sm:inline">
                     Explore Vault →
                 </Link>
             </div>
@@ -352,13 +352,13 @@ export const HomePage: React.FC = () => {
             {/* 1. MEDICAL DISCIPLINES & ACADEMIC SEGMENTS */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-                    <span className="text-xs font-bold text-red-300 uppercase tracking-widest bg-[#1A0303] px-3 py-1 rounded-full border border-[#A60201]/40">
+                    <span className="text-xs font-bold text-[#A60201] dark:text-red-300 uppercase tracking-widest bg-red-50 dark:bg-[#1A0303] px-3 py-1 rounded-full border border-red-200 dark:border-[#A60201]/40 shadow-xs">
                         MBBS Disciplines
                     </span>
-                    <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
                         Which Subject or Card are You Preparing For?
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-400">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                         Choose your target discipline and master your item, card & 1st Prof syllabus.
                     </p>
                 </div>
@@ -367,61 +367,61 @@ export const HomePage: React.FC = () => {
                     {/* Anatomy */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-white dark:bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg dark:hover:shadow-none transition-all cursor-pointer group flex flex-col items-center shadow-xs"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <Activity className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-white">Gross Anatomy</h3>
-                        <p className="text-[11px] text-slate-400 mt-1">Dissection, Viscera & Histo</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Gross Anatomy</h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Dissection, Viscera & Histo</p>
                     </div>
 
                     {/* Physiology */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-white dark:bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg dark:hover:shadow-none transition-all cursor-pointer group flex flex-col items-center shadow-xs"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <HeartPulse className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-white">Physiology</h3>
-                        <p className="text-[11px] text-slate-400 mt-1">Guyton & Ganong Concepts</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Physiology</h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Guyton & Ganong Concepts</p>
                     </div>
 
                     {/* Biochemistry */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-white dark:bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg dark:hover:shadow-none transition-all cursor-pointer group flex flex-col items-center shadow-xs"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <Microscope className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-white">Biochemistry</h3>
-                        <p className="text-[11px] text-slate-400 mt-1">Metabolism & Genetics</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Biochemistry</h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Metabolism & Genetics</p>
                     </div>
 
                     {/* Card & Term Bundles */}
                     <div 
                         onClick={() => handleCategoryClick('all')}
-                        className="bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="bg-white dark:bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg dark:hover:shadow-none transition-all cursor-pointer group flex flex-col items-center shadow-xs"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <Boxes className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-white">Card & Term Combos</h3>
-                        <p className="text-[11px] text-slate-400 mt-1">All-in-One Programs</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Card & Term Combos</h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">All-in-One Programs</p>
                     </div>
 
                     {/* Marked Books & OSPE */}
                     <Link 
                         to="/courses"
-                        className="col-span-2 sm:col-span-1 bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg transition-all cursor-pointer group flex flex-col items-center"
+                        className="col-span-2 sm:col-span-1 bg-white dark:bg-black/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-[#A60201]/60 hover:shadow-lg dark:hover:shadow-none transition-all cursor-pointer group flex flex-col items-center shadow-xs"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <BookOpen className="w-6 h-6" />
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-white">Marked Books & OSPE</h3>
-                        <p className="text-[11px] text-slate-400 mt-1">Soft Books & Viva Qs</p>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Marked Books & OSPE</h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Soft Books & Viva Qs</p>
                     </Link>
                 </div>
             </section>
@@ -430,8 +430,8 @@ export const HomePage: React.FC = () => {
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                     <div>
-                        <div className="flex items-center gap-2 text-xs font-bold text-sky-600 uppercase tracking-widest mb-1.5">
-                            <Flame className="w-4 h-4 text-rose-500" />
+                        <div className="flex items-center gap-2 text-xs font-bold text-[#A60201] dark:text-red-400 uppercase tracking-widest mb-1.5">
+                            <Flame className="w-4 h-4 text-[#A60201]" />
                             <span>Popular & Ongoing Courses</span>
                         </div>
                         <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -440,7 +440,7 @@ export const HomePage: React.FC = () => {
                     </div>
                     <Link
                         to="/courses"
-                        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
+                        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#A60201] dark:text-red-400 hover:underline"
                     >
                         <span>View All Courses</span>
                         <ArrowRight className="w-4 h-4" />
@@ -453,8 +453,8 @@ export const HomePage: React.FC = () => {
                         onClick={() => handleCategoryClick('all')}
                         className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
                             activeCategory === 'all'
-                                ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
-                                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800'
+                                ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
+                                : 'bg-white dark:bg-black/80 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800'
                         }`}
                     >
                         All Courses
@@ -467,8 +467,8 @@ export const HomePage: React.FC = () => {
                                 onClick={() => handleCategoryClick(cat.slug)}
                                 className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${
                                     isSelected
-                                        ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
-                                        : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800'
+                                        ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
+                                        : 'bg-white dark:bg-black/80 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800'
                                 }`}
                             >
                                 <span>{cat.name}</span>

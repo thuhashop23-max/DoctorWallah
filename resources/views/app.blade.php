@@ -34,11 +34,10 @@
         (function() {
             try {
                 var theme = localStorage.getItem('DoctorWallah_theme');
-                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (theme === 'dark' || (!theme && prefersDark)) {
-                    document.documentElement.classList.add('dark');
-                } else {
+                if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
+                } else {
+                    document.documentElement.classList.add('dark');
                 }
             } catch (_) {}
         })();
@@ -46,7 +45,7 @@
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/main.tsx'])
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-[#CC1200] selection:text-white">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#060202] dark:text-slate-100 font-sans antialiased selection:bg-[#A60201] selection:text-white">
     <div id="root"></div>
 </body>
 </html>

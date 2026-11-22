@@ -199,24 +199,24 @@ export const CourseDetailsPage: React.FC = () => {
     };
 
     return (
-        <div className="bg-[#050505] text-white min-h-screen pb-28 sm:pb-20 selection:bg-[#A60201] selection:text-white font-sans antialiased relative">
+        <div className="bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white min-h-screen pb-28 sm:pb-20 selection:bg-[#A60201] selection:text-white font-sans antialiased relative transition-colors">
             {/* Ambient Background Glows */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-gradient-to-b from-[#A60201]/12 via-[#A60201]/3 to-transparent blur-3xl pointer-events-none -z-10" />
 
             {/* Top Minimal Breadcrumb Bar */}
-            <div className="border-b border-white/[0.06] bg-[#070303]/80 backdrop-blur-md sticky top-0 z-30">
+            <div className="border-b border-slate-200 dark:border-white/[0.06] bg-white/80 dark:bg-[#070303]/80 backdrop-blur-md sticky top-0 z-30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 text-xs">
-                    <div className="flex items-center gap-2 text-slate-400 min-w-0">
-                        <Link to="/" className="hover:text-white transition-colors shrink-0">Home</Link>
-                        <span className="text-slate-600">/</span>
-                        <Link to="/courses" className="hover:text-white transition-colors shrink-0">Courses</Link>
-                        <span className="text-slate-600">/</span>
-                        <span className="text-slate-200 font-semibold truncate">{course.title}</span>
+                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 min-w-0">
+                        <Link to="/" className="hover:text-slate-900 dark:hover:text-white transition-colors shrink-0">Home</Link>
+                        <span className="text-slate-400 dark:text-slate-600">/</span>
+                        <Link to="/courses" className="hover:text-slate-900 dark:hover:text-white transition-colors shrink-0">Courses</Link>
+                        <span className="text-slate-400 dark:text-slate-600">/</span>
+                        <span className="text-slate-900 dark:text-slate-200 font-semibold truncate">{course.title}</span>
                     </div>
 
                     <div className="hidden sm:flex items-center gap-3 shrink-0">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-400/20">
-                            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-200 dark:border-amber-400/20">
+                            <Star className="w-3 h-3 fill-amber-500 dark:fill-amber-400 text-amber-500 dark:text-amber-400" />
                             <span>4.9 / 5.0 (Medical Peer Rated)</span>
                         </span>
                     </div>
@@ -224,7 +224,7 @@ export const CourseDetailsPage: React.FC = () => {
             </div>
 
             {/* Hero Section */}
-            <section className="relative pt-8 pb-12 sm:pt-12 sm:pb-16 border-b border-white/[0.06] bg-gradient-to-b from-[#0B0303] via-[#070202] to-[#050505] overflow-hidden">
+            <section className="relative pt-8 pb-12 sm:pt-12 sm:pb-16 border-b border-slate-200 dark:border-white/[0.06] bg-white dark:bg-gradient-to-b dark:from-[#0B0303] dark:via-[#070202] dark:to-[#050505] overflow-hidden">
                 {/* Subtle Grid Accent */}
                 <div className="absolute inset-0 bg-[radial-gradient(#A60201_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none" />
 
@@ -234,56 +234,56 @@ export const CourseDetailsPage: React.FC = () => {
                         <div className="lg:col-span-8 space-y-5">
                             {/* Eyebrow Label */}
                             <div className="flex flex-wrap items-center gap-2.5">
-                                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#A60201]/15 text-red-200 text-xs font-bold tracking-wider uppercase border border-[#A60201]/40 shadow-xs">
+                                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-200 text-xs font-bold tracking-wider uppercase border border-red-200 dark:border-[#A60201]/40 shadow-xs">
                                     <Stethoscope className="w-3.5 h-3.5 text-[#A60201]" />
                                     <span>MBBS Clinical Program</span>
                                 </span>
 
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] text-slate-300 text-xs font-medium border border-white/[0.08]">
-                                    <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-white/[0.08]">
+                                    <Activity className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                                     <span>BMDC Curriculum Aligned</span>
                                 </span>
                             </div>
 
                             {/* Main Title */}
-                            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.18] drop-shadow-sm">
+                            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.18] drop-shadow-xs">
                                 {course.title}
                             </h1>
 
                             {/* Subtitle / Description */}
-                            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl font-normal">
+                            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl font-normal">
                                 {course.short_description || 'Master clinical concepts, ward rounds, pharmacology, and exam-oriented high-yield topics with experienced medical mentors.'}
                             </p>
 
                             {/* Key Quick Metrics Bar */}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xs">
-                                    <span className="text-[11px] font-semibold text-slate-400 block">Classes</span>
-                                    <span className="text-lg font-black text-white mt-0.5 flex items-center gap-1.5">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] backdrop-blur-xs shadow-xs">
+                                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Classes</span>
+                                    <span className="text-lg font-black text-slate-900 dark:text-white mt-0.5 flex items-center gap-1.5">
                                         <BookOpen className="w-4 h-4 text-[#A60201]" />
                                         {course.lessons_count || 0} Lessons
                                     </span>
                                 </div>
 
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xs">
-                                    <span className="text-[11px] font-semibold text-slate-400 block">Enrolled</span>
-                                    <span className="text-lg font-black text-white mt-0.5 flex items-center gap-1.5">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] backdrop-blur-xs shadow-xs">
+                                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Enrolled</span>
+                                    <span className="text-lg font-black text-slate-900 dark:text-white mt-0.5 flex items-center gap-1.5">
                                         <Users className="w-4 h-4 text-[#A60201]" />
                                         {totalEnrolled}+ Doctors
                                     </span>
                                 </div>
 
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xs">
-                                    <span className="text-[11px] font-semibold text-slate-400 block">Validity</span>
-                                    <span className="text-lg font-black text-white mt-0.5 flex items-center gap-1.5">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] backdrop-blur-xs shadow-xs">
+                                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Validity</span>
+                                    <span className="text-lg font-black text-slate-900 dark:text-white mt-0.5 flex items-center gap-1.5">
                                         <Clock className="w-4 h-4 text-[#A60201]" />
                                         Lifetime
                                     </span>
                                 </div>
 
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xs">
-                                    <span className="text-[11px] font-semibold text-slate-400 block">Language</span>
-                                    <span className="text-lg font-black text-white mt-0.5 flex items-center gap-1.5">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] backdrop-blur-xs shadow-xs">
+                                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Language</span>
+                                    <span className="text-lg font-black text-slate-900 dark:text-white mt-0.5 flex items-center gap-1.5">
                                         <GraduationCap className="w-4 h-4 text-[#A60201]" />
                                         Bangla + Eng
                                     </span>
@@ -301,12 +301,12 @@ export const CourseDetailsPage: React.FC = () => {
                                                     key={inst.id}
                                                     src={getImageUrl(p)}
                                                     alt={inst.name}
-                                                    className="inline-block h-9 w-9 rounded-full ring-2 ring-[#070202] object-cover object-top"
+                                                    className="inline-block h-9 w-9 rounded-full ring-2 ring-white dark:ring-[#070202] object-cover object-top"
                                                 />
                                             ) : (
                                                 <div
                                                     key={inst.id}
-                                                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#A60201] text-xs font-black text-white ring-2 ring-[#070202]"
+                                                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#A60201] text-xs font-black text-white ring-2 ring-white dark:ring-[#070202]"
                                                 >
                                                     {inst.name.charAt(0).toUpperCase()}
                                                 </div>
@@ -314,8 +314,8 @@ export const CourseDetailsPage: React.FC = () => {
                                         })}
                                     </div>
                                     <div className="text-xs">
-                                        <span className="text-slate-400 block">Led by Medical Mentors</span>
-                                        <span className="font-extrabold text-white">
+                                        <span className="text-slate-500 dark:text-slate-400 block">Led by Medical Mentors</span>
+                                        <span className="font-extrabold text-slate-900 dark:text-white">
                                             {allInstructors.map((i: any) => i.name).join(', ')}
                                         </span>
                                     </div>
@@ -335,14 +335,14 @@ export const CourseDetailsPage: React.FC = () => {
                     {/* Left Column: Navigation Tabs & Tab Content */}
                     <div className="order-2 lg:order-1 lg:col-span-8 space-y-6">
                         {/* Modern Tab Bar */}
-                        <div className="flex items-center gap-2 p-1.5 bg-[#0D0404]/90 border border-white/[0.08] rounded-2xl overflow-x-auto no-scrollbar shadow-inner">
+                        <div className="flex items-center gap-2 p-1.5 bg-slate-100 dark:bg-[#0D0404]/90 border border-slate-200 dark:border-white/[0.08] rounded-2xl overflow-x-auto no-scrollbar shadow-inner">
                             <button
                                 type="button"
                                 onClick={() => setActiveTab('overview')}
                                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                                     activeTab === 'overview'
                                         ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-white dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.04]'
                                 }`}
                             >
                                 <FileText className="w-4 h-4" />
@@ -355,7 +355,7 @@ export const CourseDetailsPage: React.FC = () => {
                                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                                     activeTab === 'curriculum'
                                         ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-white dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.04]'
                                 }`}
                             >
                                 <Layers className="w-4 h-4" />
@@ -368,7 +368,7 @@ export const CourseDetailsPage: React.FC = () => {
                                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                                     activeTab === 'instructors'
                                         ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-white dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.04]'
                                 }`}
                             >
                                 <GraduationCap className="w-4 h-4" />
@@ -381,7 +381,7 @@ export const CourseDetailsPage: React.FC = () => {
                                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                                     activeTab === 'benefits'
                                         ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-white dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.04]'
                                 }`}
                             >
                                 <ShieldCheck className="w-4 h-4" />
@@ -393,12 +393,12 @@ export const CourseDetailsPage: React.FC = () => {
                         {activeTab === 'overview' && (
                             <div className="space-y-6 animate-in fade-in duration-200">
                                 {/* Description Card */}
-                                <div className="p-6 sm:p-8 rounded-3xl bg-[#0A0505] border border-white/[0.08] shadow-xl space-y-4">
-                                    <div className="flex items-center gap-2.5 pb-4 border-b border-white/[0.06]">
-                                        <div className="w-8 h-8 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center font-bold">
+                                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0A0505] border border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-xl space-y-4">
+                                    <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 dark:border-white/[0.06]">
+                                        <div className="w-8 h-8 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center font-bold">
                                             <FileText className="w-4 h-4" />
                                         </div>
-                                        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                                             Course Details & Syllabus Breakdown
                                         </h2>
                                     </div>
@@ -406,51 +406,51 @@ export const CourseDetailsPage: React.FC = () => {
                                     {course.description ? (
                                         <MathView
                                             content={course.description}
-                                            className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans max-w-none prose prose-invert"
+                                            className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-sans max-w-none prose prose-slate dark:prose-invert"
                                         />
                                     ) : (
-                                        <p className="text-sm text-slate-400 italic">Course description will be published soon.</p>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400 italic">Course description will be published soon.</p>
                                     )}
                                 </div>
 
                                 {/* Class Highlights Bento Grid */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="p-5 rounded-2xl bg-[#0D0505] border border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
-                                        <div className="w-9 h-9 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
+                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0D0505] border border-slate-200 dark:border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
+                                        <div className="w-9 h-9 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
                                             <Video className="w-4 h-4" />
                                         </div>
-                                        <h3 className="text-sm font-bold text-white">Full HD Video Classes</h3>
-                                        <p className="text-xs text-slate-400 leading-relaxed">
+                                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">Full HD Video Classes</h3>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                             Watch every lecture on your own schedule with zero ads, high-speed streaming, and playback speed control.
                                         </p>
                                     </div>
 
-                                    <div className="p-5 rounded-2xl bg-[#0D0505] border border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
-                                        <div className="w-9 h-9 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
+                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0D0505] border border-slate-200 dark:border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
+                                        <div className="w-9 h-9 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
                                             <Download className="w-4 h-4" />
                                         </div>
-                                        <h3 className="text-sm font-bold text-white">Annotated Medical Notes</h3>
-                                        <p className="text-xs text-slate-400 leading-relaxed">
+                                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">Annotated Medical Notes</h3>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                             Download high-resolution presentation slides, clinical diagrams, formulas, and mnemonics in PDF.
                                         </p>
                                     </div>
 
-                                    <div className="p-5 rounded-2xl bg-[#0D0505] border border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
-                                        <div className="w-9 h-9 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
+                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0D0505] border border-slate-200 dark:border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
+                                        <div className="w-9 h-9 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
                                             <Stethoscope className="w-4 h-4" />
                                         </div>
-                                        <h3 className="text-sm font-bold text-white">Ward & Clinical Correlation</h3>
-                                        <p className="text-xs text-slate-400 leading-relaxed">
+                                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">Ward & Clinical Correlation</h3>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                             Bridging textbook theory with clinical bedside case presentations and OSPE/viva questions.
                                         </p>
                                     </div>
 
-                                    <div className="p-5 rounded-2xl bg-[#0D0505] border border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
-                                        <div className="w-9 h-9 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
+                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0D0505] border border-slate-200 dark:border-[#A60201]/20 hover:border-[#A60201]/50 transition-colors space-y-2">
+                                        <div className="w-9 h-9 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center">
                                             <HelpCircle className="w-4 h-4" />
                                         </div>
-                                        <h3 className="text-sm font-bold text-white">Direct Mentor Doubt Clearing</h3>
-                                        <p className="text-xs text-slate-400 leading-relaxed">
+                                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">Direct Mentor Doubt Clearing</h3>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                             Ask questions directly to doctors in the dedicated discussion panel for instant conceptual clarity.
                                         </p>
                                     </div>
@@ -461,14 +461,14 @@ export const CourseDetailsPage: React.FC = () => {
                         {/* Tab 2: Curriculum */}
                         {activeTab === 'curriculum' && (
                             <div className="space-y-4 animate-in fade-in duration-200">
-                                <div className="p-5 sm:p-6 rounded-3xl bg-[#0A0505] border border-white/[0.08] shadow-xl space-y-4">
-                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-white/[0.06]">
+                                <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#0A0505] border border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-xl space-y-4">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-white/[0.06]">
                                         <div>
-                                            <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                                            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
                                                 <Layers className="w-5 h-5 text-[#A60201]" />
                                                 <span>Complete Syllabus Breakdown</span>
                                             </h2>
-                                            <p className="text-xs text-slate-400 mt-1">
+                                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                                 {course.sections?.length || 0} Modules • {course.lessons_count || 0} Lectures • Comprehensive Clinical Coverage
                                             </p>
                                         </div>
@@ -497,25 +497,25 @@ export const CourseDetailsPage: React.FC = () => {
                                                 return (
                                                     <div
                                                         key={section.id}
-                                                        className="border border-white/[0.06] rounded-2xl overflow-hidden bg-[#0D0505] transition-colors"
+                                                        className="border border-slate-200 dark:border-white/[0.06] rounded-2xl overflow-hidden bg-slate-50 dark:bg-[#0D0505] transition-colors"
                                                     >
                                                         {/* Section Header */}
                                                         <button
                                                             type="button"
                                                             onClick={() => toggleSection(section.id)}
-                                                            className="w-full px-5 py-4 bg-[#110505] hover:bg-[#170707] flex items-center justify-between text-left transition-colors cursor-pointer border-b border-white/[0.04]"
+                                                            className="w-full px-5 py-4 bg-slate-100/80 hover:bg-slate-200/60 dark:bg-[#110505] dark:hover:bg-[#170707] flex items-center justify-between text-left transition-colors cursor-pointer border-b border-slate-200 dark:border-white/[0.04]"
                                                         >
                                                             <div className="space-y-0.5">
                                                                 <span className="text-[11px] font-black text-[#A60201] uppercase tracking-wider block">
                                                                     Module {sIndex + 1 < 10 ? `0${sIndex + 1}` : sIndex + 1}
                                                                 </span>
-                                                                <h4 className="text-sm sm:text-base font-bold text-white">
+                                                                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
                                                                     {section.title}
                                                                 </h4>
                                                             </div>
 
-                                                            <div className="flex items-center gap-3 text-xs text-slate-400 shrink-0">
-                                                                <span className="bg-black/60 px-2.5 py-1 rounded-lg border border-white/[0.08] font-bold text-slate-300">
+                                                            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 shrink-0">
+                                                                <span className="bg-white dark:bg-black/60 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/[0.08] font-bold text-slate-700 dark:text-slate-300 shadow-2xs">
                                                                     {section.lessons?.length || 0} Classes
                                                                 </span>
                                                                 {isOpen ? <ChevronUp className="w-4 h-4 text-[#A60201]" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
@@ -524,7 +524,7 @@ export const CourseDetailsPage: React.FC = () => {
 
                                                         {/* Section Lessons */}
                                                         {isOpen && (
-                                                            <div className="divide-y divide-white/[0.04] bg-[#0A0404]">
+                                                            <div className="divide-y divide-slate-100 dark:divide-white/[0.04] bg-white dark:bg-[#0A0404]">
                                                                 {section.lessons?.map((lesson, lIndex) => {
                                                                     const isTeacherOrAdmin = Boolean(user && (user.role === 'admin' || (user.role === 'teacher' && course?.instructors?.some((i: any) => i.id === user.id))));
                                                                     const isPurchased = Boolean(isEnrolled || isTeacherOrAdmin);
@@ -536,23 +536,23 @@ export const CourseDetailsPage: React.FC = () => {
                                                                             <Link
                                                                                 key={lesson.id}
                                                                                 to={lessonUrl}
-                                                                                className="px-5 py-3.5 flex items-center justify-between hover:bg-[#160606] transition-colors text-sm group cursor-pointer"
+                                                                                className="px-5 py-3.5 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#160606] transition-colors text-sm group cursor-pointer"
                                                                             >
                                                                                 <div className="flex items-center gap-3 min-w-0">
                                                                                     {isPurchased ? (
-                                                                                        <Unlock className="w-4 h-4 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
+                                                                                        <Unlock className="w-4 h-4 text-emerald-500 shrink-0 group-hover:scale-110 transition-transform" />
                                                                                     ) : (
                                                                                         <PlayCircle className="w-4 h-4 text-[#A60201] shrink-0 group-hover:scale-110 transition-transform" />
                                                                                     )}
-                                                                                    <span className="text-slate-200 font-medium group-hover:text-red-200 transition-colors truncate">
+                                                                                    <span className="text-slate-800 dark:text-slate-200 font-medium group-hover:text-[#A60201] dark:group-hover:text-red-200 transition-colors truncate">
                                                                                         Class {lIndex + 1}: {lesson.title}
                                                                                     </span>
                                                                                 </div>
 
                                                                                 <div className="flex items-center gap-3 shrink-0">
                                                                                     {lesson.is_preview && !isPurchased ? (
-                                                                                        <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1 shadow-2xs">
-                                                                                            <PlayCircle className="w-3 h-3 text-emerald-400" /> Free Preview
+                                                                                        <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1 shadow-2xs">
+                                                                                            <PlayCircle className="w-3 h-3 text-emerald-500 dark:text-emerald-400" /> Free Preview
                                                                                         </span>
                                                                                     ) : (
                                                                                         <span className="text-xs font-bold text-[#A60201] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
@@ -560,7 +560,7 @@ export const CourseDetailsPage: React.FC = () => {
                                                                                             <ArrowRight className="w-3.5 h-3.5" />
                                                                                         </span>
                                                                                     )}
-                                                                                    <span className="text-xs text-slate-400 font-mono">
+                                                                                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                                                                                         {lesson.duration_minutes} mins
                                                                                     </span>
                                                                                 </div>
@@ -577,22 +577,22 @@ export const CourseDetailsPage: React.FC = () => {
                                                                                     enrollCard.scrollIntoView({ behavior: 'smooth' });
                                                                                 }
                                                                             }}
-                                                                            className="px-5 py-3.5 flex items-center justify-between bg-black/20 hover:bg-black/40 text-sm cursor-not-allowed opacity-75 transition-colors"
+                                                                            className="px-5 py-3.5 flex items-center justify-between bg-slate-50/50 dark:bg-black/20 hover:bg-slate-100/60 dark:hover:bg-black/40 text-sm cursor-not-allowed opacity-75 transition-colors"
                                                                             title="Enroll in this course to unlock this class"
                                                                         >
                                                                             <div className="flex items-center gap-3 min-w-0">
-                                                                                <Lock className="w-4 h-4 text-slate-500 shrink-0" />
-                                                                                <span className="text-slate-400 font-medium truncate">
+                                                                                <Lock className="w-4 h-4 text-slate-400 shrink-0" />
+                                                                                <span className="text-slate-500 dark:text-slate-400 font-medium truncate">
                                                                                     Class {lIndex + 1}: {lesson.title}
                                                                                 </span>
                                                                             </div>
 
                                                                             <div className="flex items-center gap-3 shrink-0">
-                                                                                <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1">
+                                                                                <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
                                                                                     <Lock className="w-3 h-3" />
                                                                                     Locked
                                                                                 </span>
-                                                                                <span className="text-xs text-slate-500 font-mono">
+                                                                                <span className="text-xs text-slate-400 font-mono">
                                                                                     {lesson.duration_minutes} mins
                                                                                 </span>
                                                                             </div>
@@ -605,7 +605,7 @@ export const CourseDetailsPage: React.FC = () => {
                                                 );
                                             })
                                         ) : (
-                                            <p className="text-sm text-slate-400 text-center py-8">
+                                            <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-8">
                                                 Curriculum for this course will be updated shortly.
                                             </p>
                                         )}
@@ -617,13 +617,13 @@ export const CourseDetailsPage: React.FC = () => {
                         {/* Tab 3: Faculty / Instructors */}
                         {activeTab === 'instructors' && (
                             <div className="space-y-4 animate-in fade-in duration-200">
-                                <div className="p-6 sm:p-8 rounded-3xl bg-[#0A0505] border border-white/[0.08] shadow-xl space-y-6">
-                                    <div className="pb-4 border-b border-white/[0.06]">
-                                        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0A0505] border border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-xl space-y-6">
+                                    <div className="pb-4 border-b border-slate-100 dark:border-white/[0.06]">
+                                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
                                             <GraduationCap className="w-5 h-5 text-[#A60201]" />
                                             <span>Course Instructors & Academic Mentors</span>
                                         </h2>
-                                        <p className="text-xs text-slate-400 mt-1">
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                             Learn directly from qualified medical graduates and experienced teachers.
                                         </p>
                                     </div>
@@ -648,10 +648,10 @@ export const CourseDetailsPage: React.FC = () => {
                                                 return (
                                                     <div 
                                                         key={teacher.id} 
-                                                        className="p-5 rounded-2xl border border-white/[0.06] bg-[#0E0505] hover:border-[#A60201]/50 hover:shadow-lg hover:shadow-[#A60201]/10 transition-all flex items-center gap-4 group"
+                                                        className="p-5 rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-[#0E0505] hover:border-[#A60201]/50 hover:shadow-lg dark:hover:shadow-[#A60201]/10 transition-all flex items-center gap-4 group"
                                                     >
                                                         {/* Avatar */}
-                                                        <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border border-[#A60201]/40 bg-black p-0.5 shadow-md">
+                                                        <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-200 dark:border-[#A60201]/40 bg-slate-100 dark:bg-black p-0.5 shadow-xs">
                                                             {photoSrc ? (
                                                                 <img
                                                                     src={photoSrc}
@@ -664,7 +664,7 @@ export const CourseDetailsPage: React.FC = () => {
                                                                     }}
                                                                 />
                                                             ) : null}
-                                                            <div className={`teacher-fallback-avatar w-full h-full ${photoSrc ? 'hidden' : 'flex'} items-center justify-center rounded-[14px] bg-gradient-to-tr from-[#A60201] to-black text-white font-black text-2xl`}>
+                                                            <div className={`teacher-fallback-avatar w-full h-full ${photoSrc ? 'hidden' : 'flex'} items-center justify-center rounded-[14px] bg-gradient-to-tr from-[#A60201] to-slate-900 text-white font-black text-2xl`}>
                                                                 {teacher.name ? teacher.name.charAt(0).toUpperCase() : 'D'}
                                                             </div>
                                                         </div>
@@ -673,15 +673,15 @@ export const CourseDetailsPage: React.FC = () => {
                                                         <div className="min-w-0 flex-1">
                                                             <Link 
                                                                 to={`/instructors/${teacher.id}`}
-                                                                className="font-bold text-white text-base hover:text-red-300 transition-colors line-clamp-1 block cursor-pointer"
+                                                                className="font-bold text-slate-900 dark:text-white text-base hover:text-[#A60201] dark:hover:text-red-300 transition-colors line-clamp-1 block cursor-pointer"
                                                             >
                                                                 {teacher.name}
                                                             </Link>
-                                                            <p className="text-xs text-red-300 font-medium mt-0.5 line-clamp-1">
+                                                            <p className="text-xs text-[#A60201] dark:text-red-300 font-medium mt-0.5 line-clamp-1">
                                                                 {designation}
                                                             </p>
                                                             {institution && (
-                                                                <p className="text-[11px] text-slate-400 font-medium mt-0.5 line-clamp-1">
+                                                                <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5 line-clamp-1">
                                                                     {institution}
                                                                 </p>
                                                             )}
@@ -690,13 +690,13 @@ export const CourseDetailsPage: React.FC = () => {
                                                 );
                                             })
                                         ) : (
-                                            <div className="p-5 rounded-2xl border border-white/[0.06] bg-[#0E0505] flex items-center gap-4">
-                                                <div className="w-16 h-16 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/40 flex items-center justify-center shrink-0 text-white font-black text-2xl">
+                                            <div className="p-5 rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-[#0E0505] flex items-center gap-4">
+                                                <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 border border-red-200 dark:border-[#A60201]/40 flex items-center justify-center shrink-0 text-[#A60201] font-black text-2xl">
                                                     DW
                                                 </div>
                                                 <div>
-                                                    <h4 className="font-bold text-white text-base">DoctorWallah Clinical Faculty</h4>
-                                                    <p className="text-xs text-slate-400 mt-0.5">Experienced Medical Doctors & Academic Specialists</p>
+                                                    <h4 className="font-bold text-slate-900 dark:text-white text-base">DoctorWallah Clinical Faculty</h4>
+                                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Experienced Medical Doctors & Academic Specialists</p>
                                                 </div>
                                             </div>
                                         )}
@@ -708,22 +708,22 @@ export const CourseDetailsPage: React.FC = () => {
                         {/* Tab 4: What's Included / Benefits */}
                         {activeTab === 'benefits' && (
                             <div className="space-y-4 animate-in fade-in duration-200">
-                                <div className="p-6 sm:p-8 rounded-3xl bg-[#0A0505] border border-white/[0.08] shadow-xl space-y-5">
-                                    <div className="pb-4 border-b border-white/[0.06]">
-                                        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0A0505] border border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-xl space-y-5">
+                                    <div className="pb-4 border-b border-slate-100 dark:border-white/[0.06]">
+                                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
                                             <ShieldCheck className="w-5 h-5 text-[#A60201]" />
                                             <span>Full Course Privileges & Included Material</span>
                                         </h2>
-                                        <p className="text-xs text-slate-400 mt-1">
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                             All features unlocked immediately upon enrollment verification.
                                         </p>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                                         {courseFeatures.map((feat, idx) => (
-                                            <div key={idx} className="p-4 rounded-2xl bg-[#0E0505] border border-white/[0.04] flex items-start gap-3">
+                                            <div key={idx} className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0E0505] border border-slate-200 dark:border-white/[0.04] flex items-start gap-3">
                                                 <CheckCircle2 className="w-4 h-4 text-[#A60201] shrink-0 mt-0.5" />
-                                                <span className="text-xs sm:text-sm font-medium text-slate-200 leading-snug">{feat}</span>
+                                                <span className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-snug">{feat}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -734,12 +734,12 @@ export const CourseDetailsPage: React.FC = () => {
 
                     {/* Right Column: Sticky Elegant Purchase Card */}
                     <div className="order-1 lg:order-2 lg:col-span-4 -mt-6 sm:-mt-8 lg:-mt-48 xl:-mt-52 relative z-20">
-                        <div id="enroll-section-card" className="sticky top-20 bg-[#0C0505]/95 backdrop-blur-xl rounded-3xl border border-[#A60201]/30 shadow-2xl shadow-black/90 overflow-hidden space-y-5 p-5 sm:p-6 ring-1 ring-white/[0.05]">
+                        <div id="enroll-section-card" className="sticky top-20 bg-white dark:bg-[#0C0505]/95 backdrop-blur-xl rounded-3xl border border-slate-200 dark:border-[#A60201]/30 shadow-xl dark:shadow-2xl dark:shadow-black/90 overflow-hidden space-y-5 p-5 sm:p-6 ring-1 ring-slate-200/50 dark:ring-white/[0.05]">
                             {/* Top Laser Accent */}
                             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#A60201] to-transparent shadow-[0_0_12px_#A60201]" />
 
                             {/* Media Preview Box */}
-                            <div className="aspect-video bg-black rounded-2xl overflow-hidden -mx-2 -mt-2 border border-white/[0.08] relative group">
+                            <div className="aspect-video bg-black rounded-2xl overflow-hidden -mx-2 -mt-2 border border-slate-200 dark:border-white/[0.08] relative group">
                                 {(course.thumbnail || (course as any).thumbnail_url) ? (
                                     <img 
                                         src={getImageUrl(course.thumbnail || (course as any).thumbnail_url)} 
@@ -752,7 +752,7 @@ export const CourseDetailsPage: React.FC = () => {
                                         }}
                                     />
                                 ) : null}
-                                <div className={`course-fallback-img w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center text-white bg-[#0A0202]`}>
+                                <div className={`course-fallback-img w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center text-white bg-slate-900 dark:bg-[#0A0202]`}>
                                     <BookOpen className="w-12 h-12 text-[#A60201] opacity-70" />
                                 </div>
 
@@ -772,23 +772,23 @@ export const CourseDetailsPage: React.FC = () => {
 
                             {/* Enrolled & Class Schedule Strip */}
                             <div className="grid grid-cols-2 gap-2.5">
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-2.5">
-                                    <div className="w-8 h-8 rounded-xl bg-[#A60201]/15 text-[#A60201] flex items-center justify-center shrink-0">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5">
+                                    <div className="w-8 h-8 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] flex items-center justify-center shrink-0">
                                         <Users className="w-4 h-4" />
                                     </div>
                                     <div className="min-w-0">
-                                        <span className="text-[10px] font-bold text-slate-400 block truncate">Total Students</span>
-                                        <span className="text-sm font-black text-white block">{totalEnrolled}</span>
+                                        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block truncate">Total Students</span>
+                                        <span className="text-sm font-black text-slate-900 dark:text-white block">{totalEnrolled}</span>
                                     </div>
                                 </div>
 
-                                <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-2.5">
-                                    <div className="w-8 h-8 rounded-xl bg-[#A60201]/15 text-red-300 flex items-center justify-center shrink-0">
+                                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5">
+                                    <div className="w-8 h-8 rounded-xl bg-red-50 dark:bg-[#A60201]/15 text-[#A60201] dark:text-red-300 flex items-center justify-center shrink-0">
                                         <Calendar className="w-4 h-4" />
                                     </div>
                                     <div className="min-w-0">
-                                        <span className="text-[10px] font-bold text-slate-400 block truncate">Schedule</span>
-                                        <span className="text-xs font-black text-red-200 block truncate">
+                                        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block truncate">Schedule</span>
+                                        <span className="text-xs font-black text-[#A60201] dark:text-red-200 block truncate">
                                             {course.class_starts_at || 'Immediate'}
                                         </span>
                                     </div>
@@ -797,14 +797,14 @@ export const CourseDetailsPage: React.FC = () => {
 
                             {/* Coupon & Live Countdown Timer */}
                             {!isEnrolled && Boolean(course.show_coupon_timer) && (Boolean(promoCoupon) || (Boolean(course.discount_deadline) && (timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0))) && (
-                                <div className="border border-dashed border-[#A60201]/40 bg-[#120404] rounded-2xl p-3 sm:p-3.5 space-y-2.5">
+                                <div className="border border-dashed border-[#A60201]/40 bg-red-50/50 dark:bg-[#120404] rounded-2xl p-3 sm:p-3.5 space-y-2.5">
                                     {Boolean(promoCoupon) && (
                                         <div className="flex items-center justify-between gap-2">
-                                            <div className="bg-black/70 border border-[#A60201]/40 rounded-xl px-2.5 py-1 font-mono font-bold text-red-200 text-xs truncate">
+                                            <div className="bg-white dark:bg-black/70 border border-slate-200 dark:border-[#A60201]/40 rounded-xl px-2.5 py-1 font-mono font-bold text-[#A60201] dark:text-red-200 text-xs truncate">
                                                 {promoCoupon}
                                             </div>
                                             {Boolean(discountText) && (
-                                                <span className="text-xs font-black text-red-400">
+                                                <span className="text-xs font-black text-[#A60201] dark:text-red-400">
                                                     {discountText}
                                                 </span>
                                             )}
@@ -821,21 +821,21 @@ export const CourseDetailsPage: React.FC = () => {
                                     {/* Countdown */}
                                     {Boolean(course.discount_deadline) && (timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0) && (
                                         <div className="grid grid-cols-4 gap-1.5 text-center pt-1">
-                                            <div className="bg-black/60 rounded-xl py-1.5 px-1 border border-white/[0.04]">
-                                                <span className="text-sm font-black text-white block leading-tight">{timeLeft.days}</span>
-                                                <span className="text-[9px] font-semibold text-slate-400">Days</span>
+                                            <div className="bg-white dark:bg-black/60 rounded-xl py-1.5 px-1 border border-slate-200 dark:border-white/[0.04]">
+                                                <span className="text-sm font-black text-slate-900 dark:text-white block leading-tight">{timeLeft.days}</span>
+                                                <span className="text-[9px] font-semibold text-slate-500 dark:text-slate-400">Days</span>
                                             </div>
-                                            <div className="bg-black/60 rounded-xl py-1.5 px-1 border border-white/[0.04]">
-                                                <span className="text-sm font-black text-white block leading-tight">{timeLeft.hours}</span>
-                                                <span className="text-[9px] font-semibold text-slate-400">Hours</span>
+                                            <div className="bg-white dark:bg-black/60 rounded-xl py-1.5 px-1 border border-slate-200 dark:border-white/[0.04]">
+                                                <span className="text-sm font-black text-slate-900 dark:text-white block leading-tight">{timeLeft.hours}</span>
+                                                <span className="text-[9px] font-semibold text-slate-500 dark:text-slate-400">Hours</span>
                                             </div>
-                                            <div className="bg-black/60 rounded-xl py-1.5 px-1 border border-white/[0.04]">
-                                                <span className="text-sm font-black text-white block leading-tight">{timeLeft.minutes}</span>
-                                                <span className="text-[9px] font-semibold text-slate-400">Mins</span>
+                                            <div className="bg-white dark:bg-black/60 rounded-xl py-1.5 px-1 border border-slate-200 dark:border-white/[0.04]">
+                                                <span className="text-sm font-black text-slate-900 dark:text-white block leading-tight">{timeLeft.minutes}</span>
+                                                <span className="text-[9px] font-semibold text-slate-500 dark:text-slate-400">Mins</span>
                                             </div>
-                                            <div className="bg-black/60 rounded-xl py-1.5 px-1 border border-white/[0.04]">
+                                            <div className="bg-white dark:bg-black/60 rounded-xl py-1.5 px-1 border border-slate-200 dark:border-white/[0.04]">
                                                 <span className="text-sm font-black text-[#A60201] block leading-tight">{timeLeft.seconds}</span>
-                                                <span className="text-[9px] font-semibold text-slate-400">Secs</span>
+                                                <span className="text-[9px] font-semibold text-slate-500 dark:text-slate-400">Secs</span>
                                             </div>
                                         </div>
                                     )}
@@ -845,31 +845,31 @@ export const CourseDetailsPage: React.FC = () => {
                             {/* Price Presentation */}
                             {isEnrolled ? (
                                 <div className="text-center py-2">
-                                    <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-950/80 text-emerald-300 font-extrabold text-sm rounded-full border border-emerald-500/40">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                                    <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 font-extrabold text-sm rounded-full border border-emerald-200 dark:border-emerald-500/40">
+                                        <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                                         <span>Enrolled • Lifetime Access Active</span>
                                     </span>
                                 </div>
                             ) : (
                                 <div className="space-y-1">
                                     <div className="flex items-baseline justify-between">
-                                        <span className="text-xs font-semibold text-slate-400">Course Fee:</span>
+                                        <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Course Fee:</span>
                                         {hasDiscount && (
-                                            <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-md">
+                                            <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 px-2 py-0.5 rounded-md">
                                                 Save {formatBDT(discountAmount)}
                                             </span>
                                         )}
                                     </div>
                                     <div className="flex items-baseline gap-3">
                                         {course.price === 0 ? (
-                                            <span className="text-3xl sm:text-4xl font-black text-emerald-400">Free</span>
+                                            <span className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">Free</span>
                                         ) : (
                                             <>
-                                                <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                                                <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                                                     {formatBDT(effectivePrice)}
                                                 </span>
                                                 {hasDiscount && (
-                                                    <span className="text-base sm:text-lg font-bold text-slate-500 line-through">
+                                                    <span className="text-base sm:text-lg font-bold text-slate-400 dark:text-slate-500 line-through">
                                                         {formatBDT(course.price)}
                                                     </span>
                                                 )}
@@ -918,7 +918,7 @@ export const CourseDetailsPage: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={() => setShowHowToBuyModal(true)}
-                                        className="w-full py-3 px-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-slate-300 hover:text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition cursor-pointer"
+                                        className="w-full py-3 px-4 rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-slate-50 hover:bg-slate-100 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition cursor-pointer"
                                     >
                                         <PlayCircle className="w-4 h-4 text-[#A60201]" />
                                         <span>How to Enroll • Video Guide</span>
@@ -934,7 +934,7 @@ export const CourseDetailsPage: React.FC = () => {
                                                 href={btn.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="w-full py-3 px-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-slate-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition"
+                                                className="w-full py-3 px-4 rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-slate-50 hover:bg-slate-100 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition"
                                             >
                                                 {btn.type === 'file' ? (
                                                     <FileText className="w-4 h-4 text-[#A60201]" />
@@ -949,17 +949,17 @@ export const CourseDetailsPage: React.FC = () => {
                             </div>
 
                             {/* Trust Guarantee Bullets */}
-                            <div className="space-y-2.5 pt-4 border-t border-white/[0.06] text-xs text-slate-400">
+                            <div className="space-y-2.5 pt-4 border-t border-slate-200 dark:border-white/[0.06] text-xs text-slate-500 dark:text-slate-400">
                                 <div className="flex items-center gap-2">
-                                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                                    <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
                                     <span>Instant automated access after payment</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
                                     <span>Official BMDC / Academic oriented material</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Award className="w-4 h-4 text-amber-400 shrink-0" />
+                                    <Award className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
                                     <span>Verified DoctorWallah Learning Experience</span>
                                 </div>
                             </div>
@@ -970,13 +970,13 @@ export const CourseDetailsPage: React.FC = () => {
 
             {/* Mobile Fixed Bottom Purchase Strip */}
             {!isEnrolled && (
-                <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#090303]/95 backdrop-blur-xl border-t border-[#A60201]/30 p-3 shadow-2xl flex items-center justify-between gap-3">
+                <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#090303]/95 backdrop-blur-xl border-t border-slate-200 dark:border-[#A60201]/30 p-3 shadow-2xl flex items-center justify-between gap-3">
                     <div className="min-w-0">
-                        <span className="text-[10px] font-bold text-slate-400 block">Course Fee</span>
+                        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block">Course Fee</span>
                         <div className="flex items-baseline gap-1.5">
-                            <span className="text-lg font-black text-white">{formatBDT(effectivePrice)}</span>
+                            <span className="text-lg font-black text-slate-900 dark:text-white">{formatBDT(effectivePrice)}</span>
                             {hasDiscount && (
-                                <span className="text-xs text-slate-500 line-through">{formatBDT(course.price)}</span>
+                                <span className="text-xs text-slate-400 dark:text-slate-500 line-through">{formatBDT(course.price)}</span>
                             )}
                         </div>
                     </div>
@@ -994,28 +994,28 @@ export const CourseDetailsPage: React.FC = () => {
 
             {/* How to Enroll Modal */}
             {showHowToBuyModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-                    <div className="bg-[#0C0505] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-[#A60201]/40 space-y-4 p-6 relative text-white">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 dark:bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+                    <div className="bg-white dark:bg-[#0C0505] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-200 dark:border-[#A60201]/40 space-y-4 p-6 relative text-slate-900 dark:text-white">
                         <button
                             type="button"
                             onClick={() => setShowHowToBuyModal(false)}
-                            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white hover:bg-white/[0.06] rounded-full transition cursor-pointer"
+                            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] rounded-full transition cursor-pointer"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
-                        <div className="flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                            <div className="w-10 h-10 rounded-xl bg-[#A60201]/15 flex items-center justify-center text-[#A60201] shrink-0">
+                        <div className="flex items-center gap-2.5 pb-2 border-b border-slate-100 dark:border-white/[0.06]">
+                            <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-[#A60201]/15 flex items-center justify-center text-[#A60201] shrink-0">
                                 <PlayCircle className="w-6 h-6" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-black text-white">How to Enroll in this Course?</h3>
-                                <p className="text-xs text-slate-400">Enroll easily in 4 simple steps</p>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-white">How to Enroll in this Course?</h3>
+                                <p className="text-xs text-slate-500 dark:text-slate-400">Enroll easily in 4 simple steps</p>
                             </div>
                         </div>
 
                         {course.how_to_buy_url ? (
-                            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black border border-white/[0.08] shadow-inner">
+                            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black border border-slate-200 dark:border-white/[0.08] shadow-inner">
                                 {course.how_to_buy_url.includes('youtube.com') || course.how_to_buy_url.includes('youtu.be') ? (
                                     <iframe
                                         src={
@@ -1038,23 +1038,23 @@ export const CourseDetailsPage: React.FC = () => {
                             </div>
                         ) : (
                             <div className="space-y-2.5 py-1">
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06]">
                                     <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
-                                    <p className="text-xs text-slate-300 font-medium">Click the <strong className="text-white">"ENROL IN THIS COURSE"</strong> button to add this course to your cart.</p>
+                                    <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">Click the <strong className="text-slate-900 dark:text-white">"ENROL IN THIS COURSE"</strong> button to add this course to your cart.</p>
                                 </div>
                                 {Boolean(course.show_coupon_timer && promoCoupon) && (
-                                    <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                                    <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06]">
                                         <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
-                                        <p className="text-xs text-slate-300 font-medium">Coupon code <strong className="text-red-300 font-mono">{promoCoupon}</strong> will apply your discount.</p>
+                                        <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">Coupon code <strong className="text-[#A60201] dark:text-red-300 font-mono">{promoCoupon}</strong> will apply your discount.</p>
                                     </div>
                                 )}
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06]">
                                     <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
-                                    <p className="text-xs text-slate-300 font-medium">Complete payment through bKash, Nagad, Rocket, or card online gateway.</p>
+                                    <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">Complete payment through bKash, Nagad, Rocket, or card online gateway.</p>
                                 </div>
-                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06]">
                                     <span className="w-6 h-6 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
-                                    <p className="text-xs text-slate-300 font-medium">Access will be granted immediately in your student dashboard upon confirmation.</p>
+                                    <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">Access will be granted immediately in your student dashboard upon confirmation.</p>
                                 </div>
                             </div>
                         )}

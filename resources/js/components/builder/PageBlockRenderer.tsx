@@ -168,7 +168,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
     };
 
     return (
-        <section className="relative overflow-hidden bg-[#060202] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-[#A60201]/15">
+        <section className="relative overflow-hidden bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-white pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-slate-200 dark:border-[#A60201]/15 transition-colors">
             {/* Ambient Medical Glow Mesh & Grid Backdrop */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(166,2,1,0.22),rgba(0,0,0,0))] pointer-events-none" />
             <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#A60201]/15 rounded-full blur-3xl pointer-events-none" />
@@ -188,7 +188,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* 1. Header Eyebrow & Badges */}
                 <div className="text-center max-w-3xl mx-auto space-y-4">
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(166,2,1,0.2)]">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/40 text-[#A60201] dark:text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-xs dark:shadow-[0_0_20px_rgba(166,2,1,0.2)]">
                         <span className="flex h-2 w-2 relative">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
@@ -198,13 +198,13 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
                         {titlePart1} <br />
-                        <span className="bg-gradient-to-r from-white via-rose-100 to-[#EF4444] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
+                        <span className="bg-gradient-to-r from-slate-950 via-slate-800 to-[#A60201] dark:from-white dark:via-rose-100 dark:to-[#EF4444] bg-clip-text text-transparent drop-shadow-sm dark:drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
                             {titleHighlight}
                         </span>
                         {titlePart2 && <><br /><span>{titlePart2}</span></>}
                     </h1>
 
-                    <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
                         {subtitle}
                     </p>
                 </div>
@@ -213,8 +213,8 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                 <div className="mt-8 max-w-2xl mx-auto">
                     <form onSubmit={handleSearch} className="relative group">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#A60201]/40 to-[#A60201]/20 rounded-2xl blur-md opacity-75 group-hover:opacity-100 transition duration-300" />
-                        <div className="relative flex items-center bg-black/90 border border-[#A60201]/40 rounded-2xl p-1.5 sm:p-2 backdrop-blur-2xl shadow-2xl">
-                            <div className="pl-3 sm:pl-4 pr-2 text-red-400">
+                        <div className="relative flex items-center bg-white dark:bg-black/90 border border-slate-300 dark:border-[#A60201]/40 rounded-2xl p-1.5 sm:p-2 backdrop-blur-2xl shadow-xl">
+                            <div className="pl-3 sm:pl-4 pr-2 text-red-500">
                                 <Search className="w-5 h-5" />
                             </div>
                             <input
@@ -222,7 +222,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                 value={searchTopic}
                                 onChange={(e) => setSearchTopic(e.target.value)}
                                 placeholder="Search organ, card, item, or textbook (e.g. Thorax, Guyton CVS, BDC Upper Limb)..."
-                                className="w-full bg-transparent text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none"
+                                className="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none"
                             />
                             <button
                                 type="submit"
@@ -236,8 +236,8 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
 
                     {/* Quick-Jump Neon Topic Pills */}
                     <div className="flex items-center justify-center gap-2 flex-wrap mt-3 text-xs">
-                        <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
-                            <Activity className="w-3.5 h-3.5 text-red-400" />
+                        <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 flex items-center gap-1">
+                            <Activity className="w-3.5 h-3.5 text-red-500" />
                             Quick Vault:
                         </span>
                         {[
@@ -252,7 +252,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                 key={idx}
                                 type="button"
                                 onClick={() => handleTagClick(p.tag)}
-                                className="px-2.5 py-1 rounded-lg bg-black/80 border border-slate-800 hover:border-[#A60201]/80 text-slate-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer backdrop-blur-md"
+                                className="px-2.5 py-1 rounded-lg bg-white dark:bg-black/80 border border-slate-200 dark:border-slate-800 hover:border-[#A60201]/80 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white text-[11px] font-medium transition-all cursor-pointer backdrop-blur-md shadow-2xs"
                             >
                                 {p.label}
                             </button>
@@ -262,27 +262,27 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
 
                 {/* 3. The Clinical Studio Cockpit */}
                 <div className="mt-12 sm:mt-16 max-w-5xl mx-auto">
-                    <div className="bg-black/90 border border-[#A60201]/30 rounded-3xl p-4 sm:p-7 backdrop-blur-2xl shadow-[0_0_60px_-15px_rgba(166,2,1,0.25)]">
+                    <div className="bg-white dark:bg-black/90 border border-slate-200 dark:border-[#A60201]/30 rounded-3xl p-4 sm:p-7 backdrop-blur-2xl shadow-xl dark:shadow-[0_0_60px_-15px_rgba(166,2,1,0.25)]">
                         {/* Cockpit Mode Switcher Bar */}
-                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4 mb-6">
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800/80 pb-4 mb-6">
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 rounded-full bg-[#A60201] shadow-[0_0_8px_rgba(166,2,1,0.6)]" />
                                 <div className="w-3 h-3 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.6)]" />
-                                <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
-                                <span className="ml-2 text-xs font-mono text-red-300 font-semibold uppercase tracking-wider hidden sm:inline">
+                                <div className="w-3 h-3 rounded-full bg-slate-400 dark:bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                                <span className="ml-2 text-xs font-mono text-[#A60201] dark:text-red-300 font-semibold uppercase tracking-wider hidden sm:inline">
                                     DoctorWallah Clinical Studio Console
                                 </span>
                             </div>
 
                             {/* Cockpit Tabs */}
-                            <div className="flex items-center gap-1.5 p-1 bg-black rounded-xl border border-slate-800">
+                            <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-black rounded-xl border border-slate-200 dark:border-slate-800">
                                 <button
                                     type="button"
                                     onClick={() => setCockpitMode('dissection')}
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'dissection'
                                             ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                            : 'text-slate-400 hover:text-white'
+                                            : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                                     }`}
                                 >
                                     <Activity className="w-3.5 h-3.5" />
@@ -294,7 +294,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'item'
                                             ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                            : 'text-slate-400 hover:text-white'
+                                            : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                                     }`}
                                 >
                                     <Zap className="w-3.5 h-3.5" />
@@ -306,7 +306,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'textbooks'
                                             ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
-                                            : 'text-slate-400 hover:text-white'
+                                            : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                                     }`}
                                 >
                                     <BookOpen className="w-3.5 h-3.5" />
@@ -318,55 +318,55 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                         {/* Interactive Cockpit Viewports */}
                         {cockpitMode === 'dissection' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-4">
+                                <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-300 text-[11px] font-mono">
                                             LIVE CADAVERIC PREVIEW • THORAX CARD
                                         </span>
-                                        <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1">
-                                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                                             1080p Ultra-HD Dissection
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-black text-white">
+                                    <h3 className="text-lg font-black text-slate-900 dark:text-white">
                                         Gross Anatomy & Organ Demonstration Lab
                                     </h3>
-                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                                         Real cadaveric organ handling with live anatomical landmarks highlighted. Never get confused during OSPE or viva again.
                                     </p>
                                     <div className="grid grid-cols-2 gap-2.5 pt-1">
-                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                                            <span className="text-xs font-medium text-slate-200">Aortic Arch & Branches</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                                            <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Aortic Arch & Branches</span>
                                         </div>
-                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-teal-400" />
-                                            <span className="text-xs font-medium text-slate-200">Pericardium & Sinuses</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-teal-500" />
+                                            <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Pericardium & Sinuses</span>
                                         </div>
-                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                                            <span className="text-xs font-medium text-slate-200">Phrenic & Vagus Nerves</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                            <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Phrenic & Vagus Nerves</span>
                                         </div>
-                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-amber-400" />
-                                            <span className="text-xs font-medium text-slate-200">Hilus of Lungs & Relations</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-amber-500" />
+                                            <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Hilus of Lungs & Relations</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="lg:col-span-5 space-y-4">
-                                    <div className="bg-gradient-to-br from-cyan-950/60 to-slate-900/90 rounded-2xl border border-cyan-500/20 p-5 space-y-3">
-                                        <div className="text-xs font-mono uppercase text-cyan-400 tracking-wider">
+                                    <div className="bg-gradient-to-br from-red-50 to-slate-100 dark:from-cyan-950/60 dark:to-slate-900/90 rounded-2xl border border-red-200 dark:border-cyan-500/20 p-5 space-y-3">
+                                        <div className="text-xs font-mono uppercase text-[#A60201] dark:text-cyan-400 tracking-wider">
                                             Anatomical Advantage
                                         </div>
-                                        <div className="text-xl font-black text-white">
+                                        <div className="text-xl font-black text-slate-900 dark:text-white">
                                             "Clear visualization is 90% of viva success."
                                         </div>
-                                        <p className="text-xs text-slate-300 leading-relaxed">
+                                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                                             Our professors demonstrate every muscle origin-insertion, arterial anastomoses, and viscera impressions before oral examinations.
                                         </p>
                                         <Link
                                             to="/courses"
-                                            className="inline-flex items-center gap-2 text-xs font-bold text-cyan-300 hover:text-cyan-200 underline pt-1"
+                                            className="inline-flex items-center gap-2 text-xs font-bold text-[#A60201] dark:text-cyan-300 hover:underline pt-1"
                                         >
                                             <span>Explore Dissection Course Library</span>
                                             <ArrowRight className="w-3.5 h-3.5" />
@@ -378,46 +378,46 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
 
                         {cockpitMode === 'item' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-3.5">
+                                <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-3.5">
                                     <div className="flex items-center justify-between">
-                                        <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-300 text-[11px] font-mono">
                                             PANIC DECK • TOMORROW'S VIVA READY
                                         </span>
-                                        <span className="text-xs font-semibold text-cyan-400">
+                                        <span className="text-xs font-semibold text-cyan-600 dark:text-cyan-400">
                                             10-Minute Rapid Revision
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-black text-white">
+                                    <h3 className="text-lg font-black text-slate-900 dark:text-white">
                                         Top 5 Must-Ask Viva Questions for This Card
                                     </h3>
                                     <div className="space-y-2 text-xs">
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <span className="text-cyan-400 font-bold">Q1: </span>
-                                            <span className="text-slate-200">Demonstrate anatomical position of heart and boundaries of transverse sinus.</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <span className="text-[#A60201] dark:text-cyan-400 font-bold">Q1: </span>
+                                            <span className="text-slate-700 dark:text-slate-200">Demonstrate anatomical position of heart and boundaries of transverse sinus.</span>
                                         </div>
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <span className="text-cyan-400 font-bold">Q2: </span>
-                                            <span className="text-slate-200">What are the bronchopulmonary segments and their clinical significance?</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <span className="text-[#A60201] dark:text-cyan-400 font-bold">Q2: </span>
+                                            <span className="text-slate-700 dark:text-slate-200">What are the bronchopulmonary segments and their clinical significance?</span>
                                         </div>
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <span className="text-cyan-400 font-bold">Q3: </span>
-                                            <span className="text-slate-200">Coronary blood supply: Right dominant vs left dominant circulation differences.</span>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <span className="text-[#A60201] dark:text-cyan-400 font-bold">Q3: </span>
+                                            <span className="text-slate-700 dark:text-slate-200">Coronary blood supply: Right dominant vs left dominant circulation differences.</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="lg:col-span-5 bg-gradient-to-br from-amber-950/40 to-slate-900/90 rounded-2xl border border-amber-500/20 p-5 space-y-3">
-                                    <div className="text-xs font-mono uppercase text-amber-400 tracking-wider">
+                                <div className="lg:col-span-5 bg-gradient-to-br from-red-50 to-amber-50 dark:from-amber-950/40 dark:to-slate-900/90 rounded-2xl border border-red-200 dark:border-amber-500/20 p-5 space-y-3">
+                                    <div className="text-xs font-mono uppercase text-[#A60201] dark:text-amber-400 tracking-wider">
                                         10-Min Viva Summary
                                     </div>
-                                    <div className="text-xl font-black text-white">
+                                    <div className="text-xl font-black text-slate-900 dark:text-white">
                                         Save hours of sleep before oral exams.
                                     </div>
-                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                                         Each item has a high-yield 10-minute recap video giving you the exact key phrases professors expect to hear at the viva table.
                                     </p>
                                     <Link
                                         to="/courses"
-                                        className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 hover:text-amber-200 underline pt-1"
+                                        className="inline-flex items-center gap-2 text-xs font-bold text-[#A60201] dark:text-amber-300 hover:underline pt-1"
                                     >
                                         <span>Unlock Item Viva Recaps</span>
                                         <ArrowRight className="w-3.5 h-3.5" />
@@ -428,33 +428,33 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
 
                         {cockpitMode === 'textbooks' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-4">
+                                <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-300 text-[11px] font-mono">
                                             PROFESSOR MARKINGS • GUYTON & BDC
                                         </span>
-                                        <span className="text-xs font-semibold text-emerald-400">
+                                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                                             Direct Soft-Book Annotations
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-black text-white">
+                                    <h3 className="text-lg font-black text-slate-900 dark:text-white">
                                         Stop Reading Everything: Read What Gets You Honours
                                     </h3>
-                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                                         Medical textbooks are 1,200+ pages long. Our mentors have marked every high-yield line, table, and clinical box in Guyton, Ganong, BDC, and Datta so you know exactly what to study.
                                     </p>
                                     <div className="grid grid-cols-3 gap-3 pt-1 text-center">
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <div className="text-sm font-black text-cyan-400">BDC Vol 1-4</div>
-                                            <div className="text-[10px] text-slate-400 mt-0.5">Marked Gross Anatomy</div>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <div className="text-sm font-black text-red-600 dark:text-cyan-400">BDC Vol 1-4</div>
+                                            <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Marked Gross Anatomy</div>
                                         </div>
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <div className="text-sm font-black text-emerald-400">Guyton 14th</div>
-                                            <div className="text-[10px] text-slate-400 mt-0.5">Marked Medical Physio</div>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <div className="text-sm font-black text-emerald-600 dark:text-emerald-400">Guyton 14th</div>
+                                            <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Marked Medical Physio</div>
                                         </div>
-                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                                            <div className="text-sm font-black text-amber-400">Harper & Datta</div>
-                                            <div className="text-[10px] text-slate-400 mt-0.5">Biochem & Neuroanatomy</div>
+                                        <div className="bg-white dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                                            <div className="text-sm font-black text-amber-600 dark:text-amber-400">Harper & Datta</div>
+                                            <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Biochem & Neuroanatomy</div>
                                         </div>
                                     </div>
                                 </div>
@@ -602,22 +602,22 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
     };
 
     return (
-        <section className="bg-[#060202] text-white py-16 sm:py-20 border-b border-[#A60201]/15 relative overflow-hidden">
+        <section className="bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-white py-16 sm:py-20 border-b border-slate-200 dark:border-[#A60201]/15 relative overflow-hidden transition-colors">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
-                            <Activity className="w-3.5 h-3.5 text-red-400" />
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/40 text-[#A60201] dark:text-red-200 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+                            <Activity className="w-3.5 h-3.5 text-red-500" />
                             <span>{headingTag || 'BM&DC 1ST PHASE CURRICULUM'}</span>
                         </div>
-                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                             {headingTitle || 'Flagship MBBS Courses & Card Batches'}
                         </h2>
                     </div>
                     {viewAllText && (
                         <Link
                             to={s.viewAllLink || '/courses'}
-                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-red-400 hover:text-white transition-colors"
+                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#A60201] dark:text-red-400 hover:underline transition-colors"
                         >
                             <span>{viewAllText}</span>
                             <ArrowRight className="w-4 h-4" />
@@ -636,12 +636,12 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
                                 onClick={() => handleTabClick(tab)}
                                 className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${isSelected
                                     ? 'bg-[#A60201] text-white font-black shadow-lg shadow-[#A60201]/30'
-                                    : 'bg-black/80 text-slate-300 hover:text-white hover:bg-[#1A0303] border border-slate-800 shadow-2xs'
+                                    : 'bg-white dark:bg-black/80 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1A0303] border border-slate-200 dark:border-slate-800 shadow-2xs'
                                     }`}
                             >
                                 <span>{tab.label}</span>
                                 {tab.type === 'html' && (
-                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-black/40 text-white font-bold' : 'bg-[#1A0303] text-red-300'
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-black/40 text-white font-bold' : 'bg-red-50 dark:bg-[#1A0303] text-[#A60201] dark:text-red-300'
                                         }`}>
                                         HTML
                                     </span>
@@ -668,12 +668,12 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
                                 }}
                                 className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${isSelected
                                     ? 'bg-[#A60201] text-white font-black shadow-lg shadow-[#A60201]/30'
-                                    : 'bg-black/80 text-slate-300 hover:text-white hover:bg-[#1A0303] border border-slate-800 shadow-2xs'
+                                    : 'bg-white dark:bg-black/80 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1A0303] border border-slate-200 dark:border-slate-800 shadow-2xs'
                                     }`}
                             >
                                 <span>{cat.name}</span>
                                 {cat.courses_count !== undefined && cat.courses_count > 0 && (
-                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-black/30 text-slate-900 font-bold' : 'bg-slate-800 text-slate-400'
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-black/30 text-white font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                                         }`}>
                                         {cat.courses_count}
                                     </span>
@@ -764,7 +764,7 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
     const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য পূর্ণাঙ্গ ক্লিনিক্যাল ও অ্যাকাডেমিক আর্কিটেকচার — ৪K ক্যাডাভারিক ডিসেকশন ও ভিসেরা থিয়েটার, ১০ মিনিট আইটেম রিভিশন এবং লাইন-বাই-লাইন দাগানো স্ট্যান্ডার্ড বই (BDC, Guyton, Ganong, Datta, Langman)।';
 
     return (
-        <section className="bg-[#060202] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 relative overflow-hidden border-b border-[#A60201]/15">
+        <section className="bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-white pt-12 sm:pt-20 pb-20 sm:pb-28 relative overflow-hidden border-b border-slate-200 dark:border-[#A60201]/15 transition-colors">
             {/* Ambient Medical Glow Mesh & Grid Backdrop */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(166,2,1,0.25),rgba(0,0,0,0))] pointer-events-none" />
             <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#A60201]/15 rounded-full blur-3xl pointer-events-none" />
@@ -785,7 +785,7 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Hero Header */}
                 <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16 space-y-4">
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(166,2,1,0.2)]">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/40 text-[#A60201] dark:text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-xs dark:shadow-[0_0_20px_rgba(166,2,1,0.2)]">
                         <span className="flex h-2 w-2 relative">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
@@ -795,12 +795,12 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
                         Medical Academic Excellence, <br />
-                        <span className="bg-gradient-to-r from-white via-rose-100 to-[#EF4444] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
+                        <span className="bg-gradient-to-r from-slate-950 via-slate-800 to-[#A60201] dark:from-white dark:via-rose-100 dark:to-[#EF4444] bg-clip-text text-transparent drop-shadow-sm dark:drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
                             From Daily Items & Cards To 1st Prof Honours!
                         </span>
                     </h1>
 
-                    <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
                         {sectionSub}
                     </p>
 
@@ -815,77 +815,77 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                         </Link>
                         <Link
                             to="/courses"
-                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-black/80 border border-[#A60201]/40 hover:border-[#A60201] text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs backdrop-blur-xl"
+                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white dark:bg-black/80 border border-slate-300 dark:border-[#A60201]/40 hover:border-[#A60201] text-slate-800 dark:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs backdrop-blur-xl"
                         >
-                            <PlayCircle className="w-5 h-5 text-red-400" />
+                            <PlayCircle className="w-5 h-5 text-red-500" />
                             <span>Watch Viscera Demos</span>
                         </Link>
                     </div>
 
                     {/* Trust Counter Strip */}
-                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left border-t border-[#A60201]/15">
-                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-white font-mono">550+</div>
-                            <div className="text-[11px] text-slate-400 font-medium">Doctors-in-Training</div>
+                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left border-t border-slate-200 dark:border-[#A60201]/15">
+                        <div className="bg-white dark:bg-black/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xs">
+                            <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-mono">550+</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Doctors-in-Training</div>
                         </div>
-                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-red-400 font-mono">1,250+</div>
-                            <div className="text-[11px] text-slate-400 font-medium">High-Yield Lectures</div>
+                        <div className="bg-white dark:bg-black/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xs">
+                            <div className="text-xl sm:text-2xl font-black text-[#A60201] dark:text-red-400 font-mono">1,250+</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">High-Yield Lectures</div>
                         </div>
-                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-white font-mono">100%</div>
-                            <div className="text-[11px] text-slate-400 font-medium">BM&DC Curriculum</div>
+                        <div className="bg-white dark:bg-black/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xs">
+                            <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-mono">100%</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">BM&DC Curriculum</div>
                         </div>
-                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-red-400 font-mono">24/7</div>
-                            <div className="text-[11px] text-slate-400 font-medium">Marked Soft Books</div>
+                        <div className="bg-white dark:bg-black/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xs">
+                            <div className="text-xl sm:text-2xl font-black text-[#A60201] dark:text-red-400 font-mono">24/7</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Marked Soft Books</div>
                         </div>
                     </div>
                 </div>
 
-                {/* The Asymmetric Dark Glass Bento Grid */}
+                {/* The Asymmetric Bento Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* BENTO TILE 1: Large (Span 7) - Virtual Dissection & Viscera Theater */}
-                    <div className="lg:col-span-7 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#A60201]/15 transition-all" />
+                    <div className="lg:col-span-7 bg-white dark:bg-[#0A0303]/95 backdrop-blur-2xl border border-slate-200 dark:border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-lg dark:shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A60201]/5 dark:bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#A60201]/10 dark:group-hover:bg-[#A60201]/15 transition-all" />
 
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-400 flex items-center justify-center">
                                     <Activity className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 01 • ANATOMY
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-[#A60201] dark:group-hover:text-red-300 transition-colors">
                                 Cadaveric Dissection & Viscera 3D Theater
                             </h3>
-                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                                 Don't just imagine structures in 2D. Watch high-definition dissection recordings where mentors hold real viscera, trace arterial courses, and point out exact structures asked in OSPE and oral examinations.
                             </p>
 
                             {/* Anatomical Tags */}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-red-200 font-semibold">Thoracic Viscera</span>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-[#A60201] dark:text-red-200 font-semibold">Thoracic Viscera</span>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-slate-200 font-semibold">Abdomen Organs</span>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-slate-700 dark:text-slate-200 font-semibold">Abdomen Organs</span>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-red-200 font-semibold">Head & Neck</span>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-[#A60201] dark:text-red-200 font-semibold">Head & Neck</span>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-slate-200 font-semibold">Extremities</span>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-slate-700 dark:text-slate-200 font-semibold">Extremities</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-medium">Included with all Anatomy courses</span>
-                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Included with all Anatomy courses</span>
+                            <Link to="/courses" className="text-xs font-bold text-[#A60201] dark:text-red-400 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Watch Preview</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -893,39 +893,39 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 2: Small (Span 5) - The 10-Minute Item Panic Station */}
-                    <div className="lg:col-span-5 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
+                    <div className="lg:col-span-5 bg-white dark:bg-[#0A0303]/95 backdrop-blur-2xl border border-slate-200 dark:border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-lg dark:shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-400 flex items-center justify-center">
                                     <Zap className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 02 • SPEED
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-[#A60201] dark:group-hover:text-red-300 transition-colors">
                                 10-Minute Item Panic Station
                             </h3>
-                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                                 Viva tomorrow morning at 8:00 AM? Don't panic. Watch our 10-minute concentrated item recaps covering the 15 exact questions professors ask before handing you your signature.
                             </p>
 
-                            <div className="bg-black/80 p-3 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
-                                <div className="flex items-center gap-2 text-slate-300">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                            <div className="bg-slate-50 dark:bg-black/80 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-1.5 text-xs">
+                                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
                                     <span>High-frequency viva questions from DMC, SSMC & CMC</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-slate-300">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
                                     <span>Exact anatomical definitions & relations</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-medium">Night-before revision</span>
-                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Night-before revision</span>
+                            <Link to="/courses" className="text-xs font-bold text-[#A60201] dark:text-red-400 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Try Item Recap</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -933,39 +933,39 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 3: Small (Span 5) - Professor-Marked Textbooks */}
-                    <div className="lg:col-span-5 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
+                    <div className="lg:col-span-5 bg-white dark:bg-[#0A0303]/95 backdrop-blur-2xl border border-slate-200 dark:border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-lg dark:shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-400 flex items-center justify-center">
                                     <BookOpen className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 03 • TEXTBOOKS
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-[#A60201] dark:group-hover:text-red-300 transition-colors">
                                 Professor-Marked Standard Books
                             </h3>
-                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                                 Complete soft-copy books with lines already marked by experienced doctors. Yellow for must-know written topics, Pink for tricky oral viva questions.
                             </p>
 
                             <div className="grid grid-cols-2 gap-2 text-center text-xs">
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="font-bold text-white">Guyton 14th Ed</div>
-                                    <div className="text-[10px] text-slate-400">Marked Physio</div>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <div className="font-bold text-slate-900 dark:text-white">Guyton 14th Ed</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Marked Physio</div>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="font-bold text-red-400">BDC Anatomy</div>
-                                    <div className="text-[10px] text-slate-400">All 4 Volumes</div>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <div className="font-bold text-[#A60201] dark:text-red-400">BDC Anatomy</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">All 4 Volumes</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-medium">PDF Soft Copies Included</span>
-                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">PDF Soft Copies Included</span>
+                            <Link to="/courses" className="text-xs font-bold text-[#A60201] dark:text-red-400 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Get Marked Books</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -973,43 +973,43 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 4: Large (Span 7) - Real-Time Model Tests & OSPE Simulator */}
-                    <div className="lg:col-span-7 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
+                    <div className="lg:col-span-7 bg-white dark:bg-[#0A0303]/95 backdrop-blur-2xl border border-slate-200 dark:border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-lg dark:shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-[#A60201]/15 border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-400 flex items-center justify-center">
                                     <ClipboardList className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/30 text-[#A60201] dark:text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 04 • EVALUATION
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-[#A60201] dark:group-hover:text-red-300 transition-colors">
                                 Real-Time 1st Prof Model Tests & OSPE Stations
                             </h3>
-                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                                 Practice realistic clinical MCQs and Single Best Answer (SBA) questions with negative marking, timed countdowns, and instant nationwide medical college merit rankings.
                             </p>
 
                             <div className="grid grid-cols-3 gap-2.5 pt-1 text-center text-xs">
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-white">BM&DC</div>
-                                    <div className="text-[10px] text-slate-400">Standard Pattern</div>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <div className="text-sm font-black text-slate-900 dark:text-white">BM&DC</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Standard Pattern</div>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-red-400">Instant</div>
-                                    <div className="text-[10px] text-slate-400">Solution Analysis</div>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <div className="text-sm font-black text-[#A60201] dark:text-red-400">Instant</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Solution Analysis</div>
                                 </div>
-                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-white">Nationwide</div>
-                                    <div className="text-[10px] text-slate-400">Merit Position</div>
+                                <div className="bg-slate-50 dark:bg-black/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <div className="text-sm font-black text-slate-900 dark:text-white">Nationwide</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Merit Position</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-medium">Card & Term Exam Hall</span>
-                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Card & Term Exam Hall</span>
+                            <Link to="/courses" className="text-xs font-bold text-[#A60201] dark:text-red-400 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Start Model Test</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -1035,19 +1035,19 @@ const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ b
     const buttonLink = s.buttonLink || '/courses';
 
     return (
-        <section className="bg-[#060202] py-16 sm:py-24 relative overflow-hidden border-t border-[#A60201]/15">
+        <section className="bg-slate-50 dark:bg-[#060202] py-16 sm:py-24 relative overflow-hidden border-t border-slate-200 dark:border-[#A60201]/15 transition-colors">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="bg-[#0A0303]/95 border border-[#A60201]/30 rounded-3xl p-8 sm:p-14 text-center space-y-6 backdrop-blur-2xl shadow-[0_0_80px_-20px_rgba(166,2,1,0.25)] relative overflow-hidden">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider">
-                        <Stethoscope className="w-3.5 h-3.5 text-red-400" />
+                <div className="bg-white dark:bg-[#0A0303]/95 border border-slate-200 dark:border-[#A60201]/30 rounded-3xl p-8 sm:p-14 text-center space-y-6 backdrop-blur-2xl shadow-xl dark:shadow-[0_0_80px_-20px_rgba(166,2,1,0.25)] relative overflow-hidden">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 dark:bg-[#1A0303] border border-red-200 dark:border-[#A60201]/40 text-[#A60201] dark:text-red-200 text-xs font-mono tracking-wider shadow-xs">
+                        <Stethoscope className="w-3.5 h-3.5 text-red-500" />
                         <span>{badge}</span>
                     </div>
 
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                         {title}
                     </h2>
 
-                    <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         {subtitle}
                     </p>
 
@@ -1061,9 +1061,9 @@ const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ b
                         </Link>
                         <Link
                             to="/courses"
-                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-black border border-slate-700 hover:border-[#A60201]/60 text-slate-300 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-white dark:bg-black border border-slate-300 dark:border-slate-700 hover:border-[#A60201]/60 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                         >
-                            <PlayCircle className="w-5 h-5 text-red-400" />
+                            <PlayCircle className="w-5 h-5 text-red-500" />
                             <span>Watch Demo Classes</span>
                         </Link>
                     </div>
@@ -1177,17 +1177,17 @@ const TopAnnouncementBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> 
     const linkUrl = s.linkUrl || '/courses';
 
     return (
-        <div className="bg-[#0B0404] border-b border-[#A60201]/30 text-slate-200 text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 relative z-10 shadow-lg shadow-black/50 backdrop-blur-md">
+        <div className="bg-red-50 dark:bg-[#0B0404] border-b border-red-200 dark:border-[#A60201]/30 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 relative z-10 shadow-xs dark:shadow-lg dark:shadow-black/50 backdrop-blur-md transition-colors">
             {badge && (
                 <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
                 </span>
             )}
-            <span className="text-red-300 font-mono text-[11px] sm:text-xs font-bold uppercase">{badge}:</span>
-            <span className="text-slate-300 font-medium text-xs sm:text-sm">{text}</span>
+            <span className="text-[#A60201] dark:text-red-300 font-mono text-[11px] sm:text-xs font-bold uppercase">{badge}:</span>
+            <span className="text-slate-700 dark:text-slate-300 font-medium text-xs sm:text-sm">{text}</span>
             {linkText && (
-                <Link to={linkUrl} className="underline font-bold text-red-400 hover:text-white transition-colors ml-1 hidden sm:inline">
+                <Link to={linkUrl} className="underline font-bold text-[#A60201] dark:text-red-400 hover:text-[#880101] dark:hover:text-white transition-colors ml-1 hidden sm:inline">
                     {linkText}
                 </Link>
             )}

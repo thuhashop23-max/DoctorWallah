@@ -22,12 +22,12 @@ function getSystemTheme(): ResolvedTheme {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [theme, setThemeState] = useState<Theme>(() => {
-        if (typeof window === 'undefined') return 'system';
+        if (typeof window === 'undefined') return 'dark';
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved === 'light' || saved === 'dark' || saved === 'system') {
             return saved;
         }
-        return 'system';
+        return 'dark'; // Default to dark mode
     });
 
     const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(getSystemTheme);
