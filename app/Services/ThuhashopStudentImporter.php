@@ -41,12 +41,12 @@ class ThuhashopStudentImporter
 
     // Group IDs on thuhashop.com
     protected array $groupMap = [
-        3222   => '1st-card-full-course',
-        18452  => 'mbbs-first-phase-1st-term',
-        60779  => 'mbbs-first-phase-2nd-term',
-        60781  => '2nd-card-full-course',
-        129925 => 'mbbs-first-phase-3rd-card',
-        145893 => 'mbbs-4th-card',
+        3230   => '1st-card-full-course',
+        56721  => 'mbbs-first-phase-1st-term',
+        56586  => '2nd-card-full-course',
+        129599 => 'mbbs-first-phase-2nd-term',
+        127873 => 'mbbs-first-phase-3rd-card',
+        145901 => 'mbbs-4th-card',
     ];
 
     public function connect(): bool
@@ -116,10 +116,38 @@ class ThuhashopStudentImporter
             $stmt->execute(["learndash_group_enrolled_{$gid}"]);
             $uids2 = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-            $allUids = array_unique(array_merge($uids1, $uids2));
+            // Check postmeta for learndash_group_users or learndash_group_enrolled_users
+            $stmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ? AND meta_key LIKE '%group_user%'");
+            $stmt->execute([$gid]);
+            $pmRows = $stmt->fetchAll();
+            $pmUids = [];
+            foreach ($pmRows as $pm) {
+                $un = @unserialize($pm['meta_value']);
+                if (is_array($un)) {
+                    $pmUids = array_merge($pmUids, $un);
+                } elseif (is_numeric($pm['meta_value'])) {
+                    $pmUids[] = (int)$pm['meta_value'];
+                }
+            }
+
+            // Check learndash_user_activity table
+            $actUids = [];
+            try {
+                $actStmt = $pdo->prepare("SELECT DISTINCT user_id FROM {$prefix}learndash_user_activity WHERE course_id = ? OR post_id = ?");
+                $actStmt->execute([$gid, $gid]);
+                $actUids = $actStmt->fetchAll(PDO::FETCH_COLUMN);
+            } catch (\Throwable $e) {}
+
+            $allUids = array_unique(array_merge($uids1, $uids2, $pmUids, $actUids));
             $groupUserCounts[$gid] = [
                 'slug' => $slug,
                 'count' => count($allUids),
+                'breakdown' => [
+                    'usermeta_users' => count($uids1),
+                    'usermeta_enrolled' => count($uids2),
+                    'postmeta_users' => count($pmUids),
+                    'activity_users' => count($actUids),
+                ],
                 'sample_uids' => array_slice($allUids, 0, 5),
             ];
 
@@ -243,6 +271,39 @@ class ThuhashopStudentImporter
                 }
                 $studentEnrollments[$uid]['groups'][$slug] = true;
             }
+
+            // Also check postmeta for group
+            $pmStmt = $pdo->prepare("SELECT meta_value FROM {$prefix}postmeta WHERE post_id = ? AND meta_key LIKE '%group_user%'");
+            $pmStmt->execute([$gid]);
+            $pmRows = $pmStmt->fetchAll();
+            foreach ($pmRows as $pm) {
+                $un = @unserialize($pm['meta_value']);
+                if (is_array($un)) {
+                    foreach ($un as $u) {
+                        $uid = (int)$u;
+                        if (!$uid) continue;
+                        if (!isset($studentEnrollments[$uid])) {
+                            $studentEnrollments[$uid] = ['groups' => [], 'courses' => []];
+                        }
+                        $studentEnrollments[$uid]['groups'][$slug] = true;
+                    }
+                }
+            }
+
+            // Also check learndash_user_activity
+            try {
+                $actStmt = $pdo->prepare("SELECT DISTINCT user_id FROM {$prefix}learndash_user_activity WHERE course_id = ? OR post_id = ?");
+                $actStmt->execute([$gid, $gid]);
+                $actUids = $actStmt->fetchAll(PDO::FETCH_COLUMN);
+                foreach ($actUids as $u) {
+                    $uid = (int)$u;
+                    if (!$uid) continue;
+                    if (!isset($studentEnrollments[$uid])) {
+                        $studentEnrollments[$uid] = ['groups' => [], 'courses' => []];
+                    }
+                    $studentEnrollments[$uid]['groups'][$slug] = true;
+                }
+            } catch (\Throwable $e) {}
         }
 
         // B. From LearnDash Courses
@@ -339,7 +400,7 @@ class ThuhashopStudentImporter
                 SELECT user_id, meta_key, meta_value 
                 FROM {$prefix}usermeta 
                 WHERE user_id IN ($inClause) 
-                  AND meta_key IN ('first_name', 'last_name', 'billing_phone', 'phone', 'digits_phone', 'billing_first_name', 'billing_last_name')
+                  AND meta_key IN ('first_name', 'last_name', 'billing_phone', 'phone', 'digits_phone', 'digits_phone_no', 'billing_first_name', 'billing_last_name')
             ");
             $metaRows = $mStmt->fetchAll();
             $metaByUid = [];
@@ -373,9 +434,9 @@ class ThuhashopStudentImporter
                     $phoneCandidate = $loginCandidate;
                 }
 
-                // 2. Check billing_phone / phone / digits_phone
+                // 2. Check digits_phone_no / digits_phone / billing_phone / phone
                 if (!$phoneCandidate) {
-                    $rawPhone = $meta['billing_phone'] ?? ($meta['phone'] ?? ($meta['digits_phone'] ?? null));
+                    $rawPhone = $meta['digits_phone_no'] ?? ($meta['digits_phone'] ?? ($meta['billing_phone'] ?? ($meta['phone'] ?? null)));
                     $metaCandidate = User::normalizePhone($rawPhone);
                     if ($metaCandidate && User::isValidPhoneNumber($metaCandidate)) {
                         $phoneCandidate = $metaCandidate;
