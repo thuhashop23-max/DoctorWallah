@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageBlock, Course, Category, CourseTabItem } from '../../types';
 import { apiClient, formatBDT, getImageUrl } from '../../api/client';
 import { useLanguage } from '../../context/LanguageContext';
@@ -38,7 +38,8 @@ import {
     Activity,
     Microscope,
     HeartPulse,
-    Dna
+    Dna,
+    Search
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { StudentReviewsMarquee } from '../home/StudentReviewsMarquee';
@@ -132,150 +133,387 @@ export const PageBlockRenderer: React.FC<PageBlockRendererProps> = ({
  * ----------------------------------------------------------- */
 const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { t, language } = useLanguage();
+    const navigate = useNavigate();
     const s = block.settings || {};
 
-    const badge = getLocalizedText(s.badge, s.badge_en, language) || (language === 'en' ? t.hero.badge : s.badge);
-    const titlePart1 = getLocalizedText(s.titlePart1, s.titlePart1_en, language) || t.hero.titlePart1;
-    const titleHighlight = getLocalizedText(s.titleHighlight, s.titleHighlight_en, language) || t.hero.titleHighlight;
-    const titlePart2 = getLocalizedText(s.titlePart2, s.titlePart2_en, language) || t.hero.titlePart2;
-    const subtitle = getLocalizedText(s.subtitle, s.subtitle_en, language) || t.hero.subtitle;
-    const browseCoursesBtn = getLocalizedText(s.browseCoursesBtn, s.browseCoursesBtn_en, language) || t.hero.browseCourses;
-    const startFreeClassBtn = getLocalizedText(s.startFreeClassBtn, s.startFreeClassBtn_en, language) || t.hero.startFreeClass;
-    const trust1 = getLocalizedText(s.trust1, s.trust1_en, language) || t.hero.trustStudents;
-    const trust2 = getLocalizedText(s.trust2, s.trust2_en, language) || t.hero.trustLifetime;
-    const trust3 = getLocalizedText(s.trust3, s.trust3_en, language) || t.hero.trustDoubts;
+    const [searchTopic, setSearchTopic] = useState('');
+    const [cockpitMode, setCockpitMode] = useState<'dissection' | 'item' | 'textbooks'>('dissection');
 
-    const cardBadge = getLocalizedText(s.cardBadge, s.cardBadge_en, language) || 'MBBS Clinical Hub';
-    const physicsTitle = getLocalizedText(s.physicsTitle, s.physicsTitle_en, language) || t.hero.physicsTitle;
-    const physicsSub = getLocalizedText(s.physicsSub, s.physicsSub_en, language) || t.hero.physicsSub;
-    const teachersTitle = getLocalizedText(s.teachersTitle, s.teachersTitle_en, language) || t.hero.teachersTitle;
-    const teachersSub = getLocalizedText(s.teachersSub, s.teachersSub_en, language) || t.hero.teachersSub;
-    const studyMatTitle = getLocalizedText(s.studyMatTitle, s.studyMatTitle_en, language) || t.hero.studyMatTitle;
-    const studyMatSub = getLocalizedText(s.studyMatSub, s.studyMatSub_en, language) || t.hero.studyMatSub;
-    const joinTodayBtn = getLocalizedText(s.joinTodayBtn, s.joinTodayBtn_en, language) || t.hero.joinToday;
+    const badge = getLocalizedText(s.badge, s.badge_en, language) || 'CLINICAL STUDIO 2026-27 | BM&DC 1ST PHASE ACADEMIC SUITE';
+    const titlePart1 = getLocalizedText(s.titlePart1, s.titlePart1_en, language) || 'Master Gross Anatomy, Physiology & Biochemistry';
+    const titleHighlight = getLocalizedText(s.titleHighlight, s.titleHighlight_en, language) || 'From Daily Items & Cards To 1st Prof Honours';
+    const titlePart2 = getLocalizedText(s.titlePart2, s.titlePart2_en, language) || '';
+    const subtitle = getLocalizedText(s.subtitle, s.subtitle_en, language) || 'Research-grounded clinical lectures, cadaveric dissection theater, and line-by-line marked standard textbooks (BDC, Guyton, Ganong, Datta, Langman) designed for viva & OSPE mastery.';
+    const browseCoursesBtn = getLocalizedText(s.browseCoursesBtn, s.browseCoursesBtn_en, language) || 'Explore Clinical Courses';
+    const startFreeClassBtn = getLocalizedText(s.startFreeClassBtn, s.startFreeClassBtn_en, language) || 'Watch Viscera Demos';
+    const trust1 = getLocalizedText(s.trust1, s.trust1_en, language) || '550+ Enrolled Doctors-in-Training';
+    const trust2 = getLocalizedText(s.trust2, s.trust2_en, language) || '1,250+ High-Yield Medical Lectures';
+    const trust3 = getLocalizedText(s.trust3, s.trust3_en, language) || 'BM&DC Syllabus 100% Covered';
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchTopic.trim()) {
+            navigate(`/courses?search=${encodeURIComponent(searchTopic.trim())}`);
+        } else {
+            navigate('/courses');
+        }
+    };
+
+    const handleTagClick = (tag: string) => {
+        navigate(`/courses?search=${encodeURIComponent(tag)}`);
+    };
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-teal-50/70 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-16 pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors duration-150">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    {/* Left Text */}
-                    <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        {badge && (
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 dark:bg-teal-950/80 text-teal-800 dark:text-teal-300 text-xs sm:text-sm font-bold tracking-wide">
-                                <Stethoscope className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
-                                <span>{badge}</span>
+        <section className="relative overflow-hidden bg-[#060913] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-cyan-500/10">
+            {/* Ambient Medical Glow Mesh & Grid Backdrop */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.18),rgba(255,255,255,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Subtle Electrocardiogram (ECG) Pulse Line SVG in Background */}
+            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-[0.06] pointer-events-none overflow-hidden select-none">
+                <svg className="w-full h-48" viewBox="0 0 1200 200" fill="none" preserveAspectRatio="none">
+                    <path
+                        d="M0 100 L300 100 L320 60 L335 140 L350 40 L365 170 L380 90 L395 110 L410 100 L700 100 L720 60 L735 140 L750 40 L765 170 L780 90 L795 110 L810 100 L1200 100"
+                        stroke="url(#ecg-gradient)"
+                        strokeWidth="2.5"
+                    />
+                    <defs>
+                        <linearGradient id="ecg-gradient" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#06b6d4" stopOpacity="0.2" />
+                            <stop offset="0.5" stopColor="#10b981" stopOpacity="0.8" />
+                            <stop offset="1" stopColor="#06b6d4" stopOpacity="0.2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* 1. Header Eyebrow & Badges */}
+                <div className="text-center max-w-3xl mx-auto space-y-4">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+                        <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                        </span>
+                        <span>{badge}</span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+                        {titlePart1} <br />
+                        <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(6,182,212,0.35)]">
+                            {titleHighlight}
+                        </span>
+                        {titlePart2 && <><br /><span>{titlePart2}</span></>}
+                    </h1>
+
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                        {subtitle}
+                    </p>
+                </div>
+
+                {/* 2. Interactive Medical Search & Viva Finder Console */}
+                <div className="mt-8 max-w-2xl mx-auto">
+                    <form onSubmit={handleSearch} className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-emerald-500/30 to-cyan-500/30 rounded-2xl blur-md opacity-75 group-hover:opacity-100 transition duration-300" />
+                        <div className="relative flex items-center bg-slate-950/90 border border-cyan-500/40 rounded-2xl p-1.5 sm:p-2 backdrop-blur-2xl shadow-2xl">
+                            <div className="pl-3 sm:pl-4 pr-2 text-cyan-400">
+                                <Search className="w-5 h-5" />
+                            </div>
+                            <input
+                                type="text"
+                                value={searchTopic}
+                                onChange={(e) => setSearchTopic(e.target.value)}
+                                placeholder="Search organ, card, item, or textbook (e.g. Thorax, Guyton CVS, BDC Upper Limb)..."
+                                className="w-full bg-transparent text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none"
+                            />
+                            <button
+                                type="submit"
+                                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm transition-all shadow-md shadow-cyan-500/25 shrink-0 cursor-pointer flex items-center gap-1.5"
+                            >
+                                <span>Find Topic</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </form>
+
+                    {/* Quick-Jump Neon Topic Pills */}
+                    <div className="flex items-center justify-center gap-2 flex-wrap mt-3 text-xs">
+                        <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                            Quick Vault:
+                        </span>
+                        {[
+                            { label: '⚡ Thorax Card', tag: 'Thorax' },
+                            { label: '🧬 Guyton CVS', tag: 'Physiology' },
+                            { label: '🦴 Upper Limb', tag: 'Upper Limb' },
+                            { label: '🔬 Histology OSPE', tag: 'Histology' },
+                            { label: '🫁 Respi & Renal', tag: 'Renal' },
+                            { label: '📚 Marked Books', tag: 'Anatomy' },
+                        ].map((p, idx) => (
+                            <button
+                                key={idx}
+                                type="button"
+                                onClick={() => handleTagClick(p.tag)}
+                                className="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-700/80 hover:border-cyan-400/80 text-slate-300 hover:text-cyan-300 text-[11px] font-medium transition-all cursor-pointer backdrop-blur-md"
+                            >
+                                {p.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 3. The Clinical Studio Cockpit (3-Mode Interactive Dark Glass Showcase) */}
+                <div className="mt-12 sm:mt-16 max-w-5xl mx-auto">
+                    <div className="bg-slate-950/70 border border-cyan-500/30 rounded-3xl p-4 sm:p-7 backdrop-blur-2xl shadow-[0_0_60px_-15px_rgba(6,182,212,0.2)]">
+                        {/* Cockpit Mode Switcher Bar */}
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4 mb-6">
+                            <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]" />
+                                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                                <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+                                <span className="ml-2 text-xs font-mono text-cyan-300 font-semibold uppercase tracking-wider hidden sm:inline">
+                                    DoctorWallah Clinical Studio Console
+                                </span>
+                            </div>
+
+                            {/* Cockpit Tabs */}
+                            <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800">
+                                <button
+                                    type="button"
+                                    onClick={() => setCockpitMode('dissection')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                        cockpitMode === 'dissection'
+                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            : 'text-slate-400 hover:text-white'
+                                    }`}
+                                >
+                                    <Activity className="w-3.5 h-3.5" />
+                                    <span>Viscera & Dissection</span>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setCockpitMode('item')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                        cockpitMode === 'item'
+                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            : 'text-slate-400 hover:text-white'
+                                    }`}
+                                >
+                                    <Zap className="w-3.5 h-3.5" />
+                                    <span>10-Min Item Deck</span>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setCockpitMode('textbooks')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                        cockpitMode === 'textbooks'
+                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            : 'text-slate-400 hover:text-white'
+                                    }`}
+                                >
+                                    <BookOpen className="w-3.5 h-3.5" />
+                                    <span>Marked Books (Guyton & BDC)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Interactive Cockpit Viewports */}
+                        {cockpitMode === 'dissection' && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono">
+                                            LIVE CADAVERIC PREVIEW • THORAX CARD
+                                        </span>
+                                        <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1">
+                                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                            1080p Ultra-HD Dissection
+                                        </span>
+                                    </div>
+                                    <h3 className="text-lg font-black text-white">
+                                        Gross Anatomy & Organ Demonstration Lab
+                                    </h3>
+                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                        Real cadaveric organ handling with live anatomical landmarks highlighted. Never get confused during OSPE or viva again.
+                                    </p>
+                                    <div className="grid grid-cols-2 gap-2.5 pt-1">
+                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                                            <span className="text-xs font-medium text-slate-200">Aortic Arch & Branches</span>
+                                        </div>
+                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-teal-400" />
+                                            <span className="text-xs font-medium text-slate-200">Pericardium & Sinuses</span>
+                                        </div>
+                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                                            <span className="text-xs font-medium text-slate-200">Phrenic & Vagus Nerves</span>
+                                        </div>
+                                        <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-amber-400" />
+                                            <span className="text-xs font-medium text-slate-200">Hilus of Lungs & Relations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-5 space-y-4">
+                                    <div className="bg-gradient-to-br from-cyan-950/60 to-slate-900/90 rounded-2xl border border-cyan-500/20 p-5 space-y-3">
+                                        <div className="text-xs font-mono uppercase text-cyan-400 tracking-wider">
+                                            Anatomical Advantage
+                                        </div>
+                                        <div className="text-xl font-black text-white">
+                                            "Clear visualization is 90% of viva success."
+                                        </div>
+                                        <p className="text-xs text-slate-300 leading-relaxed">
+                                            Our professors demonstrate every muscle origin-insertion, arterial anastomoses, and viscera impressions before oral examinations.
+                                        </p>
+                                        <Link
+                                            to="/courses"
+                                            className="inline-flex items-center gap-2 text-xs font-bold text-cyan-300 hover:text-cyan-200 underline pt-1"
+                                        >
+                                            <span>Explore Dissection Course Library</span>
+                                            <ArrowRight className="w-3.5 h-3.5" />
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         )}
 
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight">
-                            {titlePart1} <br />
-                            <span className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-500 bg-clip-text text-transparent">
-                                {titleHighlight}
-                            </span> <br />
-                            {titlePart2}
-                        </h1>
-
-                        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                            {subtitle}
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                            {browseCoursesBtn && (
-                                <Link
-                                    to={s.browseCoursesLink || '/courses'}
-                                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-teal-600 text-white font-bold text-base shadow-lg shadow-teal-600/30 hover:bg-teal-700 hover:shadow-xl hover:shadow-teal-600/40 transition-all flex items-center justify-center gap-2 group cursor-pointer"
-                                >
-                                    <span>{browseCoursesBtn}</span>
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            )}
-                            {startFreeClassBtn && (
-                                <Link
-                                    to={s.startFreeClassLink || '/courses'}
-                                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-                                >
-                                    <PlayCircle className="w-5 h-5 text-teal-600" />
-                                    <span>{startFreeClassBtn}</span>
-                                </Link>
-                            )}
-                        </div>
-
-                        {/* Trust badges */}
-                        <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 dark:text-slate-400 font-medium border-t border-slate-200/60 dark:border-slate-800">
-                            {trust1 && (
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                                    {trust1}
-                                </span>
-                            )}
-                            {trust2 && (
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                                    {trust2}
-                                </span>
-                            )}
-                            {trust3 && (
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                                    {trust3}
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Right Visual Card */}
-                    <div className="lg:col-span-5 relative">
-                        <div className="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-tr from-teal-500 via-sky-600 to-emerald-500 p-1 rounded-3xl shadow-2xl shadow-teal-500/20">
-                            <div className="bg-slate-900 rounded-[22px] p-6 text-white space-y-6">
-                                <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-rose-500" />
-                                        <div className="w-3 h-3 rounded-full bg-amber-500" />
-                                        <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                        {cockpitMode === 'item' && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-3.5">
+                                    <div className="flex items-center justify-between">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono">
+                                            PANIC DECK • TOMORROW'S VIVA READY
+                                        </span>
+                                        <span className="text-xs font-semibold text-cyan-400">
+                                            10-Minute Rapid Revision
+                                        </span>
                                     </div>
-                                    <span className="text-xs font-semibold text-teal-400">{cardBadge}</span>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0">
-                                            <Activity className="w-6 h-6" />
+                                    <h3 className="text-lg font-black text-white">
+                                        Top 5 Must-Ask Viva Questions for This Card
+                                    </h3>
+                                    <div className="space-y-2 text-xs">
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <span className="text-cyan-400 font-bold">Q1: </span>
+                                            <span className="text-slate-200">Demonstrate anatomical position of heart and boundaries of transverse sinus.</span>
                                         </div>
-                                        <div>
-                                            <h4 className="text-sm font-bold text-white">{physicsTitle}</h4>
-                                            <p className="text-xs text-slate-400">{physicsSub}</p>
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <span className="text-cyan-400 font-bold">Q2: </span>
+                                            <span className="text-slate-200">What are the bronchopulmonary segments and their clinical significance?</span>
                                         </div>
-                                    </div>
-
-                                    <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                                            <Microscope className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-sm font-bold text-white">{teachersTitle}</h4>
-                                            <p className="text-xs text-slate-400">{teachersSub}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
-                                            <FileText className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-sm font-bold text-white">{studyMatTitle}</h4>
-                                            <p className="text-xs text-slate-400">{studyMatSub}</p>
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <span className="text-cyan-400 font-bold">Q3: </span>
+                                            <span className="text-slate-200">Coronary blood supply: Right dominant vs left dominant circulation differences.</span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="pt-2 text-center">
+                                <div className="lg:col-span-5 bg-gradient-to-br from-amber-950/40 to-slate-900/90 rounded-2xl border border-amber-500/20 p-5 space-y-3">
+                                    <div className="text-xs font-mono uppercase text-amber-400 tracking-wider">
+                                        10-Min Viva Summary
+                                    </div>
+                                    <div className="text-xl font-black text-white">
+                                        Save hours of sleep before oral exams.
+                                    </div>
+                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                        Each item has a high-yield 10-minute recap video giving you the exact key phrases professors expect to hear at the viva table.
+                                    </p>
                                     <Link
-                                        to="/register"
-                                        className="block w-full py-3 bg-gradient-to-r from-teal-500 via-teal-600 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold rounded-xl text-sm shadow-md shadow-teal-500/25 transition-all cursor-pointer"
+                                        to="/courses"
+                                        className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 hover:text-amber-200 underline pt-1"
                                     >
-                                        {joinTodayBtn}
+                                        <span>Unlock Item Viva Recaps</span>
+                                        <ArrowRight className="w-3.5 h-3.5" />
                                     </Link>
                                 </div>
+                            </div>
+                        )}
+
+                        {cockpitMode === 'textbooks' && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                                <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800 p-5 space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono">
+                                            PROFESSOR MARKINGS • GUYTON & BDC
+                                        </span>
+                                        <span className="text-xs font-semibold text-emerald-400">
+                                            Direct Soft-Book Annotations
+                                        </span>
+                                    </div>
+                                    <h3 className="text-lg font-black text-white">
+                                        Stop Reading Everything: Read What Gets You Honours
+                                    </h3>
+                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                        Medical textbooks are 1,200+ pages long. Our mentors have marked every high-yield line, table, and clinical box in Guyton, Ganong, BDC, and Datta so you know exactly what to study.
+                                    </p>
+                                    <div className="grid grid-cols-3 gap-3 pt-1 text-center">
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <div className="text-sm font-black text-cyan-400">BDC Vol 1-4</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">Marked Gross Anatomy</div>
+                                        </div>
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <div className="text-sm font-black text-emerald-400">Guyton 14th</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">Marked Medical Physio</div>
+                                        </div>
+                                        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                                            <div className="text-sm font-black text-amber-400">Harper & Datta</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">Biochem & Neuroanatomy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-5 bg-gradient-to-br from-emerald-950/40 to-slate-900/90 rounded-2xl border border-emerald-500/20 p-5 space-y-3">
+                                    <div className="text-xs font-mono uppercase text-emerald-400 tracking-wider">
+                                        Downloadable Materials
+                                    </div>
+                                    <div className="text-xl font-black text-white">
+                                        Soft-copies included with every course.
+                                    </div>
+                                    <p className="text-xs text-slate-300 leading-relaxed">
+                                        Open directly on your iPad, tablet or laptop. Highlighted in yellow (Must Know for Prof) and pink (Item Viva Specials).
+                                    </p>
+                                    <Link
+                                        to="/courses"
+                                        className="inline-flex items-center gap-2 text-xs font-bold text-emerald-300 hover:text-emerald-200 underline pt-1"
+                                    >
+                                        <span>Browse Courses with Marked Textbooks</span>
+                                        <ArrowRight className="w-3.5 h-3.5" />
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Cockpit Bottom Actions & Metrics */}
+                        <div className="mt-6 pt-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                            <div className="flex items-center gap-6 text-slate-400 font-medium">
+                                <span className="flex items-center gap-1.5">
+                                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                                    {trust1}
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                                    {trust2}
+                                </span>
+                                <span className="flex items-center gap-1.5 hidden md:flex">
+                                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                                    {trust3}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-3 w-full sm:w-auto">
+                                <Link
+                                    to={s.browseCoursesLink || '/courses'}
+                                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-xs transition-all shadow-md shadow-cyan-500/20 flex items-center justify-center gap-2"
+                                >
+                                    <span>{browseCoursesBtn}</span>
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                                <Link
+                                    to={s.startFreeClassLink || '/courses'}
+                                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400/60 text-slate-300 hover:text-white font-bold text-xs transition-all flex items-center justify-center gap-2"
+                                >
+                                    <PlayCircle className="w-4 h-4 text-cyan-400" />
+                                    <span>{startFreeClassBtn}</span>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -367,284 +605,284 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
     };
 
     return (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-                <div>
-                    {headingTag && (
-                        <div className="flex items-center gap-2 text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">
-                            <Sparkles className="w-4 h-4" />
-                            <span>{headingTag}</span>
+        <section className="bg-[#060913] text-white py-16 sm:py-20 border-b border-cyan-500/10 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+                            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                            <span>{headingTag || 'BM&DC 1ST PHASE CURRICULUM'}</span>
                         </div>
-                    )}
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                        {headingTitle}
-                    </h2>
-                </div>
-                {viewAllText && (
-                    <Link
-                        to={s.viewAllLink || '/courses'}
-                        className="inline-flex items-center gap-1.5 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
-                    >
-                        <span>{viewAllText}</span>
-                        <ArrowRight className="w-4 h-4" />
-                    </Link>
-                )}
-            </div>
-
-            {/* Configured Tabs Bar */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-thin">
-                {configuredTabs.map((tab) => {
-                    const isSelected = activeTabId === tab.id;
-                    return (
-                        <button
-                            key={tab.id}
-                            type="button"
-                            onClick={() => handleTabClick(tab)}
-                            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${isSelected
-                                ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
-                                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 shadow-2xs'
-                                }`}
+                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                            {headingTitle || 'Flagship MBBS Courses & Card Batches'}
+                        </h2>
+                    </div>
+                    {viewAllText && (
+                        <Link
+                            to={s.viewAllLink || '/courses'}
+                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
                         >
-                            <span>{tab.label}</span>
-                            {tab.type === 'html' && (
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-white/20 text-white' : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
-                                    }`}>
-                                    HTML
-                                </span>
-                            )}
-                        </button>
-                    );
-                })}
+                            <span>{viewAllText}</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    )}
+                </div>
 
-                {/* If dynamic categories enabled in settings, also show database categories */}
-                {s.dynamicCategories && categories.map((cat) => {
-                    const isSelected = activeTab?.type === 'category' && activeTab?.categorySlug === cat.slug;
-                    return (
-                        <button
-                            key={`cat_${cat.id}`}
-                            type="button"
-                            onClick={() => {
-                                const customTab: CourseTabItem = {
-                                    id: `dyn_cat_${cat.id}`,
-                                    label: cat.name,
-                                    type: 'category',
-                                    categorySlug: cat.slug,
-                                };
-                                handleTabClick(customTab);
+                {/* Configured Tabs Bar */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-thin">
+                    {configuredTabs.map((tab) => {
+                        const isSelected = activeTabId === tab.id;
+                        return (
+                            <button
+                                key={tab.id}
+                                type="button"
+                                onClick={() => handleTabClick(tab)}
+                                className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${isSelected
+                                    ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-black shadow-lg shadow-cyan-500/30'
+                                    : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800 shadow-2xs'
+                                    }`}
+                            >
+                                <span>{tab.label}</span>
+                                {tab.type === 'html' && (
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-black/30 text-slate-900 font-bold' : 'bg-cyan-950 text-cyan-300'
+                                        }`}>
+                                        HTML
+                                    </span>
+                                )}
+                            </button>
+                        );
+                    })}
+
+                    {/* If dynamic categories enabled in settings, also show database categories */}
+                    {s.dynamicCategories && categories.map((cat) => {
+                        const isSelected = activeTab?.type === 'category' && activeTab?.categorySlug === cat.slug;
+                        return (
+                            <button
+                                key={`cat_${cat.id}`}
+                                type="button"
+                                onClick={() => {
+                                    const customTab: CourseTabItem = {
+                                        id: `dyn_cat_${cat.id}`,
+                                        label: cat.name,
+                                        type: 'category',
+                                        categorySlug: cat.slug,
+                                    };
+                                    handleTabClick(customTab);
+                                }}
+                                className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${isSelected
+                                    ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-black shadow-lg shadow-cyan-500/30'
+                                    : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800 shadow-2xs'
+                                    }`}
+                            >
+                                <span>{cat.name}</span>
+                                {cat.courses_count !== undefined && cat.courses_count > 0 && (
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-black/30 text-slate-900 font-bold' : 'bg-slate-800 text-slate-400'
+                                        }`}>
+                                        {cat.courses_count}
+                                    </span>
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                {/* TAB CONTENT: EITHER CUSTOM HTML WIDGET OR COURSES GRID */}
+                {activeTab?.type === 'html' ? (
+                    <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xs">
+                        {activeTab.cssContent && (
+                            <style>{activeTab.cssContent}</style>
+                        )}
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: activeTab.htmlContent || `<div class="text-center text-slate-400 py-8">Add custom HTML widget content...</div>`
                             }}
-                            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${isSelected
-                                ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
-                                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 shadow-2xs'
-                                }`}
-                        >
-                            <span>{cat.name}</span>
-                            {cat.courses_count !== undefined && cat.courses_count > 0 && (
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-                                    }`}>
-                                    {cat.courses_count}
-                                </span>
-                            )}
-                        </button>
-                    );
-                })}
-            </div>
-
-            {/* TAB CONTENT: EITHER CUSTOM HTML WIDGET OR COURSES GRID */}
-            {activeTab?.type === 'html' ? (
-                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 shadow-xs">
-                    {activeTab.cssContent && (
-                        <style>{activeTab.cssContent}</style>
-                    )}
-                    <div
-                        dangerouslySetInnerHTML={{
-                            __html: activeTab.htmlContent || `<div class="text-center text-slate-400 py-8">Add custom HTML widget content...</div>`
-                        }}
-                    />
-                </div>
-            ) : (
-                /* Course Cards Grid */
-                <div>
-                    {loading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1, 2, 3].map((n) => (
-                                <div key={n} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-4 animate-pulse space-y-4">
-                                    <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-xl" />
-                                    <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-3/4" />
-                                    <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/2" />
-                                </div>
-                            ))}
-                        </div>
-                    ) : courses.length === 0 ? (
-                        <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-400 space-y-2">
-                            <BookOpen className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
-                            <p className="font-semibold">{t.courses.emptyCourses}</p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                            {courses.map((course) => {
-                                const thumbUrl = getImageUrl((course as any).thumbnail || course.thumbnail_url);
-                                return (
-                                    <div
-                                        key={course.id}
-                                        className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-2xl hover:border-sky-400 dark:hover:border-sky-500 transition-all flex flex-col overflow-hidden relative"
-                                    >
-                                        {/* Thumbnail Header */}
-                                        <Link to={`/courses/${course.slug}`} className="block relative aspect-video bg-slate-900 overflow-hidden cursor-pointer group/thumb">
-                                            {thumbUrl ? (
-                                                <img
-                                                    src={thumbUrl}
-                                                    alt={course.title}
-                                                    className="w-full h-full object-cover group-hover:scale-105 group-hover/thumb:scale-105 transition-transform duration-500"
-                                                    onError={(e) => {
-                                                        (e.currentTarget as HTMLElement).style.display = 'none';
-                                                        const fallback = (e.currentTarget.parentElement?.querySelector('.fallback-thumb') as HTMLElement);
-                                                        if (fallback) fallback.style.display = 'flex';
-                                                    }}
-                                                />
-                                            ) : null}
-                                            <div className={`fallback-thumb w-full h-full ${thumbUrl ? 'hidden' : 'flex'} items-center justify-center bg-gradient-to-tr from-slate-800 to-sky-950 text-white`}>
-                                                <BookOpen className="w-12 h-12 text-sky-400 opacity-60" />
-                                            </div>
-
-                                            {/* Discount Badge */}
-                                            {course.discount_percent && course.discount_percent > 0 ? (
-                                                <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-rose-600 text-white rounded-xl shadow-md">
-                                                    {course.discount_percent}% OFF
-                                                </span>
-                                            ) : course.price === 0 ? (
-                                                <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-emerald-600 text-white rounded-xl shadow-md">
-                                                    Free Course
-                                                </span>
-                                            ) : null}
-
-                                            {/* Category Pill on image */}
-                                            {course.categories && course.categories.length > 0 && (
-                                                <span className="absolute bottom-3 left-3 px-2.5 py-1 text-[11px] font-bold bg-black/70 backdrop-blur-xs text-white rounded-lg">
-                                                    {course.categories[0].name}
-                                                </span>
-                                            )}
-                                        </Link>
-
-                                        {/* Content Body */}
-                                        <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                                            <div className="space-y-3">
-                                                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-                                                    <span className="flex items-center gap-1">
-                                                        <Video className="w-3.5 h-3.5 text-sky-500" />
-                                                        <span>{course.lessons_count || 0} Classes</span>
-                                                    </span>
-                                                    <span>•</span>
-                                                    <span className="flex items-center gap-1">
-                                                        <Users className="w-3.5 h-3.5 text-sky-500" />
-                                                        <span>{(course.fake_enrollment_count || 0) + (course.enrollments_count || 0)} Students</span>
-                                                    </span>
+                        />
+                    </div>
+                ) : (
+                    /* Course Cards Grid */
+                    <div>
+                        {loading ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {[1, 2, 3].map((n) => (
+                                    <div key={n} className="bg-slate-900/80 rounded-2xl border border-slate-800 p-4 animate-pulse space-y-4">
+                                        <div className="h-48 bg-slate-800 rounded-xl" />
+                                        <div className="h-6 bg-slate-800 rounded w-3/4" />
+                                        <div className="h-4 bg-slate-800 rounded w-1/2" />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : courses.length === 0 ? (
+                            <div className="text-center py-12 bg-slate-900/60 rounded-2xl border border-slate-800 text-slate-400 space-y-2">
+                                <BookOpen className="w-10 h-10 text-slate-600 mx-auto" />
+                                <p className="font-semibold">{t.courses.emptyCourses}</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                                {courses.map((course) => {
+                                    const thumbUrl = getImageUrl((course as any).thumbnail || course.thumbnail_url);
+                                    return (
+                                        <div
+                                            key={course.id}
+                                            className="group bg-slate-900/70 backdrop-blur-xl rounded-3xl border border-slate-800/90 hover:border-cyan-500/50 shadow-xs hover:shadow-[0_0_35px_rgba(6,182,212,0.18)] transition-all flex flex-col overflow-hidden relative"
+                                        >
+                                            {/* Thumbnail Header */}
+                                            <Link to={`/courses/${course.slug}`} className="block relative aspect-video bg-slate-950 overflow-hidden cursor-pointer group/thumb">
+                                                {thumbUrl ? (
+                                                    <img
+                                                        src={thumbUrl}
+                                                        alt={course.title}
+                                                        className="w-full h-full object-cover group-hover:scale-105 group-hover/thumb:scale-105 transition-transform duration-500"
+                                                        onError={(e) => {
+                                                            (e.currentTarget as HTMLElement).style.display = 'none';
+                                                            const fallback = (e.currentTarget.parentElement?.querySelector('.fallback-thumb') as HTMLElement);
+                                                            if (fallback) fallback.style.display = 'flex';
+                                                        }}
+                                                    />
+                                                ) : null}
+                                                <div className={`fallback-thumb w-full h-full ${thumbUrl ? 'hidden' : 'flex'} items-center justify-center bg-gradient-to-tr from-slate-900 to-cyan-950 text-white`}>
+                                                    <BookOpen className="w-12 h-12 text-cyan-400 opacity-60" />
                                                 </div>
 
-                                                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 transition-colors line-clamp-2">
-                                                    <Link
-                                                        to={`/courses/${course.slug}`}
-                                                        className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors cursor-pointer"
-                                                    >
-                                                        {course.title}
-                                                    </Link>
-                                                </h3>
+                                                {/* Discount Badge */}
+                                                {course.discount_percent && course.discount_percent > 0 ? (
+                                                    <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-rose-600 text-white rounded-xl shadow-md">
+                                                        {course.discount_percent}% OFF
+                                                    </span>
+                                                ) : course.price === 0 ? (
+                                                    <span className="absolute top-3 right-3 px-3 py-1 text-xs font-black bg-emerald-600 text-white rounded-xl shadow-md">
+                                                        Free Course
+                                                    </span>
+                                                ) : null}
 
-                                                {/* Course feature checklist */}
-                                                <div className="space-y-1.5 pt-1 text-xs text-slate-600 dark:text-slate-300">
-                                                    {((course.features && Array.isArray(course.features) && course.features.length > 0)
-                                                        ? course.features.filter((f: any) => typeof f === 'string' && f.trim().length > 0)
-                                                        : [
-                                                            'Live & Full HD Recorded Class Archive',
-                                                            'Chapter Lecture Notes & Question Bank',
-                                                            'NexPilot AI 24/7 Instant Doubt Solver',
-                                                        ]
-                                                    ).slice(0, 4).map((feat: string, fIdx: number) => (
-                                                        <div key={fIdx} className="flex items-start gap-1.5">
-                                                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                                                            <span className="line-clamp-1 leading-tight">{feat}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                                {/* Category Pill on image */}
+                                                {course.categories && course.categories.length > 0 && (
+                                                    <span className="absolute bottom-3 left-3 px-2.5 py-1 text-[10px] font-mono font-bold bg-slate-950/80 backdrop-blur-md text-cyan-300 rounded-lg border border-cyan-500/30">
+                                                        {course.categories[0].name}
+                                                    </span>
+                                                )}
+                                            </Link>
 
-                                            {/* Pricing & Instructor Row */}
-                                            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                                                <div className="flex items-center justify-between">
-                                                    <div className="text-xs font-medium text-slate-500 truncate mr-2">
-                                                        Instructor: <span className="font-bold text-slate-800 dark:text-slate-200">
-                                                            {course.instructors && course.instructors.length > 0
-                                                                ? course.instructors[0].name
-                                                                : (course.instructor?.name || 'Expert Mentor')}
+                                            {/* Content Body */}
+                                            <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                                                <div className="space-y-3">
+                                                    <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+                                                        <span className="flex items-center gap-1">
+                                                            <Video className="w-3.5 h-3.5 text-cyan-400" />
+                                                            <span>{course.lessons_count || 0} Classes</span>
+                                                        </span>
+                                                        <span>•</span>
+                                                        <span className="flex items-center gap-1">
+                                                            <Users className="w-3.5 h-3.5 text-emerald-400" />
+                                                            <span>{(course.fake_enrollment_count || 0) + (course.enrollments_count || 0)} Students</span>
                                                         </span>
                                                     </div>
 
-                                                    <div className="text-right shrink-0">
-                                                        {(course as any).is_enrolled ? (
-                                                            <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-bold text-xs rounded-full border border-emerald-200 dark:border-emerald-800">
-                                                                <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                                                                <span>Enrolled</span>
-                                                            </span>
-                                                        ) : course.price === 0 ? (
-                                                            <span className="text-lg font-black text-emerald-600">Free</span>
-                                                        ) : (
-                                                            <div className="flex items-baseline gap-1.5">
-                                                                <span className="text-xl font-black text-sky-600 dark:text-sky-400">
-                                                                    {formatBDT(
-                                                                        course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price)
-                                                                            ? Number(course.sale_price)
-                                                                            : (course.effective_price ?? Number(course.price))
-                                                                    )}
-                                                                </span>
-                                                                {course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price) && (
-                                                                    <span className="text-xs text-slate-400 line-through">
-                                                                        {formatBDT(course.price)}
-                                                                    </span>
-                                                                )}
+                                                    <h3 className="text-base sm:text-lg font-black text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
+                                                        <Link
+                                                            to={`/courses/${course.slug}`}
+                                                            className="hover:text-cyan-300 transition-colors cursor-pointer"
+                                                        >
+                                                            {course.title}
+                                                        </Link>
+                                                    </h3>
+
+                                                    {/* Course feature checklist */}
+                                                    <div className="space-y-1.5 pt-1 text-xs text-slate-300">
+                                                        {((course.features && Array.isArray(course.features) && course.features.length > 0)
+                                                            ? course.features.filter((f: any) => typeof f === 'string' && f.trim().length > 0)
+                                                            : [
+                                                                'Cadaveric Dissection & Viscera Demonstration',
+                                                                'Marked Standard Soft-Textbook (BDC / Guyton)',
+                                                                '10-Minute Item Quick Recap & Viva Prep',
+                                                            ]
+                                                        ).slice(0, 4).map((feat: string, fIdx: number) => (
+                                                            <div key={fIdx} className="flex items-start gap-1.5">
+                                                                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                                                                <span className="line-clamp-1 leading-tight">{feat}</span>
                                                             </div>
-                                                        )}
+                                                        ))}
                                                     </div>
                                                 </div>
 
-                                                {/* Action buttons */}
-                                                <div className="grid grid-cols-2 gap-2 pt-1">
-                                                    <Link
-                                                        to={`/courses/${course.slug}`}
-                                                        className="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-xs text-slate-700 dark:text-slate-200 text-center transition-all cursor-pointer flex items-center justify-center"
-                                                    >
-                                                        View Details
-                                                    </Link>
-                                                    {(course as any).is_enrolled ? (
+                                                {/* Pricing & Instructor Row */}
+                                                <div className="pt-4 border-t border-slate-800 space-y-3">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="text-xs font-medium text-slate-400 truncate mr-2">
+                                                            Mentor: <span className="font-bold text-slate-200">
+                                                                {course.instructors && course.instructors.length > 0
+                                                                    ? course.instructors[0].name
+                                                                    : (course.instructor?.name || 'Medical Faculty Lead')}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="text-right shrink-0">
+                                                            {(course as any).is_enrolled ? (
+                                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-950/60 text-emerald-400 font-bold text-xs rounded-full border border-emerald-500/30">
+                                                                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                                                                    <span>Enrolled</span>
+                                                                </span>
+                                                            ) : course.price === 0 ? (
+                                                                <span className="text-lg font-black text-emerald-400">Free</span>
+                                                            ) : (
+                                                                <div className="flex items-baseline gap-1.5">
+                                                                    <span className="text-xl font-black text-cyan-400">
+                                                                        {formatBDT(
+                                                                            course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price)
+                                                                                ? Number(course.sale_price)
+                                                                                : (course.effective_price ?? Number(course.price))
+                                                                        )}
+                                                                    </span>
+                                                                    {course.sale_price !== null && course.sale_price !== undefined && Number(course.sale_price) < Number(course.price) && (
+                                                                        <span className="text-xs text-slate-500 line-through">
+                                                                            {formatBDT(course.price)}
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Action buttons */}
+                                                    <div className="grid grid-cols-2 gap-2 pt-1">
                                                         <Link
-                                                            to={`/learning/${course.id}`}
-                                                            className="py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20"
+                                                            to={`/courses/${course.slug}`}
+                                                            className="py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 font-bold text-xs text-slate-200 text-center transition-all cursor-pointer flex items-center justify-center border border-slate-700"
                                                         >
-                                                            <PlayCircle className="w-3.5 h-3.5" />
-                                                            <span>Start Class</span>
+                                                            View Details
                                                         </Link>
-                                                    ) : (
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => addToCart(course)}
-                                                            className={`py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs ${
-                                                                isInCart(course.id)
-                                                                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
-                                                                    : 'bg-[#25a2ee] hover:bg-[#1f8ed1] text-white shadow-sky-500/20'
-                                                            }`}
-                                                        >
-                                                            <ShoppingCart className="w-3.5 h-3.5" />
-                                                            <span>{isInCart(course.id) ? 'In Cart' : 'Add to Cart'}</span>
-                                                        </button>
-                                                    )}
+                                                        {(course as any).is_enrolled ? (
+                                                            <Link
+                                                                to={`/learning/${course.id}`}
+                                                                className="py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20"
+                                                            >
+                                                                <PlayCircle className="w-3.5 h-3.5" />
+                                                                <span>Start Class</span>
+                                                            </Link>
+                                                        ) : (
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => addToCart(course)}
+                                                                className={`py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs ${
+                                                                    isInCart(course.id)
+                                                                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
+                                                                        : 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black shadow-cyan-500/20'
+                                                                }`}
+                                                            >
+                                                                <ShoppingCart className="w-3.5 h-3.5" />
+                                                                <span>{isInCart(course.id) ? 'In Cart' : 'Add to Cart'}</span>
+                                                            </button>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    )}
-                </div>
-            )}
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         </section>
     );
 };
@@ -670,91 +908,208 @@ const HtmlWidgetBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
 };
 
 /* -------------------------------------------------------------
- * 4. FEATURES GRID BLOCK (Why Choose Us)
+ * 4. FEATURES GRID BLOCK (The Clinical Vault - Dark Glass Bento Grid)
  * ----------------------------------------------------------- */
 const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { t, language } = useLanguage();
     const s = block.settings || {};
 
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || t.features.sectionTag;
-    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || t.features.sectionTitle;
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || t.features.sectionSub;
-
-    const defaultItems = [
-        {
-            id: '1',
-            icon: 'Award',
-            title: t.features.feature1Title,
-            desc: t.features.feature1Desc,
-        },
-        {
-            id: '2',
-            icon: 'HelpCircle',
-            title: t.features.feature2Title,
-            desc: t.features.feature2Desc,
-        },
-        {
-            id: '3',
-            icon: 'Clock',
-            title: t.features.feature3Title,
-            desc: t.features.feature3Desc,
-        },
-    ];
-
-    const rawItems = s.items || defaultItems;
-    const items = rawItems.map((item: any) => ({
-        ...item,
-        title: getLocalizedText(item.title, item.title_en, language) || item.title,
-        desc: getLocalizedText(item.desc, item.desc_en, language) || item.desc,
-    }));
-
-    const getIcon = (iconName: string) => {
-        switch (iconName) {
-            case 'Stethoscope': return <Stethoscope className="w-6 h-6" />;
-            case 'Activity': return <Activity className="w-6 h-6" />;
-            case 'Microscope': return <Microscope className="w-6 h-6" />;
-            case 'HeartPulse': return <HeartPulse className="w-6 h-6" />;
-            case 'FileText': return <FileText className="w-6 h-6" />;
-            case 'BookOpen': return <BookOpen className="w-6 h-6" />;
-            case 'Award': return <Award className="w-6 h-6" />;
-            case 'HelpCircle': return <HelpCircle className="w-6 h-6" />;
-            case 'Clock': return <Clock className="w-6 h-6" />;
-            case 'Zap': return <Zap className="w-6 h-6" />;
-            case 'ShieldCheck': return <ShieldCheck className="w-6 h-6" />;
-            case 'Heart': return <Heart className="w-6 h-6" />;
-            default: return <Stethoscope className="w-6 h-6" />;
-        }
-    };
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'THE CLINICAL VAULT • 4 CORE ADVANTAGES';
+    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Scientific Learning Architecture for 1st Prof Honours';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'We bridge textbook theory, cadaveric dissection, and clinical viva questions to ensure distinction marks in your college examinations.';
 
     return (
-        <section className="bg-slate-900 text-white py-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {(sectionTag || sectionTitle) && (
-                    <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                        {sectionTag && (
-                            <span className="text-xs font-bold uppercase tracking-widest text-sky-400">{sectionTag}</span>
-                        )}
-                        {sectionTitle && (
-                            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{sectionTitle}</h2>
-                        )}
-                        {sectionSub && (
-                            <p className="text-slate-400 text-sm sm:text-base">{sectionSub}</p>
-                        )}
-                    </div>
-                )}
+        <section className="bg-[#070B14] text-white py-20 sm:py-28 relative overflow-hidden border-b border-cyan-500/10">
+            {/* Ambient background glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {items.map((item: any, idx: number) => (
-                        <div key={item.id || idx} className="bg-slate-800/80 p-8 rounded-2xl border border-slate-700/60 space-y-4">
-                            <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center">
-                                {getIcon(item.icon)}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* Section Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold uppercase tracking-wider shadow-sm">
+                        <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>{sectionTag}</span>
+                    </span>
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+                        {sectionTitle}
+                    </h2>
+                    <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                        {sectionSub}
+                    </p>
+                </div>
+
+                {/* The Asymmetric Dark Glass Bento Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* BENTO TILE 1: Large (Span 7) - Virtual Dissection & Viscera Theater */}
+                    <div className="lg:col-span-7 bg-slate-900/60 backdrop-blur-2xl border border-cyan-500/20 hover:border-cyan-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(6,182,212,0.15)] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-500/15 transition-all" />
+
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+                                    <Activity className="w-6 h-6" />
+                                </div>
+                                <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono uppercase tracking-wider">
+                                    PILLAR 01 • ANATOMY
+                                </span>
                             </div>
-                            <h3 className="text-xl font-bold">{item.title}</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed">
-                                {item.desc}
+
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-cyan-300 transition-colors">
+                                Cadaveric Dissection & Viscera 3D Theater
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Don't just imagine structures in 2D. Watch high-definition dissection recordings where mentors hold real viscera, trace arterial courses, and point out exact structures asked in OSPE and oral examinations.
                             </p>
+
+                            {/* Anatomical Tags */}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-cyan-300 font-semibold">Thoracic Viscera</span>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-teal-300 font-semibold">Abdomen Organs</span>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-emerald-300 font-semibold">Head & Neck</span>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-amber-300 font-semibold">Extremities</span>
+                                </div>
+                            </div>
                         </div>
-                    ))}
+
+                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-400 font-medium">Included with all Anatomy courses</span>
+                            <Link to="/courses" className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>Watch Preview</span>
+                                <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* BENTO TILE 2: Small (Span 5) - The 10-Minute Item Panic Station */}
+                    <div className="lg:col-span-5 bg-slate-900/60 backdrop-blur-2xl border border-amber-500/20 hover:border-amber-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(245,158,11,0.15)] relative overflow-hidden">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                                    <Zap className="w-6 h-6" />
+                                </div>
+                                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono uppercase tracking-wider">
+                                    PILLAR 02 • SPEED
+                                </span>
+                            </div>
+
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors">
+                                10-Minute Item Panic Station
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Viva tomorrow morning at 8:00 AM? Don't panic. Watch our 10-minute concentrated item recaps covering the 15 exact questions professors ask before handing you your signature.
+                            </p>
+
+                            <div className="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
+                                <div className="flex items-center gap-2 text-slate-300">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                                    <span>High-frequency viva questions from DMC, SSMC & CMC</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-slate-300">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                                    <span>Exact anatomical definitions & relations</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-400 font-medium">Night-before revision</span>
+                            <Link to="/courses" className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>Try Item Recap</span>
+                                <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* BENTO TILE 3: Small (Span 5) - Professor-Marked Textbooks */}
+                    <div className="lg:col-span-5 bg-slate-900/60 backdrop-blur-2xl border border-emerald-500/20 hover:border-emerald-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+                                    <BookOpen className="w-6 h-6" />
+                                </div>
+                                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono uppercase tracking-wider">
+                                    PILLAR 03 • TEXTBOOKS
+                                </span>
+                            </div>
+
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-emerald-300 transition-colors">
+                                Professor-Marked Standard Books
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Complete soft-copy books with lines already marked by experienced doctors. Yellow for must-know written topics, Pink for tricky oral viva questions.
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-2 text-center text-xs">
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="font-bold text-emerald-400">Guyton 14th Ed</div>
+                                    <div className="text-[10px] text-slate-400">Marked Physio</div>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="font-bold text-cyan-400">BDC Anatomy</div>
+                                    <div className="text-[10px] text-slate-400">All 4 Volumes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-400 font-medium">PDF Soft Copies Included</span>
+                            <Link to="/courses" className="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>Get Marked Books</span>
+                                <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* BENTO TILE 4: Large (Span 7) - Real-Time Model Tests & OSPE Simulator */}
+                    <div className="lg:col-span-7 bg-slate-900/60 backdrop-blur-2xl border border-rose-500/20 hover:border-rose-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(244,63,94,0.15)] relative overflow-hidden">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+                                    <ClipboardList className="w-6 h-6" />
+                                </div>
+                                <span className="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px] font-mono uppercase tracking-wider">
+                                    PILLAR 04 • EVALUATION
+                                </span>
+                            </div>
+
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-rose-300 transition-colors">
+                                Real-Time 1st Prof Model Tests & OSPE Stations
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Practice realistic clinical MCQs and Single Best Answer (SBA) questions with negative marking, timed countdowns, and instant nationwide medical college merit rankings.
+                            </p>
+
+                            <div className="grid grid-cols-3 gap-2.5 pt-1 text-center text-xs">
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-rose-400">BM&DC</div>
+                                    <div className="text-[10px] text-slate-400">Standard Pattern</div>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-amber-400">Instant</div>
+                                    <div className="text-[10px] text-slate-400">Solution Analysis</div>
+                                </div>
+                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-emerald-400">Nationwide</div>
+                                    <div className="text-[10px] text-slate-400">Merit Position</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+                            <span className="text-xs text-slate-400 font-medium">Card & Term Exam Hall</span>
+                            <Link to="/courses" className="text-xs font-bold text-rose-400 hover:text-rose-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>Start Model Test</span>
+                                <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -762,48 +1117,52 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 };
 
 /* -------------------------------------------------------------
- * 5. CTA BANNER BLOCK
+ * 5. CTA BANNER BLOCK (Dark Glass Clinical Terminal)
  * ----------------------------------------------------------- */
 const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
 
-    const badge = getLocalizedText(s.badge, s.badge_en, language);
-    const title = getLocalizedText(s.title, s.title_en, language) || 'Join DoctorWallah Today';
-    const subtitle = getLocalizedText(s.subtitle, s.subtitle_en, language);
-    const buttonText = getLocalizedText(s.buttonText, s.buttonText_en, language) || 'Browse Courses';
-
-    const bgGradient = s.bgColor === 'slate'
-        ? 'from-slate-900 via-slate-800 to-slate-900'
-        : 'from-sky-700 via-sky-600 to-amber-600';
+    const badge = getLocalizedText(s.badge, s.badge_en, language) || 'MBBS 2026 ADMISSION OPEN';
+    const title = getLocalizedText(s.title, s.title_en, language) || 'Join Bangladesh\'s #1 MBBS Academic Platform Today';
+    const subtitle = getLocalizedText(s.subtitle, s.subtitle_en, language) || 'From day-to-day item viva clearance to 1st Prof Honours, DoctorWallah is your constant academic mentor.';
+    const buttonText = getLocalizedText(s.buttonText, s.buttonText_en, language) || 'Enroll in MBBS Batch';
+    const buttonLink = s.buttonLink || '/courses';
 
     return (
-        <section className={`py-16 bg-gradient-to-r ${bgGradient} text-white`}>
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-                {badge && (
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-xs">
-                        {badge}
-                    </span>
-                )}
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-                    {title}
-                </h2>
-                {subtitle && (
-                    <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+        <section className="bg-[#050811] py-16 sm:py-24 relative overflow-hidden border-t border-cyan-500/10">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="bg-slate-900/80 border border-cyan-500/30 rounded-3xl p-8 sm:p-14 text-center space-y-6 backdrop-blur-2xl shadow-[0_0_80px_-20px_rgba(6,182,212,0.25)] relative overflow-hidden">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider">
+                        <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>{badge}</span>
+                    </div>
+
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                        {title}
+                    </h2>
+
+                    <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         {subtitle}
                     </p>
-                )}
-                {buttonText && (
-                    <div className="pt-2">
+
+                    <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
-                            to={s.buttonLink || '/courses'}
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 font-bold text-base hover:bg-slate-100 shadow-xl transition-all cursor-pointer"
+                            to={buttonLink}
+                            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-sm sm:text-base transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <span>{buttonText}</span>
-                            <ArrowRight className="w-5 h-5 text-sky-600" />
+                            <ArrowRight className="w-5 h-5" />
+                        </Link>
+                        <Link
+                            to="/courses"
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-950 border border-slate-700 hover:border-cyan-400/60 text-slate-300 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                            <PlayCircle className="w-5 h-5 text-cyan-400" />
+                            <span>Watch Demo Classes</span>
                         </Link>
                     </div>
-                )}
+                </div>
             </div>
         </section>
     );
@@ -907,23 +1266,23 @@ const StatsCounterBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
 const TopAnnouncementBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
-    const badge = getLocalizedText(s.badge, s.badge_en, language) || 'Special Offer';
-    const text = getLocalizedText(s.text, s.text_en, language) || 'Special discount enrollment open for Academic & Admission Master Batches!';
-    const linkText = getLocalizedText(s.linkText, s.linkText_en, language) || 'Explore All Courses →';
+    const badge = getLocalizedText(s.badge, s.badge_en, language) || '🩺 MBBS 2026 Batch';
+    const text = getLocalizedText(s.text, s.text_en, language) || 'Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs! Access 1,250+ video lectures & marked standard books.';
+    const linkText = getLocalizedText(s.linkText, s.linkText_en, language) || 'Explore MBBS Courses →';
     const linkUrl = s.linkUrl || '/courses';
-    const bgGradient = s.bgColor || 'from-sky-700 via-sky-600 to-amber-500';
 
     return (
-        <div className={`bg-gradient-to-r ${bgGradient} text-white text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 shadow-inner relative z-10`}>
+        <div className="bg-[#040711] border-b border-cyan-500/20 text-slate-200 text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 relative z-10 shadow-lg shadow-cyan-950/50 backdrop-blur-md">
             {badge && (
                 <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
                 </span>
             )}
-            <span>{text}</span>
+            <span className="text-cyan-300 font-mono text-[11px] sm:text-xs font-bold uppercase">{badge}:</span>
+            <span className="text-slate-300 font-medium text-xs sm:text-sm">{text}</span>
             {linkText && (
-                <Link to={linkUrl} className="underline font-bold text-amber-200 hover:text-white transition-colors ml-1 hidden sm:inline">
+                <Link to={linkUrl} className="underline font-bold text-cyan-400 hover:text-cyan-300 transition-colors ml-1 hidden sm:inline">
                     {linkText}
                 </Link>
             )}
@@ -1067,14 +1426,14 @@ const SpacerBlock: React.FC<{ block: PageBlock }> = ({ block }) => {
 };
 
 /* -------------------------------------------------------------
- * 15. COURSE BUNDLES SHOWCASE BLOCK
+ * 15. COURSE BUNDLES SHOWCASE BLOCK (Dark Glass Clinical Packages)
  * ----------------------------------------------------------- */
 const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Special Packages';
-    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Popular Course Bundles & Combos';
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Enroll in multiple courses together and save up to 50%!';
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'PHASE-1 ALL-IN-ONE BUNDLES';
+    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Complete Card & Term Preparation Suites';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Combine Anatomy, Physiology, and Biochemistry in one all-inclusive bundle with maximum savings.';
     const limit = Number(s.limit || 4);
 
     const [bundles, setBundles] = useState<any[]>([]);
@@ -1092,20 +1451,20 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
     if (bundles.length === 0) return null;
 
     return (
-        <section className="py-14 sm:py-20 bg-gradient-to-b from-amber-50/40 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-950 dark:to-slate-950 border-b border-slate-100 dark:border-slate-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 sm:py-24 bg-[#070B14] text-white border-b border-cyan-500/10 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
                     {sectionTag && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-xs font-bold uppercase tracking-wider">
-                            <Boxes className="w-3.5 h-3.5" />
+                        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono uppercase tracking-wider">
+                            <Boxes className="w-3.5 h-3.5 text-amber-400" />
                             <span>{sectionTag}</span>
                         </div>
                     )}
-                    <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:white tracking-tight">
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
                         {sectionTitle}
                     </h2>
                     {sectionSub && (
-                        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+                        <p className="text-sm sm:text-base text-slate-300">
                             {sectionSub}
                         </p>
                     )}
@@ -1120,7 +1479,7 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
                         return (
                             <div
                                 key={bundle.id}
-                                className="bg-white dark:bg-slate-900 rounded-3xl border-2 border-amber-200/80 dark:border-amber-900/40 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-200 relative group overflow-hidden"
+                                className="bg-slate-900/60 backdrop-blur-xl rounded-3xl border border-amber-500/30 hover:border-amber-400 p-6 flex flex-col justify-between shadow-[0_0_35px_-10px_rgba(245,158,11,0.15)] hover:shadow-[0_0_45px_-5px_rgba(245,158,11,0.25)] transition-all duration-300 relative group overflow-hidden"
                             >
                                 {discount > 0 && (
                                     <div className="absolute top-4 right-4 bg-rose-600 text-white text-[11px] font-black px-2.5 py-1 rounded-full shadow-md">
@@ -1128,31 +1487,31 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
                                     </div>
                                 )}
                                 <div>
-                                    <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+                                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-4">
                                         <Boxes className="w-6 h-6" />
                                     </div>
-                                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                                    <h3 className="text-xl font-black text-white mb-2 group-hover:text-amber-300 transition-colors">
                                         {bundle.title}
                                     </h3>
                                     {bundle.short_description && (
-                                        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 leading-relaxed">
+                                        <p className="text-xs text-slate-300 line-clamp-2 mb-4 leading-relaxed">
                                             {bundle.short_description}
                                         </p>
                                     )}
 
                                     {Array.isArray(bundle.courses) && bundle.courses.length > 0 && (
-                                        <div className="space-y-1.5 mb-6 pt-3 border-t border-slate-100 dark:border-slate-800">
-                                            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                                        <div className="space-y-1.5 mb-6 pt-3 border-t border-slate-800">
+                                            <span className="text-[11px] font-mono text-cyan-300 font-semibold uppercase tracking-wider block">
                                                 Included Courses ({bundle.courses.length}):
                                             </span>
                                             {bundle.courses.slice(0, 3).map((c: any) => (
-                                                <div key={c.id} className="text-xs text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                                <div key={c.id} className="text-xs text-slate-300 flex items-center gap-2">
+                                                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                                                     <span className="truncate">{c.title}</span>
                                                 </div>
                                             ))}
                                             {bundle.courses.length > 3 && (
-                                                <div className="text-[11px] text-amber-600 font-bold pl-5">
+                                                <div className="text-[11px] text-amber-400 font-bold pl-5">
                                                     + {bundle.courses.length - 3} more courses
                                                 </div>
                                             )}
@@ -1160,18 +1519,18 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
                                     )}
                                 </div>
 
-                                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                                <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                                     <div>
-                                        <div className="text-xs text-slate-400 line-through">
+                                        <div className="text-xs text-slate-500 line-through">
                                             {formatBDT(bundle.regular_price)}
                                         </div>
-                                        <div className="text-2xl font-black text-amber-600 dark:text-amber-400">
+                                        <div className="text-2xl font-black text-amber-400">
                                             {formatBDT(bundle.sale_price)}
                                         </div>
                                     </div>
                                     <Link
                                         to={`/checkout/${bundle.slug}?type=bundle`}
-                                        className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-md shadow-amber-500/30 flex items-center gap-1.5 transition-all"
+                                        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs shadow-md shadow-amber-500/30 flex items-center gap-1.5 transition-all"
                                     >
                                         <span>Get Bundle</span>
                                         <ArrowRight className="w-3.5 h-3.5" />
@@ -1187,12 +1546,12 @@ const BundleShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> =
 };
 
 /* -------------------------------------------------------------
- * 16. FACULTY & TEACHERS SHOWCASE BLOCK
+ * 16. FACULTY & TEACHERS SHOWCASE BLOCK (Dark Glass Studio)
  * ----------------------------------------------------------- */
 const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Medical Faculty';
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'MEDICAL FACULTY';
     const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Learn from Top Medical Educators';
     const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'Experienced medical mentors from premier medical colleges (DMC, CMC, SSMC, SOMC) guiding you through Items, Cards & 1st Prof.';
     const limit = Number(s.limit || 8);
@@ -1224,20 +1583,20 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
     });
 
     return (
-        <section className="py-16 sm:py-24 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
+        <section className="py-16 sm:py-24 bg-[#060913] text-white border-b border-cyan-500/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
                     {sectionTag && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 text-xs font-bold uppercase tracking-wider">
-                            <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
+                        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+                            <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
                             <span>{sectionTag}</span>
                         </div>
                     )}
-                    <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
                         {sectionTitle}
                     </h2>
                     {sectionSub && (
-                        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+                        <p className="text-sm sm:text-base text-slate-300">
                             {sectionSub}
                         </p>
                     )}
@@ -1256,8 +1615,8 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
                                 type="button"
                                 onClick={() => setFilter(btn.key as any)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${filter === btn.key
-                                    ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
-                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                                    ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-black shadow-md shadow-cyan-500/20'
+                                    : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
                                     }`}
                             >
                                 {btn.label}
@@ -1270,32 +1629,32 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
                     {filtered.map((t) => (
                         <div
                             key={t.id}
-                            className="bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 p-3 sm:p-5 text-center shadow-sm hover:shadow-lg hover:border-sky-300 transition-all group flex flex-col justify-between"
+                            className="bg-slate-900/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-800 hover:border-cyan-500/50 p-3 sm:p-5 text-center shadow-sm hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group flex flex-col justify-between"
                         >
                             <div>
-                                <div className="relative w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-3 sm:mb-4 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border-2 border-sky-100 dark:border-sky-900/40">
+                                <div className="relative w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-3 sm:mb-4 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 border-2 border-cyan-500/20 group-hover:border-cyan-400/50 transition-colors">
                                     {t.photo_url ? (
                                         <img src={getImageUrl(t.photo_url)} alt={t.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-sky-500 font-black text-xl sm:text-2xl">
+                                        <div className="w-full h-full flex items-center justify-center text-cyan-400 font-black text-xl sm:text-2xl">
                                             {t.name.charAt(0)}
                                         </div>
                                     )}
                                 </div>
-                                <h3 className="font-bold text-xs sm:text-base text-slate-900 dark:text-white mb-0.5 group-hover:text-sky-600 transition-colors line-clamp-1">
+                                <h3 className="font-bold text-xs sm:text-base text-white mb-0.5 group-hover:text-cyan-300 transition-colors line-clamp-1">
                                     {t.name}
                                 </h3>
-                                <p className="text-[10px] sm:text-xs font-semibold text-sky-600 dark:text-sky-400 line-clamp-1">
-                                    {t.designation || 'Instructor & Mentor'}
+                                <p className="text-[10px] sm:text-xs font-semibold text-cyan-400 line-clamp-1">
+                                    {t.designation || 'Medical Faculty Lead'}
                                 </p>
-                                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 line-clamp-1">
-                                    {t.institution || 'DoctorWallah'}
+                                <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1 line-clamp-1">
+                                    {t.institution || 'DMC / SSMC / CMC'}
                                 </p>
                             </div>
-                            <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-800">
                                 <Link
                                     to={`/teachers/${t.id}`}
-                                    className="text-[11px] sm:text-xs font-bold text-sky-600 hover:text-sky-700 flex items-center justify-center gap-1"
+                                    className="text-[11px] sm:text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center justify-center gap-1"
                                 >
                                     <span>View Profile</span>
                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1310,14 +1669,14 @@ const TeachersShowcaseBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }>
 };
 
 /* -------------------------------------------------------------
- * 17. LEARNING PATH / METHODOLOGY BLOCK
+ * 17. LEARNING PATH / METHODOLOGY BLOCK (Dark Glass 4-Step Blueprint)
  * ----------------------------------------------------------- */
 const LearningPathBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { language } = useLanguage();
     const s = block.settings || {};
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'Learning Methodology';
-    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || '4-Step Scientific System for Guaranteed Preparation';
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'A structured blueprint from conceptual mastery to exam excellence.';
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'METHODOLOGY • 4-STEP SYSTEM';
+    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || '4-Step Scientific System for Guaranteed 1st Prof Preparation';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'A structured blueprint from conceptual mastery to oral viva distinction.';
 
     const defaultSteps = [
         { id: '1', num: '01', title: 'Conceptual Clarity & Item Mastery', desc: 'Every topic explained thoroughly from standard books (BDC, Guyton, Harper) with 3D models and viscera demo.' },
@@ -1328,20 +1687,20 @@ const LearningPathBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
     const steps = s.steps || defaultSteps;
 
     return (
-        <section className="py-16 sm:py-24 bg-gradient-to-b from-sky-50/50 via-white to-slate-50 dark:from-slate-900/60 dark:via-slate-950 dark:to-slate-950 border-b border-slate-100 dark:border-slate-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 sm:py-24 bg-[#070B14] text-white border-b border-cyan-500/10 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
                     {sectionTag && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 text-xs font-bold uppercase tracking-wider">
-                            <Flame className="w-3.5 h-3.5 text-amber-500" />
+                        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+                            <Activity className="w-3.5 h-3.5 text-cyan-400" />
                             <span>{sectionTag}</span>
                         </div>
                     )}
-                    <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
                         {sectionTitle}
                     </h2>
                     {sectionSub && (
-                        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+                        <p className="text-sm sm:text-base text-slate-300">
                             {sectionSub}
                         </p>
                     )}
@@ -1351,15 +1710,15 @@ const LearningPathBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = (
                     {steps.map((st: any, idx: number) => (
                         <div
                             key={st.id || idx}
-                            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all relative overflow-hidden"
+                            className="bg-slate-900/60 backdrop-blur-xl p-6 rounded-3xl border border-cyan-500/20 hover:border-cyan-400/50 shadow-sm hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all relative overflow-hidden group"
                         >
-                            <div className="text-4xl font-black text-sky-500/20 dark:text-sky-400/20 mb-3">
+                            <div className="text-3xl font-mono font-black text-cyan-400/40 group-hover:text-cyan-400 mb-3 transition-colors">
                                 {st.num || `0${idx + 1}`}
                             </div>
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                            <h3 className="text-base sm:text-lg font-black text-white mb-2 group-hover:text-cyan-300 transition-colors">
                                 {st.title}
                             </h3>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p className="text-xs text-slate-300 leading-relaxed">
                                 {st.desc}
                             </p>
                         </div>

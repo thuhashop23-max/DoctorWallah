@@ -318,7 +318,7 @@ export const HomePage: React.FC = () => {
         }
 
         return (
-            <div className="space-y-0 overflow-hidden font-sans">
+            <div className="space-y-0 overflow-hidden font-sans bg-[#060913] text-white min-h-screen">
                 {customPage.custom_css && <style>{customPage.custom_css}</style>}
                 {displayBlocks.map((block) => (
                     <PageBlockRenderer key={block.id} block={block} isBuilder={false} />
@@ -335,46 +335,46 @@ export const HomePage: React.FC = () => {
     );
 
     return (
-        <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden font-sans">
+        <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden font-sans bg-[#060913] text-white min-h-screen">
             {/* Top Live Campaign Ribbon */}
-            <div className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-600 text-white text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 shadow-inner">
+            <div className="bg-[#050B14]/90 border-b border-cyan-500/30 text-white text-xs sm:text-sm py-2.5 px-4 font-mono text-center flex items-center justify-center gap-2 backdrop-blur-xl">
                 <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                 </span>
-                <span>🩺 MBBS 2026 Batch: Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs!</span>
-                <Link to="/courses" className="underline font-extrabold text-white hover:text-teal-100 transition-colors ml-1 hidden sm:inline">
-                    View All Courses →
+                <span className="text-cyan-200">CLINICAL SUITE 2026: Admissions open for MBBS 1st Phase, Cards & Term All-in-One Programs!</span>
+                <Link to="/courses" className="underline font-bold text-cyan-400 hover:text-white transition-colors ml-1 hidden sm:inline">
+                    Explore Vault →
                 </Link>
             </div>
 
             {/* 1. HERO SECTION */}
-            <section className="relative overflow-hidden bg-gradient-to-b from-teal-50/70 via-white to-slate-50/50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors">
+            <section className="relative overflow-hidden bg-[#050811] text-white pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-cyan-500/10 transition-colors">
                 {/* Decorative background blurs */}
-                <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
-                <div className="absolute bottom-0 left-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
+                <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
+                <div className="absolute bottom-0 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                         {/* Left Content Column */}
                         <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                             {/* Trust Badge */}
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs sm:text-sm font-extrabold tracking-wide shadow-2xs">
-                                <Stethoscope className="w-4 h-4 text-teal-600 animate-pulse" />
-                                <span>Bangladesh's #1 MBBS & Medical Learning Platform</span>
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wide shadow-2xs">
+                                <Activity className="w-4 h-4 text-cyan-400 animate-pulse" />
+                                <span>CLINICAL STUDIO 2026-27 | BM&DC 1ST PHASE ACADEMIC SUITE</span>
                             </div>
 
                             {/* Headline */}
-                            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight">
-                                Medical Academic Excellence, <br />
-                                <span className="bg-gradient-to-r from-teal-600 via-sky-600 to-emerald-500 bg-clip-text text-transparent">
-                                    From Item & Card Prep
+                            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.2] tracking-tight">
+                                Master Gross Anatomy, <br />
+                                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+                                    From Daily Items & Cards
                                 </span> <br />
-                                To 1st Prof Success!
+                                To 1st Prof Honours!
                             </h1>
 
                             {/* Subtitle */}
-                            <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                                 Master Gross Anatomy, Physiology & Biochemistry with clinical confidence through expert-led high-yield lectures, cadaveric dissection & viscera demos, and marked standard textbooks (BDC, Guyton, Datta, Langman, Ganong).
                             </p>
 
