@@ -46,6 +46,15 @@
     @vite(['resources/css/app.css', 'resources/js/main.tsx'])
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060202] dark:text-slate-100 font-sans antialiased selection:bg-[#A60201] selection:text-white">
-    <div id="root"></div>
+    <div id="root">
+        <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 38px; height: 38px; border: 3px solid rgba(166, 2, 1, 0.18); border-top-color: #A60201; border-radius: 50%; animation: dwSpin 0.75s linear infinite;"></div>
+        </div>
+        <style>
+            @keyframes dwSpin {
+                to { transform: rotate(360deg); }
+            }
+        </style>
+    </div>
 </body>
 </html>
