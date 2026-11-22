@@ -58,8 +58,8 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
             setFaviconUrl(settings.favicon_url || '');
             setSiteName(settings.site_name || 'DoctorWallah');
             setSiteTagline(settings.site_tagline || 'Premier Online Learning & EdTech Platform');
-            setPrimaryColor(settings.primary_color || '#CC1200');
-            setSecondaryColor(settings.secondary_color || '#25a2ee');
+            setPrimaryColor(settings.primary_color || '#A60201');
+            setSecondaryColor(settings.secondary_color || '#050505');
         }
     }, [settings]);
 
@@ -168,8 +168,8 @@ export const AdminAppearanceGeneralPage: React.FC = () => {
             setFaviconUrl('');
             setSiteName('DoctorWallah');
             setSiteTagline("Premier Online Learning Platform");
-            setPrimaryColor('#CC1200');
-            setSecondaryColor('#25a2ee');
+            setPrimaryColor('#A60201');
+            setSecondaryColor('#050505');
         }
     };
 

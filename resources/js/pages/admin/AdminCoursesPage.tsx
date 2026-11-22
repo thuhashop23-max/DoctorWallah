@@ -166,7 +166,7 @@ export const AdminCoursesPage: React.FC = () => {
                 <div className="flex items-center gap-3">
                     <Link
                         to="/admin/courses/create"
-                        className="px-5 py-3 bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-sm rounded-xl shadow-md shadow-[#25a2ee]/25 flex items-center gap-2 transition-all cursor-pointer"
+                        className="px-5 py-3 bg-[#A60201] hover:bg-[#1f8ed1] text-white font-bold text-sm rounded-xl shadow-md shadow-[#A60201]/25 flex items-center gap-2 transition-all cursor-pointer"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Create New Course</span>
@@ -191,11 +191,11 @@ export const AdminCoursesPage: React.FC = () => {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search courses by name or description..."
-                            className="w-full pl-10 pr-24 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee] focus:border-transparent transition"
+                            className="w-full pl-10 pr-24 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-[#A60201] focus:border-transparent transition"
                         />
                         <button
                             type="submit"
-                            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#25a2ee] cursor-pointer"
+                            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#A60201] cursor-pointer"
                             title="Search"
                         >
                             <Search className="w-4 h-4" />
@@ -216,7 +216,7 @@ export const AdminCoursesPage: React.FC = () => {
                         )}
                         <button
                             type="submit"
-                            className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1 bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                            className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1 bg-[#A60201] hover:bg-[#1f8ed1] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer"
                         >
                             Search
                         </button>
@@ -296,7 +296,7 @@ export const AdminCoursesPage: React.FC = () => {
                                 <tr>
                                     <td colSpan={6} className="py-16 text-center text-slate-400">
                                         <div className="flex flex-col items-center justify-center gap-2">
-                                            <Loader2 className="w-6 h-6 animate-spin text-[#25a2ee]" />
+                                            <Loader2 className="w-6 h-6 animate-spin text-[#A60201]" />
                                             <span>Loading courses...</span>
                                         </div>
                                     </td>
@@ -311,7 +311,7 @@ export const AdminCoursesPage: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     onClick={() => setSearch('')}
-                                                    className="text-xs text-[#25a2ee] hover:underline font-semibold"
+                                                    className="text-xs text-[#A60201] hover:underline font-semibold"
                                                 >
                                                     Clear search filter
                                                 </button>
@@ -340,7 +340,7 @@ export const AdminCoursesPage: React.FC = () => {
                                                         />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center text-white font-bold text-[10px]">
-                                                            <BookOpen className="w-4 h-4 text-[#25a2ee]" />
+                                                            <BookOpen className="w-4 h-4 text-[#A60201]" />
                                                         </div>
                                                     )}
                                                 </a>
@@ -349,7 +349,7 @@ export const AdminCoursesPage: React.FC = () => {
                                                         href={`/courses/${course.slug}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="font-bold text-slate-900 hover:text-[#25a2ee] text-sm truncate block transition-colors"
+                                                        className="font-bold text-slate-900 hover:text-[#A60201] text-sm truncate block transition-colors"
                                                         title="View course details"
                                                     >
                                                         {course.title}
@@ -445,7 +445,7 @@ export const AdminCoursesPage: React.FC = () => {
                                                         <Link
                                                             to={`/admin/courses/${course.id}/builder`}
                                                             title="Open Course Builder"
-                                                            className="px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-[#25a2ee] font-bold rounded-lg flex items-center gap-1 text-xs transition-colors border border-sky-100"
+                                                            className="px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-[#A60201] font-bold rounded-lg flex items-center gap-1 text-xs transition-colors border border-sky-100"
                                                         >
                                                             <Layers className="w-3.5 h-3.5" />
                                                             <span>Builder</span>
@@ -499,7 +499,7 @@ export const AdminCoursesPage: React.FC = () => {
                             <select
                                 value={perPage}
                                 onChange={(e) => handlePerPageChange(Number(e.target.value))}
-                                className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs font-bold text-slate-700 cursor-pointer focus:ring-2 focus:ring-[#25a2ee]"
+                                className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs font-bold text-slate-700 cursor-pointer focus:ring-2 focus:ring-[#A60201]"
                             >
                                 <option value={10}>10</option>
                                 <option value={15}>15</option>
@@ -555,7 +555,7 @@ export const AdminCoursesPage: React.FC = () => {
                                             disabled={loading}
                                             onClick={() => handlePageChange(pageNum)}
                                             className={`w-7 sm:w-8 h-7 sm:h-8 rounded-lg font-bold text-xs transition cursor-pointer ${isActive
-                                                ? 'bg-[#25a2ee] text-white shadow-xs'
+                                                ? 'bg-[#A60201] text-white shadow-xs'
                                                 : 'bg-white border border-slate-200 hover:bg-slate-100 text-slate-700'
                                                 }`}
                                         >

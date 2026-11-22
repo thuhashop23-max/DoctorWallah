@@ -14,188 +14,203 @@
     --font-sans: 'Poppins', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-heading: 'Poppins', 'Hind Siliguri', sans-serif;
 
-    /* DoctorWallah Official Brand Colors: #CC1200 (Crimson Red) & #25a2ee (Azure Blue) */
-    --color-brand-red: #CC1200;
-    --color-brand-blue: #25a2ee;
+    /* DoctorWallah Official Brand Colors: #A60201 (Medical Brand Red) + Pure Black & White */
+    --color-brand-red: #A60201;
+    --color-brand-primary: #A60201;
+    --color-brand-dark: #090303;
+    --color-brand-black: #050505;
 
-    /* Primary Palette (#25a2ee) */
-    --color-primary-50: #edf7fd;
-    --color-primary-100: #d6eefb;
-    --color-primary-200: #b2e0f8;
-    --color-primary-300: #7bcbf4;
-    --color-primary-400: #43b4f0;
-    --color-primary-500: #25a2ee;
-    --color-primary-600: #1784ce;
-    --color-primary-700: #1269a7;
-    --color-primary-800: #135889;
-    --color-primary-900: #154a71;
-    --color-primary-950: #0e2f4b;
+    /* Primary Palette -> #A60201 and its curated medical red variants */
+    --color-primary-50: #fef2f2;
+    --color-primary-100: #fee2e2;
+    --color-primary-200: #fecaca;
+    --color-primary-300: #fca5a5;
+    --color-primary-400: #f87171;
+    --color-primary-500: #ef4444;
+    --color-primary-600: #A60201;
+    --color-primary-700: #8c0201;
+    --color-primary-800: #730201;
+    --color-primary-900: #5a0201;
+    --color-primary-950: #2e0101;
 
-    /* Secondary Palette (#CC1200) */
-    --color-secondary-50: #fdf2f1;
-    --color-secondary-100: #fce3e1;
-    --color-secondary-200: #f9cbc8;
-    --color-secondary-300: #f5a6a0;
-    --color-secondary-400: #ee736a;
-    --color-secondary-500: #e04337;
-    --color-secondary-600: #CC1200;
-    --color-secondary-700: #a80e00;
-    --color-secondary-800: #8b0f03;
-    --color-secondary-900: #741208;
-    --color-secondary-950: #400501;
+    /* Secondary Palette -> Deep Ruby & Crimson */
+    --color-secondary-50: #fef2f2;
+    --color-secondary-100: #fee2e2;
+    --color-secondary-200: #fecaca;
+    --color-secondary-300: #fca5a5;
+    --color-secondary-400: #f87171;
+    --color-secondary-500: #ef4444;
+    --color-secondary-600: #A60201;
+    --color-secondary-700: #8c0201;
+    --color-secondary-800: #730201;
+    --color-secondary-900: #5a0201;
+    --color-secondary-950: #2e0101;
 
-    /* Sky Palette Overrides -> #25a2ee */
-    --color-sky-50: #edf7fd;
-    --color-sky-100: #d6eefb;
-    --color-sky-200: #b2e0f8;
-    --color-sky-300: #7bcbf4;
-    --color-sky-400: #43b4f0;
-    --color-sky-500: #25a2ee;
-    --color-sky-600: #1784ce;
-    --color-sky-700: #1269a7;
-    --color-sky-800: #135889;
-    --color-sky-900: #154a71;
-    --color-sky-950: #0e2f4b;
+    /* Sky Palette Overrides -> #A60201 variants */
+    --color-sky-50: #fef2f2;
+    --color-sky-100: #fee2e2;
+    --color-sky-200: #fecaca;
+    --color-sky-300: #fca5a5;
+    --color-sky-400: #f87171;
+    --color-sky-500: #ef4444;
+    --color-sky-600: #A60201;
+    --color-sky-700: #8c0201;
+    --color-sky-800: #730201;
+    --color-sky-900: #5a0201;
+    --color-sky-950: #2e0101;
 
-    /* Blue Palette Overrides -> #25a2ee */
-    --color-blue-50: #edf7fd;
-    --color-blue-100: #d6eefb;
-    --color-blue-200: #b2e0f8;
-    --color-blue-300: #7bcbf4;
-    --color-blue-400: #43b4f0;
-    --color-blue-500: #25a2ee;
-    --color-blue-600: #1784ce;
-    --color-blue-700: #1269a7;
-    --color-blue-800: #135889;
-    --color-blue-900: #154a71;
-    --color-blue-950: #0e2f4b;
+    /* Blue Palette Overrides -> #A60201 variants */
+    --color-blue-50: #fef2f2;
+    --color-blue-100: #fee2e2;
+    --color-blue-200: #fecaca;
+    --color-blue-300: #fca5a5;
+    --color-blue-400: #f87171;
+    --color-blue-500: #ef4444;
+    --color-blue-600: #A60201;
+    --color-blue-700: #8c0201;
+    --color-blue-800: #730201;
+    --color-blue-900: #5a0201;
+    --color-blue-950: #2e0101;
 
-    /* Indigo Palette Overrides -> #25a2ee */
-    --color-indigo-50: #edf7fd;
-    --color-indigo-100: #d6eefb;
-    --color-indigo-200: #b2e0f8;
-    --color-indigo-300: #7bcbf4;
-    --color-indigo-400: #43b4f0;
-    --color-indigo-500: #25a2ee;
-    --color-indigo-600: #1784ce;
-    --color-indigo-700: #1269a7;
-    --color-indigo-800: #135889;
-    --color-indigo-900: #154a71;
-    --color-indigo-950: #0e2f4b;
+    /* Indigo Palette Overrides -> #A60201 variants */
+    --color-indigo-50: #fef2f2;
+    --color-indigo-100: #fee2e2;
+    --color-indigo-200: #fecaca;
+    --color-indigo-300: #fca5a5;
+    --color-indigo-400: #f87171;
+    --color-indigo-500: #ef4444;
+    --color-indigo-600: #A60201;
+    --color-indigo-700: #8c0201;
+    --color-indigo-800: #730201;
+    --color-indigo-900: #5a0201;
+    --color-indigo-950: #2e0101;
 
-    /* Cyan Palette Overrides -> #25a2ee */
-    --color-cyan-50: #edf7fd;
-    --color-cyan-100: #d6eefb;
-    --color-cyan-200: #b2e0f8;
-    --color-cyan-300: #7bcbf4;
-    --color-cyan-400: #43b4f0;
-    --color-cyan-500: #25a2ee;
-    --color-cyan-600: #1784ce;
-    --color-cyan-700: #1269a7;
-    --color-cyan-800: #135889;
-    --color-cyan-900: #154a71;
-    --color-cyan-950: #0e2f4b;
+    /* Cyan Palette Overrides -> #A60201 variants */
+    --color-cyan-50: #fef2f2;
+    --color-cyan-100: #fee2e2;
+    --color-cyan-200: #fecaca;
+    --color-cyan-300: #fca5a5;
+    --color-cyan-400: #f87171;
+    --color-cyan-500: #ef4444;
+    --color-cyan-600: #A60201;
+    --color-cyan-700: #8c0201;
+    --color-cyan-800: #730201;
+    --color-cyan-900: #5a0201;
+    --color-cyan-950: #2e0101;
 
-    /* Emerald & Green Overrides -> #25a2ee */
-    --color-emerald-50: #edf7fd;
-    --color-emerald-100: #d6eefb;
-    --color-emerald-200: #b2e0f8;
-    --color-emerald-300: #7bcbf4;
-    --color-emerald-400: #43b4f0;
-    --color-emerald-500: #25a2ee;
-    --color-emerald-600: #1784ce;
-    --color-emerald-700: #1269a7;
-    --color-emerald-800: #135889;
-    --color-emerald-900: #154a71;
-    --color-emerald-950: #0e2f4b;
+    /* Teal Palette Overrides -> #A60201 variants */
+    --color-teal-50: #fef2f2;
+    --color-teal-100: #fee2e2;
+    --color-teal-200: #fecaca;
+    --color-teal-300: #fca5a5;
+    --color-teal-400: #f87171;
+    --color-teal-500: #ef4444;
+    --color-teal-600: #A60201;
+    --color-teal-700: #8c0201;
+    --color-teal-800: #730201;
+    --color-teal-900: #5a0201;
+    --color-teal-950: #2e0101;
 
-    --color-green-50: #edf7fd;
-    --color-green-100: #d6eefb;
-    --color-green-200: #b2e0f8;
-    --color-green-300: #7bcbf4;
-    --color-green-400: #43b4f0;
-    --color-green-500: #25a2ee;
-    --color-green-600: #1784ce;
-    --color-green-700: #1269a7;
-    --color-green-800: #135889;
-    --color-green-900: #154a71;
-    --color-green-950: #0e2f4b;
+    /* Emerald & Green Overrides -> #A60201 variants */
+    --color-emerald-50: #fef2f2;
+    --color-emerald-100: #fee2e2;
+    --color-emerald-200: #fecaca;
+    --color-emerald-300: #fca5a5;
+    --color-emerald-400: #f87171;
+    --color-emerald-500: #ef4444;
+    --color-emerald-600: #A60201;
+    --color-emerald-700: #8c0201;
+    --color-emerald-800: #730201;
+    --color-emerald-900: #5a0201;
+    --color-emerald-950: #2e0101;
 
-    /* Red Palette Overrides -> #CC1200 */
-    --color-red-50: #fdf2f1;
-    --color-red-100: #fce3e1;
-    --color-red-200: #f9cbc8;
-    --color-red-300: #f5a6a0;
-    --color-red-400: #ee736a;
-    --color-red-500: #e04337;
-    --color-red-600: #CC1200;
-    --color-red-700: #a80e00;
-    --color-red-800: #8b0f03;
-    --color-red-900: #741208;
-    --color-red-950: #400501;
+    --color-green-50: #fef2f2;
+    --color-green-100: #fee2e2;
+    --color-green-200: #fecaca;
+    --color-green-300: #fca5a5;
+    --color-green-400: #f87171;
+    --color-green-500: #ef4444;
+    --color-green-600: #A60201;
+    --color-green-700: #8c0201;
+    --color-green-800: #730201;
+    --color-green-900: #5a0201;
+    --color-green-950: #2e0101;
 
-    /* Rose Palette Overrides -> #CC1200 */
-    --color-rose-50: #fdf2f1;
-    --color-rose-100: #fce3e1;
-    --color-rose-200: #f9cbc8;
-    --color-rose-300: #f5a6a0;
-    --color-rose-400: #ee736a;
-    --color-rose-500: #e04337;
-    --color-rose-600: #CC1200;
-    --color-rose-700: #a80e00;
-    --color-rose-800: #8b0f03;
-    --color-rose-900: #741208;
-    --color-rose-950: #400501;
+    /* Red Palette Overrides -> #A60201 */
+    --color-red-50: #fef2f2;
+    --color-red-100: #fee2e2;
+    --color-red-200: #fecaca;
+    --color-red-300: #fca5a5;
+    --color-red-400: #f87171;
+    --color-red-500: #ef4444;
+    --color-red-600: #A60201;
+    --color-red-700: #8c0201;
+    --color-red-800: #730201;
+    --color-red-900: #5a0201;
+    --color-red-950: #2e0101;
 
-    /* Amber & Orange Overrides -> #CC1200 */
-    --color-amber-50: #fdf2f1;
-    --color-amber-100: #fce3e1;
-    --color-amber-200: #f9cbc8;
-    --color-amber-300: #f5a6a0;
-    --color-amber-400: #ee736a;
-    --color-amber-500: #e04337;
-    --color-amber-600: #CC1200;
-    --color-amber-700: #a80e00;
-    --color-amber-800: #8b0f03;
-    --color-amber-900: #741208;
-    --color-amber-950: #400501;
+    /* Rose Palette Overrides -> #A60201 */
+    --color-rose-50: #fef2f2;
+    --color-rose-100: #fee2e2;
+    --color-rose-200: #fecaca;
+    --color-rose-300: #fca5a5;
+    --color-rose-400: #f87171;
+    --color-rose-500: #ef4444;
+    --color-rose-600: #A60201;
+    --color-rose-700: #8c0201;
+    --color-rose-800: #730201;
+    --color-rose-900: #5a0201;
+    --color-rose-950: #2e0101;
 
-    --color-orange-50: #fdf2f1;
-    --color-orange-100: #fce3e1;
-    --color-orange-200: #f9cbc8;
-    --color-orange-300: #f5a6a0;
-    --color-orange-400: #ee736a;
-    --color-orange-500: #e04337;
-    --color-orange-600: #CC1200;
-    --color-orange-700: #a80e00;
-    --color-orange-800: #8b0f03;
-    --color-orange-900: #741208;
-    --color-orange-950: #400501;
+    /* Amber & Orange Overrides -> #A60201 */
+    --color-amber-50: #fef2f2;
+    --color-amber-100: #fee2e2;
+    --color-amber-200: #fecaca;
+    --color-amber-300: #fca5a5;
+    --color-amber-400: #f87171;
+    --color-amber-500: #ef4444;
+    --color-amber-600: #A60201;
+    --color-amber-700: #8c0201;
+    --color-amber-800: #730201;
+    --color-amber-900: #5a0201;
+    --color-amber-950: #2e0101;
 
-    /* Purple & Violet Overrides -> #CC1200 */
-    --color-purple-50: #fdf2f1;
-    --color-purple-100: #fce3e1;
-    --color-purple-200: #f9cbc8;
-    --color-purple-300: #f5a6a0;
-    --color-purple-400: #ee736a;
-    --color-purple-500: #e04337;
-    --color-purple-600: #CC1200;
-    --color-purple-700: #a80e00;
-    --color-purple-800: #8b0f03;
-    --color-purple-900: #741208;
-    --color-purple-950: #400501;
+    --color-orange-50: #fef2f2;
+    --color-orange-100: #fee2e2;
+    --color-orange-200: #fecaca;
+    --color-orange-300: #fca5a5;
+    --color-orange-400: #f87171;
+    --color-orange-500: #ef4444;
+    --color-orange-600: #A60201;
+    --color-orange-700: #8c0201;
+    --color-orange-800: #730201;
+    --color-orange-900: #5a0201;
+    --color-orange-950: #2e0101;
 
-    --color-violet-50: #fdf2f1;
-    --color-violet-100: #fce3e1;
-    --color-violet-200: #f9cbc8;
-    --color-violet-300: #f5a6a0;
-    --color-violet-400: #ee736a;
-    --color-violet-500: #e04337;
-    --color-violet-600: #CC1200;
-    --color-violet-700: #a80e00;
-    --color-violet-800: #8b0f03;
-    --color-violet-900: #741208;
-    --color-violet-950: #400501;
+    /* Purple & Violet Overrides -> #A60201 */
+    --color-purple-50: #fef2f2;
+    --color-purple-100: #fee2e2;
+    --color-purple-200: #fecaca;
+    --color-purple-300: #fca5a5;
+    --color-purple-400: #f87171;
+    --color-purple-500: #ef4444;
+    --color-purple-600: #A60201;
+    --color-purple-700: #8c0201;
+    --color-purple-800: #730201;
+    --color-purple-900: #5a0201;
+    --color-purple-950: #2e0101;
+
+    --color-violet-50: #fef2f2;
+    --color-violet-100: #fee2e2;
+    --color-violet-200: #fecaca;
+    --color-violet-300: #fca5a5;
+    --color-violet-400: #f87171;
+    --color-violet-500: #ef4444;
+    --color-violet-600: #A60201;
+    --color-violet-700: #8c0201;
+    --color-violet-800: #730201;
+    --color-violet-900: #5a0201;
+    --color-violet-950: #2e0101;
 }
 
 body, input, textarea, select, button {
@@ -240,7 +255,7 @@ body, input, textarea, select, button {
     max-height: 100% !important;
     scrollbar-gutter: stable;
     scrollbar-width: auto;
-    scrollbar-color: #0284c7 #090d16;
+    scrollbar-color: #A60201 #090303;
 }
 
 .builder-canvas-scroll::-webkit-scrollbar {
@@ -249,23 +264,23 @@ body, input, textarea, select, button {
 }
 
 .builder-canvas-scroll::-webkit-scrollbar-track {
-    background: #090d16 !important;
-    border-left: 2px solid #1e293b !important;
+    background: #090303 !important;
+    border-left: 2px solid #2e0101 !important;
 }
 
 .builder-canvas-scroll::-webkit-scrollbar-thumb {
-    background: #0284c7 !important;
+    background: #A60201 !important;
     border-radius: 9999px !important;
-    border: 3px solid #090d16 !important;
+    border: 3px solid #090303 !important;
     min-height: 60px !important;
 }
 
 .builder-canvas-scroll::-webkit-scrollbar-thumb:hover {
-    background: #38bdf8 !important;
+    background: #ef4444 !important;
 }
 
 .builder-canvas-scroll::-webkit-scrollbar-thumb:active {
-    background: #0369a1 !important;
+    background: #730201 !important;
 }
 
 /* -------------------------------------------------------------
@@ -276,7 +291,7 @@ body, input, textarea, select, button {
     overflow-x: hidden !important;
     scrollbar-gutter: stable;
     scrollbar-width: auto;
-    scrollbar-color: #0284c7 #f1f5f9;
+    scrollbar-color: #A60201 #f1f5f9;
 }
 
 .builder-frame-scroll::-webkit-scrollbar {
@@ -291,25 +306,25 @@ body, input, textarea, select, button {
 }
 
 .builder-frame-scroll::-webkit-scrollbar-thumb {
-    background: #0284c7 !important;
+    background: #A60201 !important;
     border-radius: 9999px !important;
     border: 3px solid #f1f5f9 !important;
     min-height: 50px !important;
 }
 
 .builder-frame-scroll::-webkit-scrollbar-thumb:hover {
-    background: #0369a1 !important;
+    background: #ef4444 !important;
 }
 
 .builder-frame-scroll::-webkit-scrollbar-thumb:active {
-    background: #075985 !important;
+    background: #730201 !important;
 }
 
 .builder-sidebar-scroll {
     overflow-y: auto !important;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
-    scrollbar-color: #38bdf8 #090d16;
+    scrollbar-color: #A60201 #090303;
 }
 
 .builder-sidebar-scroll::-webkit-scrollbar {
@@ -318,17 +333,17 @@ body, input, textarea, select, button {
 }
 
 .builder-sidebar-scroll::-webkit-scrollbar-track {
-    background: #090d16;
+    background: #090303;
 }
 
 .builder-sidebar-scroll::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: #2e0101;
     border-radius: 9999px;
-    border: 2px solid #090d16;
+    border: 2px solid #090303;
 }
 
 .builder-sidebar-scroll::-webkit-scrollbar-thumb:hover {
-    background: #0284c7;
+    background: #A60201;
 }
 
 /* Smooth color transitions when toggling theme */

@@ -127,7 +127,7 @@ export const CartDrawer: React.FC = () => {
                                 <h2 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                                     <span>Shopping Cart</span>
                                     {cartCount > 0 && (
-                                        <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#25a2ee] text-white shrink-0">
+                                        <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#A60201] text-white shrink-0">
                                             {cartCount}
                                         </span>
                                     )}
@@ -210,7 +210,7 @@ export const CartDrawer: React.FC = () => {
                                             closeCart();
                                             navigate('/courses');
                                         }}
-                                        className="px-5 py-2.5 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                                        className="px-5 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer flex items-center gap-1.5"
                                     >
                                         <BookOpen className="w-4 h-4" />
                                         <span>Browse Courses</span>
@@ -234,7 +234,7 @@ export const CartDrawer: React.FC = () => {
                                     return (
                                         <div
                                             key={item.id}
-                                            className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 hover:border-[#25a2ee]/40 transition-colors group"
+                                            className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 hover:border-[#A60201]/40 transition-colors group"
                                         >
                                             {/* Thumbnail */}
                                             <Link
@@ -260,7 +260,7 @@ export const CartDrawer: React.FC = () => {
                                                 <Link
                                                     to={`/courses/${item.slug}`}
                                                     onClick={closeCart}
-                                                    className="block font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 hover:text-[#25a2ee] dark:hover:text-[#25a2ee] line-clamp-2 transition-colors leading-snug"
+                                                    className="block font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 hover:text-[#A60201] dark:hover:text-[#A60201] line-clamp-2 transition-colors leading-snug"
                                                 >
                                                     {item.title}
                                                 </Link>
@@ -276,7 +276,7 @@ export const CartDrawer: React.FC = () => {
                                                 {/* Price & Delete */}
                                                 <div className="flex items-center justify-between gap-2 mt-2 pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
                                                     <div className="flex items-baseline gap-1.5">
-                                                        <span className="font-black text-sm text-[#25a2ee]">
+                                                        <span className="font-black text-sm text-[#A60201]">
                                                             {formatBDT(item.effective_price)}
                                                         </span>
                                                         {hasDiscount && (
@@ -353,13 +353,13 @@ export const CartDrawer: React.FC = () => {
                                                     }}
                                                     placeholder="Coupon Code"
                                                     disabled={isApplyingCoupon}
-                                                    className="w-full pl-8 pr-2 py-1.5 text-xs font-semibold uppercase tracking-wider bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:normal-case focus:outline-none focus:border-[#25a2ee] focus:ring-1 focus:ring-[#25a2ee]"
+                                                    className="w-full pl-8 pr-2 py-1.5 text-xs font-semibold uppercase tracking-wider bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:normal-case focus:outline-none focus:border-[#A60201] focus:ring-1 focus:ring-[#A60201]"
                                                 />
                                             </div>
                                             <button
                                                 type="submit"
                                                 disabled={isApplyingCoupon || !couponCodeInput.trim()}
-                                                className="px-3 py-1.5 bg-[#25a2ee] hover:bg-[#1a8ed2] disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold rounded-lg transition-colors cursor-pointer shrink-0 flex items-center gap-1"
+                                                className="px-3 py-1.5 bg-[#A60201] hover:bg-[#880101] disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold rounded-lg transition-colors cursor-pointer shrink-0 flex items-center gap-1"
                                             >
                                                 {isApplyingCoupon ? (
                                                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -447,7 +447,7 @@ export const CartDrawer: React.FC = () => {
 
                                 <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
                                     <span className="font-extrabold text-sm text-slate-800 dark:text-slate-200">Total Payable</span>
-                                    <span className="font-black text-lg text-[#25a2ee]">
+                                    <span className="font-black text-lg text-[#A60201]">
                                         {formatBDT(totalPayable)}
                                     </span>
                                 </div>
@@ -458,7 +458,7 @@ export const CartDrawer: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={handleCheckout}
-                                    className="w-full py-3 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md shadow-[#25a2ee]/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                                    className="w-full py-3 bg-[#A60201] hover:bg-[#880101] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md shadow-[#A60201]/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
                                 >
                                     <span>Proceed to Checkout</span>
                                     <ArrowRight className="w-4 h-4" />

@@ -102,7 +102,7 @@ export const StudentDashboardLayout: React.FC = () => {
         return (
             <div className="min-h-screen bg-slate-50 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-3">
-                    <Loader2 className="w-8 h-8 text-[#25a2ee] animate-spin" />
+                    <Loader2 className="w-8 h-8 text-[#A60201] animate-spin" />
                     <span className="text-xs font-bold text-slate-500">Loading Student Portal...</span>
                 </div>
             </div>
@@ -200,7 +200,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     {isMobile && (
                         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                             <span className="font-extrabold text-sm text-slate-800 flex items-center gap-2">
-                                <GraduationCap className="w-4 h-4 text-[#25a2ee]" />
+                                <GraduationCap className="w-4 h-4 text-[#A60201]" />
                                 Student Portal
                             </span>
                             <button
@@ -217,7 +217,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     {/* Student Profile Box (Avatar, Name, Member Since, 3-Stat Box) */}
                     <div className="pt-1 pb-3 px-1 border-b border-slate-100 space-y-3">
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-16 h-16 rounded-full bg-[#25a2ee] text-white font-black text-2xl flex items-center justify-center shadow-md shadow-[#25a2ee]/25 border-2 border-white ring-2 ring-[#25a2ee]/30">
+                            <div className="w-16 h-16 rounded-full bg-[#A60201] text-white font-black text-2xl flex items-center justify-center shadow-md shadow-[#A60201]/25 border-2 border-white ring-2 ring-[#A60201]/30">
                                 {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
                             </div>
                             <h3 className="text-sm font-bold text-slate-800 mt-2.5 truncate max-w-full">
@@ -260,17 +260,17 @@ export const StudentDashboardLayout: React.FC = () => {
                                             onClick={() => toggleSubmenu(item.title)}
                                             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition-all text-left cursor-pointer ${
                                                 active
-                                                    ? 'bg-sky-50 text-[#25a2ee] font-extrabold'
-                                                    : 'text-slate-600 hover:text-[#25a2ee] hover:bg-sky-50/80'
+                                                    ? 'bg-red-50 text-[#A60201] font-extrabold'
+                                                    : 'text-slate-600 hover:text-[#A60201] hover:bg-red-50/80'
                                             }`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <Icon className={`w-4 h-4 ${active ? 'text-[#25a2ee]' : 'text-slate-400'}`} />
+                                                <Icon className={`w-4 h-4 ${active ? 'text-[#A60201]' : 'text-slate-400'}`} />
                                                 <span>{item.title}</span>
                                             </div>
                                             <ChevronDown
                                                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                                                    isSubmenuOpen ? 'rotate-180 text-[#25a2ee]' : 'text-slate-400'
+                                                    isSubmenuOpen ? 'rotate-180 text-[#A60201]' : 'text-slate-400'
                                                 }`}
                                             />
                                         </button>
@@ -289,8 +289,8 @@ export const StudentDashboardLayout: React.FC = () => {
                                                             onClick={() => setSidebarOpen(false)}
                                                             className={`flex items-center gap-2.5 px-3 py-2 rounded-xl font-bold text-xs transition-all ${
                                                                 isChildActive
-                                                                    ? 'bg-[#25a2ee] text-white shadow-2xs'
-                                                                    : 'text-slate-500 hover:text-[#25a2ee] hover:bg-sky-50/70'
+                                                                    ? 'bg-[#A60201] text-white shadow-2xs'
+                                                                    : 'text-slate-500 hover:text-[#A60201] hover:bg-red-50/70'
                                                             }`}
                                                         >
                                                             {ChildIcon && (
@@ -313,8 +313,8 @@ export const StudentDashboardLayout: React.FC = () => {
                                     onClick={() => setSidebarOpen(false)}
                                     className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition-all ${
                                         active
-                                            ? 'bg-[#25a2ee] text-white shadow-xs'
-                                            : 'text-slate-600 hover:text-[#25a2ee] hover:bg-sky-50/80'
+                                            ? 'bg-[#A60201] text-white shadow-xs'
+                                            : 'text-slate-600 hover:text-[#A60201] hover:bg-red-50/80'
                                     }`}
                                 >
                                     <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
@@ -327,15 +327,15 @@ export const StudentDashboardLayout: React.FC = () => {
 
                 {/* Bottom Support & Logout */}
                 <div className="space-y-3 pt-3 border-t border-slate-100">
-                    <div className="bg-sky-50/80 rounded-2xl p-3 border border-sky-100 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-white text-[#25a2ee] shadow-2xs flex items-center justify-center shrink-0">
+                    <div className="bg-red-50/80 rounded-2xl p-3 border border-red-100 flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-white text-[#A60201] shadow-2xs flex items-center justify-center shrink-0">
                             <PhoneCall className="w-4 h-4" />
                         </div>
                         <div className="truncate">
                             <span className="text-[10px] font-bold text-slate-500 block leading-tight">Need Help?</span>
                             <a
                                 href={`tel:${supportPhone}`}
-                                className="text-xs font-extrabold text-[#25a2ee] hover:underline truncate block"
+                                className="text-xs font-extrabold text-[#A60201] hover:underline truncate block"
                             >
                                 {supportPhone}
                             </a>
@@ -356,7 +356,7 @@ export const StudentDashboardLayout: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 font-sans antialiased selection:bg-[#25a2ee] selection:text-white">
+        <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 font-sans antialiased selection:bg-[#A60201] selection:text-white">
             {/* Header: Global Website Navbar */}
             <Navbar />
 
@@ -367,7 +367,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     {/* User Quick Strip + Menu Toggle Button */}
                     <div className="bg-white rounded-2xl p-3.5 border border-slate-200/90 shadow-2xs flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-10 h-10 rounded-full bg-[#25a2ee] text-white font-bold text-base flex items-center justify-center shrink-0 shadow-xs">
+                            <div className="w-10 h-10 rounded-full bg-[#A60201] text-white font-bold text-base flex items-center justify-center shrink-0 shadow-xs">
                                 {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
                             </div>
                             <div className="truncate">
@@ -383,7 +383,7 @@ export const StudentDashboardLayout: React.FC = () => {
                         <button
                             type="button"
                             onClick={() => setSidebarOpen(true)}
-                            className="px-3.5 py-2 bg-[#25a2ee]/10 hover:bg-[#25a2ee]/20 text-[#25a2ee] text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0 cursor-pointer"
+                            className="px-3.5 py-2 bg-[#A60201]/10 hover:bg-[#A60201]/20 text-[#A60201] text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0 cursor-pointer"
                         >
                             <SlidersHorizontal className="w-3.5 h-3.5" />
                             <span>Student Menu</span>

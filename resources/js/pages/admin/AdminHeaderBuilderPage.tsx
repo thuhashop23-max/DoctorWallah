@@ -442,7 +442,7 @@ export const AdminHeaderBuilderPage: React.FC = () => {
                                 />
                             ) : (
                                 <div className="flex items-center gap-2">
-                                    <div className="w-10 h-10 rounded-xl bg-[#25a2ee] flex items-center justify-center text-white font-black text-sm shadow-sm">
+                                    <div className="w-10 h-10 rounded-xl bg-[#A60201] flex items-center justify-center text-white font-black text-sm shadow-sm">
                                         N
                                     </div>
                                     <div>

@@ -22,17 +22,17 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
             {/* Animated Dual Glowing Rings & Logo */}
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
                 {/* Outer pulsing soft glow */}
-                <div className="absolute inset-0 rounded-full bg-sky-500/15 blur-xl animate-pulse pointer-events-none" />
+                <div className="absolute inset-0 rounded-full bg-[#A60201]/15 blur-xl animate-pulse pointer-events-none" />
 
                 {/* Outer spinning ring */}
                 <div
-                    className="absolute inset-0 rounded-full border-3 border-transparent border-t-sky-500 border-r-sky-500/50 animate-spin"
+                    className="absolute inset-0 rounded-full border-3 border-transparent border-t-[#A60201] border-r-[#A60201]/50 animate-spin"
                     style={{ animationDuration: '1.2s' }}
                 />
 
                 {/* Inner counter-spinning ring */}
                 <div
-                    className="absolute inset-2.5 rounded-full border-3 border-transparent border-b-[#CC1200] border-l-[#CC1200]/50 animate-spin"
+                    className="absolute inset-2.5 rounded-full border-3 border-transparent border-b-[#A60201] border-l-[#A60201]/50 animate-spin"
                     style={{ animationDuration: '0.9s', animationDirection: 'reverse' }}
                 />
 
@@ -48,8 +48,8 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
                             }}
                         />
                     ) : (
-                        <div className="w-full h-full rounded-full bg-gradient-to-tr from-sky-500 to-sky-400 flex items-center justify-center text-white font-black text-sm shadow-inner">
-                            N
+                        <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#A60201] to-[#880101] flex items-center justify-center text-white font-black text-sm shadow-inner">
+                            D
                         </div>
                     )}
                 </div>
@@ -59,10 +59,10 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
             <div className="space-y-1">
                 <div className="flex items-center justify-center gap-1.5 text-slate-800 dark:text-slate-100 font-extrabold text-sm sm:text-base tracking-tight">
                     <span>{title}</span>
-                    <span className="flex items-center gap-0.5 text-sky-500">
-                        <span className="w-1 h-1 rounded-full bg-sky-500 animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <span className="w-1 h-1 rounded-full bg-sky-500 animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <span className="w-1 h-1 rounded-full bg-sky-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="flex items-center gap-0.5 text-[#A60201]">
+                        <span className="w-1 h-1 rounded-full bg-[#A60201] animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <span className="w-1 h-1 rounded-full bg-[#A60201] animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <span className="w-1 h-1 rounded-full bg-[#A60201] animate-bounce" style={{ animationDelay: '300ms' }} />
                     </span>
                 </div>
                 {subtitle && (

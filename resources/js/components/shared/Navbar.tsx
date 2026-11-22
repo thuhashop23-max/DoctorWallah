@@ -216,7 +216,7 @@ export const Navbar: React.FC = () => {
             {/* Announcement Top Banner */}
             {headerSettings?.announcement_enabled && announcementText && (
                 <div
-                    style={{ backgroundColor: headerSettings.announcement_bg || '#0284c7' }}
+                    style={{ backgroundColor: headerSettings.announcement_bg || '#A60201' }}
                     className="w-full text-white text-xs font-semibold py-1.5 px-3 sm:px-4 text-center shadow-xs transition-colors"
                 >
                     <div className="max-w-7xl mx-auto flex items-center justify-center gap-1.5 sm:gap-2">
@@ -264,7 +264,7 @@ export const Navbar: React.FC = () => {
                             ) : loading ? (
                                 <div style={{ height: '40px', width: '40px' }} className="shrink-0" />
                             ) : (
-                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl sm:rounded-full bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 text-white flex items-center justify-center font-black shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform shrink-0">
+                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl sm:rounded-full bg-[#A60201] text-white flex items-center justify-center font-black shadow-md shadow-[#A60201]/30 group-hover:scale-105 transition-transform shrink-0">
                                     <GraduationCap className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" />
                                 </div>
                             )}
@@ -403,7 +403,7 @@ export const Navbar: React.FC = () => {
                         >
                             <ShoppingCart className="w-4 h-4" />
                             {cartCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-sky-500 text-white text-[9px] sm:text-[10px] font-black min-w-[16px] h-[16px] sm:min-w-[18px] sm:h-[18px] px-1 rounded-full flex items-center justify-center shadow-xs">
+                                <span className="absolute -top-1 -right-1 bg-[#A60201] text-white text-[9px] sm:text-[10px] font-black min-w-[16px] h-[16px] sm:min-w-[18px] sm:h-[18px] px-1 rounded-full flex items-center justify-center shadow-xs">
                                     {cartCount > 9 ? '9+' : cartCount}
                                 </span>
                             )}
@@ -465,7 +465,7 @@ export const Navbar: React.FC = () => {
                                                 {unreadCount > 0 && (
                                                     <button
                                                         onClick={markAllRead}
-                                                        className="text-[10px] font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                                                        className="text-[10px] font-bold text-[#A60201] dark:text-red-400 hover:underline flex items-center gap-1 cursor-pointer"
                                                     >
                                                         <CheckCheck className="w-3 h-3" />
                                                         <span>Mark all as read</span>
@@ -483,7 +483,7 @@ export const Navbar: React.FC = () => {
                                                             key={n.id}
                                                             onClick={() => handleNotificationClick(n)}
                                                             className={`p-3 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer ${
-                                                                !n.read_at ? 'bg-sky-50/60 dark:bg-sky-500/10' : ''
+                                                                !n.read_at ? 'bg-red-500/10' : ''
                                                             }`}
                                                         >
                                                             <div className="flex items-center justify-between gap-1">
@@ -491,7 +491,7 @@ export const Navbar: React.FC = () => {
                                                                     {n.data?.title || n.title || 'Notice'}
                                                                 </p>
                                                                 {!n.read_at && (
-                                                                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
+                                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#A60201] shrink-0" />
                                                                 )}
                                                             </div>
                                                             <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
@@ -511,7 +511,7 @@ export const Navbar: React.FC = () => {
                                     className="flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 dark:border-white/15 text-slate-800 dark:text-white transition-all shrink-0"
                                     title="My Dashboard"
                                 >
-                                    <div className="w-5 h-5 rounded-full bg-sky-500 text-white font-bold text-[10px] flex items-center justify-center shrink-0">
+                                    <div className="w-5 h-5 rounded-full bg-[#A60201] text-white font-bold text-[10px] flex items-center justify-center shrink-0">
                                         {user.name.charAt(0).toUpperCase()}
                                     </div>
                                     <span className="font-bold text-xs hidden sm:inline max-w-[80px] truncate">
@@ -531,7 +531,7 @@ export const Navbar: React.FC = () => {
                         ) : (
                             <Link
                                 to="/login"
-                                className="bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full transition-all shadow-xs text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
+                                className="bg-[#A60201] text-white hover:bg-[#880101] font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full transition-all shadow-md shadow-[#A60201]/25 text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center"
                             >
                                 {language === 'bn' ? 'লগইন' : 'Login'}
                             </Link>
@@ -614,11 +614,11 @@ export const Navbar: React.FC = () => {
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`flex items-center gap-2.5 px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm transition-colors ${
                                     isHome
-                                        ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold'
+                                        ? 'bg-[#A60201]/10 text-[#A60201] dark:text-red-400 font-bold'
                                         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10'
                                 }`}
                             >
-                                <Home className="w-4 h-4 text-sky-500 shrink-0" />
+                                <Home className="w-4 h-4 text-[#A60201] shrink-0" />
                                 <span>{language === 'bn' ? 'হোম' : 'Home'}</span>
                             </Link>
 
@@ -628,28 +628,28 @@ export const Navbar: React.FC = () => {
                                     type="button"
                                     onClick={() => toggleMobileSubmenu('courses')}
                                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer text-left ${
-                                        isCourses ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-700 dark:text-slate-200'
+                                        isCourses ? 'bg-[#A60201]/10 text-[#A60201] dark:text-red-400 font-bold' : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                 >
                                     <span className="flex items-center gap-2.5">
-                                        <GraduationCap className="w-4 h-4 text-sky-500 shrink-0" />
+                                        <GraduationCap className="w-4 h-4 text-[#A60201] shrink-0" />
                                         <span>{language === 'bn' ? 'কোর্সসমূহ' : 'Courses'}</span>
                                     </span>
                                     <ChevronDown
                                         className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                                            openMobileSubmenuIds['courses'] ? 'rotate-180 text-sky-500' : ''
+                                            openMobileSubmenuIds['courses'] ? 'rotate-180 text-[#A60201]' : ''
                                         }`}
                                     />
                                 </button>
 
                                 {openMobileSubmenuIds['courses'] && (
-                                    <div className="pl-6 space-y-1 border-l-2 border-sky-500/30 ml-4 my-1">
+                                    <div className="pl-6 space-y-1 border-l-2 border-[#A60201]/30 ml-4 my-1">
                                         {courseCategories.map((cat) => (
                                             <Link
                                                 key={cat.id}
                                                 to={cat.url}
                                                 onClick={() => setMobileMenuOpen(false)}
-                                                className="block px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white"
+                                                className="block px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#A60201] dark:hover:text-red-400"
                                             >
                                                 • {language === 'bn' ? cat.label_bn : cat.label}
                                             </Link>
@@ -671,7 +671,7 @@ export const Navbar: React.FC = () => {
                                         className="flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
                                     >
                                         <span className="flex items-center gap-2.5">
-                                            <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
+                                            <BookOpen className="w-4 h-4 text-[#A60201] shrink-0" />
                                             <span>{itemLabel}</span>
                                         </span>
                                         <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
@@ -684,7 +684,7 @@ export const Navbar: React.FC = () => {
                                         className="flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10"
                                     >
                                         <span className="flex items-center gap-2.5">
-                                            <BookOpen className="w-4 h-4 text-sky-500 shrink-0" />
+                                            <BookOpen className="w-4 h-4 text-[#A60201] shrink-0" />
                                             <span>{itemLabel}</span>
                                         </span>
                                     </Link>
@@ -702,11 +702,11 @@ export const Navbar: React.FC = () => {
                             className="w-full flex items-center justify-between px-3 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
                         >
                             <span className="flex items-center gap-2.5">
-                                <ShoppingCart className="w-4 h-4 text-sky-500 shrink-0" />
+                                <ShoppingCart className="w-4 h-4 text-[#A60201] shrink-0" />
                                 <span>Cart</span>
                             </span>
                             {cartCount > 0 && (
-                                <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-sky-500 text-white">
+                                <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#A60201] text-white">
                                     {cartCount}
                                 </span>
                             )}
@@ -735,7 +735,7 @@ export const Navbar: React.FC = () => {
                             {user ? (
                                 <div className="space-y-2 pt-1">
                                     <div className="px-3 py-2 bg-slate-50 dark:bg-white/5 rounded-xl flex items-center gap-2.5">
-                                        <div className="w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center shrink-0">
+                                        <div className="w-8 h-8 rounded-full bg-[#A60201] text-white font-bold text-xs flex items-center justify-center shrink-0">
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
                                         <div className="min-w-0 flex-1">
@@ -751,7 +751,7 @@ export const Navbar: React.FC = () => {
                                         <Link
                                             to={getDashboardPath()}
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className="flex-1 py-2 text-center font-bold text-white bg-sky-600 hover:bg-sky-500 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors"
+                                            className="flex-1 py-2 text-center font-bold text-white bg-[#A60201] hover:bg-[#880101] rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-md shadow-[#A60201]/30"
                                         >
                                             <Shield className="w-4 h-4" />
                                             <span>Dashboard</span>
@@ -798,7 +798,7 @@ export const Navbar: React.FC = () => {
                     <div className="bg-white dark:bg-[#10121a] text-slate-900 dark:text-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-white/10 relative animate-in fade-in zoom-in-95 duration-150">
                         <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/10">
                             <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-white text-sm">
-                                <Search className="w-4 h-4 text-sky-500" />
+                                <Search className="w-4 h-4 text-[#A60201]" />
                                 <span>Search Courses or Topics</span>
                             </div>
                             <button

@@ -412,7 +412,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
             {/* Header with Title and Create Button */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
                 <div>
-                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-bold bg-sky-50 dark:bg-sky-950/60 text-[#25a2ee] border border-sky-200 dark:border-sky-800 mb-2">
+                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-bold bg-sky-50 dark:bg-sky-950/60 text-[#A60201] border border-sky-200 dark:border-sky-800 mb-2">
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>Marketing Automation</span>
                     </div>
@@ -427,7 +427,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                 <button
                     type="button"
                     onClick={handleOpenCreateModal}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-sm shadow-md shadow-[#25a2ee]/25 transition-all cursor-pointer self-start sm:self-auto shrink-0"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#A60201] hover:bg-[#1f8ed1] text-white font-bold text-sm shadow-md shadow-[#A60201]/25 transition-all cursor-pointer self-start sm:self-auto shrink-0"
                 >
                     <Plus className="w-4 h-4" />
                     <span>Create New Offer</span>
@@ -437,7 +437,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-[#25a2ee] flex items-center justify-center font-bold">
+                    <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-[#A60201] flex items-center justify-center font-bold">
                         <Gift className="w-6 h-6" />
                     </div>
                     <div>
@@ -482,7 +482,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search offers by title..."
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee]"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#A60201]"
                     />
                 </div>
 
@@ -542,7 +542,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
             <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center text-slate-400">
-                        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[#25a2ee]" />
+                        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[#A60201]" />
                         <span className="text-sm font-semibold">Loading dynamic offers...</span>
                     </div>
                 ) : filteredOffers.length === 0 ? (
@@ -621,7 +621,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                             className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
                                                         >
                                                             <span>{t.min_qty}+ Items:</span>
-                                                            <strong className="text-[#25a2ee]">
+                                                            <strong className="text-[#A60201]">
                                                                 {t.discount_type === 'percentage'
                                                                     ? `${t.discount_value}% OFF`
                                                                     : `-${formatBDT(t.discount_value)}`}
@@ -657,7 +657,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleOpenEditModal(offer)}
-                                                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#25a2ee] hover:bg-sky-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#A60201] hover:bg-sky-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                                                         title="Edit Offer"
                                                     >
                                                         <Edit2 className="w-4 h-4" />
@@ -696,7 +696,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                         <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
                             <div>
                                 <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5 text-[#25a2ee]" />
+                                    <Sparkles className="w-5 h-5 text-[#A60201]" />
                                     <span>{editingOffer ? 'Edit Dynamic Offer' : 'Create Dynamic Offer'}</span>
                                 </h2>
                                 <p className="text-xs text-slate-400 mt-0.5">
@@ -742,7 +742,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     placeholder="e.g. Special Bundle Saver: Buy 2 Get 15% Off, Buy 3 Get 25% Off"
-                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee]"
+                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#A60201]"
                                 />
                             </div>
 
@@ -757,7 +757,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                         onChange={(e) =>
                                             setFormData({ ...formData, scope_type: e.target.value as any })
                                         }
-                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee] cursor-pointer"
+                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#A60201] cursor-pointer"
                                     >
                                         <option value="all">All Courses (Storewide)</option>
                                         <option value="category">Specific Categories</option>
@@ -789,7 +789,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     onClick={handleSelectAllFilteredCategories}
-                                                    className="text-[11px] font-bold text-[#25a2ee] hover:underline cursor-pointer"
+                                                    className="text-[11px] font-bold text-[#A60201] hover:underline cursor-pointer"
                                                 >
                                                     Select All Matching ({filteredModalCategories.length})
                                                 </button>
@@ -816,7 +816,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                 value={modalCategorySearch}
                                                 onChange={(e) => setModalCategorySearch(e.target.value)}
                                                 placeholder="Search categories by name..."
-                                                className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee]"
+                                                className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#A60201]"
                                             />
                                         </div>
 
@@ -843,7 +843,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                                 <div
                                                                     className={`w-4 h-4 rounded flex items-center justify-center shrink-0 border ${
                                                                         selected
-                                                                            ? 'bg-[#25a2ee] border-[#25a2ee] text-white'
+                                                                            ? 'bg-[#A60201] border-[#A60201] text-white'
                                                                             : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900'
                                                                     }`}
                                                                 >
@@ -880,7 +880,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     onClick={handleSelectAllFilteredCourses}
-                                                    className="text-[11px] font-bold text-[#25a2ee] hover:underline cursor-pointer"
+                                                    className="text-[11px] font-bold text-[#A60201] hover:underline cursor-pointer"
                                                 >
                                                     Select All Matching ({filteredModalCourses.length})
                                                 </button>
@@ -909,7 +909,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                     value={modalCourseSearch}
                                                     onChange={(e) => setModalCourseSearch(e.target.value)}
                                                     placeholder="Search course by title..."
-                                                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee]"
+                                                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#A60201]"
                                                 />
                                             </div>
 
@@ -918,7 +918,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                 <select
                                                     value={modalCourseCategoryFilter}
                                                     onChange={(e) => setModalCourseCategoryFilter(e.target.value)}
-                                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#25a2ee] cursor-pointer"
+                                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-850 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-[#A60201] cursor-pointer"
                                                 >
                                                     <option value="all">All Categories ({coursesList.length})</option>
                                                     {categoriesList.map((cat) => (
@@ -954,7 +954,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                                 <div
                                                                     className={`w-4 h-4 rounded flex items-center justify-center shrink-0 border ${
                                                                         selected
-                                                                            ? 'bg-[#25a2ee] border-[#25a2ee] text-white'
+                                                                            ? 'bg-[#A60201] border-[#A60201] text-white'
                                                                             : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900'
                                                                     }`}
                                                                 >
@@ -971,7 +971,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                                     )}
                                                                 </div>
                                                             </div>
-                                                            <span className="text-xs font-black text-[#25a2ee] shrink-0">
+                                                            <span className="text-xs font-black text-[#A60201] shrink-0">
                                                                 {formatBDT(c.sale_price || c.price)}
                                                             </span>
                                                         </div>
@@ -997,7 +997,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={handleAddTier}
-                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#25a2ee] hover:bg-sky-100 font-bold text-xs cursor-pointer border border-sky-200 dark:border-sky-800"
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#A60201] hover:bg-sky-100 font-bold text-xs cursor-pointer border border-sky-200 dark:border-sky-800"
                                     >
                                         <Plus className="w-3.5 h-3.5" />
                                         <span>Add Tier Rule</span>
@@ -1023,7 +1023,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                         onChange={(e) =>
                                                             handleTierChange(idx, 'min_qty', parseInt(e.target.value, 10) || 1)
                                                         }
-                                                        className="w-16 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bold text-slate-900 dark:text-white text-center focus:ring-1 focus:ring-[#25a2ee]"
+                                                        className="w-16 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bold text-slate-900 dark:text-white text-center focus:ring-1 focus:ring-[#A60201]"
                                                     />
                                                     <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
                                                         courses
@@ -1054,7 +1054,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                                         onChange={(e) =>
                                                             handleTierChange(idx, 'discount_value', parseFloat(e.target.value) || 0)
                                                         }
-                                                        className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bold text-[#25a2ee] text-center focus:ring-1 focus:ring-[#25a2ee]"
+                                                        className="w-20 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bold text-[#A60201] text-center focus:ring-1 focus:ring-[#A60201]"
                                                     />
                                                     <span className="text-xs font-bold text-slate-500">
                                                         {tier.discount_type === 'percentage' ? '%' : 'Tk'}
@@ -1155,7 +1155,7 @@ export const AdminDynamicOffersPage: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="px-6 py-2.5 rounded-xl bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-xs shadow-md shadow-[#25a2ee]/25 flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
+                                    className="px-6 py-2.5 rounded-xl bg-[#A60201] hover:bg-[#1f8ed1] text-white font-bold text-xs shadow-md shadow-[#A60201]/25 flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
                                 >
                                     {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                                     <span>{editingOffer ? 'Update Offer' : 'Save & Publish Offer'}</span>

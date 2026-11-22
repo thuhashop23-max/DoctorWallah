@@ -780,7 +780,7 @@ export const AdminUsersPage: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleOpenEditUser(u)}
-                                                        className="px-2.5 py-1.5 bg-[#25a2ee]/10 hover:bg-[#25a2ee]/20 text-[#25a2ee] font-bold rounded-lg text-xs transition-colors cursor-pointer flex items-center gap-1"
+                                                        className="px-2.5 py-1.5 bg-[#A60201]/10 hover:bg-[#A60201]/20 text-[#A60201] font-bold rounded-lg text-xs transition-colors cursor-pointer flex items-center gap-1"
                                                         title="Edit User Info & Profile Picture"
                                                     >
                                                         <Edit className="w-3.5 h-3.5" />
@@ -1233,7 +1233,7 @@ export const AdminUsersPage: React.FC = () => {
                                             setDetailsModalOpen(false);
                                             handleOpenEditUser(userDetails);
                                         }}
-                                        className="px-3 py-1.5 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white rounded-xl text-xs font-bold shadow-2xs transition-colors flex items-center gap-1.5 cursor-pointer"
+                                        className="px-3 py-1.5 bg-[#A60201] hover:bg-[#1a8ed2] text-white rounded-xl text-xs font-bold shadow-2xs transition-colors flex items-center gap-1.5 cursor-pointer"
                                     >
                                         <Edit className="w-3.5 h-3.5" />
                                         <span>Edit Info</span>
@@ -1790,7 +1790,7 @@ export const AdminUsersPage: React.FC = () => {
                                 <div className="space-y-2 flex-1 w-full text-center sm:text-left">
                                     <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                                         {/* File Upload Button */}
-                                        <label className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white text-xs font-bold rounded-xl cursor-pointer shadow-xs transition-colors">
+                                        <label className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#A60201] hover:bg-[#1a8ed2] text-white text-xs font-bold rounded-xl cursor-pointer shadow-xs transition-colors">
                                             <Upload className="w-3.5 h-3.5" />
                                             <span>Upload New Photo</span>
                                             <input
@@ -1821,7 +1821,7 @@ export const AdminUsersPage: React.FC = () => {
                                             value={editForm.photo_url}
                                             onChange={(e) => setEditForm({ ...editForm, photo_url: e.target.value })}
                                             placeholder="Or enter direct photo URL (optional)"
-                                            className="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                            className="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                                         />
                                     </div>
                                 </div>
@@ -1839,7 +1839,7 @@ export const AdminUsersPage: React.FC = () => {
                                     required
                                     value={editForm.name}
                                     onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                                 />
                             </div>
 
@@ -1853,7 +1853,7 @@ export const AdminUsersPage: React.FC = () => {
                                     value={editForm.phone}
                                     onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                                     placeholder="01XXXXXXXXX"
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                                 />
                             </div>
                         </div>
@@ -1869,7 +1869,7 @@ export const AdminUsersPage: React.FC = () => {
                                     required
                                     value={editForm.email}
                                     onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                                 />
                             </div>
 
@@ -1882,7 +1882,7 @@ export const AdminUsersPage: React.FC = () => {
                                     value={editForm.registration_number}
                                     onChange={(e) => setEditForm({ ...editForm, registration_number: e.target.value })}
                                     placeholder="e.g. NN-2026-0042"
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono font-medium text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                                 />
                             </div>
                         </div>
@@ -1896,7 +1896,7 @@ export const AdminUsersPage: React.FC = () => {
                                 <select
                                     value={editForm.role}
                                     onChange={(e) => setEditForm({ ...editForm, role: e.target.value as UserRole })}
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden cursor-pointer"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden cursor-pointer"
                                 >
                                     <option value="student">Student</option>
                                     <option value="teacher">Instructor / Teacher</option>
@@ -1913,7 +1913,7 @@ export const AdminUsersPage: React.FC = () => {
                                     <select
                                         value={editForm.custom_role_id}
                                         onChange={(e) => setEditForm({ ...editForm, custom_role_id: e.target.value })}
-                                        className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden cursor-pointer"
+                                        className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden cursor-pointer"
                                     >
                                         <option value="">Select Role...</option>
                                         {customRoles.map((r) => (
@@ -1932,7 +1932,7 @@ export const AdminUsersPage: React.FC = () => {
                                 <select
                                     value={editForm.status}
                                     onChange={(e) => setEditForm({ ...editForm, status: e.target.value as 'active' | 'inactive' })}
-                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden cursor-pointer"
+                                    className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden cursor-pointer"
                                 >
                                     <option value="active">Active</option>
                                     <option value="inactive">Inactive</option>
@@ -1951,7 +1951,7 @@ export const AdminUsersPage: React.FC = () => {
                                 value={editForm.password}
                                 onChange={(e) => setEditForm({ ...editForm, password: e.target.value })}
                                 placeholder="Leave blank to keep existing password"
-                                className="w-full px-3.5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#25a2ee] focus:outline-hidden"
+                                className="w-full px-3.5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-[#A60201] focus:outline-hidden"
                             />
                             <p className="text-[11px] text-amber-700/80 dark:text-amber-300/80">
                                 Enter 6+ characters only if you want to set a new password for this user.
@@ -2022,7 +2022,7 @@ export const AdminUsersPage: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={savingUser || uploadingAvatar}
-                                className="px-5 py-2 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+                                className="px-5 py-2 bg-[#A60201] hover:bg-[#1a8ed2] text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
                             >
                                 {savingUser ? (
                                     <>

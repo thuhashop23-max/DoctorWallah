@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
 
     const logoUrl = footer?.logo_url || settings?.logo_url || settings?.header_settings?.logo_url;
 
-    const bgColor = footer?.bg_color || '#0f172a';
+    const bgColor = footer?.bg_color || '#070202';
     const brandTitle = getLocalizedText(footer?.brand_title, footer?.brand_title_en, language)
         || (settings?.site_name ? settings.site_name.split(' ')[0] : 'DoctorWallah');
     const brandSubtitle = getLocalizedText(footer?.brand_subtitle, footer?.brand_subtitle_en, language)
@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
     const bottomCredit = getLocalizedText(footer?.bottom_credit, footer?.bottom_credit_en, language) || defaultCredit;
 
     return (
-        <footer style={{ backgroundColor: bgColor }} className="text-slate-300 pt-16 pb-12 border-t border-slate-800 transition-colors">
+        <footer style={{ backgroundColor: bgColor }} className="text-slate-300 pt-16 pb-12 border-t border-[#A60201]/25 transition-colors">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                     {/* Brand Info */}
@@ -84,11 +84,11 @@ export const Footer: React.FC = () => {
                                 </Link>
                             ) : (
                                 <>
-                                    <div className="w-10 h-10 rounded-xl bg-[#25a2ee] flex items-center justify-center text-white shadow-md shadow-[#25a2ee]/20">
+                                    <div className="w-10 h-10 rounded-xl bg-[#A60201] flex items-center justify-center text-white shadow-md shadow-[#A60201]/30">
                                         <BookOpen className="w-6 h-6" />
                                     </div>
                                     <span className="text-2xl font-black text-white tracking-tight">
-                                        {brandTitle} <span className="text-[#CC1200]">{brandSubtitle}</span>
+                                        {brandTitle} <span className="text-[#A60201]">{brandSubtitle}</span>
                                     </span>
                                 </>
                             )}
@@ -97,8 +97,8 @@ export const Footer: React.FC = () => {
                             {description}
                         </p>
                         {showBadge && (
-                            <div className="flex items-center gap-2 text-xs text-[#25a2ee] font-semibold bg-[#25a2ee]/10 border border-[#25a2ee]/30 px-3 py-1.5 rounded-lg w-fit">
-                                <ShieldCheck className="w-4 h-4" />
+                            <div className="flex items-center gap-2 text-xs text-red-300 font-semibold bg-[#A60201]/15 border border-[#A60201]/40 px-3 py-1.5 rounded-lg w-fit">
+                                <ShieldCheck className="w-4 h-4 text-red-400" />
                                 <span>{badgeText}</span>
                             </div>
                         )}
@@ -111,11 +111,11 @@ export const Footer: React.FC = () => {
                             {col2Links.map((link) => (
                                 <li key={link.id || link.label}>
                                     {link.url.startsWith('http') ? (
-                                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors">
+                                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
                                             {link.label}
                                         </a>
                                     ) : (
-                                        <Link to={link.url} className="hover:text-sky-400 transition-colors">
+                                        <Link to={link.url} className="hover:text-red-400 transition-colors">
                                             {link.label}
                                         </Link>
                                     )}
@@ -131,11 +131,11 @@ export const Footer: React.FC = () => {
                             {col3Links.map((link) => (
                                 <li key={link.id || link.label}>
                                     {link.url.startsWith('http') ? (
-                                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors">
+                                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
                                             {link.label}
                                         </a>
                                     ) : (
-                                        <Link to={link.url} className="hover:text-sky-400 transition-colors">
+                                        <Link to={link.url} className="hover:text-red-400 transition-colors">
                                             {link.label}
                                         </Link>
                                     )}
@@ -150,24 +150,24 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3 text-sm">
                             {phone && (
                                 <li className="flex items-start gap-3">
-                                    <Phone className="w-4 h-4 text-sky-400 mt-1 shrink-0" />
+                                    <Phone className="w-4 h-4 text-[#A60201] mt-1 shrink-0" />
                                     <div>
                                         <span>{phone}</span>
                                         {phoneHours && (
-                                            <div className="text-xs text-slate-400 mt-0.5">{phoneHours}</div>
+                                             <div className="text-xs text-slate-400 mt-0.5">{phoneHours}</div>
                                         )}
                                     </div>
                                 </li>
                             )}
                             {email && (
                                 <li className="flex items-center gap-3">
-                                    <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                                    <Mail className="w-4 h-4 text-[#A60201] shrink-0" />
                                     <span>{email}</span>
                                 </li>
                             )}
                             {address && (
                                 <li className="flex items-start gap-3">
-                                    <MapPin className="w-4 h-4 text-sky-400 mt-1 shrink-0" />
+                                    <MapPin className="w-4 h-4 text-[#A60201] mt-1 shrink-0" />
                                     <span>{address}</span>
                                 </li>
                             )}
@@ -183,7 +183,7 @@ export const Footer: React.FC = () => {
                                             href={soc.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-[#CC1200] text-slate-300 hover:text-white text-xs font-semibold capitalize transition"
+                                            className="px-2.5 py-1 rounded-lg bg-slate-900 border border-[#A60201]/30 hover:bg-[#A60201] text-slate-300 hover:text-white text-xs font-semibold capitalize transition"
                                         >
                                             {soc.platform}
                                         </a>
@@ -195,7 +195,7 @@ export const Footer: React.FC = () => {
                 </div>
 
                 {/* Bottom Copyright Bar */}
-                <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+                <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
                     <div>{copyrightText}</div>
                     <div className="flex items-center gap-1">
                         {bottomCredit}

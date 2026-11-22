@@ -619,7 +619,7 @@ export const StudentCoursesPage: React.FC = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowPastComplaints(!showPastComplaints)}
-                                className="text-xs font-bold text-[#25a2ee] hover:underline cursor-pointer"
+                                className="text-xs font-bold text-[#A60201] hover:underline cursor-pointer"
                             >
                                 {showPastComplaints ? 'Write New Complaint' : `View My Past Complaints (${pastComplaints.length})`}
                             </button>

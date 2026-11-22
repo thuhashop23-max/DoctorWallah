@@ -3612,7 +3612,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                                                                 href={fileUrl}
                                                                                 target="_blank"
                                                                                 rel="noreferrer"
-                                                                                className="px-3 py-1.5 bg-white border border-slate-200 hover:border-[#25a2ee] rounded-xl text-xs font-bold text-slate-700 hover:text-[#25a2ee] flex items-center gap-1.5 transition"
+                                                                                className="px-3 py-1.5 bg-white border border-slate-200 hover:border-[#A60201] rounded-xl text-xs font-bold text-slate-700 hover:text-[#A60201] flex items-center gap-1.5 transition"
                                                                             >
                                                                                 <Paperclip className="w-3.5 h-3.5" />
                                                                                 <span className="max-w-[140px] truncate">{fileName}</span>
@@ -4430,7 +4430,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                         <div>
                             <div className="flex items-center justify-between mb-1.5">
                                 <label className="block text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                                    <Video className="w-4 h-4 text-[#25a2ee]" />
+                                    <Video className="w-4 h-4 text-[#A60201]" />
                                     <span>Video Source</span>
                                 </label>
                                 {lessonVideoProvider === 'vdocipher' && (
@@ -4449,7 +4449,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                         setLessonVideoUrl('');
                                     }
                                 }}
-                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-[#25a2ee]"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-[#A60201]"
                             >
                                 <option value="youtube">YouTube</option>
                                 <option value="vdocipher">VdoCipher (DRM Anti-Piracy)</option>
@@ -4467,7 +4467,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                     value={lessonVideoUrl}
                                     onChange={(e) => setLessonVideoUrl(e.target.value)}
                                     placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
-                                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#25a2ee]"
+                                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#A60201]"
                                 />
                                 <p className="text-[11px] text-slate-500 mt-1">
                                     Paste standard YouTube or unlisted video URL.
@@ -4484,7 +4484,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                         type="button"
                                         onClick={() => setVdoMode('upload')}
                                         className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${vdoMode === 'upload'
-                                            ? 'bg-[#25a2ee] text-white shadow-xs'
+                                            ? 'bg-[#A60201] text-white shadow-xs'
                                             : 'text-slate-600 hover:bg-slate-200'
                                             }`}
                                     >
@@ -4495,7 +4495,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                         type="button"
                                         onClick={() => setVdoMode('shortcode')}
                                         className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${vdoMode === 'shortcode'
-                                            ? 'bg-[#25a2ee] text-white shadow-xs'
+                                            ? 'bg-[#A60201] text-white shadow-xs'
                                             : 'text-slate-600 hover:bg-slate-200'
                                             }`}
                                     >
@@ -4520,7 +4520,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                                     setVdoUploadStatus('');
                                                 }}
                                                 disabled={vdoUploading}
-                                                className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#25a2ee]/10 file:text-[#25a2ee] hover:file:bg-[#25a2ee]/20 cursor-pointer"
+                                                className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#A60201]/10 file:text-[#A60201] hover:file:bg-[#A60201]/20 cursor-pointer"
                                             />
                                             <p className="text-[11px] text-slate-500 mt-1">
                                                 Direct high-speed upload to VdoCipher cloud storage with multi-bitrate DRM protection.
@@ -4604,7 +4604,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                             <div className="space-y-1.5 pt-1">
                                                 <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
                                                     <div
-                                                        className="bg-[#25a2ee] h-2.5 rounded-full transition-all duration-200"
+                                                        className="bg-[#A60201] h-2.5 rounded-full transition-all duration-200"
                                                         style={{ width: `${vdoUploadProgress}%` }}
                                                     />
                                                 </div>
@@ -4649,7 +4649,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                             value={lessonVideoUrl}
                                             onChange={(e) => setLessonVideoUrl(e.target.value)}
                                             placeholder='e.g. 1234567890abcdef1234567890abcdef or [vdo id="..."]'
-                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-[#25a2ee]"
+                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-[#A60201]"
                                         />
                                         <p className="text-[11px] text-slate-500">
                                             Enter the 32-character Video ID from your VdoCipher dashboard, or paste the WordPress embed shortcode <code className="bg-slate-100 px-1 py-0.5 rounded text-[10px]">[vdo id="..."]</code> or iframe embed code.
@@ -4713,7 +4713,7 @@ export const AdminCourseBuilderPage: React.FC = () => {
                                 min={0}
                                 value={lessonDuration}
                                 onChange={(e) => setLessonDuration(e.target.value)}
-                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#25a2ee]"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#A60201]"
                             />
                         </div>
                     </div>

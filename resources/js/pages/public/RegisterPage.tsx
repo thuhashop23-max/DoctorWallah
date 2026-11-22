@@ -115,15 +115,15 @@ export const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050811] text-white flex items-center justify-center px-4 py-12 sm:py-20 relative overflow-hidden font-sans">
+        <div className="min-h-screen bg-[#060202] text-white flex items-center justify-center px-4 py-12 sm:py-20 relative overflow-hidden font-sans">
             {/* Ambient Medical Glow Mesh & Grid Backdrop */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.16),rgba(255,255,255,0))] pointer-events-none" />
-            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(166,2,1,0.22),rgba(0,0,0,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#A60201]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="max-w-md w-full relative z-10 bg-[#0B101D]/90 backdrop-blur-2xl p-7 sm:p-9 rounded-[28px] border border-cyan-500/25 shadow-[0_0_60px_-15px_rgba(6,182,212,0.2)] space-y-6">
+            <div className="max-w-md w-full relative z-10 bg-[#0A0303]/95 backdrop-blur-2xl p-7 sm:p-9 rounded-[28px] border border-[#A60201]/30 shadow-[0_0_60px_-15px_rgba(166,2,1,0.3)] space-y-6">
                 {/* Top Laser Hairline Accent */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/90 to-transparent pointer-events-none rounded-t-[28px]" />
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#A60201] to-transparent pointer-events-none rounded-t-[28px]" />
 
                 <div className="text-center space-y-3">
                     {logoUrl && !logoError ? (
@@ -136,13 +136,13 @@ export const RegisterPage: React.FC = () => {
                             />
                         </Link>
                     ) : (
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-teal-500 flex items-center justify-center text-slate-950 font-black mx-auto shadow-md shadow-cyan-500/20">
+                        <div className="w-12 h-12 rounded-2xl bg-[#A60201] flex items-center justify-center text-white font-black mx-auto shadow-md shadow-[#A60201]/30">
                             <BookOpen className="w-6 h-6" />
                         </div>
                     )}
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono tracking-wider mb-2">
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-[11px] font-mono tracking-wider mb-2">
+                            <span className="w-2 h-2 rounded-full bg-[#A60201] animate-ping" />
                             <span>STUDENT REGISTRATION</span>
                         </div>
                         <h2 className="text-2xl font-black text-white tracking-tight">
@@ -173,9 +173,9 @@ export const RegisterPage: React.FC = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder={t.auth.namePlaceholder || 'e.g. Dr. Arpon Hossain'}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-black/80 border border-slate-800 hover:border-[#A60201]/50 focus:border-[#A60201] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A60201] font-mono transition-all"
                             />
-                            <User className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                            <User className="w-4 h-4 text-red-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
@@ -190,9 +190,9 @@ export const RegisterPage: React.FC = () => {
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 placeholder={t.auth.phonePlaceholder || '01XXXXXXXXX'}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-black/80 border border-slate-800 hover:border-[#A60201]/50 focus:border-[#A60201] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A60201] font-mono transition-all"
                             />
-                            <Phone className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                            <Phone className="w-4 h-4 text-red-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
@@ -207,9 +207,9 @@ export const RegisterPage: React.FC = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder={t.auth.emailPlaceholder || 'student@doctorwallah.com'}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-black/80 border border-slate-800 hover:border-[#A60201]/50 focus:border-[#A60201] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A60201] font-mono transition-all"
                             />
-                            <Mail className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                            <Mail className="w-4 h-4 text-red-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
@@ -225,9 +225,9 @@ export const RegisterPage: React.FC = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder={t.auth.passwordPlaceholder || '••••••••'}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-black/80 border border-slate-800 hover:border-[#A60201]/50 focus:border-[#A60201] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A60201] font-mono transition-all"
                             />
-                            <Lock className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                            <Lock className="w-4 h-4 text-red-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
@@ -242,25 +242,25 @@ export const RegisterPage: React.FC = () => {
                                 value={passwordConfirmation}
                                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                                 placeholder={t.auth.confirmPasswordPlaceholder || '••••••••'}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-black/80 border border-slate-800 hover:border-[#A60201]/50 focus:border-[#A60201] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A60201] font-mono transition-all"
                             />
-                            <Lock className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                            <Lock className="w-4 h-4 text-red-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-95 text-slate-950 font-black text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 font-mono uppercase tracking-wider mt-2"
+                        className="w-full py-3.5 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-sm shadow-lg shadow-[#A60201]/30 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 font-mono uppercase tracking-wider mt-2"
                     >
                         <span>{loading ? t.auth.processing : (t.auth.completeRegisterBtn || 'CREATE DOCTOR ACCOUNT')}</span>
                         <ArrowRight className="w-4 h-4" />
                     </button>
                 </form>
 
-                <div className="text-center text-xs text-slate-400 pt-3 border-t border-cyan-500/10">
+                <div className="text-center text-xs text-slate-400 pt-3 border-t border-[#A60201]/15">
                     {t.auth.haveAccount || 'Already have an account?'}{' '}
-                    <Link to="/login" className="font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                    <Link to="/login" className="font-bold text-red-400 hover:text-white transition-colors">
                         {t.auth.loginBtn || 'Sign In Here →'}
                     </Link>
                 </div>
@@ -305,14 +305,14 @@ export const RegisterPage: React.FC = () => {
                             value={otpCode}
                             onChange={(e) => setOtpCode(e.target.value)}
                             placeholder="------"
-                            className="w-full text-center tracking-[0.5em] text-xl font-bold py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800"
+                            className="w-full text-center tracking-[0.5em] text-xl font-bold py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-[#A60201] focus:bg-white dark:focus:bg-slate-800"
                         />
                     </div>
 
                     <button
                         type="submit"
                         disabled={otpLoading || otpCode.length !== 6}
-                        className="w-full py-3 bg-sky-600 text-white font-bold text-sm rounded-xl hover:bg-sky-700 transition-colors disabled:opacity-50 cursor-pointer"
+                        className="w-full py-3 bg-[#A60201] text-white font-bold text-sm rounded-xl hover:bg-[#880101] transition-colors disabled:opacity-50 cursor-pointer shadow-md shadow-[#A60201]/30"
                     >
                         {otpLoading ? t.auth.verifying : t.auth.verifyOtpBtn}
                     </button>
@@ -328,7 +328,7 @@ export const RegisterPage: React.FC = () => {
                                 type="button"
                                 onClick={handleResendOtp}
                                 disabled={resendLoading}
-                                className="text-sky-600 dark:text-sky-400 font-bold hover:underline cursor-pointer disabled:opacity-50"
+                                className="text-red-400 hover:underline cursor-pointer disabled:opacity-50 font-bold"
                             >
                                 {resendLoading ? 'Sending...' : 'Resend OTP'}
                             </button>

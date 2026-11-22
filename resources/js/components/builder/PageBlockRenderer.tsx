@@ -168,44 +168,37 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
     };
 
     return (
-        <section className="relative overflow-hidden bg-[#060913] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-cyan-500/10">
+        <section className="relative overflow-hidden bg-[#060202] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 border-b border-[#A60201]/15">
             {/* Ambient Medical Glow Mesh & Grid Backdrop */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.18),rgba(255,255,255,0))] pointer-events-none" />
-            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(166,2,1,0.22),rgba(0,0,0,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#A60201]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none" />
 
             {/* Subtle Electrocardiogram (ECG) Pulse Line SVG in Background */}
             <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-[0.06] pointer-events-none overflow-hidden select-none">
                 <svg className="w-full h-48" viewBox="0 0 1200 200" fill="none" preserveAspectRatio="none">
                     <path
                         d="M0 100 L300 100 L320 60 L335 140 L350 40 L365 170 L380 90 L395 110 L410 100 L700 100 L720 60 L735 140 L750 40 L765 170 L780 90 L795 110 L810 100 L1200 100"
-                        stroke="url(#ecg-gradient)"
+                        stroke="#A60201"
                         strokeWidth="2.5"
                     />
-                    <defs>
-                        <linearGradient id="ecg-gradient" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-                            <stop stopColor="#06b6d4" stopOpacity="0.2" />
-                            <stop offset="0.5" stopColor="#10b981" stopOpacity="0.8" />
-                            <stop offset="1" stopColor="#06b6d4" stopOpacity="0.2" />
-                        </linearGradient>
-                    </defs>
                 </svg>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* 1. Header Eyebrow & Badges */}
                 <div className="text-center max-w-3xl mx-auto space-y-4">
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(166,2,1,0.2)]">
                         <span className="flex h-2 w-2 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
                         </span>
                         <span>{badge}</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
                         {titlePart1} <br />
-                        <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(6,182,212,0.35)]">
+                        <span className="bg-gradient-to-r from-white via-rose-100 to-[#EF4444] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
                             {titleHighlight}
                         </span>
                         {titlePart2 && <><br /><span>{titlePart2}</span></>}
@@ -219,9 +212,9 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                 {/* 2. Interactive Medical Search & Viva Finder Console */}
                 <div className="mt-8 max-w-2xl mx-auto">
                     <form onSubmit={handleSearch} className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-emerald-500/30 to-cyan-500/30 rounded-2xl blur-md opacity-75 group-hover:opacity-100 transition duration-300" />
-                        <div className="relative flex items-center bg-slate-950/90 border border-cyan-500/40 rounded-2xl p-1.5 sm:p-2 backdrop-blur-2xl shadow-2xl">
-                            <div className="pl-3 sm:pl-4 pr-2 text-cyan-400">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[#A60201]/40 to-[#A60201]/20 rounded-2xl blur-md opacity-75 group-hover:opacity-100 transition duration-300" />
+                        <div className="relative flex items-center bg-black/90 border border-[#A60201]/40 rounded-2xl p-1.5 sm:p-2 backdrop-blur-2xl shadow-2xl">
+                            <div className="pl-3 sm:pl-4 pr-2 text-red-400">
                                 <Search className="w-5 h-5" />
                             </div>
                             <input
@@ -233,7 +226,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                             />
                             <button
                                 type="submit"
-                                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm transition-all shadow-md shadow-cyan-500/25 shrink-0 cursor-pointer flex items-center gap-1.5"
+                                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-xs sm:text-sm transition-all shadow-md shadow-[#A60201]/30 shrink-0 cursor-pointer flex items-center gap-1.5"
                             >
                                 <span>Find Topic</span>
                                 <ArrowRight className="w-4 h-4" />
@@ -244,7 +237,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                     {/* Quick-Jump Neon Topic Pills */}
                     <div className="flex items-center justify-center gap-2 flex-wrap mt-3 text-xs">
                         <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
-                            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                            <Activity className="w-3.5 h-3.5 text-red-400" />
                             Quick Vault:
                         </span>
                         {[
@@ -259,7 +252,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                 key={idx}
                                 type="button"
                                 onClick={() => handleTagClick(p.tag)}
-                                className="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-700/80 hover:border-cyan-400/80 text-slate-300 hover:text-cyan-300 text-[11px] font-medium transition-all cursor-pointer backdrop-blur-md"
+                                className="px-2.5 py-1 rounded-lg bg-black/80 border border-slate-800 hover:border-[#A60201]/80 text-slate-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer backdrop-blur-md"
                             >
                                 {p.label}
                             </button>
@@ -267,28 +260,28 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                     </div>
                 </div>
 
-                {/* 3. The Clinical Studio Cockpit (3-Mode Interactive Dark Glass Showcase) */}
+                {/* 3. The Clinical Studio Cockpit */}
                 <div className="mt-12 sm:mt-16 max-w-5xl mx-auto">
-                    <div className="bg-slate-950/70 border border-cyan-500/30 rounded-3xl p-4 sm:p-7 backdrop-blur-2xl shadow-[0_0_60px_-15px_rgba(6,182,212,0.2)]">
+                    <div className="bg-black/90 border border-[#A60201]/30 rounded-3xl p-4 sm:p-7 backdrop-blur-2xl shadow-[0_0_60px_-15px_rgba(166,2,1,0.25)]">
                         {/* Cockpit Mode Switcher Bar */}
                         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4 mb-6">
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]" />
-                                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
-                                <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
-                                <span className="ml-2 text-xs font-mono text-cyan-300 font-semibold uppercase tracking-wider hidden sm:inline">
+                                <div className="w-3 h-3 rounded-full bg-[#A60201] shadow-[0_0_8px_rgba(166,2,1,0.6)]" />
+                                <div className="w-3 h-3 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.6)]" />
+                                <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                                <span className="ml-2 text-xs font-mono text-red-300 font-semibold uppercase tracking-wider hidden sm:inline">
                                     DoctorWallah Clinical Studio Console
                                 </span>
                             </div>
 
                             {/* Cockpit Tabs */}
-                            <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800">
+                            <div className="flex items-center gap-1.5 p-1 bg-black rounded-xl border border-slate-800">
                                 <button
                                     type="button"
                                     onClick={() => setCockpitMode('dissection')}
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'dissection'
-                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
                                             : 'text-slate-400 hover:text-white'
                                     }`}
                                 >
@@ -300,7 +293,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                     onClick={() => setCockpitMode('item')}
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'item'
-                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
                                             : 'text-slate-400 hover:text-white'
                                     }`}
                                 >
@@ -312,7 +305,7 @@ const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({
                                     onClick={() => setCockpitMode('textbooks')}
                                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                                         cockpitMode === 'textbooks'
-                                            ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                                            ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/30'
                                             : 'text-slate-400 hover:text-white'
                                     }`}
                                 >
@@ -609,12 +602,12 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
     };
 
     return (
-        <section className="bg-[#060913] text-white py-16 sm:py-20 border-b border-cyan-500/10 relative overflow-hidden">
+        <section className="bg-[#060202] text-white py-16 sm:py-20 border-b border-[#A60201]/15 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
-                            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+                            <Activity className="w-3.5 h-3.5 text-red-400" />
                             <span>{headingTag || 'BM&DC 1ST PHASE CURRICULUM'}</span>
                         </div>
                         <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
@@ -624,7 +617,7 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
                     {viewAllText && (
                         <Link
                             to={s.viewAllLink || '/courses'}
-                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
+                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-red-400 hover:text-white transition-colors"
                         >
                             <span>{viewAllText}</span>
                             <ArrowRight className="w-4 h-4" />
@@ -642,13 +635,13 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
                                 type="button"
                                 onClick={() => handleTabClick(tab)}
                                 className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${isSelected
-                                    ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-black shadow-lg shadow-cyan-500/30'
-                                    : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800 shadow-2xs'
+                                    ? 'bg-[#A60201] text-white font-black shadow-lg shadow-[#A60201]/30'
+                                    : 'bg-black/80 text-slate-300 hover:text-white hover:bg-[#1A0303] border border-slate-800 shadow-2xs'
                                     }`}
                             >
                                 <span>{tab.label}</span>
                                 {tab.type === 'html' && (
-                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-black/30 text-slate-900 font-bold' : 'bg-cyan-950 text-cyan-300'
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-mono ${isSelected ? 'bg-black/40 text-white font-bold' : 'bg-[#1A0303] text-red-300'
                                         }`}>
                                         HTML
                                     </span>
@@ -674,8 +667,8 @@ const CourseTabsBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
                                     handleTabClick(customTab);
                                 }}
                                 className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${isSelected
-                                    ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-black shadow-lg shadow-cyan-500/30'
-                                    : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800 shadow-2xs'
+                                    ? 'bg-[#A60201] text-white font-black shadow-lg shadow-[#A60201]/30'
+                                    : 'bg-black/80 text-slate-300 hover:text-white hover:bg-[#1A0303] border border-slate-800 shadow-2xs'
                                     }`}
                             >
                                 <span>{cat.name}</span>
@@ -771,45 +764,38 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
     const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য পূর্ণাঙ্গ ক্লিনিক্যাল ও অ্যাকাডেমিক আর্কিটেকচার — ৪K ক্যাডাভারিক ডিসেকশন ও ভিসেরা থিয়েটার, ১০ মিনিট আইটেম রিভিশন এবং লাইন-বাই-লাইন দাগানো স্ট্যান্ডার্ড বই (BDC, Guyton, Ganong, Datta, Langman)।';
 
     return (
-        <section className="bg-[#050811] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 relative overflow-hidden border-b border-cyan-500/10">
+        <section className="bg-[#060202] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 relative overflow-hidden border-b border-[#A60201]/15">
             {/* Ambient Medical Glow Mesh & Grid Backdrop */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.18),rgba(255,255,255,0))] pointer-events-none" />
-            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(166,2,1,0.25),rgba(0,0,0,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#A60201]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#A60201]/10 rounded-full blur-[140px] pointer-events-none" />
 
             {/* Subtle Electrocardiogram (ECG) Pulse Line SVG in Background */}
             <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-[0.06] pointer-events-none overflow-hidden select-none">
                 <svg className="w-full h-48" viewBox="0 0 1200 200" fill="none" preserveAspectRatio="none">
                     <path
                         d="M0 100 L300 100 L320 60 L335 140 L350 40 L365 170 L380 90 L395 110 L410 100 L700 100 L720 60 L735 140 L750 40 L765 170 L780 90 L795 110 L810 100 L1200 100"
-                        stroke="url(#ecg-gradient-hero)"
+                        stroke="#A60201"
                         strokeWidth="2.5"
                     />
-                    <defs>
-                        <linearGradient id="ecg-gradient-hero" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-                            <stop stopColor="#06b6d4" stopOpacity="0.2" />
-                            <stop offset="0.5" stopColor="#10b981" stopOpacity="0.8" />
-                            <stop offset="1" stopColor="#06b6d4" stopOpacity="0.2" />
-                        </linearGradient>
-                    </defs>
                 </svg>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Hero Header */}
                 <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16 space-y-4">
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(166,2,1,0.2)]">
                         <span className="flex h-2 w-2 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
                         </span>
                         <span>🩺 BANGLADESH'S #1 MBBS & MEDICAL ACADEMIC PLATFORM</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
                         Medical Academic Excellence, <br />
-                        <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(6,182,212,0.35)]">
+                        <span className="bg-gradient-to-r from-white via-rose-100 to-[#EF4444] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(166,2,1,0.35)]">
                             From Daily Items & Cards To 1st Prof Honours!
                         </span>
                     </h1>
@@ -822,36 +808,36 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
                             to="/courses"
-                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-95 text-slate-950 font-black text-sm sm:text-base transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 group cursor-pointer"
+                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-sm sm:text-base transition-all shadow-lg shadow-[#A60201]/30 flex items-center justify-center gap-2 group cursor-pointer"
                         >
                             <span>Explore MBBS Courses</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
                         </Link>
                         <Link
                             to="/courses"
-                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 text-slate-200 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs backdrop-blur-xl"
+                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-black/80 border border-[#A60201]/40 hover:border-[#A60201] text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs backdrop-blur-xl"
                         >
-                            <PlayCircle className="w-5 h-5 text-cyan-400" />
+                            <PlayCircle className="w-5 h-5 text-red-400" />
                             <span>Watch Viscera Demos</span>
                         </Link>
                     </div>
 
                     {/* Trust Counter Strip */}
-                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left border-t border-cyan-500/10">
-                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-cyan-400 font-mono">550+</div>
+                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left border-t border-[#A60201]/15">
+                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-white font-mono">550+</div>
                             <div className="text-[11px] text-slate-400 font-medium">Doctors-in-Training</div>
                         </div>
-                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-teal-400 font-mono">1,250+</div>
+                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-red-400 font-mono">1,250+</div>
                             <div className="text-[11px] text-slate-400 font-medium">High-Yield Lectures</div>
                         </div>
-                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">100%</div>
+                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-white font-mono">100%</div>
                             <div className="text-[11px] text-slate-400 font-medium">BM&DC Curriculum</div>
                         </div>
-                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
-                            <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono">24/7</div>
+                        <div className="bg-black/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-red-400 font-mono">24/7</div>
                             <div className="text-[11px] text-slate-400 font-medium">Marked Soft Books</div>
                         </div>
                     </div>
@@ -860,20 +846,20 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                 {/* The Asymmetric Dark Glass Bento Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* BENTO TILE 1: Large (Span 7) - Virtual Dissection & Viscera Theater */}
-                    <div className="lg:col-span-7 bg-slate-900/60 backdrop-blur-2xl border border-cyan-500/20 hover:border-cyan-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(6,182,212,0.15)] relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-500/15 transition-all" />
+                    <div className="lg:col-span-7 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A60201]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#A60201]/15 transition-all" />
 
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
                                     <Activity className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 01 • ANATOMY
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-cyan-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
                                 Cadaveric Dissection & Viscera 3D Theater
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -882,24 +868,24 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
                             {/* Anatomical Tags */}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-cyan-300 font-semibold">Thoracic Viscera</span>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-red-200 font-semibold">Thoracic Viscera</span>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-teal-300 font-semibold">Abdomen Organs</span>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-slate-200 font-semibold">Abdomen Organs</span>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-emerald-300 font-semibold">Head & Neck</span>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-red-200 font-semibold">Head & Neck</span>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-center">
-                                    <span className="text-[11px] font-mono text-amber-300 font-semibold">Extremities</span>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800 text-center">
+                                    <span className="text-[11px] font-mono text-slate-200 font-semibold">Extremities</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
                             <span className="text-xs text-slate-400 font-medium">Included with all Anatomy courses</span>
-                            <Link to="/courses" className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Watch Preview</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -907,31 +893,31 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 2: Small (Span 5) - The 10-Minute Item Panic Station */}
-                    <div className="lg:col-span-5 bg-slate-900/60 backdrop-blur-2xl border border-amber-500/20 hover:border-amber-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(245,158,11,0.15)] relative overflow-hidden">
+                    <div className="lg:col-span-5 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
                                     <Zap className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 02 • SPEED
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
                                 10-Minute Item Panic Station
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                                 Viva tomorrow morning at 8:00 AM? Don't panic. Watch our 10-minute concentrated item recaps covering the 15 exact questions professors ask before handing you your signature.
                             </p>
 
-                            <div className="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
+                            <div className="bg-black/80 p-3 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
                                 <div className="flex items-center gap-2 text-slate-300">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
                                     <span>High-frequency viva questions from DMC, SSMC & CMC</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-slate-300">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
                                     <span>Exact anatomical definitions & relations</span>
                                 </div>
                             </div>
@@ -939,7 +925,7 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
                         <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
                             <span className="text-xs text-slate-400 font-medium">Night-before revision</span>
-                            <Link to="/courses" className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Try Item Recap</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -947,18 +933,18 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 3: Small (Span 5) - Professor-Marked Textbooks */}
-                    <div className="lg:col-span-5 bg-slate-900/60 backdrop-blur-2xl border border-emerald-500/20 hover:border-emerald-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                    <div className="lg:col-span-5 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
                                     <BookOpen className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 03 • TEXTBOOKS
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-emerald-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
                                 Professor-Marked Standard Books
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -966,12 +952,12 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                             </p>
 
                             <div className="grid grid-cols-2 gap-2 text-center text-xs">
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="font-bold text-emerald-400">Guyton 14th Ed</div>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="font-bold text-white">Guyton 14th Ed</div>
                                     <div className="text-[10px] text-slate-400">Marked Physio</div>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="font-bold text-cyan-400">BDC Anatomy</div>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="font-bold text-red-400">BDC Anatomy</div>
                                     <div className="text-[10px] text-slate-400">All 4 Volumes</div>
                                 </div>
                             </div>
@@ -979,7 +965,7 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
                         <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
                             <span className="text-xs text-slate-400 font-medium">PDF Soft Copies Included</span>
-                            <Link to="/courses" className="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Get Marked Books</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -987,18 +973,18 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                     </div>
 
                     {/* BENTO TILE 4: Large (Span 7) - Real-Time Model Tests & OSPE Simulator */}
-                    <div className="lg:col-span-7 bg-slate-900/60 backdrop-blur-2xl border border-rose-500/20 hover:border-rose-400/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(244,63,94,0.15)] relative overflow-hidden">
+                    <div className="lg:col-span-7 bg-[#0A0303]/95 backdrop-blur-2xl border border-[#A60201]/25 hover:border-[#A60201]/60 rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group shadow-[0_0_50px_-20px_rgba(166,2,1,0.2)] relative overflow-hidden">
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-2xl bg-[#A60201]/15 border border-[#A60201]/30 text-red-400 flex items-center justify-center">
                                     <ClipboardList className="w-6 h-6" />
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px] font-mono uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-[#1A0303] border border-[#A60201]/30 text-red-200 text-[11px] font-mono uppercase tracking-wider">
                                     PILLAR 04 • EVALUATION
                                 </span>
                             </div>
 
-                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-rose-300 transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-red-300 transition-colors">
                                 Real-Time 1st Prof Model Tests & OSPE Stations
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -1006,16 +992,16 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
                             </p>
 
                             <div className="grid grid-cols-3 gap-2.5 pt-1 text-center text-xs">
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-rose-400">BM&DC</div>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-white">BM&DC</div>
                                     <div className="text-[10px] text-slate-400">Standard Pattern</div>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-amber-400">Instant</div>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-red-400">Instant</div>
                                     <div className="text-[10px] text-slate-400">Solution Analysis</div>
                                 </div>
-                                <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
-                                    <div className="text-sm font-black text-emerald-400">Nationwide</div>
+                                <div className="bg-black/80 p-2.5 rounded-xl border border-slate-800">
+                                    <div className="text-sm font-black text-white">Nationwide</div>
                                     <div className="text-[10px] text-slate-400">Merit Position</div>
                                 </div>
                             </div>
@@ -1023,7 +1009,7 @@ const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ bl
 
                         <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
                             <span className="text-xs text-slate-400 font-medium">Card & Term Exam Hall</span>
-                            <Link to="/courses" className="text-xs font-bold text-rose-400 hover:text-rose-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <Link to="/courses" className="text-xs font-bold text-red-400 hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                 <span>Start Model Test</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
@@ -1049,11 +1035,11 @@ const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ b
     const buttonLink = s.buttonLink || '/courses';
 
     return (
-        <section className="bg-[#050811] py-16 sm:py-24 relative overflow-hidden border-t border-cyan-500/10">
+        <section className="bg-[#060202] py-16 sm:py-24 relative overflow-hidden border-t border-[#A60201]/15">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="bg-slate-900/80 border border-cyan-500/30 rounded-3xl p-8 sm:p-14 text-center space-y-6 backdrop-blur-2xl shadow-[0_0_80px_-20px_rgba(6,182,212,0.25)] relative overflow-hidden">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider">
-                        <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="bg-[#0A0303]/95 border border-[#A60201]/30 rounded-3xl p-8 sm:p-14 text-center space-y-6 backdrop-blur-2xl shadow-[0_0_80px_-20px_rgba(166,2,1,0.25)] relative overflow-hidden">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A0303] border border-[#A60201]/40 text-red-200 text-xs font-mono tracking-wider">
+                        <Stethoscope className="w-3.5 h-3.5 text-red-400" />
                         <span>{badge}</span>
                     </div>
 
@@ -1068,16 +1054,16 @@ const CtaBannerBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ b
                     <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
                             to={buttonLink}
-                            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-sm sm:text-base transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-black text-sm sm:text-base transition-all shadow-lg shadow-[#A60201]/30 flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <span>{buttonText}</span>
                             <ArrowRight className="w-5 h-5" />
                         </Link>
                         <Link
                             to="/courses"
-                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-950 border border-slate-700 hover:border-cyan-400/60 text-slate-300 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-black border border-slate-700 hover:border-[#A60201]/60 text-slate-300 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
                         >
-                            <PlayCircle className="w-5 h-5 text-cyan-400" />
+                            <PlayCircle className="w-5 h-5 text-red-400" />
                             <span>Watch Demo Classes</span>
                         </Link>
                     </div>
@@ -1191,17 +1177,17 @@ const TopAnnouncementBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> 
     const linkUrl = s.linkUrl || '/courses';
 
     return (
-        <div className="bg-[#040711] border-b border-cyan-500/20 text-slate-200 text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 relative z-10 shadow-lg shadow-cyan-950/50 backdrop-blur-md">
+        <div className="bg-[#0B0404] border-b border-[#A60201]/30 text-slate-200 text-xs sm:text-sm py-2.5 px-4 font-semibold text-center flex items-center justify-center gap-2 relative z-10 shadow-lg shadow-black/50 backdrop-blur-md">
             {badge && (
                 <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A60201] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A60201]"></span>
                 </span>
             )}
-            <span className="text-cyan-300 font-mono text-[11px] sm:text-xs font-bold uppercase">{badge}:</span>
+            <span className="text-red-300 font-mono text-[11px] sm:text-xs font-bold uppercase">{badge}:</span>
             <span className="text-slate-300 font-medium text-xs sm:text-sm">{text}</span>
             {linkText && (
-                <Link to={linkUrl} className="underline font-bold text-cyan-400 hover:text-cyan-300 transition-colors ml-1 hidden sm:inline">
+                <Link to={linkUrl} className="underline font-bold text-red-400 hover:text-white transition-colors ml-1 hidden sm:inline">
                     {linkText}
                 </Link>
             )}

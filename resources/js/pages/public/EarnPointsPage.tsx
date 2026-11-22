@@ -296,7 +296,7 @@ export const EarnPointsPage: React.FC = () => {
                     </p>
                     <Link
                         to="/courses"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-xs rounded-xl shadow-xs transition"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl shadow-xs transition"
                     >
                         <span>Browse Courses</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -336,7 +336,7 @@ export const EarnPointsPage: React.FC = () => {
 
                                 <button
                                     onClick={() => setActiveTab(activeTab === 'my_submissions' ? 'courses' : 'my_submissions')}
-                                    className="px-4 py-2 bg-[#25a2ee] hover:bg-[#1f8ed1] text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer"
+                                    className="px-4 py-2 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer"
                                 >
                                     <span>{activeTab === 'my_submissions' ? 'Browse Topics' : 'My Submissions'}</span>
                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -365,7 +365,7 @@ export const EarnPointsPage: React.FC = () => {
                         <button
                             onClick={() => setActiveTab('courses')}
                             className={`px-4 py-2 font-bold text-sm border-b-2 transition-all cursor-pointer ${activeTab === 'courses'
-                                ? 'border-[#25a2ee] text-[#25a2ee]'
+                                ? 'border-[#A60201] text-[#A60201]'
                                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
                                 }`}
                         >
@@ -391,7 +391,7 @@ export const EarnPointsPage: React.FC = () => {
                             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs p-4 space-y-3">
                                 <div className="flex items-center justify-between">
                                     <h3 className="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
-                                        <BookOpen className="w-4 h-4 text-[#25a2ee]" />
+                                        <BookOpen className="w-4 h-4 text-[#A60201]" />
                                         <span>Select Course</span>
                                     </h3>
                                     <span className="text-xs font-bold text-slate-400">
@@ -412,7 +412,7 @@ export const EarnPointsPage: React.FC = () => {
                                                 fetchCourses(searchCourseTerm);
                                             }
                                         }}
-                                        className="w-full pl-8 pr-8 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-[#25a2ee]"
+                                        className="w-full pl-8 pr-8 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-[#A60201]"
                                     />
                                     {searchCourseTerm && (
                                         <button
@@ -433,7 +433,7 @@ export const EarnPointsPage: React.FC = () => {
                                 <div className="max-h-[600px] overflow-y-auto space-y-2 pr-1">
                                     {loadingCourses ? (
                                         <div className="py-10 text-center space-y-2">
-                                            <Loader2 className="w-6 h-6 text-[#25a2ee] animate-spin mx-auto" />
+                                            <Loader2 className="w-6 h-6 text-[#A60201] animate-spin mx-auto" />
                                             <p className="text-xs text-slate-400">Loading courses...</p>
                                         </div>
                                     ) : filteredCourses.length === 0 ? (
@@ -446,7 +446,7 @@ export const EarnPointsPage: React.FC = () => {
                                                         setSearchCourseTerm('');
                                                         fetchCourses('');
                                                     }}
-                                                    className="text-xs text-[#25a2ee] font-bold hover:underline cursor-pointer"
+                                                    className="text-xs text-[#A60201] font-bold hover:underline cursor-pointer"
                                                 >
                                                     View All Courses
                                                 </button>
@@ -462,7 +462,7 @@ export const EarnPointsPage: React.FC = () => {
                                                     key={c.id}
                                                     onClick={() => selectCourse(c)}
                                                     className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center gap-3 ${isSelected
-                                                        ? 'bg-sky-50/70 dark:bg-sky-950/40 border-[#25a2ee] ring-2 ring-sky-400/20'
+                                                        ? 'bg-red-50/70 dark:bg-[#A60201]/10 border-[#A60201] ring-2 ring-[#A60201]/20'
                                                         : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-slate-300'
                                                         }`}
                                                 >
@@ -481,7 +481,7 @@ export const EarnPointsPage: React.FC = () => {
                                                     </div>
 
                                                     <div className="flex-1 min-w-0 space-y-0.5">
-                                                        <h4 className={`text-xs font-bold truncate ${isSelected ? 'text-[#25a2ee]' : 'text-slate-800 dark:text-slate-200'}`}>
+                                                        <h4 className={`text-xs font-bold truncate ${isSelected ? 'text-[#A60201]' : 'text-slate-800 dark:text-slate-200'}`}>
                                                             {c.title}
                                                         </h4>
                                                         <div className="flex items-center gap-2">
@@ -492,7 +492,7 @@ export const EarnPointsPage: React.FC = () => {
                                                         </div>
                                                     </div>
 
-                                                    <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${isSelected ? 'text-[#25a2ee] translate-x-0.5' : 'text-slate-400'}`} />
+                                                    <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${isSelected ? 'text-[#A60201] translate-x-0.5' : 'text-slate-400'}`} />
                                                 </div>
                                             );
                                         })
@@ -590,9 +590,9 @@ export const EarnPointsPage: React.FC = () => {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => handleOpenApprovedNotes(topic)}
-                                                                        className="px-3.5 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:border-[#25a2ee] text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                                                                        className="px-3.5 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:border-[#A60201] text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
                                                                     >
-                                                                        <Eye className="w-3.5 h-3.5 text-sky-500" />
+                                                                        <Eye className="w-3.5 h-3.5 text-[#A60201]" />
                                                                         <span>View Approved Notes ({approvedCount})</span>
                                                                     </button>
                                                                 )}
@@ -655,7 +655,7 @@ export const EarnPointsPage: React.FC = () => {
                                 </p>
                                 <button
                                     onClick={() => setActiveTab('courses')}
-                                    className="px-4 py-2 bg-[#25a2ee] text-white text-xs font-bold rounded-xl shadow-xs inline-flex items-center gap-1.5"
+                                    className="px-4 py-2 bg-[#A60201] hover:bg-[#880101] text-white text-xs font-bold rounded-xl shadow-xs inline-flex items-center gap-1.5 cursor-pointer"
                                 >
                                     <span>Explore Topics & Submit Notes</span>
                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -939,9 +939,9 @@ export const EarnPointsPage: React.FC = () => {
                                                                         href={fileUrl}
                                                                         target="_blank"
                                                                         rel="noreferrer"
-                                                                        className="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#25a2ee] rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition shadow-2xs"
+                                                                        className="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#A60201] rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition shadow-2xs"
                                                                     >
-                                                                        <Paperclip className="w-4 h-4 text-[#25a2ee]" />
+                                                                        <Paperclip className="w-4 h-4 text-[#A60201]" />
                                                                         <span className="max-w-[160px] truncate">{fileName}</span>
                                                                         <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                                                                     </a>

@@ -197,20 +197,20 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
     }
 
     return (
-        <section className="relative py-16 sm:py-24 bg-slate-950 text-white overflow-hidden border-y border-slate-800/80">
+        <section className="relative py-16 sm:py-24 bg-[#060202] text-white overflow-hidden border-y border-[#A60201]/20">
             {/* Background Radial Glow */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#25a2ee]/10 rounded-full blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#A60201]/10 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#A60201]/5 rounded-full blur-[140px] pointer-events-none" />
 
             {/* Edge Fade Gradients for Seamless Look */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-slate-950 via-slate-950/80 to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-[#060201] via-[#060201]/80 to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-[#060201] via-[#060201]/80 to-transparent z-10" />
 
             {/* Section Header */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 mb-12 sm:mb-16 relative z-10">
                 {sectionTag && (
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/15 to-sky-500/15 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-extrabold shadow-sm">
-                        <Sparkles className="w-4 h-4 text-emerald-400" />
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#A60201]/10 border border-[#A60201]/30 text-red-300 text-xs sm:text-sm font-extrabold shadow-sm">
+                        <Sparkles className="w-4 h-4 text-[#A60201]" />
                         <span>{sectionTag}</span>
                     </div>
                 )}
@@ -243,9 +243,9 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                                     <div
                                         key={`r1_${item.id}_${idx}`}
                                         onClick={() => setLightboxIndex(realIdx)}
-                                        className="group relative w-[280px] sm:w-[360px] h-[190px] sm:h-[230px] rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-[#25a2ee]/60 p-2 sm:p-2.5 shadow-md hover:shadow-2xl hover:shadow-[#25a2ee]/15 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shrink-0 flex items-center justify-center overflow-hidden"
+                                        className="group relative w-[280px] sm:w-[360px] h-[190px] sm:h-[230px] rounded-2xl sm:rounded-3xl bg-[#0B0404] border border-[#A60201]/20 hover:border-[#A60201]/60 p-2 sm:p-2.5 shadow-md hover:shadow-2xl hover:shadow-[#A60201]/20 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shrink-0 flex items-center justify-center overflow-hidden"
                                     >
-                                        <div className="relative w-full h-full rounded-xl sm:rounded-2xl bg-slate-950 overflow-hidden flex items-center justify-center p-1">
+                                        <div className="relative w-full h-full rounded-xl sm:rounded-2xl bg-black overflow-hidden flex items-center justify-center p-1">
                                             <img
                                                 src={getImageUrl(item.url)}
                                                 alt={item.title || 'Student Review'}
@@ -257,8 +257,8 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                                                 }}
                                             />
 
-                                            <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white font-bold text-xs backdrop-blur-2xs">
-                                                <Maximize2 className="w-4 h-4 text-[#25a2ee]" />
+                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white font-bold text-xs backdrop-blur-2xs">
+                                                <Maximize2 className="w-4 h-4 text-[#A60201]" />
                                                 <span>Click to Zoom</span>
                                             </div>
                                         </div>
@@ -331,7 +331,7 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                         {/* Top Bar */}
                         <div className="w-full flex items-center justify-between text-white pb-3 px-1">
                             <div className="flex items-center gap-2">
-                                <MessageSquareQuote className="w-5 h-5 text-[#25a2ee]" />
+                                <MessageSquareQuote className="w-5 h-5 text-[#A60201]" />
                                 <span className="text-xs sm:text-sm font-bold">
                                     Student Review ({(lightboxIndex ?? 0) + 1} of {activeReviews.length})
                                 </span>
@@ -339,7 +339,7 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                             <button
                                 type="button"
                                 onClick={() => setLightboxIndex(null)}
-                                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center transition-colors cursor-pointer border border-slate-700 shadow-md"
+                                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#A60201] text-white flex items-center justify-center transition-colors cursor-pointer border border-slate-700 shadow-md"
                                 title="Close (Esc)"
                             >
                                 <X className="w-5 h-5" />
@@ -347,7 +347,7 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                         </div>
 
                         {/* Image Viewer */}
-                        <div className="relative w-full max-h-[78vh] flex items-center justify-center bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-800 overflow-hidden shadow-2xl p-2 sm:p-4">
+                        <div className="relative w-full max-h-[78vh] flex items-center justify-center bg-[#0B0404] rounded-2xl sm:rounded-3xl border border-[#A60201]/30 overflow-hidden shadow-2xl p-2 sm:p-4">
                             <img
                                 src={getImageUrl(activePreview.url)}
                                 alt={activePreview.title || 'Student Review Fullscreen'}
@@ -362,7 +362,7 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                                         prev !== null && prev > 0 ? prev - 1 : activeReviews.length - 1
                                     )
                                 }
-                                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-[#25a2ee] text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/20 shadow-lg"
+                                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-[#A60201] text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/20 shadow-lg"
                                 title="Previous"
                             >
                                 <ChevronLeft className="w-6 h-6" />
@@ -376,7 +376,7 @@ export const StudentReviewsMarquee: React.FC<StudentReviewsMarqueeProps> = ({
                                         prev !== null && prev < activeReviews.length - 1 ? prev + 1 : 0
                                     )
                                 }
-                                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-[#25a2ee] text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/20 shadow-lg"
+                                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-[#A60201] text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/20 shadow-lg"
                                 title="Next"
                             >
                                 <ChevronRight className="w-6 h-6" />

@@ -185,14 +185,14 @@ export const OrderStatusPage: React.FC = () => {
                 {/* ORDER DETAILS & BILLING SUMMARY */}
                 {loading ? (
                     <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-8 text-center text-slate-400 text-xs flex items-center justify-center gap-2">
-                        <Loader2 className="w-4 h-4 animate-spin text-[#25a2ee]" />
+                        <Loader2 className="w-4 h-4 animate-spin text-[#A60201]" />
                         <span>Loading order summary...</span>
                     </div>
                 ) : (
                     <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xs space-y-6">
                         <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                             <h3 className="font-black text-base text-slate-900 dark:text-white flex items-center gap-2">
-                                <ShoppingBag className="w-4 h-4 text-[#25a2ee]" />
+                                <ShoppingBag className="w-4 h-4 text-[#A60201]" />
                                 <span>Order Summary & Items</span>
                             </h3>
 
@@ -309,7 +309,7 @@ export const OrderStatusPage: React.FC = () => {
                                 <span className="text-sm font-extrabold text-slate-900 dark:text-white">
                                     Total Amount:
                                 </span>
-                                <span className="text-xl font-black text-[#25a2ee]">
+                                <span className="text-xl font-black text-[#A60201]">
                                     {formatBDT(order?.final_amount || 0)}
                                 </span>
                             </div>
@@ -323,7 +323,7 @@ export const OrderStatusPage: React.FC = () => {
                         {isPaymentPaid && firstCourseSlug ? (
                             <Link
                                 to={`/learning/${order?.course_id || orderedCourses[0]?.id}`}
-                                className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-[#25a2ee]/25 flex items-center justify-center gap-2 transition cursor-pointer"
+                                className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-[#A60201] hover:bg-[#880101] text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-[#A60201]/25 flex items-center justify-center gap-2 transition cursor-pointer"
                             >
                                 <BookOpen className="w-4 h-4" />
                                 <span>Start Learning Course</span>
@@ -332,7 +332,7 @@ export const OrderStatusPage: React.FC = () => {
                         ) : (
                             <Link
                                 to="/student/my-courses"
-                                className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-[#25a2ee] hover:bg-[#1a8ed2] text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-[#25a2ee]/25 flex items-center justify-center gap-2 transition cursor-pointer"
+                                className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-[#A60201] hover:bg-[#880101] text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-[#A60201]/25 flex items-center justify-center gap-2 transition cursor-pointer"
                             >
                                 <BookOpen className="w-4 h-4" />
                                 <span>Go to My Courses</span>

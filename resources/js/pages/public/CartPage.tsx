@@ -86,15 +86,15 @@ export const CartPage: React.FC = () => {
                 {/* Header breadcrumb & title */}
                 <div className="mb-8">
                     <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-                        <Link to="/" className="hover:text-[#25a2ee] transition-colors">Home</Link>
+                        <Link to="/" className="hover:text-[#A60201] transition-colors">Home</Link>
                         <span>/</span>
-                        <Link to="/courses" className="hover:text-[#25a2ee] transition-colors">Courses</Link>
+                        <Link to="/courses" className="hover:text-[#A60201] transition-colors">Courses</Link>
                         <span>/</span>
                         <span className="text-slate-900 dark:text-white font-medium">Cart</span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-2xl bg-sky-50 dark:bg-sky-950/60 text-[#25a2ee] flex items-center justify-center shadow-xs">
+                            <div className="w-12 h-12 rounded-2xl bg-[#A60201]/10 text-[#A60201] flex items-center justify-center shadow-xs">
                                 <ShoppingCart className="w-6 h-6" />
                             </div>
                             <div>
@@ -125,7 +125,7 @@ export const CartPage: React.FC = () => {
                 {cartCount === 0 ? (
                     /* Empty Cart State */
                     <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 sm:p-16 text-center max-w-2xl mx-auto shadow-sm">
-                        <div className="w-20 h-20 rounded-3xl bg-sky-50 dark:bg-sky-950/40 text-[#25a2ee] flex items-center justify-center mx-auto mb-5 shadow-xs">
+                        <div className="w-20 h-20 rounded-3xl bg-[#A60201]/10 text-[#A60201] flex items-center justify-center mx-auto mb-5 shadow-xs">
                             <ShoppingBag className="w-10 h-10 stroke-[1.5]" />
                         </div>
                         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
@@ -136,7 +136,7 @@ export const CartPage: React.FC = () => {
                         </p>
                         <Link
                             to="/courses"
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25a2ee] hover:bg-[#1d8cd0] text-white font-bold text-sm shadow-md shadow-[#25a2ee]/20 hover:shadow-lg transition-all"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-bold text-sm shadow-md shadow-[#A60201]/20 hover:shadow-lg transition-all"
                         >
                             <span>Browse Courses</span>
                             <ArrowRight className="w-4 h-4" />
@@ -223,7 +223,7 @@ export const CartPage: React.FC = () => {
                                                 <div className="flex-1 min-w-0">
                                                     <Link
                                                         to={`/courses/${item.slug}`}
-                                                        className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-[#25a2ee] line-clamp-2 transition-colors"
+                                                        className="text-sm sm:text-base font-bold text-slate-900 dark:text-white hover:text-[#A60201] line-clamp-2 transition-colors"
                                                     >
                                                         {item.title}
                                                     </Link>
@@ -234,7 +234,7 @@ export const CartPage: React.FC = () => {
                                                         )}
                                                         {item.lessons_count && item.lessons_count > 0 ? (
                                                             <span className="flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
-                                                                <BookOpen className="w-3 h-3 text-[#25a2ee]" />
+                                                                <BookOpen className="w-3 h-3 text-[#A60201]" />
                                                                 {item.lessons_count} Lessons
                                                             </span>
                                                         ) : null}
@@ -274,7 +274,7 @@ export const CartPage: React.FC = () => {
                             <div className="flex items-center justify-between pt-2">
                                 <Link
                                     to="/courses"
-                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-[#25a2ee] transition-colors"
+                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-[#A60201] transition-colors"
                                 >
                                     <ArrowLeft className="w-4 h-4" />
                                     <span>Continue Browsing Courses</span>
@@ -293,7 +293,7 @@ export const CartPage: React.FC = () => {
                                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 space-y-2.5">
                                     <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-200">
                                         <span className="flex items-center gap-1.5">
-                                            <Ticket className="w-4 h-4 text-[#25a2ee]" />
+                                            <Ticket className="w-4 h-4 text-[#A60201]" />
                                             <span>Apply Coupon</span>
                                         </span>
                                     </div>
@@ -338,13 +338,13 @@ export const CartPage: React.FC = () => {
                                                         }}
                                                         placeholder="Enter coupon code"
                                                         disabled={isApplyingCoupon}
-                                                        className="w-full px-3 py-2 text-xs font-semibold uppercase tracking-wider bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:normal-case focus:outline-none focus:border-[#25a2ee] focus:ring-1 focus:ring-[#25a2ee]"
+                                                        className="w-full px-3 py-2 text-xs font-semibold uppercase tracking-wider bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:normal-case focus:outline-none focus:border-[#A60201] focus:ring-1 focus:ring-[#A60201]"
                                                     />
                                                 </div>
                                                 <button
                                                     type="submit"
                                                     disabled={isApplyingCoupon || !couponCodeInput.trim()}
-                                                    className="px-4 py-2 bg-[#25a2ee] hover:bg-[#1a8ed2] disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl transition-colors cursor-pointer shrink-0 flex items-center gap-1.5"
+                                                    className="px-4 py-2 bg-[#A60201] hover:bg-[#880101] disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl transition-colors cursor-pointer shrink-0 flex items-center gap-1.5"
                                                 >
                                                     {isApplyingCoupon ? (
                                                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -497,7 +497,7 @@ export const CartPage: React.FC = () => {
 
                                     <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-between items-baseline">
                                         <span className="text-base font-bold text-slate-900 dark:text-white">Total Payable:</span>
-                                        <span className="text-2xl font-black text-[#25a2ee]">
+                                        <span className="text-2xl font-black text-[#A60201]">
                                             {formatBDT(totalPayable)}
                                         </span>
                                     </div>
@@ -507,7 +507,7 @@ export const CartPage: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={handleCheckout}
-                                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#25a2ee] hover:bg-[#1d8cd0] text-white font-bold text-sm shadow-md shadow-[#25a2ee]/25 hover:shadow-lg transition-all cursor-pointer"
+                                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-bold text-sm shadow-md shadow-[#A60201]/25 hover:shadow-lg transition-all cursor-pointer"
                                 >
                                     <span>Proceed to Checkout</span>
                                     <ArrowRight className="w-4 h-4" />
@@ -524,7 +524,7 @@ export const CartPage: React.FC = () => {
                                         <span>Limited access to course contents</span>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <ShieldCheck className="w-4 h-4 text-[#25a2ee] shrink-0" />
+                                        <ShieldCheck className="w-4 h-4 text-[#A60201] shrink-0" />
                                         <span>100% secure payment gateway</span>
                                     </div>
                                 </div>

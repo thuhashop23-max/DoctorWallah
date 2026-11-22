@@ -136,7 +136,7 @@ export const StudentDashboardPage: React.FC = () => {
     if (loading) {
         return (
             <div className="py-24 flex flex-col items-center justify-center gap-3">
-                <Loader2 className="w-8 h-8 text-[#25a2ee] animate-spin" />
+                <Loader2 className="w-8 h-8 text-[#A60201] animate-spin" />
                 <span className="text-xs font-bold text-slate-500">Loading student profile...</span>
             </div>
         );
@@ -158,7 +158,7 @@ export const StudentDashboardPage: React.FC = () => {
                 {/* 1. Personal Information Card */}
                 <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-2xs space-y-4">
                     <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
-                        <UserIcon className="w-4 h-4 text-[#25a2ee]" />
+                        <UserIcon className="w-4 h-4 text-[#A60201]" />
                         <h2 className="text-sm font-black text-slate-900 uppercase tracking-wider">
                             Personal Information
                         </h2>
@@ -189,7 +189,7 @@ export const StudentDashboardPage: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={copyUserId}
-                                    className="p-1.5 text-slate-400 hover:text-[#25a2ee] hover:bg-sky-50 rounded-lg transition-colors cursor-pointer"
+                                    className="p-1.5 text-slate-400 hover:text-[#A60201] hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                                     title="Copy User ID"
                                 >
                                     {copiedId ? (
@@ -243,7 +243,7 @@ export const StudentDashboardPage: React.FC = () => {
                 <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-2xs space-y-5 flex flex-col justify-between">
                     <div>
                         <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
-                            <BarChart3 className="w-4 h-4 text-[#25a2ee]" />
+                            <BarChart3 className="w-4 h-4 text-[#A60201]" />
                             <h2 className="text-sm font-black text-slate-900 uppercase tracking-wider">
                                 Account Summary
                             </h2>
@@ -342,7 +342,7 @@ export const StudentDashboardPage: React.FC = () => {
                         <div className="space-y-2.5">
                             {recentActivities.map((act) => (
                                 <div key={act.id} className="flex items-start gap-2 text-xs">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#25a2ee] mt-1.5 shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#A60201] mt-1.5 shrink-0" />
                                     <div>
                                         <p className="font-semibold text-slate-700 leading-snug">
                                             {act.text}
@@ -366,7 +366,7 @@ export const StudentDashboardPage: React.FC = () => {
                     </h2>
                     <Link
                         to="/student/my-courses"
-                        className="text-xs font-extrabold text-[#25a2ee] hover:underline flex items-center gap-1"
+                        className="text-xs font-extrabold text-[#A60201] hover:underline flex items-center gap-1"
                     >
                         <span>View All</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -391,7 +391,7 @@ export const StudentDashboardPage: React.FC = () => {
                             return (
                                 <div
                                     key={item.enrollment_id || course.id}
-                                    className="p-3.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200/80 hover:border-sky-300 rounded-2xl transition-all flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 group"
+                                    className="p-3.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200/80 hover:border-red-300 rounded-2xl transition-all flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 group"
                                 >
                                     {/* Thumbnail */}
                                     <div className="w-full sm:w-28 h-36 sm:h-20 bg-slate-900 rounded-xl overflow-hidden shrink-0 relative shadow-2xs">
@@ -402,7 +402,7 @@ export const StudentDashboardPage: React.FC = () => {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-[#25a2ee] to-slate-900 text-white font-bold text-[10px] p-1 text-center">
+                                            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-[#A60201] to-[#0A0303] text-white font-bold text-[10px] p-1 text-center">
                                                 <span>DoctorWallah</span>
                                             </div>
                                         )}
@@ -410,7 +410,7 @@ export const StudentDashboardPage: React.FC = () => {
 
                                     {/* Details */}
                                     <div className="w-full flex-1 min-w-0 space-y-1">
-                                        <h3 className="font-extrabold text-sm text-slate-900 truncate group-hover:text-[#25a2ee] transition-colors">
+                                        <h3 className="font-extrabold text-sm text-slate-900 truncate group-hover:text-[#A60201] transition-colors">
                                             {course.title}
                                         </h3>
                                         <p className="text-[11px] text-slate-500">
@@ -422,7 +422,7 @@ export const StudentDashboardPage: React.FC = () => {
                                             </span>
                                             <Link
                                                 to={playUrl}
-                                                className="px-3 py-1 bg-[#25a2ee] hover:bg-[#1f8ed1] text-white text-[11px] font-bold rounded-lg shadow-2xs flex items-center gap-1 transition"
+                                                className="px-3 py-1 bg-[#A60201] hover:bg-[#880101] text-white text-[11px] font-bold rounded-lg shadow-2xs flex items-center gap-1 transition"
                                             >
                                                 <Play className="w-3 h-3 fill-white" />
                                                 <span>Continue</span>

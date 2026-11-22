@@ -236,7 +236,7 @@ export const ClassReviewsPage: React.FC = () => {
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xs space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
-                        <BookOpen className="w-4 h-4 text-[#25a2ee]" />
+                        <BookOpen className="w-4 h-4 text-[#A60201]" />
                         <span>Select Course to Analyze:</span>
                     </div>
 
@@ -247,7 +247,7 @@ export const ClassReviewsPage: React.FC = () => {
                             value={searchCourseText}
                             onChange={(e) => setSearchCourseText(e.target.value)}
                             placeholder="Search courses..."
-                            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#25a2ee]"
+                            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#A60201]"
                         />
                     </div>
                 </div>
@@ -295,7 +295,7 @@ export const ClassReviewsPage: React.FC = () => {
             {/* Course Analytics Content */}
             {detailsLoading ? (
                 <div className="py-24 text-center space-y-3">
-                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#25a2ee]" />
+                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#A60201]" />
                     <p className="text-xs text-slate-400">Loading class performance and student reviews...</p>
                 </div>
             ) : !selectedCourse ? (
@@ -681,7 +681,7 @@ export const ClassReviewsPage: React.FC = () => {
                                         value={searchReviewQuery}
                                         onChange={(e) => setSearchReviewQuery(e.target.value)}
                                         placeholder="Search student or note..."
-                                        className="pl-8 pr-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#25a2ee]"
+                                        className="pl-8 pr-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#A60201]"
                                     />
                                 </div>
 

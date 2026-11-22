@@ -397,7 +397,7 @@ export const TeacherProfilePage: React.FC = () => {
                                                 className={`py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs ${
                                                     isInCart(course.id)
                                                         ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
-                                                        : 'bg-[#25a2ee] hover:bg-[#1f8ed1] text-white shadow-sky-500/20'
+                                                        : 'bg-[#A60201] hover:bg-[#880101] text-white shadow-[#A60201]/20'
                                                 }`}
                                             >
                                                 <ShoppingCart className="w-3.5 h-3.5" />
