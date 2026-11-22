@@ -235,7 +235,7 @@ class EnrollmentController extends Controller
         }
 
         // Track last accessed
-        if ($user->isEnrolledIn($course->id)) {
+        if ($user && $user->isEnrolledIn($course->id)) {
             LessonProgress::updateOrCreate(
                 ['user_id' => $user->id, 'lesson_id' => $lesson->id],
                 ['course_id' => $course->id, 'last_accessed_at' => now()]
@@ -251,11 +251,13 @@ class EnrollmentController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        $completedLessonIds = LessonProgress::where('user_id', $user->id)
-            ->where('course_id', $course->id)
-            ->where('is_completed', true)
-            ->pluck('lesson_id')
-            ->toArray();
+        $completedLessonIds = $user 
+            ? LessonProgress::where('user_id', $user->id)
+                ->where('course_id', $course->id)
+                ->where('is_completed', true)
+                ->pluck('lesson_id')
+                ->toArray()
+            : [];
 
         $canManageBuilder = $user && ($user->isAdmin() || ($user->isTeacher() && $course->isAssignedTeacher($user->id)));
 
