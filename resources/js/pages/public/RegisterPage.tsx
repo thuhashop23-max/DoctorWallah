@@ -115,44 +115,56 @@ export const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-[85vh] flex items-center justify-center px-4 py-12">
-            <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl">
+        <div className="min-h-screen bg-[#050811] text-white flex items-center justify-center px-4 py-12 sm:py-20 relative overflow-hidden font-sans">
+            {/* Ambient Medical Glow Mesh & Grid Backdrop */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.16),rgba(255,255,255,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-md w-full relative z-10 bg-[#0B101D]/90 backdrop-blur-2xl p-7 sm:p-9 rounded-[28px] border border-cyan-500/25 shadow-[0_0_60px_-15px_rgba(6,182,212,0.2)] space-y-6">
+                {/* Top Laser Hairline Accent */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/90 to-transparent pointer-events-none rounded-t-[28px]" />
+
                 <div className="text-center space-y-3">
                     {logoUrl && !logoError ? (
                         <Link to="/" className="inline-block transition-transform hover:scale-105 mx-auto">
                             <img
                                 src={logoUrl}
-                                alt={settings?.site_name || 'Logo'}
+                                alt={settings?.site_name || 'DoctorWallah'}
                                 onError={() => setLogoError(true)}
                                 className="h-12 sm:h-14 w-auto object-contain mx-auto max-w-[220px]"
                             />
                         </Link>
                     ) : (
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-500 to-amber-500 flex items-center justify-center text-white mx-auto shadow-md shadow-sky-500/20">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-teal-500 flex items-center justify-center text-slate-950 font-black mx-auto shadow-md shadow-cyan-500/20">
                             <BookOpen className="w-6 h-6" />
                         </div>
                     )}
                     <div>
-                        <h2 className="text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
-                            {t.auth.registerTitle}
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono tracking-wider mb-2">
+                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                            <span>STUDENT REGISTRATION</span>
+                        </div>
+                        <h2 className="text-2xl font-black text-white tracking-tight">
+                            {t.auth.registerTitle || 'Create Doctor Account'}
                         </h2>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                            {t.auth.registerSub}
+                        <p className="text-xs text-slate-400 mt-1">
+                            {t.auth.registerSub || 'Join Bangladesh\'s #1 MBBS academic learning platform.'}
                         </p>
                     </div>
                 </div>
 
                 {error && (
-                    <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 shrink-0" />
+                    <div className="p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2.5 shadow-md">
+                        <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
                         <span>{error}</span>
                     </div>
                 )}
 
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                            {t.auth.nameLabel}
+                        <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                            {t.auth.nameLabel || 'Full Name'}
                         </label>
                         <div className="relative">
                             <input
@@ -160,16 +172,16 @@ export const RegisterPage: React.FC = () => {
                                 required
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder={t.auth.namePlaceholder}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800 transition-all"
+                                placeholder={t.auth.namePlaceholder || 'e.g. Dr. Arpon Hossain'}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
                             />
-                            <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                            <User className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                            {t.auth.phoneLabel}
+                        <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                            {t.auth.phoneLabel || 'Mobile Number'}
                         </label>
                         <div className="relative">
                             <input
@@ -177,16 +189,16 @@ export const RegisterPage: React.FC = () => {
                                 required
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                placeholder={t.auth.phonePlaceholder}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800 transition-all"
+                                placeholder={t.auth.phonePlaceholder || '01XXXXXXXXX'}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
                             />
-                            <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                            <Phone className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                            {t.auth.emailLabel}
+                        <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                            {t.auth.emailLabel || 'Email Address'}
                         </label>
                         <div className="relative">
                             <input
@@ -194,16 +206,16 @@ export const RegisterPage: React.FC = () => {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder={t.auth.emailPlaceholder}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800 transition-all"
+                                placeholder={t.auth.emailPlaceholder || 'student@doctorwallah.com'}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
                             />
-                            <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                            <Mail className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                            {t.auth.passwordLabel}
+                        <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                            {t.auth.passwordLabel || 'Password'}
                         </label>
                         <div className="relative">
                             <input
@@ -212,16 +224,16 @@ export const RegisterPage: React.FC = () => {
                                 minLength={8}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder={t.auth.passwordPlaceholder}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800 transition-all"
+                                placeholder={t.auth.passwordPlaceholder || '••••••••'}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
                             />
-                            <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                            <Lock className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                            {t.auth.confirmPasswordLabel}
+                        <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                            {t.auth.confirmPasswordLabel || 'Confirm Password'}
                         </label>
                         <div className="relative">
                             <input
@@ -229,27 +241,27 @@ export const RegisterPage: React.FC = () => {
                                 required
                                 value={passwordConfirmation}
                                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-                                placeholder={t.auth.confirmPasswordPlaceholder}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-800 transition-all"
+                                placeholder={t.auth.confirmPasswordPlaceholder || '••••••••'}
+                                className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 focus:border-cyan-400 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
                             />
-                            <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                            <Lock className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
                         </div>
                     </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 mt-2"
+                        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-95 text-slate-950 font-black text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 font-mono uppercase tracking-wider mt-2"
                     >
-                        <span>{loading ? t.auth.processing : t.auth.completeRegisterBtn}</span>
+                        <span>{loading ? t.auth.processing : (t.auth.completeRegisterBtn || 'CREATE DOCTOR ACCOUNT')}</span>
                         <ArrowRight className="w-4 h-4" />
                     </button>
                 </form>
 
-                <div className="text-center text-xs text-slate-500 dark:text-slate-400 pt-3 border-t border-slate-100 dark:border-slate-800">
-                    {t.auth.haveAccount}{' '}
-                    <Link to="/login" className="font-bold text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300">
-                        {t.auth.loginBtn}
+                <div className="text-center text-xs text-slate-400 pt-3 border-t border-cyan-500/10">
+                    {t.auth.haveAccount || 'Already have an account?'}{' '}
+                    <Link to="/login" className="font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                        {t.auth.loginBtn || 'Sign In Here →'}
                     </Link>
                 </div>
             </div>
