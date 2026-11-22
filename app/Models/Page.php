@@ -50,40 +50,13 @@ class Page extends Model
                 ]
             ],
             [
-                'id' => 'block_hero_1',
-                'type' => 'hero',
-                'title' => 'Hero Banner Section',
-                'settings' => [
-                    'badge' => "🩺 Bangladesh's #1 MBBS & Medical Learning Platform",
-                    'titlePart1' => 'Medical Academic Excellence,',
-                    'titleHighlight' => 'From Item & Card Preparation',
-                    'titlePart2' => 'To 1st Prof Success!',
-                    'subtitle' => 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য MBBS First Phase, Card, Term & 1st Prof প্রস্তুতির পূর্ণাঙ্গ প্ল্যাটফর্ম। রিসার্চ বেজড অ্যানাটমি ডিসেকশন ক্লাস, ফিজিওলজি-বায়োকেমিস্ট্রি কনসেপচুয়াল লেকচার এবং স্ট্যান্ডার্ড দাগানো টেক্সটবুক (BDC, Guyton, Datta, Langman, Ganong)।',
-                    'browseCoursesBtn' => 'সকল MBBS কোর্স দেখুন',
-                    'browseCoursesLink' => '/courses',
-                    'startFreeClassBtn' => 'ডেমো ক্লাস ও ডিসেকশন',
-                    'startFreeClassLink' => '/courses',
-                    'trust1' => '১,২৫০+ প্রিমিয়াম MBBS ক্লাস',
-                    'trust2' => 'দাগানো টেক্সটবুক ও স্লাইড নোটস',
-                    'trust3' => '২৪/৭ ডেডিকেটেড ডিসকাশন সাপোর্ট',
-                    'cardBadge' => 'MBBS Clinical & Academic Hub',
-                    'physicsTitle' => 'Anatomy Dissection & Gross Viscera',
-                    'physicsSub' => 'Thorax, Abdomen, Extremities, Embryo & Histo',
-                    'teachersTitle' => 'Physiology & Biochemistry Mastery',
-                    'teachersSub' => 'Guyton, Ganong, Harper & Lippincott Concepts',
-                    'studyMatTitle' => 'Marked Standard Books & Slides',
-                    'studyMatSub' => 'Downloadable Soft-Copy Books with Item Qs',
-                    'joinTodayBtn' => 'আজই যুক্ত হোন (Join Today)',
-                ]
-            ],
-            [
                 'id' => 'block_features_1',
                 'type' => 'features',
-                'title' => 'Why Choose Us Section',
+                'title' => 'The Clinical Vault Hero Bento Grid',
                 'settings' => [
-                    'sectionTag' => 'মেডিকেল লার্নিং ফিচারসমূহ',
-                    'sectionTitle' => 'কেন DoctorWallah মেডিকেল শিক্ষার্থীদের প্রথম পছন্দ?',
-                    'sectionSub' => 'শুধুমাত্র মুখস্থ নয়, নিখুঁত কনসেপ্ট ক্লিয়ারিং, আইটেম ও ভাইভা ট্রিকস এবং প্রফ পরীক্ষার নিশ্চিত প্রস্তুতির জন্য বিশেষভাবে ডিজাইন করা।',
+                    'sectionTag' => '🩺 BANGLADESH\'S #1 MBBS ACADEMIC PLATFORM',
+                    'sectionTitle' => 'Medical Academic Excellence, From Item & Card Prep To 1st Prof Success!',
+                    'sectionSub' => 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য পূর্ণাঙ্গ ক্লিনিক্যাল ও অ্যাকাডেমিক আর্কিটেকচার — ৪K ক্যাডাভারিক ডিসেকশন ও ভিসেরা থিয়েটার, ১০ মিনিট আইটেম রিভিশন এবং লাইন-বাই-লাইন দাগানো স্ট্যান্ডার্ড বই (BDC, Guyton, Ganong, Datta, Langman)।',
                     'items' => [
                         [
                             'id' => 'feat_1',

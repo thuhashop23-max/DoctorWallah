@@ -130,9 +130,12 @@ export const PageBlockRenderer: React.FC<PageBlockRendererProps> = ({
 };
 
 /* -------------------------------------------------------------
- * 1. HERO BLOCK
+ * 1. HERO BLOCK (Retired in favor of Hero Bento Grid)
  * ----------------------------------------------------------- */
-const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
+const HeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = () => {
+    return null;
+};
+const _UnusedHeroBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { t, language } = useLanguage();
     const navigate = useNavigate();
     const s = block.settings || {};
@@ -757,34 +760,101 @@ const HtmlWidgetBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ 
 };
 
 /* -------------------------------------------------------------
- * 4. FEATURES GRID BLOCK (The Clinical Vault - Dark Glass Bento Grid)
+ * 4. HERO BENTO VAULT BLOCK (Main Hero Section - Dark Glass Bento Grid)
  * ----------------------------------------------------------- */
 const FeaturesBlock: React.FC<{ block: PageBlock; isBuilder?: boolean }> = ({ block }) => {
     const { t, language } = useLanguage();
     const s = block.settings || {};
 
-    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'THE CLINICAL VAULT • 4 CORE ADVANTAGES';
-    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Scientific Learning Architecture for 1st Prof Honours';
-    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'We bridge textbook theory, cadaveric dissection, and clinical viva questions to ensure distinction marks in your college examinations.';
+    const sectionTag = getLocalizedText(s.sectionTag, s.sectionTag_en, language) || 'CLINICAL VAULT • BM&DC 1ST PHASE ACADEMIC SUITE';
+    const sectionTitle = getLocalizedText(s.sectionTitle, s.sectionTitle_en, language) || 'Medical Academic Excellence, From Item & Card Prep To 1st Prof Honours!';
+    const sectionSub = getLocalizedText(s.sectionSub, s.sectionSub_en, language) || 'বাংলাদেশের সকল মেডিকেল কলেজের শিক্ষার্থীদের জন্য পূর্ণাঙ্গ ক্লিনিক্যাল ও অ্যাকাডেমিক আর্কিটেকচার — ৪K ক্যাডাভারিক ডিসেকশন ও ভিসেরা থিয়েটার, ১০ মিনিট আইটেম রিভিশন এবং লাইন-বাই-লাইন দাগানো স্ট্যান্ডার্ড বই (BDC, Guyton, Ganong, Datta, Langman)।';
 
     return (
-        <section className="bg-[#070B14] text-white py-20 sm:py-28 relative overflow-hidden border-b border-cyan-500/10">
-            {/* Ambient background glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
+        <section className="bg-[#050811] text-white pt-12 sm:pt-20 pb-20 sm:pb-28 relative overflow-hidden border-b border-cyan-500/10">
+            {/* Ambient Medical Glow Mesh & Grid Backdrop */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.18),rgba(255,255,255,0))] pointer-events-none" />
+            <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 -right-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+            {/* Subtle Electrocardiogram (ECG) Pulse Line SVG in Background */}
+            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-[0.06] pointer-events-none overflow-hidden select-none">
+                <svg className="w-full h-48" viewBox="0 0 1200 200" fill="none" preserveAspectRatio="none">
+                    <path
+                        d="M0 100 L300 100 L320 60 L335 140 L350 40 L365 170 L380 90 L395 110 L410 100 L700 100 L720 60 L735 140 L750 40 L765 170 L780 90 L795 110 L810 100 L1200 100"
+                        stroke="url(#ecg-gradient-hero)"
+                        strokeWidth="2.5"
+                    />
+                    <defs>
+                        <linearGradient id="ecg-gradient-hero" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#06b6d4" stopOpacity="0.2" />
+                            <stop offset="0.5" stopColor="#10b981" stopOpacity="0.8" />
+                            <stop offset="1" stopColor="#06b6d4" stopOpacity="0.2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Section Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold uppercase tracking-wider shadow-sm">
-                        <Activity className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>{sectionTag}</span>
-                    </span>
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-                        {sectionTitle}
-                    </h2>
-                    <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                {/* Hero Header */}
+                <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16 space-y-4">
+                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-300 text-xs font-mono tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+                        <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                        </span>
+                        <span>🩺 BANGLADESH'S #1 MBBS & MEDICAL ACADEMIC PLATFORM</span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+                        Medical Academic Excellence, <br />
+                        <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(6,182,212,0.35)]">
+                            From Daily Items & Cards To 1st Prof Honours!
+                        </span>
+                    </h1>
+
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
                         {sectionSub}
                     </p>
+
+                    {/* Dual Hero CTAs */}
+                    <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link
+                            to="/courses"
+                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-95 text-slate-950 font-black text-sm sm:text-base transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 group cursor-pointer"
+                        >
+                            <span>Explore MBBS Courses</span>
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                        </Link>
+                        <Link
+                            to="/courses"
+                            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 text-slate-200 hover:text-white font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs backdrop-blur-xl"
+                        >
+                            <PlayCircle className="w-5 h-5 text-cyan-400" />
+                            <span>Watch Viscera Demos</span>
+                        </Link>
+                    </div>
+
+                    {/* Trust Counter Strip */}
+                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left border-t border-cyan-500/10">
+                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-cyan-400 font-mono">550+</div>
+                            <div className="text-[11px] text-slate-400 font-medium">Doctors-in-Training</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-teal-400 font-mono">1,250+</div>
+                            <div className="text-[11px] text-slate-400 font-medium">High-Yield Lectures</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">100%</div>
+                            <div className="text-[11px] text-slate-400 font-medium">BM&DC Curriculum</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80">
+                            <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono">24/7</div>
+                            <div className="text-[11px] text-slate-400 font-medium">Marked Soft Books</div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* The Asymmetric Dark Glass Bento Grid */}
