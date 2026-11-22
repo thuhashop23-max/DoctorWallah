@@ -352,28 +352,28 @@ class ThuhashopCourseImporter
         $videoUrl = null;
         $videoProvider = null;
 
-        if (preg_match('/src="([^"]*player\.vimeo\.com\/video\/[^"]*)"/i', $rawContent, $m)) {
+        if (preg_match('#src="([^"]*player\.vimeo\.com/video/[^"]*)"#i', $rawContent, $m)) {
             $videoUrl = $m[1];
             $videoProvider = 'vimeo';
-        } elseif (preg_match('/(https?:\/\/(?:www\.)?player\.vimeo\.com\/video\/\d+[^\s"'<>]*)/i', $rawContent, $m)) {
+        } elseif (preg_match('#(https?://(?:www\.)?player\.vimeo\.com/video/\d+[^"\s<>]*)#i', $rawContent, $m)) {
             $videoUrl = $m[1];
             $videoProvider = 'vimeo';
-        } elseif (preg_match('/(https?:\/\/(?:www\.)?vimeo\.com\/\d+[^\s"'<>]*)/i', $rawContent, $m)) {
+        } elseif (preg_match('#(https?://(?:www\.)?vimeo\.com/\d+[^"\s<>]*)#i', $rawContent, $m)) {
             $videoUrl = $m[1];
             $videoProvider = 'vimeo';
-        } elseif (preg_match('/(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)[^\s"'<>]+)/i', $rawContent, $m)) {
+        } elseif (preg_match('#(https?://(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)[^"\s<>&]+)#i', $rawContent, $m)) {
             $videoUrl = $m[1];
             $videoProvider = 'youtube';
-        } elseif (preg_match('/mp4="([^"]+\.mp4)"/i', $rawContent, $m)) {
+        } elseif (preg_match('#mp4="([^"]+\.mp4)"#i', $rawContent, $m)) {
             $videoUrl = $m[1];
             $videoProvider = 'html5';
         }
 
         // 2. Detect Google Drive / Download Material
         $driveUrl = null;
-        if (preg_match('/href="([^"]*drive\.google\.com[^"]*)"/i', $rawContent, $m)) {
+        if (preg_match('#href="([^"]*drive\.google\.com[^"]*)"#i', $rawContent, $m)) {
             $driveUrl = $m[1];
-        } elseif (preg_match('/(https?:\/\/drive\.google\.com[^\s"'<>]+)/i', $rawContent, $m)) {
+        } elseif (preg_match('#(https?://drive\.google\.com/[^"\s<>]+)#i', $rawContent, $m)) {
             $driveUrl = $m[1];
         }
 
