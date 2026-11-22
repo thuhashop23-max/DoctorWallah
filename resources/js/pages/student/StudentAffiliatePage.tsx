@@ -225,24 +225,24 @@ export const StudentAffiliatePage: React.FC = () => {
 
             {/* CASE 1: NOT ELIGIBLE (No course purchased) */}
             {!isEligible && (
-                <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center max-w-2xl mx-auto shadow-sm space-y-6">
-                    <div className="h-20 w-20 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+                <div className="bg-white dark:bg-[#0A0404] rounded-2xl border border-gray-200 dark:border-white/[0.08] p-8 text-center max-w-2xl mx-auto shadow-sm dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-6 transition-colors">
+                    <div className="h-20 w-20 rounded-2xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-200 dark:border-amber-500/30">
                         <Lock className="h-10 w-10" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Unlock Affiliate Program</h2>
-                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Unlock Affiliate Program</h2>
+                        <p className="text-sm text-gray-600 dark:text-slate-400 mt-2 leading-relaxed">
                             To maintain the high quality of DoctorWallah, only our enrolled students are eligible to become affiliate partners.
                             As soon as you purchase or enroll in any course, this program will be automatically activated.
                         </p>
                     </div>
 
-                    <div className="bg-gray-50 rounded-xl p-4 text-left border border-gray-100 space-y-3">
-                        <div className="font-semibold text-gray-800 text-sm flex items-center gap-2">
-                            <Gift className="h-4 w-4 text-indigo-600" />
+                    <div className="bg-gray-50 dark:bg-white/[0.03] rounded-xl p-4 text-left border border-gray-100 dark:border-white/[0.06] space-y-3">
+                        <div className="font-semibold text-gray-800 dark:text-slate-200 text-sm flex items-center gap-2">
+                            <Gift className="h-4 w-4 text-[#A60201] dark:text-red-400" />
                             What you get as an affiliate:
                         </div>
-                        <ul className="text-xs text-gray-600 space-y-2 list-disc list-inside">
+                        <ul className="text-xs text-gray-600 dark:text-slate-400 space-y-2 list-disc list-inside">
                             <li>Earn attractive commissions on every course sale (10% - 20% or flat rate).</li>
                             <li>Earn commissions if a user purchases within {settings?.cookie_days || 30} days of clicking your link.</li>
                             <li>Friends who use your referral link/code get a special discount on their course fees.</li>
@@ -337,66 +337,66 @@ export const StudentAffiliatePage: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-xs">
-                            <div className="flex items-center justify-between text-gray-500">
+                        <div className="bg-white dark:bg-[#0A0404] rounded-2xl border border-gray-200 dark:border-white/[0.08] p-5 shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-colors">
+                            <div className="flex items-center justify-between text-gray-500 dark:text-slate-400">
                                 <span className="text-xs font-semibold uppercase tracking-wider">Total Earned</span>
                                 <TrendingUp className="h-5 w-5 text-emerald-500" />
                             </div>
-                            <p className="text-2xl font-bold text-gray-900 mt-2">Tk {Number(profile.total_earned).toFixed(2)}</p>
-                            <p className="text-xs text-emerald-600 mt-2 flex items-center gap-1 font-medium">
+                            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Tk {Number(profile.total_earned).toFixed(2)}</p>
+                            <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-1 font-medium">
                                 <CheckCircle2 className="h-3.5 w-3.5" />
                                 Commissions credited
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-xs">
-                            <div className="flex items-center justify-between text-gray-500">
+                        <div className="bg-white dark:bg-[#0A0404] rounded-2xl border border-gray-200 dark:border-white/[0.08] p-5 shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-colors">
+                            <div className="flex items-center justify-between text-gray-500 dark:text-slate-400">
                                 <span className="text-xs font-semibold uppercase tracking-wider">Total Withdrawn</span>
-                                <CreditCard className="h-5 w-5 text-indigo-500" />
+                                <CreditCard className="h-5 w-5 text-[#A60201] dark:text-red-400" />
                             </div>
-                            <p className="text-2xl font-bold text-gray-900 mt-2">Tk {Number(profile.total_withdrawn).toFixed(2)}</p>
-                            <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
+                            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Tk {Number(profile.total_withdrawn).toFixed(2)}</p>
+                            <div className="mt-2 text-xs text-gray-500 dark:text-slate-400 flex items-center justify-between">
                                 <span>Account: {profile.payout_method ? `${profile.payout_method.toUpperCase()} (${profile.payout_account})` : 'Not set'}</span>
                                 <button
                                     onClick={() => setAccountModalOpen(true)}
-                                    className="text-indigo-600 hover:underline font-semibold"
+                                    className="text-[#A60201] dark:text-red-400 hover:underline font-semibold cursor-pointer"
                                 >
                                     Change
                                 </button>
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-xs">
-                            <div className="flex items-center justify-between text-gray-500">
+                        <div className="bg-white dark:bg-[#0A0404] rounded-2xl border border-gray-200 dark:border-white/[0.08] p-5 shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-colors">
+                            <div className="flex items-center justify-between text-gray-500 dark:text-slate-400">
                                 <span className="text-xs font-semibold uppercase tracking-wider">Link Clicks</span>
                                 <MousePointerClick className="h-5 w-5 text-amber-500" />
                             </div>
-                            <p className="text-2xl font-bold text-gray-900 mt-2">{profile.clicks_count || 0}</p>
-                            <p className="text-xs text-gray-500 mt-2">
-                                Cookie Duration: <strong className="text-gray-700">{settings?.cookie_days || 30} days</strong>
+                            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{profile.clicks_count || 0}</p>
+                            <p className="text-xs text-gray-500 dark:text-slate-400 mt-2">
+                                Cookie Duration: <strong className="text-gray-700 dark:text-slate-300">{settings?.cookie_days || 30} days</strong>
                             </p>
                         </div>
                     </div>
 
                     {/* Primary Referral Code & Link Box */}
-                    <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-4">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-gray-100 pb-4">
+                    <div className="bg-white dark:bg-[#0A0404] rounded-2xl border border-gray-200 dark:border-white/[0.08] p-6 shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-4 transition-colors">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-gray-100 dark:border-white/[0.08] pb-4">
                             <div>
-                                <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                                    <Share2 className="h-5 w-5 text-indigo-600" />
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                                    <Share2 className="h-5 w-5 text-[#A60201] dark:text-red-400" />
                                     Your General Referral Link & Code
                                 </h2>
-                                <p className="text-xs text-gray-500 mt-0.5">
+                                <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
                                     Share this link or code anywhere. When someone clicks and enrolls in a course within the cookie window, you get credited.
                                 </p>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-xs text-gray-500">Referral Code:</span>
-                                <div className="px-3 py-1 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-700 font-mono font-bold text-sm flex items-center gap-1.5">
+                                <span className="text-xs text-gray-500 dark:text-slate-400">Referral Code:</span>
+                                <div className="px-3 py-1 bg-red-50 dark:bg-[#A60201]/10 border border-red-200/80 dark:border-[#A60201]/30 rounded-lg text-[#A60201] dark:text-red-300 font-mono font-bold text-sm flex items-center gap-1.5">
                                     <span>{profile.affiliate_code}</span>
                                     <button
                                         onClick={() => handleCopy(profile.affiliate_code, 'code')}
-                                        className="text-indigo-500 hover:text-indigo-800"
+                                        className="text-[#A60201] hover:text-[#880101] dark:text-red-400 cursor-pointer"
                                         title="Copy code"
                                     >
                                         {copiedCode ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
@@ -411,11 +411,11 @@ export const StudentAffiliatePage: React.FC = () => {
                                 type="text"
                                 readOnly
                                 value={baseReferralLink}
-                                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm font-mono text-gray-700 select-all"
+                                className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm font-mono text-gray-700 dark:text-slate-300 select-all"
                             />
                             <button
                                 onClick={() => handleCopy(baseReferralLink, 'base')}
-                                className="shrink-0 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-colors"
+                                className="shrink-0 px-5 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
                             >
                                 {copiedBase ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                 {copiedBase ? 'Copied!' : 'Copy Link'}

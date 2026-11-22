@@ -198,18 +198,18 @@ export const StudentCoursesPage: React.FC = () => {
     return (
         <div className="space-y-6 max-w-7xl">
             <div>
-                <h2 className="text-2xl font-black text-slate-900 tracking-tight">My Courses</h2>
-                <p className="text-xs text-slate-500 mt-0.5">All your active courses and learning progress</p>
+                <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">My Courses</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">All your active courses and learning progress</p>
             </div>
 
             {coursesData.length === 0 ? (
-                <div className="py-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200">
-                    <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-2" />
-                    <h4 className="font-bold text-slate-700">No courses found</h4>
-                    <p className="text-xs">Enroll in a new course to get started.</p>
+                <div className="py-16 text-center text-slate-400 dark:text-slate-500 bg-white dark:bg-[#0A0404] rounded-3xl border border-slate-200 dark:border-white/[0.08] shadow-xs">
+                    <BookOpen className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                    <h4 className="font-bold text-slate-700 dark:text-slate-300">No courses found</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Enroll in a new course to get started.</p>
                     <Link
                         to="/courses"
-                        className="inline-block mt-3 px-6 py-2.5 bg-sky-600 text-white font-bold text-xs rounded-xl shadow-md"
+                        className="inline-block mt-3 px-6 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl shadow-md transition-all"
                     >
                         Browse Courses
                     </Link>
@@ -219,7 +219,7 @@ export const StudentCoursesPage: React.FC = () => {
                     {coursesData.map((item) => {
                         const { course, total_lessons, completed_lessons, progress_percentage, last_lesson_id } = item;
                         return (
-                            <div key={course.id} className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col justify-between">
+                            <div key={course.id} className="bg-white dark:bg-[#0A0404] rounded-3xl border border-slate-200/80 dark:border-white/[0.08] shadow-xs overflow-hidden flex flex-col justify-between transition-colors">
                                 <Link to={`/courses/${course.slug}`} className="block aspect-video bg-slate-900 relative group/thumb cursor-pointer overflow-hidden">
                                     {(course.thumbnail || (course as any).thumbnail_url) ? (
                                         <img
@@ -234,7 +234,7 @@ export const StudentCoursesPage: React.FC = () => {
                                         />
                                     ) : null}
                                     <div className={`fallback-thumb w-full h-full ${(course.thumbnail || (course as any).thumbnail_url) ? 'hidden' : 'flex'} items-center justify-center text-white bg-slate-900`}>
-                                        <BookOpen className="w-8 h-8 text-sky-400 opacity-60" />
+                                        <BookOpen className="w-8 h-8 text-[#A60201] opacity-60" />
                                     </div>
                                     <span className="absolute bottom-3 right-3 px-2 py-0.5 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold rounded">
                                         {total_lessons} Classes
@@ -244,10 +244,10 @@ export const StudentCoursesPage: React.FC = () => {
                                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                                     <div>
                                         <div className="flex items-start justify-between gap-2">
-                                            <h3 className="font-bold text-slate-900 text-base line-clamp-2 flex-1">
+                                            <h3 className="font-bold text-slate-900 dark:text-white text-base line-clamp-2 flex-1">
                                                 <Link
                                                     to={`/courses/${course.slug}`}
-                                                    className="hover:text-sky-600 transition-colors cursor-pointer"
+                                                    className="hover:text-[#A60201] dark:hover:text-red-400 transition-colors cursor-pointer"
                                                 >
                                                     {course.title}
                                                 </Link>
@@ -256,7 +256,7 @@ export const StudentCoursesPage: React.FC = () => {
                                             {item.has_nexpilot ? (
                                                 <Link
                                                     to={`/student/courses/${course.id}/nexpilot`}
-                                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 text-white text-[11px] font-bold rounded-lg shadow-xs hover:from-sky-600 hover:to-sky-800 shrink-0 transition-all hover:scale-105"
+                                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-red-600 to-[#A60201] text-white text-[11px] font-bold rounded-lg shadow-xs hover:opacity-90 shrink-0 transition-all hover:scale-105"
                                                     title="NexPilot AI Tutor"
                                                 >
                                                     <Sparkles className="w-3 h-3 text-amber-300" />
@@ -274,7 +274,7 @@ export const StudentCoursesPage: React.FC = () => {
                                                 </button>
                                             ) : null}
                                         </div>
-                                        <p className="text-xs text-slate-500 mt-1">
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                             Instructor: {course.instructors?.map((i: any) => i.name).join(', ') || 'Expert Mentor'}
                                         </p>
                                         {item.is_instructor && (
@@ -288,14 +288,14 @@ export const StudentCoursesPage: React.FC = () => {
                                     </div>
 
                                     {/* Progress */}
-                                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                                    <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-white/[0.08]">
                                         <div className="flex justify-between text-xs font-bold">
-                                            <span className="text-slate-500">Progress ({completed_lessons}/{total_lessons})</span>
-                                            <span className="text-sky-600">{progress_percentage}%</span>
+                                            <span className="text-slate-500 dark:text-slate-400">Progress ({completed_lessons}/{total_lessons})</span>
+                                            <span className="text-[#A60201] dark:text-red-400">{progress_percentage}%</span>
                                         </div>
-                                        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div className="w-full h-2 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
                                             <div
-                                                className="h-full bg-sky-600 rounded-full"
+                                                className="h-full bg-[#A60201] rounded-full"
                                                 style={{ width: `${progress_percentage}%` }}
                                             />
                                         </div>
@@ -308,7 +308,7 @@ export const StudentCoursesPage: React.FC = () => {
                                                 to={last_lesson_id 
                                                     ? `/learning/${course.id}/lessons/${last_lesson_id}` 
                                                     : `/courses/${course.slug}`}
-                                                className="flex-1 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                                                className="flex-1 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
                                             >
                                                 <PlayCircle className="w-4 h-4" />
                                                 <span>Continue Learning</span>
@@ -318,7 +318,7 @@ export const StudentCoursesPage: React.FC = () => {
                                                 className="px-3.5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors shrink-0 border border-slate-700"
                                                 title="Open NexPilot AI Tutor Room"
                                             >
-                                                <Bot className="w-4 h-4 text-sky-400" />
+                                                <Bot className="w-4 h-4 text-[#A60201]" />
                                                 <span>Pilot</span>
                                             </Link>
                                         </div>
@@ -328,7 +328,7 @@ export const StudentCoursesPage: React.FC = () => {
                                                 to={last_lesson_id 
                                                     ? `/learning/${course.id}/lessons/${last_lesson_id}` 
                                                     : `/courses/${course.slug}`}
-                                                className="flex-1 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                                                className="flex-1 py-2.5 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
                                             >
                                                 <PlayCircle className="w-4 h-4" />
                                                 <span>Continue Learning</span>
@@ -349,7 +349,7 @@ export const StudentCoursesPage: React.FC = () => {
                                                 to={last_lesson_id 
                                                     ? `/learning/${course.id}/lessons/${last_lesson_id}` 
                                                     : `/courses/${course.slug}`}
-                                                className="w-full py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                                                className="w-full py-2.5 bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-colors"
                                             >
                                                 <PlayCircle className="w-4 h-4" />
                                                 <span>Continue Learning</span>
@@ -370,22 +370,22 @@ export const StudentCoursesPage: React.FC = () => {
                                         </div>
                                     )}
                                     {course.enrolled_action_buttons && course.enrolled_action_buttons.length > 0 && (
-                                        <div className="pt-3 border-t border-slate-100 space-y-2">
+                                        <div className="pt-3 border-t border-slate-100 dark:border-white/[0.08] space-y-2">
                                             {course.enrolled_action_buttons.some((b: any) => b.requires_access_key) && item.access_key && (
-                                                <div className="p-2.5 bg-gradient-to-r from-indigo-50/90 via-sky-50/70 to-indigo-50/90 rounded-xl border border-indigo-200/80 flex items-center justify-between gap-2 shadow-2xs">
+                                                <div className="p-2.5 bg-gradient-to-r from-red-50/90 via-slate-50/70 to-red-50/90 dark:from-[#1A0505] dark:via-black/60 dark:to-[#1A0505] rounded-xl border border-red-200/80 dark:border-[#A60201]/30 flex items-center justify-between gap-2 shadow-2xs">
                                                     <div className="min-w-0 pr-1">
-                                                        <div className="text-[10px] font-bold text-slate-500 flex items-center gap-1">
-                                                            <KeyRound className="w-3 h-3 text-indigo-600 shrink-0" />
+                                                        <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                                                            <KeyRound className="w-3 h-3 text-[#A60201] shrink-0" />
                                                             <span>Access Key:</span>
                                                         </div>
-                                                        <div className="font-mono font-black text-xs sm:text-sm text-indigo-700 select-all truncate mt-0.5">
+                                                        <div className="font-mono font-black text-xs sm:text-sm text-[#A60201] dark:text-red-300 select-all truncate mt-0.5">
                                                             {item.access_key}
                                                         </div>
                                                     </div>
                                                     <button
                                                         type="button"
                                                         onClick={() => handleCopyAccessKey(item.access_key)}
-                                                        className="px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 bg-white hover:bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-2xs"
+                                                        className="px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 bg-white dark:bg-black/80 hover:bg-red-50 dark:hover:bg-white/10 text-[#A60201] dark:text-red-300 border border-red-200 dark:border-white/10 shadow-2xs"
                                                         title="Copy Access Key"
                                                     >
                                                         {copiedAccessKey === item.access_key ? (

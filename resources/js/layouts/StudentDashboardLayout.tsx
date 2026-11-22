@@ -26,7 +26,9 @@ import {
     Radio,
     SlidersHorizontal,
     GraduationCap,
-    Loader2
+    Loader2,
+    Stethoscope,
+    ShieldCheck
 } from 'lucide-react';
 
 interface MenuItem {
@@ -58,7 +60,7 @@ export const StudentDashboardLayout: React.FC = () => {
     const [completedCoursesCount, setCompletedCoursesCount] = useState<number>(0);
     const [ordersCount, setOrdersCount] = useState<number>(0);
 
-    const supportPhone = settings?.support_phone || '01305726485';
+    const supportPhone = settings?.support_phone || settings?.contact_phone || '01580401289';
 
     useEffect(() => {
         if (!user) return;
@@ -100,10 +102,10 @@ export const StudentDashboardLayout: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+            <div className="min-h-screen bg-slate-50 dark:bg-[#060202] flex items-center justify-center">
                 <div className="flex flex-col items-center gap-3">
                     <Loader2 className="w-8 h-8 text-[#A60201] animate-spin" />
-                    <span className="text-xs font-bold text-slate-500">Loading Student Portal...</span>
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Loading Student Portal...</span>
                 </div>
             </div>
         );
@@ -115,7 +117,7 @@ export const StudentDashboardLayout: React.FC = () => {
 
     const menuItems: MenuItem[] = [
         {
-            title: 'Home',
+            title: 'Dashboard Overview',
             path: '/student',
             icon: Home,
             exact: true
@@ -131,22 +133,22 @@ export const StudentDashboardLayout: React.FC = () => {
             icon: Radio
         },
         {
-            title: 'Routine',
+            title: 'Routine & Routine Book',
             path: '/student/routine',
             icon: Calendar,
         },
         {
-            title: 'Exams',
+            title: 'Exams & Model Tests',
             path: '/student/exams',
             icon: ClipboardList
         },
         {
-            title: 'Leaderboard',
+            title: 'Academic Leaderboard',
             path: '/student/leaderboard',
             icon: Trophy
         },
         {
-            title: 'Orders',
+            title: 'Payment Orders',
             path: '/student/orders',
             icon: ShoppingCart
         },
@@ -156,7 +158,7 @@ export const StudentDashboardLayout: React.FC = () => {
             icon: Share2
         },
         {
-            title: 'Profile & Settings',
+            title: 'Profile & Security',
             path: '/student/settings',
             icon: Settings,
             children: [
@@ -166,7 +168,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     icon: Smartphone
                 },
                 {
-                    title: 'Profile Info',
+                    title: 'Profile Information',
                     path: '/student/settings/profile',
                     icon: UserIcon
                 },
@@ -198,15 +200,15 @@ export const StudentDashboardLayout: React.FC = () => {
                 <div className="space-y-5">
                     {/* Mobile Drawer Header with Close Button */}
                     {isMobile && (
-                        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                            <span className="font-extrabold text-sm text-slate-800 flex items-center gap-2">
-                                <GraduationCap className="w-4 h-4 text-[#A60201]" />
-                                Student Portal
+                        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/10">
+                            <span className="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                                <Stethoscope className="w-4 h-4 text-[#A60201]" />
+                                <span>DoctorWallah Portal</span>
                             </span>
                             <button
                                 type="button"
                                 onClick={() => setSidebarOpen(false)}
-                                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition"
+                                className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition"
                                 title="Close Menu"
                             >
                                 <X className="w-5 h-5" />
@@ -214,33 +216,43 @@ export const StudentDashboardLayout: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Student Profile Box (Avatar, Name, Member Since, 3-Stat Box) */}
-                    <div className="pt-1 pb-3 px-1 border-b border-slate-100 space-y-3">
+                    {/* Student Profile Box */}
+                    <div className="pt-1 pb-3 px-1 border-b border-slate-100 dark:border-white/[0.08] space-y-3">
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-16 h-16 rounded-full bg-[#A60201] text-white font-black text-2xl flex items-center justify-center shadow-md shadow-[#A60201]/25 border-2 border-white ring-2 ring-[#A60201]/30">
-                                {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
+                            <div className="relative">
+                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#A60201] via-[#880101] to-[#5A0101] text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-[#A60201]/30 border-2 border-white/20 ring-4 ring-[#A60201]/20">
+                                    {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
+                                </div>
+                                <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-[#0A0404]" title="Active Student" />
                             </div>
-                            <h3 className="text-sm font-bold text-slate-800 mt-2.5 truncate max-w-full">
+
+                            <h3 className="text-sm font-black text-slate-900 dark:text-white mt-3 truncate max-w-full">
                                 {user.name}
                             </h3>
-                            <p className="text-[11px] font-medium text-slate-400 mt-0.5">
-                                Member since {user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Recent'}
+
+                            <div className="inline-flex items-center gap-1.5 mt-1 px-2.5 py-0.5 rounded-full bg-red-50 dark:bg-[#A60201]/20 border border-red-200 dark:border-[#A60201]/40 text-[#A60201] dark:text-red-300 text-[10px] font-bold">
+                                <ShieldCheck className="w-3 h-3 text-[#A60201]" />
+                                <span>Verified Cadet</span>
+                            </div>
+
+                            <p className="text-[10px] font-mono text-slate-400 dark:text-slate-500 mt-1">
+                                {user.registration_number || (user.id ? `ID: bidth-${user.id}` : 'Student')}
                             </p>
                         </div>
 
-                        {/* 3-stat box */}
-                        <div className="grid grid-cols-3 gap-1 p-2 bg-slate-50 border border-slate-200/80 rounded-2xl text-center">
+                        {/* 3-stat micro-grid */}
+                        <div className="grid grid-cols-3 gap-1 p-2 bg-slate-50 dark:bg-black/50 border border-slate-200/80 dark:border-white/[0.08] rounded-2xl text-center">
                             <div className="p-1">
-                                <span className="block text-sm font-black text-slate-800">{activeCoursesCount}</span>
-                                <span className="block text-[10px] font-semibold text-slate-500 leading-tight">Active<br />Courses</span>
+                                <span className="block text-sm font-black text-slate-900 dark:text-white">{activeCoursesCount}</span>
+                                <span className="block text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-tight">Active<br />Courses</span>
                             </div>
-                            <div className="p-1 border-x border-slate-200/80">
-                                <span className="block text-sm font-black text-slate-800">{completedCoursesCount}</span>
-                                <span className="block text-[10px] font-semibold text-slate-500 leading-tight">Completed</span>
+                            <div className="p-1 border-x border-slate-200/80 dark:border-white/[0.08]">
+                                <span className="block text-sm font-black text-slate-900 dark:text-white">{completedCoursesCount}</span>
+                                <span className="block text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-tight">Completed</span>
                             </div>
                             <div className="p-1">
-                                <span className="block text-sm font-black text-slate-800">{ordersCount}</span>
-                                <span className="block text-[10px] font-semibold text-slate-500 leading-tight">Orders</span>
+                                <span className="block text-sm font-black text-slate-900 dark:text-white">{ordersCount}</span>
+                                <span className="block text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-tight">Orders</span>
                             </div>
                         </div>
                     </div>
@@ -258,14 +270,14 @@ export const StudentDashboardLayout: React.FC = () => {
                                         <button
                                             type="button"
                                             onClick={() => toggleSubmenu(item.title)}
-                                            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition-all text-left cursor-pointer ${
+                                            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-left cursor-pointer ${
                                                 active
-                                                    ? 'bg-red-50 text-[#A60201] font-extrabold'
-                                                    : 'text-slate-600 hover:text-[#A60201] hover:bg-red-50/80'
+                                                    ? 'bg-red-50 dark:bg-[#A60201]/20 text-[#A60201] dark:text-red-300 font-extrabold'
+                                                    : 'text-slate-600 dark:text-slate-300 hover:text-[#A60201] dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06]'
                                             }`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <Icon className={`w-4 h-4 ${active ? 'text-[#A60201]' : 'text-slate-400'}`} />
+                                                <Icon className={`w-4 h-4 ${active ? 'text-[#A60201] dark:text-red-400' : 'text-slate-400 dark:text-slate-500'}`} />
                                                 <span>{item.title}</span>
                                             </div>
                                             <ChevronDown
@@ -276,7 +288,7 @@ export const StudentDashboardLayout: React.FC = () => {
                                         </button>
 
                                         {isSubmenuOpen && (
-                                            <div className="pl-3 pr-1 py-1 space-y-1 ml-4 border-l-2 border-slate-100 animate-in fade-in slide-in-from-top-1 duration-200">
+                                            <div className="pl-3 pr-1 py-1 space-y-1 ml-4 border-l-2 border-slate-200 dark:border-white/10 animate-in fade-in slide-in-from-top-1 duration-200">
                                                 {item.children.map((child) => {
                                                     const ChildIcon = child.icon;
                                                     const isChildActive = location.pathname === child.path || (
@@ -290,11 +302,11 @@ export const StudentDashboardLayout: React.FC = () => {
                                                             className={`flex items-center gap-2.5 px-3 py-2 rounded-xl font-bold text-xs transition-all ${
                                                                 isChildActive
                                                                     ? 'bg-[#A60201] text-white shadow-2xs'
-                                                                    : 'text-slate-500 hover:text-[#A60201] hover:bg-red-50/70'
+                                                                    : 'text-slate-500 dark:text-slate-400 hover:text-[#A60201] dark:hover:text-white hover:bg-red-50/70 dark:hover:bg-white/[0.04]'
                                                             }`}
                                                         >
                                                             {ChildIcon && (
-                                                                <ChildIcon className={`w-3.5 h-3.5 ${isChildActive ? 'text-white' : 'text-slate-400'}`} />
+                                                                <ChildIcon className={`w-3.5 h-3.5 ${isChildActive ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} />
                                                             )}
                                                             <span>{child.title}</span>
                                                         </Link>
@@ -311,13 +323,13 @@ export const StudentDashboardLayout: React.FC = () => {
                                     key={item.title}
                                     to={item.path}
                                     onClick={() => setSidebarOpen(false)}
-                                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition-all ${
+                                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                                         active
-                                            ? 'bg-[#A60201] text-white shadow-xs'
-                                            : 'text-slate-600 hover:text-[#A60201] hover:bg-red-50/80'
+                                            ? 'bg-[#A60201] text-white shadow-xs font-extrabold'
+                                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06]'
                                     }`}
                                 >
-                                    <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
+                                    <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} />
                                     <span>{item.title}</span>
                                 </Link>
                             );
@@ -326,16 +338,16 @@ export const StudentDashboardLayout: React.FC = () => {
                 </div>
 
                 {/* Bottom Support & Logout */}
-                <div className="space-y-3 pt-3 border-t border-slate-100">
-                    <div className="bg-red-50/80 rounded-2xl p-3 border border-red-100 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-white text-[#A60201] shadow-2xs flex items-center justify-center shrink-0">
-                            <PhoneCall className="w-4 h-4" />
+                <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-white/[0.08]">
+                    <div className="bg-red-50/80 dark:bg-[#120404] rounded-2xl p-3 border border-red-100 dark:border-[#A60201]/30 flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-white dark:bg-black/50 text-[#A60201] shadow-2xs flex items-center justify-center shrink-0 border border-red-100 dark:border-[#A60201]/30">
+                            <PhoneCall className="w-4 h-4 text-[#A60201]" />
                         </div>
                         <div className="truncate">
-                            <span className="text-[10px] font-bold text-slate-500 block leading-tight">Need Help?</span>
+                            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block leading-tight">Academic Help</span>
                             <a
                                 href={`tel:${supportPhone}`}
-                                className="text-xs font-extrabold text-[#A60201] hover:underline truncate block"
+                                className="text-xs font-extrabold text-[#A60201] dark:text-red-300 hover:underline truncate block"
                             >
                                 {supportPhone}
                             </a>
@@ -345,7 +357,7 @@ export const StudentDashboardLayout: React.FC = () => {
                     <button
                         type="button"
                         onClick={logout}
-                        className="w-full flex items-center justify-center gap-2 px-3 py-2 text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-100 rounded-xl font-bold text-xs transition cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 border border-transparent hover:border-rose-100 dark:hover:border-rose-900/50 rounded-xl font-bold text-xs transition cursor-pointer"
                     >
                         <LogOut className="w-4 h-4" />
                         <span>Log Out</span>
@@ -356,7 +368,7 @@ export const StudentDashboardLayout: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 font-sans antialiased selection:bg-[#A60201] selection:text-white">
+        <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#060202] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-[#A60201] selection:text-white transition-colors duration-200">
             {/* Header: Global Website Navbar */}
             <Navbar />
 
@@ -365,17 +377,17 @@ export const StudentDashboardLayout: React.FC = () => {
                 {/* Mobile Student Bar & Drawer Trigger (lg:hidden) */}
                 <div className="lg:hidden mb-5">
                     {/* User Quick Strip + Menu Toggle Button */}
-                    <div className="bg-white rounded-2xl p-3.5 border border-slate-200/90 shadow-2xs flex items-center justify-between gap-3">
+                    <div className="bg-white dark:bg-[#0A0404] rounded-2xl p-3.5 border border-slate-200/90 dark:border-white/10 shadow-xs flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-10 h-10 rounded-full bg-[#A60201] text-white font-bold text-base flex items-center justify-center shrink-0 shadow-xs">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#A60201] to-[#7B0100] text-white font-bold text-base flex items-center justify-center shrink-0 shadow-xs">
                                 {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
                             </div>
                             <div className="truncate">
-                                <h3 className="text-xs font-bold text-slate-900 truncate">
+                                <h3 className="text-xs font-bold text-slate-900 dark:text-white truncate">
                                     {user.name}
                                 </h3>
-                                <p className="text-[10px] text-slate-400 font-mono">
-                                    {user.registration_number || (user.id ? `ID: ${user.id}` : 'Student')}
+                                <p className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+                                    {user.registration_number || (user.id ? `ID: bidth-${user.id}` : 'Student')}
                                 </p>
                             </div>
                         </div>
@@ -383,10 +395,10 @@ export const StudentDashboardLayout: React.FC = () => {
                         <button
                             type="button"
                             onClick={() => setSidebarOpen(true)}
-                            className="px-3.5 py-2 bg-[#A60201]/10 hover:bg-[#A60201]/20 text-[#A60201] text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0 cursor-pointer"
+                            className="px-3.5 py-2 bg-red-50 dark:bg-[#A60201]/20 hover:bg-red-100 dark:hover:bg-[#A60201]/30 text-[#A60201] dark:text-red-300 text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0 cursor-pointer border border-red-200 dark:border-[#A60201]/40"
                         >
                             <SlidersHorizontal className="w-3.5 h-3.5" />
-                            <span>Student Menu</span>
+                            <span>Portal Menu</span>
                         </button>
                     </div>
                 </div>
@@ -395,7 +407,7 @@ export const StudentDashboardLayout: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
                     {/* Desktop Sidebar Card */}
                     <aside className="hidden lg:block w-72 shrink-0 sticky top-24">
-                        <div className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-2xs min-h-[500px]">
+                        <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-5 border border-slate-200/90 dark:border-white/[0.08] shadow-sm dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] min-h-[500px] transition-colors">
                             {renderSidebarContent(false)}
                         </div>
                     </aside>
@@ -414,10 +426,10 @@ export const StudentDashboardLayout: React.FC = () => {
             {sidebarOpen && (
                 <div className="fixed inset-0 z-50 lg:hidden">
                     <div
-                        className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+                        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
                         onClick={() => setSidebarOpen(false)}
                     />
-                    <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white z-50 p-5 shadow-2xl flex flex-col justify-between overflow-y-auto animate-in slide-in-from-left duration-200">
+                    <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-[#0A0404] text-slate-900 dark:text-white border-r border-slate-200 dark:border-white/10 z-50 p-5 shadow-2xl flex flex-col justify-between overflow-y-auto animate-in slide-in-from-left duration-200">
                         {renderSidebarContent(true)}
                     </div>
                 </div>

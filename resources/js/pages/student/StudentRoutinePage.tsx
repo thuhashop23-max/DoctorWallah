@@ -268,8 +268,8 @@ export const StudentRoutinePage: React.FC = () => {
             case 'emerald':
             default:
                 return {
-                    border: 'border-emerald-600',
-                    pillBg: 'bg-emerald-50 text-[#0B4B34] border-emerald-200/60',
+                    border: 'border-[#A60201]',
+                    pillBg: 'bg-red-50 dark:bg-[#A60201]/10 text-[#A60201] dark:text-red-300 border-red-200/60 dark:border-[#A60201]/30',
                 };
         }
     };
@@ -279,26 +279,26 @@ export const StudentRoutinePage: React.FC = () => {
             {/* Top Header Card */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-                        <CalendarIcon className="w-7 h-7 text-[#0B4B34]" />
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+                        <CalendarIcon className="w-7 h-7 text-[#A60201]" />
                         <span>Class & Exam Routine</span>
                     </h1>
                     <div className="flex items-center gap-2 mt-1">
                         <button
                             type="button"
                             onClick={handlePrevMonth}
-                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-colors cursor-pointer"
                             title="Previous Month"
                         >
                             <ChevronLeft className="w-4 h-4" />
                         </button>
-                        <span className="text-sm font-bold text-slate-600">
+                        <span className="text-sm font-bold text-slate-600 dark:text-slate-300">
                             {currentMonthLabel}
                         </span>
                         <button
                             type="button"
                             onClick={handleNextMonth}
-                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-colors cursor-pointer"
                             title="Next Month"
                         >
                             <ChevronRight className="w-4 h-4" />
@@ -311,7 +311,7 @@ export const StudentRoutinePage: React.FC = () => {
                     <button
                         type="button"
                         onClick={handleJumpToToday}
-                        className="px-5 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 text-[#0B4B34] font-black text-xs transition-all shadow-2xs border border-emerald-200/80 cursor-pointer active:scale-95"
+                        className="px-5 py-2 rounded-full bg-red-50 dark:bg-[#A60201]/15 hover:bg-red-100 dark:hover:bg-[#A60201]/25 text-[#A60201] dark:text-red-300 font-black text-xs transition-all shadow-2xs border border-red-200/80 dark:border-[#A60201]/30 cursor-pointer active:scale-95"
                     >
                         Today
                     </button>
@@ -320,9 +320,9 @@ export const StudentRoutinePage: React.FC = () => {
 
             {/* Course Filter Tabs */}
             {enrolledCourses.length > 0 && (
-                <div className="bg-white rounded-2xl p-3 border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-extrabold text-slate-700 shrink-0">
-                        <BookOpen className="w-4 h-4 text-[#0B4B34]" />
+                <div className="bg-white dark:bg-[#0A0404] rounded-2xl p-3 border border-slate-200/80 dark:border-white/[0.08] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors">
+                    <div className="flex items-center gap-2 text-xs font-extrabold text-slate-700 dark:text-slate-300 shrink-0">
+                        <BookOpen className="w-4 h-4 text-[#A60201]" />
                         <span>Course Filter:</span>
                     </div>
 
@@ -331,8 +331,8 @@ export const StudentRoutinePage: React.FC = () => {
                             type="button"
                             onClick={() => setSelectedCourseId('all')}
                             className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer ${selectedCourseId === 'all'
-                                ? 'bg-[#0B4B34] text-white shadow-xs'
-                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                ? 'bg-[#A60201] text-white shadow-xs'
+                                : 'bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1]'
                                 }`}
                         >
                             All My Courses
@@ -344,8 +344,8 @@ export const StudentRoutinePage: React.FC = () => {
                                 type="button"
                                 onClick={() => setSelectedCourseId(c.id)}
                                 className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 truncate max-w-[220px] transition-all cursor-pointer ${selectedCourseId === c.id
-                                    ? 'bg-[#0B4B34] text-white shadow-xs'
-                                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    ? 'bg-[#A60201] text-white shadow-xs'
+                                    : 'bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1]'
                                     }`}
                                 title={c.title}
                             >
@@ -362,8 +362,8 @@ export const StudentRoutinePage: React.FC = () => {
                     type="button"
                     onClick={() => setSelectedType('all')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap ${selectedType === 'all'
-                        ? 'bg-slate-900 text-white shadow-xs'
-                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
+                        ? 'bg-[#A60201] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#0A0404] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     All Schedules
@@ -373,7 +373,7 @@ export const StudentRoutinePage: React.FC = () => {
                     onClick={() => setSelectedType('live_class')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'live_class'
                         ? 'bg-rose-600 text-white shadow-xs'
-                        : 'bg-white text-rose-700 hover:bg-rose-50 border border-slate-200/80'
+                        : 'bg-white dark:bg-[#0A0404] text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     <Radio className="w-3.5 h-3.5" />
@@ -384,7 +384,7 @@ export const StudentRoutinePage: React.FC = () => {
                     onClick={() => setSelectedType('live_exam')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'live_exam'
                         ? 'bg-amber-600 text-white shadow-xs'
-                        : 'bg-white text-amber-700 hover:bg-amber-50 border border-slate-200/80'
+                        : 'bg-white dark:bg-[#0A0404] text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-500/10 border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     <Clock className="w-3.5 h-3.5" />
@@ -395,7 +395,7 @@ export const StudentRoutinePage: React.FC = () => {
                     onClick={() => setSelectedType('class_upload')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'class_upload'
                         ? 'bg-sky-600 text-white shadow-xs'
-                        : 'bg-white text-sky-700 hover:bg-sky-50 border border-slate-200/80'
+                        : 'bg-white dark:bg-[#0A0404] text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-500/10 border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     <Video className="w-3.5 h-3.5" />
@@ -406,7 +406,7 @@ export const StudentRoutinePage: React.FC = () => {
                     onClick={() => setSelectedType('material')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'material'
                         ? 'bg-teal-600 text-white shadow-xs'
-                        : 'bg-white text-teal-700 hover:bg-teal-50 border border-slate-200/80'
+                        : 'bg-white dark:bg-[#0A0404] text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-500/10 border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     <FileText className="w-3.5 h-3.5" />
@@ -417,7 +417,7 @@ export const StudentRoutinePage: React.FC = () => {
                     onClick={() => setSelectedType('book_parcel')}
                     className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${selectedType === 'book_parcel'
                         ? 'bg-orange-600 text-white shadow-xs'
-                        : 'bg-white text-orange-700 hover:bg-orange-50 border border-slate-200/80'
+                        : 'bg-white dark:bg-[#0A0404] text-orange-700 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-500/10 border border-slate-200/80 dark:border-white/[0.08]'
                         }`}
                 >
                     <Package className="w-3.5 h-3.5" />
@@ -441,11 +441,11 @@ export const StudentRoutinePage: React.FC = () => {
                                 type="button"
                                 onClick={() => setSelectedDateStr(day.dateStr)}
                                 className={`shrink-0 w-12 sm:w-14 py-2.5 rounded-2xl flex flex-col items-center justify-center transition-all cursor-pointer ${isSelected
-                                    ? 'bg-[#0B4B34] text-white shadow-md shadow-emerald-950/25 ring-2 ring-[#0B4B34]/30 scale-105'
-                                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+                                    ? 'bg-[#A60201] text-white shadow-md shadow-[#A60201]/25 ring-2 ring-[#A60201]/30 scale-105'
+                                    : 'bg-white dark:bg-[#0A0404] hover:bg-slate-50 dark:hover:bg-white/[0.04] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-white/[0.08] shadow-2xs'
                                     }`}
                             >
-                                <span className={`text-[11px] font-bold ${isSelected ? 'text-emerald-100' : 'text-slate-400'
+                                <span className={`text-[11px] font-bold ${isSelected ? 'text-red-100' : 'text-slate-400 dark:text-slate-500'
                                     }`}>
                                     {day.isToday ? 'Today' : day.dayName}
                                 </span>
@@ -458,7 +458,7 @@ export const StudentRoutinePage: React.FC = () => {
                                     className={`w-1.5 h-1.5 rounded-full mt-1.5 transition-all ${isSelected
                                         ? 'bg-white'
                                         : day.hasEvents
-                                            ? 'bg-[#0B4B34]'
+                                            ? 'bg-[#A60201]'
                                             : 'opacity-0'
                                         }`}
                                 />
@@ -470,38 +470,38 @@ export const StudentRoutinePage: React.FC = () => {
 
             {/* Daily Header Subtitle */}
             <div className="pt-2">
-                <h3 className="text-sm font-bold text-slate-800">
+                <h3 className="text-sm font-bold text-slate-800 dark:text-white">
                     {selectedDateHeaderLabel}
                 </h3>
             </div>
 
             {/* Event Cards Section */}
             {loading ? (
-                <div className="bg-white rounded-3xl p-16 border border-slate-200/80 text-center shadow-xs">
-                    <Loader2 className="w-8 h-8 animate-spin text-[#0B4B34] mx-auto mb-3" />
-                    <p className="text-xs text-slate-500">Loading routine schedule...</p>
+                <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-16 border border-slate-200/80 dark:border-white/[0.08] text-center shadow-xs">
+                    <Loader2 className="w-8 h-8 animate-spin text-[#A60201] mx-auto mb-3" />
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Loading routine schedule...</p>
                 </div>
             ) : selectedDateEvents.length === 0 ? (
-                <div className="bg-white rounded-3xl p-12 sm:p-16 border border-slate-200/80 shadow-xs text-center space-y-3">
-                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#0B4B34] flex items-center justify-center mx-auto">
+                <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-12 sm:p-16 border border-slate-200/80 dark:border-white/[0.08] shadow-xs text-center space-y-3 transition-colors">
+                    <div className="w-14 h-14 rounded-2xl bg-red-50 dark:bg-[#A60201]/10 text-[#A60201] dark:text-red-300 flex items-center justify-center mx-auto border border-red-200/60 dark:border-[#A60201]/30">
                         <CalendarIcon className="w-7 h-7" />
                     </div>
-                    <h4 className="text-base font-bold text-slate-800">
+                    <h4 className="text-base font-bold text-slate-800 dark:text-white">
                         No scheduled events on this day
                     </h4>
-                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                         There are no classes, exams, or deliveries scheduled for this day. Review previous class notes or practice exams to stay ahead.
                     </p>
                     <div className="pt-2 flex items-center justify-center gap-3">
                         <Link
                             to="/student/exams"
-                            className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-[#0B4B34] font-bold text-xs rounded-xl transition-colors"
+                            className="px-4 py-2 bg-red-50 dark:bg-[#A60201]/15 hover:bg-red-100 dark:hover:bg-[#A60201]/25 text-[#A60201] dark:text-red-300 font-bold text-xs rounded-xl transition-colors border border-red-200/60 dark:border-[#A60201]/30"
                         >
                             Take Practice Exam
                         </Link>
                         <Link
                             to="/student/my-courses"
-                            className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors"
+                            className="px-4 py-2 bg-slate-100 dark:bg-white/[0.06] hover:bg-slate-200 dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl transition-colors"
                         >
                             Browse Course Content
                         </Link>
@@ -523,14 +523,14 @@ export const StudentRoutinePage: React.FC = () => {
                         return (
                             <div
                                 key={eventKey}
-                                className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                                className="bg-white dark:bg-[#0A0404] rounded-3xl p-4 sm:p-5 border border-slate-200/80 dark:border-white/[0.08] shadow-xs hover:shadow-sm hover:border-slate-300 dark:hover:border-white/20 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                             >
                                 {/* Left Column: Time */}
-                                <div className="sm:w-24 shrink-0 flex sm:flex-col items-baseline sm:items-start justify-between sm:justify-center border-b sm:border-b-0 border-slate-100 pb-2 sm:pb-0">
-                                    <div className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-none">
+                                <div className="sm:w-24 shrink-0 flex sm:flex-col items-baseline sm:items-start justify-between sm:justify-center border-b sm:border-b-0 border-slate-100 dark:border-white/[0.06] pb-2 sm:pb-0">
+                                    <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
                                         {evt.time_time || '—'}
                                     </div>
-                                    <div className="text-[11px] font-bold text-slate-400 mt-1">
+                                    <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 mt-1">
                                         {evt.time_period || ''}
                                     </div>
                                 </div>
@@ -539,7 +539,7 @@ export const StudentRoutinePage: React.FC = () => {
                                 <div className={`flex-1 border-l-2 ${theme.border} pl-3.5 sm:pl-4 space-y-1.5 min-w-0`}>
                                     <div className="flex flex-wrap items-center gap-2">
                                         {/* Course Tag */}
-                                        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px] truncate max-w-[180px]">
+                                        <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 font-bold text-[10px] truncate max-w-[180px]">
                                             {evt.course_title}
                                         </span>
 
@@ -550,31 +550,31 @@ export const StudentRoutinePage: React.FC = () => {
 
                                         {/* Type Pill */}
                                         {isLiveClass && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30 flex items-center gap-1">
                                                 <Radio className="w-3 h-3 text-rose-500 animate-pulse" />
                                                 <span>Live Class</span>
                                             </span>
                                         )}
                                         {isLiveExam && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 dark:bg-amber-500/15 text-amber-800 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 flex items-center gap-1">
                                                 <Clock className="w-3 h-3 text-amber-600" />
                                                 <span>Live Exam</span>
                                             </span>
                                         )}
                                         {isClassUpload && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/30 flex items-center gap-1">
                                                 <Video className="w-3 h-3 text-sky-600" />
                                                 <span>Class Upload</span>
                                             </span>
                                         )}
                                         {isMaterial && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-50 dark:bg-teal-500/15 text-teal-700 dark:text-teal-400 border border-teal-200 dark:border-teal-500/30 flex items-center gap-1">
                                                 <FileText className="w-3 h-3 text-teal-600" />
                                                 <span>Study Material</span>
                                             </span>
                                         )}
                                         {isBookParcel && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-50 text-orange-700 border border-orange-200 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-50 dark:bg-orange-500/15 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30 flex items-center gap-1">
                                                 <Package className="w-3 h-3 text-orange-600" />
                                                 <span>Book / Parcel</span>
                                             </span>
@@ -582,7 +582,7 @@ export const StudentRoutinePage: React.FC = () => {
 
                                         {/* Live Indicator */}
                                         {evt.is_live && (
-                                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-500 text-white flex items-center gap-1 animate-pulse shadow-xs">
+                                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#A60201] text-white flex items-center gap-1 animate-pulse shadow-xs">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
                                                 <span>Live Now</span>
                                             </span>
@@ -590,13 +590,13 @@ export const StudentRoutinePage: React.FC = () => {
 
                                         {/* Shipped / Delivered status for parcel */}
                                         {isBookParcel && evt.status === 'shipped' && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-800 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-400 flex items-center gap-1 border border-amber-200 dark:border-amber-500/30">
                                                 <Truck className="w-3 h-3" />
                                                 <span>Shipped via Courier</span>
                                             </span>
                                         )}
                                         {isBookParcel && evt.status === 'delivered' && (
-                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400 flex items-center gap-1 border border-emerald-200 dark:border-emerald-500/30">
                                                 <CheckCircle2 className="w-3 h-3" />
                                                 <span>Delivered</span>
                                             </span>
@@ -604,24 +604,24 @@ export const StudentRoutinePage: React.FC = () => {
                                     </div>
 
                                     {/* Title */}
-                                    <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                                    <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
                                         {evt.title}
                                     </h4>
 
                                     {/* Description */}
                                     {evt.description && (
-                                        <p className="text-xs text-slate-500 line-clamp-2">
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
                                             {evt.description}
                                         </p>
                                     )}
 
                                     {/* Courier Tracking info for parcel */}
                                     {isBookParcel && evt.meta?.courier_name && (
-                                        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-orange-800 font-semibold bg-orange-50/80 p-2 rounded-xl border border-orange-200/60">
+                                        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-orange-800 dark:text-orange-300 font-semibold bg-orange-50/80 dark:bg-orange-500/10 p-2 rounded-xl border border-orange-200/60 dark:border-orange-500/30">
                                             <Truck className="w-4 h-4 text-orange-600 shrink-0" />
                                             <span>Courier: {evt.meta.courier_name}</span>
                                             {evt.meta.tracking_code && (
-                                                <span className="bg-white px-2 py-0.5 rounded-md border border-orange-200 text-orange-950 font-mono text-[11px]">
+                                                <span className="bg-white dark:bg-black/60 px-2 py-0.5 rounded-md border border-orange-200 dark:border-orange-500/40 text-orange-950 dark:text-orange-200 font-mono text-[11px]">
                                                     Tracking Code: {evt.meta.tracking_code}
                                                 </span>
                                             )}
@@ -629,19 +629,19 @@ export const StudentRoutinePage: React.FC = () => {
                                     )}
 
                                     {/* Instructor & details Subtitle */}
-                                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-0.5">
+                                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400 pt-0.5">
                                         {evt.instructor_name && (
-                                            <span className="font-medium text-slate-600">
+                                            <span className="font-medium text-slate-600 dark:text-slate-300">
                                                 {evt.instructor_name}
                                             </span>
                                         )}
                                         {isLiveExam && evt.duration_minutes && (
-                                            <span className="text-slate-400">
+                                            <span className="text-slate-400 dark:text-slate-500">
                                                 • Duration: {formatRoutineNumber(evt.duration_minutes)} mins
                                             </span>
                                         )}
                                         {isLiveExam && evt.total_marks && (
-                                            <span className="text-slate-400">
+                                            <span className="text-slate-400 dark:text-slate-500">
                                                 • Total Marks: {formatRoutineNumber(evt.total_marks)}
                                             </span>
                                         )}
@@ -653,7 +653,7 @@ export const StudentRoutinePage: React.FC = () => {
                                     {evt.is_live ? (
                                         <Link
                                             to={evt.action_url}
-                                            className="px-5 py-2.5 rounded-full bg-[#0B4B34] hover:bg-emerald-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-950/20 animate-pulse transition-all"
+                                            className="px-5 py-2.5 rounded-full bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-[#A60201]/25 animate-pulse transition-all"
                                         >
                                             <PlayCircle className="w-3.5 h-3.5" />
                                             <span>
@@ -663,7 +663,7 @@ export const StudentRoutinePage: React.FC = () => {
                                     ) : isClassUpload ? (
                                         <a
                                             href={evt.action_url}
-                                            className="px-4 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs flex items-center gap-1.5 border border-sky-200 transition-colors"
+                                            className="px-4 py-2 rounded-full bg-sky-50 dark:bg-sky-500/15 hover:bg-sky-100 dark:hover:bg-sky-500/25 text-sky-700 dark:text-sky-300 font-bold text-xs flex items-center gap-1.5 border border-sky-200 dark:border-sky-500/30 transition-colors"
                                         >
                                             <PlayCircle className="w-3.5 h-3.5 text-sky-600" />
                                             <span>{evt.action_text || 'Watch Class'}</span>
@@ -671,7 +671,7 @@ export const StudentRoutinePage: React.FC = () => {
                                     ) : isMaterial ? (
                                         <a
                                             href={evt.action_url}
-                                            className="px-4 py-2 rounded-full bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold text-xs flex items-center gap-1.5 border border-teal-200 transition-colors"
+                                            className="px-4 py-2 rounded-full bg-teal-50 dark:bg-teal-500/15 hover:bg-teal-100 dark:hover:bg-teal-500/25 text-teal-700 dark:text-teal-300 font-bold text-xs flex items-center gap-1.5 border border-teal-200 dark:border-teal-500/30 transition-colors"
                                         >
                                             <FileText className="w-3.5 h-3.5 text-teal-600" />
                                             <span>{evt.action_text || 'Download Notes'}</span>
@@ -682,7 +682,7 @@ export const StudentRoutinePage: React.FC = () => {
                                                 href={evt.action_url}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="px-4 py-2 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-800 font-bold text-xs flex items-center gap-1.5 border border-orange-200 transition-colors"
+                                                className="px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-500/15 hover:bg-orange-100 dark:hover:bg-orange-500/25 text-orange-800 dark:text-orange-300 font-bold text-xs flex items-center gap-1.5 border border-orange-200 dark:border-orange-500/30 transition-colors"
                                             >
                                                 <ExternalLink className="w-3.5 h-3.5 text-orange-600" />
                                                 <span>{evt.action_text || 'Track Parcel'}</span>
@@ -691,7 +691,7 @@ export const StudentRoutinePage: React.FC = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => alert(`📦 Parcel Information:\nCourse: ${evt.course_title}\nDetails: ${evt.title}\nCourier: ${evt.meta?.courier_name || 'Will be shipped soon'}\nTracking Number: ${evt.meta?.tracking_code || 'Processing'}`)}
-                                                className="px-4 py-2 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-800 font-bold text-xs flex items-center gap-1.5 border border-orange-200 cursor-pointer transition-colors"
+                                                className="px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-500/15 hover:bg-orange-100 dark:hover:bg-orange-500/25 text-orange-800 dark:text-orange-300 font-bold text-xs flex items-center gap-1.5 border border-orange-200 dark:border-orange-500/30 cursor-pointer transition-colors"
                                             >
                                                 <Package className="w-3.5 h-3.5 text-orange-600" />
                                                 <span>{evt.action_text || 'Parcel Details'}</span>
@@ -700,7 +700,7 @@ export const StudentRoutinePage: React.FC = () => {
                                     ) : evt.is_completed ? (
                                         <Link
                                             to={evt.action_url}
-                                            className="px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
+                                            className="px-4 py-2 rounded-full bg-slate-100 dark:bg-white/[0.06] hover:bg-slate-200 dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 font-bold text-xs transition-colors"
                                         >
                                             {isLiveExam ? 'View Results' : 'View Recording'}
                                         </Link>
@@ -709,11 +709,11 @@ export const StudentRoutinePage: React.FC = () => {
                                             type="button"
                                             onClick={() => handleToggleReminder(eventKey, evt.title)}
                                             className={`px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isReminderSet
-                                                ? 'bg-emerald-100 text-[#0B4B34] border border-emerald-300'
-                                                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                                                ? 'bg-red-50 dark:bg-[#A60201]/20 text-[#A60201] dark:text-red-300 border border-red-300 dark:border-[#A60201]/40'
+                                                : 'bg-slate-100 dark:bg-white/[0.06] hover:bg-slate-200 dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300'
                                                 }`}
                                         >
-                                            <Bell className={`w-3.5 h-3.5 ${isReminderSet ? 'fill-current text-[#0B4B34]' : 'text-slate-400'}`} />
+                                            <Bell className={`w-3.5 h-3.5 ${isReminderSet ? 'fill-current text-[#A60201]' : 'text-slate-400 dark:text-slate-500'}`} />
                                             <span>{isReminderSet ? 'Reminder Set' : 'Set Reminder'}</span>
                                         </button>
                                     )}

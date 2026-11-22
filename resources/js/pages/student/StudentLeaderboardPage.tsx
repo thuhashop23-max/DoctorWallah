@@ -119,23 +119,23 @@ export const StudentLeaderboardPage: React.FC = () => {
             <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
+                        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
                             <Trophy className="w-7 h-7 text-amber-500" />
                             <span>Leaderboard</span>
                         </h1>
-                        <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">
+                        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                             Top student rankings and merit leaderboard based on exam performance
                         </p>
                     </div>
 
                     {/* Time Filter Pills */}
-                    <div className="bg-slate-200/70 p-1.5 rounded-full inline-flex items-center text-xs font-bold self-start sm:self-auto shadow-2xs">
+                    <div className="bg-slate-200/70 dark:bg-white/[0.06] p-1.5 rounded-full inline-flex items-center text-xs font-bold self-start sm:self-auto shadow-2xs border border-transparent dark:border-white/[0.08]">
                         <button
                             type="button"
                             onClick={() => setSelectedPeriod('week')}
                             className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedPeriod === 'week'
-                                ? 'bg-white text-slate-800 shadow-xs'
-                                : 'text-slate-600 hover:text-slate-900'
+                                ? 'bg-white dark:bg-[#A60201] text-slate-800 dark:text-white shadow-xs'
+                                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                                 }`}
                         >
                             This Week
@@ -144,8 +144,8 @@ export const StudentLeaderboardPage: React.FC = () => {
                             type="button"
                             onClick={() => setSelectedPeriod('month')}
                             className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedPeriod === 'month'
-                                ? 'bg-white text-slate-800 shadow-xs'
-                                : 'text-slate-600 hover:text-slate-900'
+                                ? 'bg-white dark:bg-[#A60201] text-slate-800 dark:text-white shadow-xs'
+                                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                                 }`}
                         >
                             This Month
@@ -154,8 +154,8 @@ export const StudentLeaderboardPage: React.FC = () => {
                             type="button"
                             onClick={() => setSelectedPeriod('all')}
                             className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedPeriod === 'all'
-                                ? 'bg-white text-slate-800 shadow-xs'
-                                : 'text-slate-600 hover:text-slate-900'
+                                ? 'bg-white dark:bg-[#A60201] text-slate-800 dark:text-white shadow-xs'
+                                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                                 }`}
                         >
                             All Time
@@ -165,9 +165,9 @@ export const StudentLeaderboardPage: React.FC = () => {
 
                 {/* Course Selection Tabs / Dropdown */}
                 {enrolledCourses.length > 0 && (
-                    <div className="bg-white rounded-2xl p-3 border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-xs font-extrabold text-slate-700 shrink-0">
-                            <BookOpen className="w-4 h-4 text-sky-600" />
+                    <div className="bg-white dark:bg-[#0A0404] rounded-2xl p-3 border border-slate-200/80 dark:border-white/[0.08] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors">
+                        <div className="flex items-center gap-2 text-xs font-extrabold text-slate-700 dark:text-slate-300 shrink-0">
+                            <BookOpen className="w-4 h-4 text-[#A60201]" />
                             <span>Filter by Course:</span>
                         </div>
 
@@ -176,8 +176,8 @@ export const StudentLeaderboardPage: React.FC = () => {
                                 type="button"
                                 onClick={() => setSelectedCourseId('all')}
                                 className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer ${selectedCourseId === 'all'
-                                    ? 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white shadow-xs'
-                                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    ? 'bg-[#A60201] text-white shadow-xs'
+                                    : 'bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1]'
                                     }`}
                             >
                                 All My Courses
@@ -189,8 +189,8 @@ export const StudentLeaderboardPage: React.FC = () => {
                                     type="button"
                                     onClick={() => setSelectedCourseId(c.id)}
                                     className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 truncate max-w-[200px] transition-all cursor-pointer ${selectedCourseId === c.id
-                                        ? 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white shadow-xs'
-                                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                        ? 'bg-[#A60201] text-white shadow-xs'
+                                        : 'bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1]'
                                         }`}
                                     title={c.title}
                                 >
@@ -204,7 +204,7 @@ export const StudentLeaderboardPage: React.FC = () => {
 
             {/* Error Message */}
             {errorMsg && (
-                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-center gap-3">
+                <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-500/15 border border-rose-200 dark:border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs sm:text-sm flex items-center gap-3">
                     <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
                     <span>{errorMsg}</span>
                 </div>
@@ -212,28 +212,28 @@ export const StudentLeaderboardPage: React.FC = () => {
 
             {/* Loading State */}
             {loading ? (
-                <div className="py-20 flex flex-col items-center justify-center gap-3 text-slate-400 bg-white rounded-3xl border border-slate-200/80 shadow-xs">
-                    <Loader2 className="w-9 h-9 text-sky-600 animate-spin" />
-                    <span className="text-xs font-bold text-slate-500">Loading leaderboard...</span>
+                <div className="py-20 flex flex-col items-center justify-center gap-3 text-slate-400 bg-white dark:bg-[#0A0404] rounded-3xl border border-slate-200/80 dark:border-white/[0.08] shadow-xs">
+                    <Loader2 className="w-9 h-9 text-[#A60201] animate-spin" />
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Loading leaderboard...</span>
                 </div>
             ) : leaderboard.length === 0 ? (
                 /* Empty State */
-                <div className="bg-white rounded-3xl p-10 sm:p-14 border border-slate-200/80 text-center shadow-xs space-y-4">
-                    <div className="w-16 h-16 rounded-3xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto border border-amber-100">
+                <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-10 sm:p-14 border border-slate-200/80 dark:border-white/[0.08] text-center shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-4 transition-colors">
+                    <div className="w-16 h-16 rounded-3xl bg-amber-50 dark:bg-amber-500/15 text-amber-500 flex items-center justify-center mx-auto border border-amber-100 dark:border-amber-500/30">
                         <Trophy className="w-8 h-8" />
                     </div>
                     <div className="max-w-md mx-auto space-y-1.5">
-                        <h3 className="text-base sm:text-lg font-black text-slate-900">
+                        <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
                             No exam results found
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-500">
+                        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                             No students have taken exams for the selected course and timeframe yet. Take an exam now to claim the top spot!
                         </p>
                     </div>
                     <div className="pt-2">
                         <Link
                             to="/student/exams"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-sky-600/25 hover:from-sky-700 hover:to-indigo-700 transition-all"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#A60201] hover:bg-[#880101] text-white font-bold text-xs sm:text-sm shadow-md shadow-[#A60201]/25 transition-all"
                         >
                             <FileText className="w-4 h-4" />
                             <span>Browse Exams</span>
@@ -243,14 +243,14 @@ export const StudentLeaderboardPage: React.FC = () => {
             ) : (
                 <>
                     {/* PODIUM CARD (TOP 3) */}
-                    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+                    <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/[0.08] shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-colors">
                         <div className="flex items-end justify-center gap-3 sm:gap-6 pt-6 pb-2">
                             {/* RANK 2 (Left - Silver Podium) */}
                             {rank2 ? (
                                 <div className="flex flex-col items-center flex-1 max-w-[140px] sm:max-w-[160px] animate-in fade-in slide-in-from-bottom-4 duration-300">
                                     {/* Avatar */}
                                     <div className="relative mb-2">
-                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 ring-4 ring-slate-300 bg-white shadow-md">
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 ring-4 ring-slate-300 dark:ring-slate-700 bg-white dark:bg-[#0A0404] shadow-md">
                                             <div
                                                 className={`w-full h-full rounded-full bg-gradient-to-tr ${getAvatarGradient(
                                                     rank2.name
@@ -260,22 +260,22 @@ export const StudentLeaderboardPage: React.FC = () => {
                                             </div>
                                         </div>
                                         {/* Rank Badge */}
-                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500 text-white font-black text-xs flex items-center justify-center border-2 border-white shadow-xs">
+                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500 text-white font-black text-xs flex items-center justify-center border-2 border-white dark:border-[#0A0404] shadow-xs">
                                             2
                                         </span>
                                     </div>
 
                                     {/* Name & Points */}
-                                    <h4 className="text-xs sm:text-sm font-extrabold text-slate-800 text-center truncate max-w-full">
+                                    <h4 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-200 text-center truncate max-w-full">
                                         {rank2.name}
                                     </h4>
-                                    <p className="text-[11px] sm:text-xs font-bold text-amber-600 mt-0.5">
+                                    <p className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
                                         {formatNumber(rank2.total_points)} pts
                                     </p>
 
                                     {/* Silver Pedestal */}
-                                    <div className="w-full h-28 sm:h-36 bg-gradient-to-b from-slate-200 to-slate-300/80 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-slate-300 shadow-inner">
-                                        <span className="text-3xl sm:text-4xl font-black text-slate-500/80">2</span>
+                                    <div className="w-full h-28 sm:h-36 bg-gradient-to-b from-slate-200 to-slate-300/80 dark:from-slate-800 dark:to-slate-900 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-slate-300 dark:border-slate-700 shadow-inner">
+                                        <span className="text-3xl sm:text-4xl font-black text-slate-500/80 dark:text-slate-400/80">2</span>
                                     </div>
                                 </div>
                             ) : (
@@ -290,7 +290,7 @@ export const StudentLeaderboardPage: React.FC = () => {
 
                                     {/* Avatar */}
                                     <div className="relative mb-2">
-                                        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1.5 ring-4 ring-amber-400 bg-white shadow-xl shadow-amber-500/20">
+                                        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1.5 ring-4 ring-amber-400 dark:ring-amber-500/60 bg-white dark:bg-[#0A0404] shadow-xl shadow-amber-500/20">
                                             <div
                                                 className={`w-full h-full rounded-full bg-gradient-to-tr ${getAvatarGradient(
                                                     rank1.name
@@ -300,22 +300,22 @@ export const StudentLeaderboardPage: React.FC = () => {
                                             </div>
                                         </div>
                                         {/* Rank 1 Badge */}
-                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-amber-500 text-white font-black text-xs sm:text-sm flex items-center justify-center border-2 border-white shadow-sm">
+                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-amber-500 text-white font-black text-xs sm:text-sm flex items-center justify-center border-2 border-white dark:border-[#0A0404] shadow-sm">
                                             1
                                         </span>
                                     </div>
 
                                     {/* Name & Points */}
-                                    <h4 className="text-xs sm:text-base font-black text-slate-900 text-center truncate max-w-full">
+                                    <h4 className="text-xs sm:text-base font-black text-slate-900 dark:text-white text-center truncate max-w-full">
                                         {rank1.name}
                                     </h4>
-                                    <p className="text-xs sm:text-sm font-black text-amber-600 mt-0.5">
+                                    <p className="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-400 mt-0.5">
                                         {formatNumber(rank1.total_points)} pts
                                     </p>
 
                                     {/* Gold Pedestal */}
-                                    <div className="w-full h-40 sm:h-48 bg-gradient-to-b from-amber-100 via-amber-200/90 to-amber-300/70 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-amber-300 shadow-inner">
-                                        <span className="text-4xl sm:text-5xl font-black text-amber-600/90">1</span>
+                                    <div className="w-full h-40 sm:h-48 bg-gradient-to-b from-amber-100 via-amber-200/90 to-amber-300/70 dark:from-amber-950/60 dark:via-amber-900/40 dark:to-amber-950/80 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-amber-300 dark:border-amber-700 shadow-inner">
+                                        <span className="text-4xl sm:text-5xl font-black text-amber-600/90 dark:text-amber-400/90">1</span>
                                     </div>
                                 </div>
                             )}
@@ -325,7 +325,7 @@ export const StudentLeaderboardPage: React.FC = () => {
                                 <div className="flex flex-col items-center flex-1 max-w-[140px] sm:max-w-[160px] animate-in fade-in slide-in-from-bottom-4 duration-300">
                                     {/* Avatar */}
                                     <div className="relative mb-2">
-                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 ring-4 ring-amber-700/40 bg-white shadow-md">
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 ring-4 ring-amber-700/40 bg-white dark:bg-[#0A0404] shadow-md">
                                             <div
                                                 className={`w-full h-full rounded-full bg-gradient-to-tr ${getAvatarGradient(
                                                     rank3.name
@@ -335,22 +335,22 @@ export const StudentLeaderboardPage: React.FC = () => {
                                             </div>
                                         </div>
                                         {/* Rank 3 Badge */}
-                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-amber-700 text-white font-black text-xs flex items-center justify-center border-2 border-white shadow-xs">
+                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-amber-700 text-white font-black text-xs flex items-center justify-center border-2 border-white dark:border-[#0A0404] shadow-xs">
                                             3
                                         </span>
                                     </div>
 
                                     {/* Name & Points */}
-                                    <h4 className="text-xs sm:text-sm font-extrabold text-slate-800 text-center truncate max-w-full">
+                                    <h4 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-200 text-center truncate max-w-full">
                                         {rank3.name}
                                     </h4>
-                                    <p className="text-[11px] sm:text-xs font-bold text-amber-600 mt-0.5">
+                                    <p className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
                                         {formatNumber(rank3.total_points)} pts
                                     </p>
 
                                     {/* Bronze Pedestal */}
-                                    <div className="w-full h-24 sm:h-28 bg-gradient-to-b from-stone-200 to-stone-300/80 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-stone-300 shadow-inner">
-                                        <span className="text-3xl sm:text-4xl font-black text-stone-500/80">3</span>
+                                    <div className="w-full h-24 sm:h-28 bg-gradient-to-b from-stone-200 to-stone-300/80 dark:from-stone-800 dark:to-stone-900 rounded-t-2xl mt-3 flex items-center justify-center border-t-2 border-stone-300 dark:border-stone-700 shadow-inner">
+                                        <span className="text-3xl sm:text-4xl font-black text-stone-500/80 dark:text-stone-400/80">3</span>
                                     </div>
                                 </div>
                             ) : (
@@ -361,18 +361,18 @@ export const StudentLeaderboardPage: React.FC = () => {
 
                     {/* RANKINGS LIST (RANK 4+) */}
                     {restList.length > 0 && (
-                        <div className="bg-white rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-xs divide-y divide-slate-100">
+                        <div className="bg-white dark:bg-[#0A0404] rounded-3xl p-3 sm:p-5 border border-slate-200/80 dark:border-white/[0.08] shadow-xs dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] divide-y divide-slate-100 dark:divide-white/[0.06] transition-colors">
                             {restList.map((item) => (
                                 <div
                                     key={item.user_id}
                                     className={`flex items-center justify-between p-3 sm:p-4 rounded-2xl transition-colors ${item.is_current_user
-                                        ? 'bg-sky-50/70 border border-sky-200'
-                                        : 'hover:bg-slate-50'
+                                        ? 'bg-red-50/50 dark:bg-[#A60201]/10 border border-red-200/80 dark:border-[#A60201]/30'
+                                        : 'hover:bg-slate-50 dark:hover:bg-white/[0.02]'
                                         }`}
                                 >
                                     <div className="flex items-center gap-3.5 sm:gap-4 truncate">
                                         {/* Rank Number */}
-                                        <span className="w-6 text-center font-black text-xs sm:text-sm text-slate-400">
+                                        <span className="w-6 text-center font-black text-xs sm:text-sm text-slate-400 dark:text-slate-500">
                                             {formatNumber(item.rank)}
                                         </span>
 
@@ -388,16 +388,16 @@ export const StudentLeaderboardPage: React.FC = () => {
                                         {/* Name & Details */}
                                         <div className="truncate">
                                             <div className="flex items-center gap-2">
-                                                <h5 className="text-xs sm:text-sm font-extrabold text-slate-800 truncate">
+                                                <h5 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100 truncate">
                                                     {item.name}
                                                 </h5>
                                                 {item.is_current_user && (
-                                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-sky-100 text-sky-700">
+                                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-red-100 dark:bg-[#A60201]/20 text-[#A60201] dark:text-red-300">
                                                         You
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="text-[11px] text-slate-400 mt-0.5">
+                                            <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
                                                 {formatNumber(item.exams_count)} exams completed
                                             </p>
                                         </div>
@@ -405,10 +405,10 @@ export const StudentLeaderboardPage: React.FC = () => {
 
                                     {/* Points */}
                                     <div className="text-right shrink-0">
-                                        <span className="text-sm sm:text-base font-black text-amber-600">
+                                        <span className="text-sm sm:text-base font-black text-amber-600 dark:text-amber-400">
                                             {formatNumber(item.total_points)}
                                         </span>
-                                        <span className="text-[10px] font-bold text-slate-400 ml-1">pts</span>
+                                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 ml-1">pts</span>
                                     </div>
                                 </div>
                             ))}
