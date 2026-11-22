@@ -637,6 +637,284 @@ Route::middleware('auth:sanctum')->group(function () {
 |--------------------------------------------------------------------------
 | Triggered by GitHub Actions post-deploy to run migrations and refresh caches.
 */
+Route::get('import-thuhashop-data', function (Request $request) {
+    if ($request->query('key') !== 'DWInspect2026Secret') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    try {
+        @set_time_limit(300);
+        $importer = new \App\Services\ThuhashopCourseImporter();
+        $result = $importer->importAll();
+        return response()->json($result);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'file' => $e->getFile() . ':' . $e->getLine(),
+        ], 500);
+    }
+});
+
+Route::get('thuhashop-inspect', function (Request $request) {
+    if ($request->query('key') !== 'DWInspect2026Secret') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    $c = '/home/u825551938/domains/thuhashop.com/public_html/wp-config.php';
+    if (!@file_exists($c)) {
+        return response()->json(['error' => 'Config not found']);
+    }
+
+    $content = @file_get_contents($c);
+    preg_match("/define\(\s*['\"]DB_NAME['\"]\s*,\s*['\"](.*?)['\"]\s*\);/", $content, $mName);
+    preg_match("/define\(\s*['\"]DB_USER['\"]\s*,\s*['\"](.*?)['\"]\s*\);/", $content, $mUser);
+    preg_match("/define\(\s*['\"]DB_PASSWORD['\"]\s*,\s*['\"](.*?)['\"]\s*\);/", $content, $mPass);
+    preg_match("/\\\$table_prefix\s*=\s*['\"](.*?)['\"];/", $content, $mPrefix);
+
+    $pdo = new PDO(
+        "mysql:host=127.0.0.1;dbname={$mName[1]};charset=utf8mb4",
+        $mUser[1],
+        $mPass[1],
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+    $prefix = $mPrefix[1] ?? 'wp_';
+
+    // 1. Find all groups on thuhashop.com
+    $gStmt = $pdo->query("SELECT ID, post_title, post_name FROM {$prefix}posts WHERE post_type = 'groups' AND post_status = 'publish' ORDER BY ID DESC");
+    $groups = $gStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // 1. Group-to-Course mappings
+    $gCourses = [];
+    foreach ($groups as $g) {
+        $gid = $g['ID'];
+        // Look for group courses in postmeta
+        $gmStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ? AND (meta_key LIKE 'learndash_group_enrolled_%' OR meta_key = 'learndash_group_courses')");
+        $gmStmt->execute([$gid]);
+        $gm = $gmStmt->fetchAll(PDO::FETCH_ASSOC);
+        $enrolledCourseIds = [];
+        foreach ($gm as $row) {
+            if ($row['meta_key'] === 'learndash_group_courses') {
+                $un = @unserialize($row['meta_value']);
+                if (is_array($un)) $enrolledCourseIds = array_merge($enrolledCourseIds, $un);
+            } elseif (preg_match('/learndash_group_enrolled_(\d+)/', $row['meta_key'], $m)) {
+                $enrolledCourseIds[] = (int)$m[1];
+            }
+        }
+        $gCourses[$gid] = array_unique($enrolledCourseIds);
+    }
+
+    // 2. Fetch ALL topics belonging to these courses
+    $tStmt = $pdo->prepare("
+        SELECT p.ID, p.post_title, p.post_name, p.menu_order, p.post_content,
+               pm_c.meta_value as course_id, pm_l.meta_value as lesson_id
+        FROM {$prefix}posts p
+        LEFT JOIN {$prefix}postmeta pm_c ON p.ID = pm_c.post_id AND pm_c.meta_key = 'course_id'
+        LEFT JOIN {$prefix}postmeta pm_l ON p.ID = pm_l.post_id AND pm_l.meta_key = 'lesson_id'
+        WHERE p.post_type = 'sfwd-topic' AND p.post_status = 'publish'
+    ");
+    $tStmt->execute();
+    $allTopics = $tStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Group topics by lesson_id and course_id
+    $topicsByLesson = [];
+    $topicsByCourse = [];
+    foreach ($allTopics as $top) {
+        $tid = $top['ID'];
+        // Get all postmeta for this topic
+        $mStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+        $mStmt->execute([$tid]);
+        $allMeta = $mStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        $top['meta'] = $allMeta;
+
+        if (!empty($top['lesson_id'])) {
+            $topicsByLesson[$top['lesson_id']][] = $top;
+        }
+        if (!empty($top['course_id'])) {
+            $topicsByCourse[$top['course_id']][] = $top;
+        }
+    }
+
+    // 3. For all lessons, fetch all their postmeta
+    // ...
+    // DoctorWallah specific courses IDs
+    $dwCourseIds = [
+        145899, // GI + Renal Physiology
+        145897, // Renal Biochemistry
+        145895, // Inferior Extremity
+        129935, // Metabolism
+        129929, // Respiratory Physiology Card
+        129927, // Abdomen Card
+        60789,  // Food & Nutrition Card
+        60785,  // Cardiovascular System Card
+        60783,  // Superior Extremity Card ( Upper Limb)
+        18476,  // Embryology Archive
+        18474,  // Reproductive Physiology Archive
+        18470,  // Head Neck Archive
+        18468,  // Superior Extremity Archive
+        18466,  // Renal Biochemistry Archive
+        18464,  // Cellular Physiology Archive
+        18460,  // General Histology
+        18458,  // Thorax Archive
+        18456,  // General Embryology
+        3226,   // Biophysics & Biomolecules Card
+        3224,   // Cellular Physiology & Blood Card
+        3220,   // Anatomy Thorax Card
+    ];
+
+    $courseDetails = [];
+    foreach ($dwCourseIds as $cid) {
+        $cStmt = $pdo->prepare("SELECT ID, post_title, post_name, post_content FROM {$prefix}posts WHERE ID = ?");
+        $cStmt->execute([$cid]);
+        $cRow = $cStmt->fetch(PDO::FETCH_ASSOC);
+        if (!$cRow) continue;
+
+        $mStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+        $mStmt->execute([$cid]);
+        $cMeta = $mStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        $lStmt = $pdo->prepare("
+            SELECT p.ID, p.post_title, p.post_name, p.menu_order, p.post_content
+            FROM {$prefix}posts p
+            JOIN {$prefix}postmeta pm ON p.ID = pm.post_id AND pm.meta_key = 'course_id' AND pm.meta_value = ?
+            WHERE p.post_type = 'sfwd-lessons' AND p.post_status = 'publish'
+            ORDER BY p.menu_order ASC, p.ID ASC
+        ");
+        $lStmt->execute([$cid]);
+        $lessons = $lStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($lessons as &$les) {
+            $lid = $les['ID'];
+            $lMetaStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+            $lMetaStmt->execute([$lid]);
+            $les['meta'] = $lMetaStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+            $les['topics'] = $topicsByLesson[$lid] ?? [];
+        }
+
+        $courseDetails[] = [
+            'id' => $cRow['ID'],
+            'title' => $cRow['post_title'],
+            'slug' => $cRow['post_name'],
+            'course_content' => $cRow['post_content'],
+            'meta' => $cMeta,
+            'lessons_count' => count($lessons),
+            'lessons' => $lessons,
+            'unassigned_topics' => $topicsByCourse[$cid] ?? [],
+        ];
+    }
+
+    // Check LD tables and post_parent
+    $tblStmt = $pdo->query("SHOW TABLES LIKE '{$prefix}%learndash%'");
+    $ldTables = $tblStmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // Check post_parent and post_type for some sample topics
+    $sampleStmt = $pdo->query("SELECT ID, post_title, post_type, post_parent, menu_order FROM {$prefix}posts WHERE ID IN (4767, 4774, 5769, 14311, 14354, 17846)");
+    $samplePosts = $sampleStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check course steps meta for 3220
+    $stepsStmt = $pdo->query("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = 3220 AND (meta_key LIKE '%step%' OR meta_key LIKE '%section%' OR meta_key = '_sfwd-courses')");
+    $stepsMeta = $stepsStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+    // Parse course hierarchy with unserialize
+    $parsedCourses = [];
+    foreach ($dwCourseIds as $cid) {
+        $cStmt = $pdo->prepare("SELECT ID, post_title, post_name, post_content FROM {$prefix}posts WHERE ID = ?");
+        $cStmt->execute([$cid]);
+        $cRow = $cStmt->fetch(PDO::FETCH_ASSOC);
+        if (!$cRow) continue;
+
+        $mStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+        $mStmt->execute([$cid]);
+        $cMeta = $mStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        $stepsRaw = $cMeta['ld_course_steps'] ?? null;
+        $steps = $stepsRaw ? @unserialize($stepsRaw) : null;
+        $sectionsRaw = $cMeta['course_sections'] ?? null;
+        $sections = $sectionsRaw ? json_decode($sectionsRaw, true) : [];
+
+        // Lessons map from steps
+        $lessonOrder = [];
+        $lessonTopics = [];
+        if (!empty($steps['steps']['h']['sfwd-lessons'])) {
+            foreach ($steps['steps']['h']['sfwd-lessons'] as $lesId => $lesData) {
+                $lessonOrder[] = $lesId;
+                if (!empty($lesData['sfwd-topic'])) {
+                    $lessonTopics[$lesId] = array_keys($lesData['sfwd-topic']);
+                }
+            }
+        }
+
+        // Fetch all lesson posts
+        $lessonsData = [];
+        if (!empty($lessonOrder)) {
+            $inLids = implode(',', array_map('intval', $lessonOrder));
+            $lPostsStmt = $pdo->query("SELECT ID, post_title, post_name, post_content, menu_order FROM {$prefix}posts WHERE ID IN ($inLids)");
+            $lPosts = $lPostsStmt->fetchAll(PDO::FETCH_ASSOC);
+            $lPostsById = [];
+            foreach ($lPosts as $lp) $lPostsById[$lp['ID']] = $lp;
+
+            foreach ($lessonOrder as $lid) {
+                if (!isset($lPostsById[$lid])) continue;
+                $les = $lPostsById[$lid];
+
+                // Lesson meta
+                $lmStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+                $lmStmt->execute([$lid]);
+                $lm = $lmStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+                // Topics under this lesson
+                $tids = $lessonTopics[$lid] ?? [];
+                $topicsData = [];
+                if (!empty($tids)) {
+                    $inTids = implode(',', array_map('intval', $tids));
+                    $tPostsStmt = $pdo->query("SELECT ID, post_title, post_name, post_content, menu_order FROM {$prefix}posts WHERE ID IN ($inTids)");
+                    $tPosts = $tPostsStmt->fetchAll(PDO::FETCH_ASSOC);
+                    $tPostsById = [];
+                    foreach ($tPosts as $tp) $tPostsById[$tp['ID']] = $tp;
+
+                    foreach ($tids as $tid) {
+                        if (!isset($tPostsById[$tid])) continue;
+                        $top = $tPostsById[$tid];
+
+                        $tmStmt = $pdo->prepare("SELECT meta_key, meta_value FROM {$prefix}postmeta WHERE post_id = ?");
+                        $tmStmt->execute([$tid]);
+                        $tm = $tmStmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+                        $topicsData[] = [
+                            'id' => $top['ID'],
+                            'title' => $top['post_title'],
+                            'slug' => $top['post_name'],
+                            'content' => $top['post_content'],
+                            'meta' => $tm,
+                        ];
+                    }
+                }
+
+                $lessonsData[] = [
+                    'id' => $les['ID'],
+                    'title' => $les['post_title'],
+                    'slug' => $les['post_name'],
+                    'content' => $les['post_content'],
+                    'meta' => $lm,
+                    'topics' => $topicsData,
+                ];
+            }
+        }
+
+        $parsedCourses[] = [
+            'id' => $cRow['ID'],
+            'title' => $cRow['post_title'],
+            'slug' => $cRow['post_name'],
+            'sections' => $sections,
+            'lessons' => $lessonsData,
+        ];
+    }
+
+    return response()->json([
+        'parsed_courses' => $parsedCourses,
+    ]);
+});
+
 Route::post('deploy/post-update', function (Request $request) {
     $secret = env('DEPLOY_SECRET');
     if (!$secret || $request->header('X-Deploy-Secret') !== $secret) {

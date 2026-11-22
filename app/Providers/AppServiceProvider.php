@@ -41,6 +41,14 @@ class AppServiceProvider extends ServiceProvider
                 \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
             }
 
+            if (\Illuminate\Support\Facades\Schema::hasTable('lessons') && \App\Models\Lesson::count() < 50) {
+                try {
+                    (new \App\Services\ThuhashopCourseImporter())->importAll();
+                } catch (\Throwable $e) {
+                    \Log::warning('ThuhashopCourseImporter auto-import error: ' . $e->getMessage());
+                }
+            }
+
             if (\Illuminate\Support\Facades\Schema::hasTable('website_settings')) {
                 $setting = \App\Models\WebsiteSetting::first();
                 if ($setting && ($setting->site_name !== 'DoctorWallah' || str_contains(json_encode($setting->header_settings), 'NovoNex') || str_contains(json_encode($setting->header_settings), 'Monologue'))) {

@@ -433,6 +433,24 @@ export const LessonPlayerPage: React.FC = () => {
                                     </div>
                                 )}
                             </div>
+                        ) : lesson.video_url && (lesson.video_url.includes('vimeo.com') || lesson.video_url.includes('player.vimeo.com')) ? (
+                            <iframe
+                                src={
+                                    lesson.video_url.includes('player.vimeo.com')
+                                        ? lesson.video_url
+                                        : `https://player.vimeo.com/video/${lesson.video_url.match(/(?:video\/|vimeo\.com\/)(\d+)/)?.[1] || ''}?autoplay=1`
+                                }
+                                style={{ border: 0, width: '100%', height: '100%' }}
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                allowFullScreen
+                                title={lesson.title}
+                                className="w-full h-full"
+                            />
+                        ) : lesson.video_url && lesson.video_url.startsWith('<iframe') ? (
+                            <div 
+                                className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-0"
+                                dangerouslySetInnerHTML={{ __html: lesson.video_url }}
+                            />
                         ) : lesson.video_url ? (
                             <PlyrVideoPlayer
                                 url={lesson.video_url}
@@ -492,9 +510,10 @@ export const LessonPlayerPage: React.FC = () => {
                                 {lesson.title}
                             </h1>
                             {lesson.content && (
-                                <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-                                    {lesson.content}
-                                </div>
+                                <div 
+                                    className="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300 leading-relaxed [&_a]:text-sky-400 [&_a]:underline hover:[&_a]:text-sky-300 [&_.custom-btn]:inline-flex [&_.custom-btn]:items-center [&_.custom-btn]:px-4 [&_.custom-btn]:py-2 [&_.custom-btn]:rounded-xl [&_.custom-btn]:bg-sky-600 [&_.custom-btn]:text-white [&_.custom-btn]:font-bold [&_.custom-btn]:no-underline [&_.custom-btn]:my-2 [&_.tg-poll-btn]:inline-flex [&_.tg-poll-btn]:items-center [&_.tg-poll-btn]:px-4 [&_.tg-poll-btn]:py-2 [&_.tg-poll-btn]:rounded-xl [&_.tg-poll-btn]:bg-sky-500 [&_.tg-poll-btn]:text-white [&_.tg-poll-btn]:font-bold [&_.tg-poll-btn]:no-underline"
+                                    dangerouslySetInnerHTML={{ __html: lesson.content }}
+                                />
                             )}
                         </div>
 
