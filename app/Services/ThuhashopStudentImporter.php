@@ -591,4 +591,37 @@ class ThuhashopStudentImporter
             'timestamp' => now()->toIso8601String(),
         ];
     }
+
+    /**
+     * Verify imported students and their enrollments in DoctorWallah database
+     */
+    public function verifyImport(): array
+    {
+        $totalStudents = User::where('role', User::ROLE_STUDENT)->count();
+        $totalEnrollments = Enrollment::count();
+
+        $sampleStudents = User::where('role', User::ROLE_STUDENT)
+            ->with(['enrollments.course:id,title,slug'])
+            ->latest('id')
+            ->take(5)
+            ->get()
+            ->map(function ($u) {
+                return [
+                    'id' => $u->id,
+                    'name' => $u->name,
+                    'phone' => $u->phone,
+                    'email' => $u->email,
+                    'password_hash_type' => str_starts_with($u->password, '$wp$') ? 'WordPress modern ($wp$)' : (str_starts_with($u->password, '$P$') ? 'WordPress phpass ($P$)' : (str_starts_with($u->password, '$2y$') ? 'Bcrypt ($2y$)' : 'Other')),
+                    'enrollments_count' => $u->enrollments->count(),
+                    'enrolled_courses' => $u->enrollments->pluck('course.title')->filter()->values(),
+                ];
+            });
+
+        return [
+            'status' => 'success',
+            'total_students_in_doctorwallah' => $totalStudents,
+            'total_enrollments_in_doctorwallah' => $totalEnrollments,
+            'sample_students' => $sampleStudents,
+        ];
+    }
 }

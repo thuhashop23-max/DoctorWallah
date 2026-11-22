@@ -692,6 +692,23 @@ Route::any('import-thuhashop-students', function (Request $request) {
     }
 });
 
+Route::get('verify-imported-students', function (Request $request) {
+    if ($request->query('key') !== 'DWInspect2026Secret') {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    try {
+        $importer = new \App\Services\ThuhashopStudentImporter();
+        return response()->json($importer->verifyImport());
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'file' => $e->getFile() . ':' . $e->getLine(),
+        ], 500);
+    }
+});
+
 Route::post('deploy/post-update', function (Request $request) {
     $secret = env('DEPLOY_SECRET');
     if (!$secret || $request->header('X-Deploy-Secret') !== $secret) {
